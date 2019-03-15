@@ -1,0 +1,63 @@
+<app-new-file></app-new-file>
+<nav>
+  <input type="text" class="form-control src-box " (keydown)="onGobalFilterChange($event)" placeholder="Enter Annotated Text"   [(ngModel)]="globalSearch">
+   <button type="button" class="btn btn-default float-right mr-50 custom-button " data-toggle="modal" data-target="#uploadModal">Upload</button> 
+
+  
+</nav>
+
+<section class="file-list">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Client Name</th>
+        <th>Doc Name</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Requirement</th>
+        <th>Region/BU</th>
+        <th>Status</th>
+        <th>Related Documents</th>
+      </tr>
+      <tr>
+        <th><input type="text" class="src-col-box" placeholder="Search Client Name" [(ngModel)]="clientNameSearch"></th>
+        <th><input type="text" placeholder="Search Doc Name" [(ngModel)]="docNameSearch"></th>
+        <th><input type="text" placeholder="Search Start" [(ngModel)]="startSearch"></th>
+        <th><input type="text" placeholder="Search End" [(ngModel)]="endSearch"></th>
+        <th><input type="text" placeholder="Search Requirement" [(ngModel)]="reqSearch"></th>
+        <th><input type="text" placeholder="Search Region/BU" [(ngModel)]="regionSearch"></th>
+        <th><input type="text" placeholder="Search Status" [(ngModel)]="statusSearch"></th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let file of docModels| recordSearch: clientNameSearch : docNameSearch : startSearch : endSearch : reqSearch : regionSearch : statusSearch : relatedDocSearch">
+        <td>{{file.clientName}}</td>
+        <td>{{file.docName}}</td>
+        <td>{{file.startDate}}</td>
+        <td>{{file.endDate}}</td>
+        <td>{{file.requirement}}</td>
+        <td>{{file.region}}</td>
+        <td>{{file.status}}</td>
+      
+        <td>
+          <div class="file-type btn btn-default upload-btn " input type="button" (click)="displayFile(file.filePath)">View Document</div>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+  <div class="row" *ngIf="!fileList.length">
+    <div class="col-md-12">
+      <div>
+        <h3 class="text-center">
+          <span class="text-danger fa fa-search"> No Matching data found.....!</span>
+        </h3>
+      </div>
+    </div>
+
+
+  </div>
+
+</section>

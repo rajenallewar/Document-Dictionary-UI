@@ -1,0 +1,44 @@
+@import '../../../../styles';
+
+:host {
+    @extend .block-code;
+    height: 75px;
+    position: fixed;
+    background-color: $header-background-color;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    width: 100%;
+    padding: 25px 0 10px;
+    z-index: 200;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    left: 0;
+    top: 0;
+
+    .half-block {
+        @extend .block-code;
+        width: 50%;
+        float:left;
+        padding: 0 20px;
+    }
+
+    .src-container {
+        .lng-text{
+            padding: 5px;
+            font-size: 14px;
+            color: #fff;
+            text-align: left;
+            font-family: "Carnas-Medium";
+            line-height: 19.6px;
+            font-weight: bold;
+            width: 54px;
+        }
+        .globe {
+            width: 25px;
+            height: 25px;
+            float: left;
+        }
+    }
+}

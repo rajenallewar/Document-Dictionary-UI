@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 pt-20" style="border-right: 3px solid black; max-height: 580px ; overflow-x: auto">
+      <div style="display: inline-flex">
+        <button type="button" class="btn btn-lg btn-default upload-btn" [routerLink]="['/dashboard']"
+          routerLinkActive="router-link-active"><i class="fa fa-arrow-circle-left"></i> Back</button>
+        <button type="button" class="btn btn-lg btn-default upload-btn" routerLinkActive="router-link-active"><i
+            class="fa fa-download" aria-hidden="true"></i> Download</button>
+        <h5 style="padding-top: 10px"><i class="fa fa-file"> {{localFilePath}}</i></h5>
+      </div>
+      <div class="pdf-container">
+        <pdf-viewer [src]="filePath" [original-size]="false"></pdf-viewer>
+      </div>
+    </div>
+    <div class="col-md-4 pt-20">
+      <h3>Enter Annotations</h3>
+      <input #newAnnotation (keyup.enter)="newAnnotation(newAnnotation.value)" class="annotation-inputbox"
+        (blur)="addAnnotation(newAnnotation.value); newAnnotation.value='' ">
+      <div class="text-left mt-10">
+
+        <button class="btn custom-button mr-15" (click)="addAnnotation(newAnnotation.value)">Add</button>
+        <button class="btn custom-button ">Save</button>
+      </div>
+
+      <ul>
+        <li *ngFor="let annotation of annotations" class="annotation-list">
+          <h6>{{annotation}}</h6>
+        </li>
+      </ul>
+      `
+      <!-- <div>
+        <angular-tag-cloud [data]="data" [width]="400" ></angular-tag-cloud>
+    </div> -->
+    </div>
+  </div>
+</div>
