@@ -10,10 +10,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TagCloudModule } from 'angular-tag-cloud-module';
 import { ColumnFilterDataPipe } from './pipes/column.filterdata.pipe';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { NewFileComponent } from './new-file/new-file.component';
 import { DocumentServices } from './services/document.services';
 import { HttpClientModule } from '@angular/common/http';
-
+import { LeftbarComponent } from './shared/components/left-bar/left-bar.component';
+import {  ProposalModule } from './praposal/proposal.module';
+import { CollateralModule } from './collaterals/collateral.module';
+import {TooltipModule} from 'ng2-tooltip-directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +23,9 @@ import { HttpClientModule } from '@angular/common/http';
     DashboardComponent,
     ViewFileComponent,
     ColumnFilterDataPipe,
-    NewFileComponent,
+    LeftbarComponent,
+    
+   
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,11 @@ import { HttpClientModule } from '@angular/common/http';
     TagCloudModule,
     PdfViewerModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ProposalModule,
+    CollateralModule,
+    TooltipModule
+   
   ],
   providers: [DocumentServices],
   bootstrap: [AppComponent]

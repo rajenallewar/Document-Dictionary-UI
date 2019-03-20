@@ -26,17 +26,26 @@ html, body {
 .mr-15{
   margin-right: 15px;
 }
-.mr-50{
-  margin-right: 50px;
+.ml-73{
+  margin-left: 73px;
+}
+.mr-0{
+  margin-right: 0px;
 }
 .custom-button{
     width: 100px;
-    background-color: $btn-background-color !important;
-    color: $btn-color !important;
-    padding: 3px;
+    //background-color: $btn-background-color !important;
+   // color: $btn-color !important;
+   background-color:rgba(73, 73, 73, 0.9) !important;
+   color: white !important;
+    padding:3px;
+    
 }
 .mt-25{
   margin-top:25px;
+}
+.ml-5{
+   margin-left:5px;
 }
 .ml-10{
   margin-left:10px;
