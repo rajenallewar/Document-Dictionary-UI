@@ -7,7 +7,6 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ViewFileComponent } from './view-file/view-file.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TagCloudModule } from 'angular-tag-cloud-module';
 import { ColumnFilterDataPipe } from './pipes/column.filterdata.pipe';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { DocumentServices } from './services/document.services';
@@ -33,7 +32,6 @@ import { StarRatingModule } from 'angular-star-rating';
     AppRoutingModule,
     AngularFontAwesomeModule,
     FormsModule,
-    TagCloudModule,
     PdfViewerModule,
     HttpClientModule,
     ReactiveFormsModule,
