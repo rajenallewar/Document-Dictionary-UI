@@ -14,7 +14,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { LeftbarComponent } from './shared/components/left-bar/left-bar.component';
 import { CollateralModule } from './collaterals/collateral.module';
 import { ProposalModule } from './proposals/proposal.module';
-import { StarRatingModule } from 'angular-star-rating';
+
+
+
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { StarRatingModule } from 'angular-star-rating';
     ViewFileComponent,
     ColumnFilterDataPipe,
     LeftbarComponent,
+  
     
     
    ],
@@ -37,8 +40,10 @@ import { StarRatingModule } from 'angular-star-rating';
     ReactiveFormsModule,
     ProposalModule,
     CollateralModule,
-    StarRatingModule,
+
+ 
     
+   
 
    
    
