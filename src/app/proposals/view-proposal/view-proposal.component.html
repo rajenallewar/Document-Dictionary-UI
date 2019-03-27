@@ -1,0 +1,46 @@
+ <section class="file-list">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Client Name</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Requirement</th>
+                <th>Region/BU</th>
+                <th>Status</th>
+                <th>Related Documents</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr *ngFor="let file of docModels">
+                <td>{{file.clientName}}</td>
+                <td>{{file.startDate  | date: 'dd/MM/yyyy' }}</td>
+                <td>{{file.endDate  | date: 'dd/MM/yyyy'  }}</td>
+                <td>{{file.requirement}}</td>
+                <td>{{file.region}}</td>
+                <td>{{file.status}}</td>
+
+                <td>
+                    <div class="file-type btn btn-default upload-btn " input type="button"
+                        (click)="displayFile(file.filePath)">View Document</div>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+    <!-- <div class="row" *ngIf="!fileList.length">
+        <div class="col-md-12">
+            <div>
+                <h3 class="text-center">
+                    <span class="text-danger fa fa-search"> No Matching data found.....!</span>
+                </h3>
+            </div>
+        </div> -->
+
+
+
+
+</section> 
+
+

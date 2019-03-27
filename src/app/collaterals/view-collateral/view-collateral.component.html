@@ -1,0 +1,41 @@
+<section class="file-list">
+  <table class="table table-striped">
+      <thead>
+          <tr>
+              <th>Collateral Type</th>
+              <th>Document Name</th>
+              <th>Annotated</th>
+              <th>Rating</th>
+              <th>Related Documents</th>
+          </tr>
+
+      </thead>
+      <tbody>
+          <tr *ngFor="">
+              <td>{{file.collateralType}}</td>
+              <td>{{file.documentName}}</td>
+              <td>{{file.annotated}}</td>
+              <td>{{file.rating}}</td>
+               <td>
+                  <div class="file-type btn btn-default upload-btn " input type="button"
+                      (click)="displayFile(file.filePath)">View Document</div>
+              </td>
+          </tr>
+      </tbody>
+
+  </table>
+  <!-- <div class="row" *ngIf="!fileList.length">
+      <div class="col-md-12">
+          <div>
+              <h3 class="text-center">
+                  <span class="text-danger fa fa-search"> No Matching data found.....!</span>
+              </h3>
+          </div>
+      </div> -->
+
+
+
+
+</section> 
+
+

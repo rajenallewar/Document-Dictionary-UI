@@ -1,0 +1,88 @@
+<div class="container ">
+  <h2 style="text-align: center"> New Collateral Form</h2>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-9">
+      <form [formGroup]="newCollateralForm" (ngSubmit)="onSubmit(newCollateralForm)">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+
+              <label>Collateral Type</label>
+
+              <input type="text" formControlName="collateralType" placeholder="Collateral Type" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.collateralType.errors }" />
+              <div *ngIf="submitted && f.collateralType.errors" class="invalid-feedback">
+                <div *ngIf="f.collateralType.errors.required">Collateral Type is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+
+              <label>Document Name</label>
+              <input type="text" formControlName="documentName" placeholder="Document Name" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.documentName.errors }" />
+              <div *ngIf="submitted && f.documentName.errors" class="invalid-feedback">
+                <div *ngIf="f.documentName.errors.required"> Document Name is required</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+
+              <label> Annotated </label>
+              <label class="form-check-inline ml-5">
+                <input class="form-check-input" formControlName="annotated" type="radio" name="annotated"
+                  [value]="true">
+              </label> Yes
+              <label class="form-check-inline ml-73">
+                <input class="form-check-input" type="radio" name="annotated" [value]="false">
+              </label> No
+              <!-- <input type="radio" formControlName="annotated" placeholder="Region/BU" class="form-control"
+                              [ngClass]="{ 'is-invalid': submitted && f.region.errors }" /> -->
+              <div *ngIf="submitted && f.anntation.errors" class="invalid-feedback">
+                <div *ngIf="f.anntation.errors.required"> Annotated is required</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <label> Rating </label>
+              
+
+              <!-- <input formControlName="rating" class="form-control" 
+                              [ngClass]="{ 'is-invalid': submitted && f.rating.errors }" /> -->
+              <!-- <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                <div *ngIf="f.rating.errors.required"> Rating is required</div> -->
+                <!-- <star-rating [starType]="'svg'" [rating]="2.63"></star-rating> -->
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8 ">
+            <div class="form-group">
+              <div class="pt-25">
+                <input type="file" name="file" multiple tooltip="You can upload New Collateral Here..." placement="top">
+                <button class="btn ml-73 custom-button" [disabled]="!newCollateralForm.valid">Upload</button>
+                <button class="btn ml-5 custom-button" [disabled]="!newCollateralForm.valid">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+
+</div>
