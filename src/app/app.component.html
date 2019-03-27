@@ -1,12 +1,19 @@
-<app-header></app-header>
-<div class="row" style="margin-top: 75px;">
-  <div class="col-md-2">
-    <app-left-bar></app-left-bar>
-  </div>    
-  <div class="col-md-10"  style="background-color:whitesmoke">
-    <!-- <div class="main-container"> -->
-      <router-outlet></router-outlet>
+<div class="container-fluid">
+  <!-- <div class="row"> -->
+    <!-- <div class="col-md-12"> -->
+        <app-header></app-header>
     <!-- </div> -->
-  </div>
+  <!-- </div> -->
+  <div class="row" style="margin-top: 75px;">
+      <div class="col-md-2">
+        <app-left-bar></app-left-bar>
+      </div>    
+      <div class="col-md-10"  style="background-color:#F5F5F5">
+        main content
+        <!-- <div class="main-container"> -->
+          <router-outlet></router-outlet>
+        <!-- </div> -->
+      </div>
+    </div>
 </div>
 
