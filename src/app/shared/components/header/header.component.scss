@@ -2,7 +2,7 @@
 
 :host {
     @extend .block-code;
-    height: 75px;
+    height: 50px;
     position: fixed;
     background-color:#ffffff;
     -webkit-transition: all 0.2s ease-in-out;
@@ -13,7 +13,7 @@
     width: 100%;
     padding: 10px 0 10px;
     z-index: 200;
-    box-shadow: 0 5px 15px #ffffff;
+   
     left: 0;
     top: 0;
 
@@ -26,7 +26,7 @@
 
     .src-container {
         .lng-text{
-            padding: 5px;
+            padding: 5px ;
             font-size: 14px;
             color: #fff;
             text-align: left;
@@ -41,4 +41,24 @@
             float: left;
         }
     }
+}
+.logo-img{
+    height: 55px;
+    padding-left: 15px;
+    margin-top: -12px;
+}
+.icon-search{
+    float:left;
+    color:rgb(175, 166, 166);
+    padding: 8px 10px;
+    font-size: 15px;
+}
+.icon-help{
+    float:right;
+    color:#4f32b6;
+    padding: 8px 10px;
+    font-size: 15px;
+}
+.login{
+    padding: 8px 10px;
 }

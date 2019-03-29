@@ -6,76 +6,50 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chart-doughnut.component.scss']
 })
 export class ChartDoughnutComponent implements OnInit {
-  option: any;
+  data: any;
+  options: any;
   constructor() {
-    this.option = {
-      tooltip : {
-          trigger: 'item',
-          formatter: "{a} <br/>{b} : {c} ({d}%)"
-      },
-      legend: {
-          orient : 'vertical',
-          x : 'left',
-          data:['Won','Lost','In-Progress','Review','Now']
-      },
-      toolbox: {
-          show : true,
-          feature : {
-              mark : {show: true},
-              dataView : {show: true, readOnly: false},
-              magicType : {
-                  show: true, 
-                  type: ['pie', 'funnel'],
-                  option: {
-                      funnel: {
-                          x: '25%',
-                          width: '50%',
-                          funnelAlign: 'center',
-                          max: 1548
-                      }
-                  }
-              },
-              restore : {show: true},
-              saveAsImage : {show: true}
-          }
-      },
-      calculable : true,
-      series : [
+    this.data = {
+        labels: ['Won', 'Lost', 'In-Progress','Review','New'],
+       
+        datasets: [
           {
-              name:'File',
-              type:'pie',
-              radius : ['50%', '70%'],
-              itemStyle : {
-                  normal : {
-                      label : {
-                          show : false
-                      },
-                      labelLine : {
-                          show : false
-                      }
-                  },
-                  emphasis : {
-                      label : {
-                          show : true,
-                          position : 'center',
-                          textStyle : {
-                              fontSize : '30',
-                              fontWeight : 'bold'
-                          }
-                      }
-                  }
-              },
-              data:[
-                  {value:335, name:'Won'},
-                  {value:310, name:'Lost'},
-                  {value:234, name:'In-Progress'},
-                  {value:135, name:'Review'},
-                  {value:1548, name:'Now'}
-              ]
-          }
-      ]
-  };
-                      
+            data: [30, 50, 100,45,30],
+            backgroundColor: [
+             
+              "#12a73a",
+              "#ff2924",
+               "#ffb902",
+               "#016bc6",
+               "#c6db03",
+               
+              
+            ],
+            hoverBackgroundColor: [
+              
+              "#12a73a",
+              "#ff2924",
+              "#ffb902",
+              "#016bc6",
+              "#c6db03",
+              
+            ]
+          }]
+      };
+
+      this.options = {
+        legend:{
+            position: 'bottom'
+          },
+          layout: {
+            padding: {
+                left: 15,
+                right: 15,
+                top: 15,
+                bottom: 15
+            }
+        }
+      }
  
   }
    ngOnInit() {

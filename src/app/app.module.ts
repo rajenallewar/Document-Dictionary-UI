@@ -4,17 +4,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/components/header/header.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { ViewFileComponent } from './view-file/view-file.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ColumnFilterDataPipe } from './pipes/column.filterdata.pipe';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { DocumentServices } from './services/document.services';
+import { DocumentServices } from './services/document.service';
 import { HttpClientModule } from '@angular/common/http';
 import { LeftbarComponent } from './shared/components/left-bar/left-bar.component';
 import { CollateralModule } from './collaterals/collateral.module';
 import { ProposalModule } from './proposals/proposal.module';
-
+import { DashboardModule } from './dashboard/dashboard.module';
+import { ProposalServices } from './services/proposal.service';
+import { CollateralServices } from './services/collateral.service';
 
 
 
@@ -22,10 +23,10 @@ import { ProposalModule } from './proposals/proposal.module';
   declarations: [
     AppComponent,
     HeaderComponent,
-    DashboardComponent,
     ViewFileComponent,
     ColumnFilterDataPipe,
     LeftbarComponent,
+  
   
     
     
@@ -40,6 +41,7 @@ import { ProposalModule } from './proposals/proposal.module';
     ReactiveFormsModule,
     ProposalModule,
     CollateralModule,
+    DashboardModule
 
  
     
@@ -48,7 +50,7 @@ import { ProposalModule } from './proposals/proposal.module';
    
    
   ],
-  providers: [DocumentServices],
+  providers: [DocumentServices, ProposalServices, CollateralServices],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

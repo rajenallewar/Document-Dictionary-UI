@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewCollateralComponent } from './new-collateral/new-collateral.component';
 import { ViewCollateralComponent } from './view-collateral/view-collateral.component';
+import { CollateralServices } from '../services/collateral.service';
 
 
 
