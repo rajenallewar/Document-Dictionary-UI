@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { ProposalServices } from 'src/app/services/proposal.service';
 
 @Component({
   selector: 'app-chart-doughnut',
@@ -8,53 +10,63 @@ import { Component, OnInit } from '@angular/core';
 export class ChartDoughnutComponent implements OnInit {
   data: any;
   options: any;
-  constructor() {
-    this.data = {
-        labels: ['Won', 'Lost', 'In-Progress','Review','New'],
-       
-        datasets: [
-          {
-            data: [30, 50, 100,45,30],
-            backgroundColor: [
-             
-              "#12a73a",
-              "#ff2924",
-               "#ffb902",
-               "#016bc6",
-               "#c6db03",
-               
-              
-            ],
-            hoverBackgroundColor: [
-              
-              "#12a73a",
-              "#ff2924",
-              "#ffb902",
-              "#016bc6",
-              "#c6db03",
-              
-            ]
-          }]
-      };
+  doughnutChartData;
+  Proposals:any;
+  @Input() doughtnutData: any;
+  constructor(private router: Router, private proposals:ProposalServices) {
+   
+  }
 
-      this.options = {
-        legend:{
-            position: 'bottom'
-          },
-          layout: {
-            padding: {
-                left: 15,
-                right: 15,
-                top: 15,
-                bottom: 15
-            }
+   ngOnInit() {
+     this.getProposalSummary();
+   }
+
+   getProposalSummary(){
+    this.proposals.getSummaryofProposalsByStatus().subscribe((data) => {
+      this.Proposals = data;
+      console.log(data);
+      this.generateDoughtnutData();
+        })
+   }
+
+    generateDoughtnutData(){
+       this.doughnutChartData = {
+        labels: this.doughtnutData.label,
+          datasets: [
+            {
+              data: this.doughtnutData.data,
+              backgroundColor: [
+                "#12a73a",
+                "#ff2924",
+                 "#ffb902",
+                 "#016bc6",
+                 "#c6db03",   
+              ],
+              hoverBackgroundColor: [
+                "#12a73a",
+                "#ff2924",
+                "#ffb902",
+                "#016bc6",
+                "#c6db03",  
+              ]
+            }]
+        };
+       this.options = {
+          legend:{
+              position: 'bottom'
+            },
+            layout: {
+              padding: {
+                  left: 15,
+                  right: 15,
+                  top: 15,
+                  bottom: 15
+              }
+          }
         }
       }
- 
-  }
-   ngOnInit() {
+
+   }
   
-  }
 
-
-}
+ 

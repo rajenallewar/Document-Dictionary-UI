@@ -1,109 +1,148 @@
-<div class="container ">
-    <h2 style="text-align: center"> New Proposal Form</h2>
-    <div class="row">
+ <div class="container">
+      <div class="row">
         <div class="col-md-3"></div>
-        <div class="col-md-9">
-            <form [formGroup]="newFileForm" (ngSubmit)="onSubmit(newFileForm)">
+        <div class="col-md-6" id="form">
+               <form [formGroup]="newFileForm" (ngSubmit)="onSubmit(newFileForm)">
                 <div class="row">
-                    <div class="col-md-8">
-                        <div class="form-group">
-
-                            <label>Client Name</label>
-
-                            <input type="text" formControlName="clientName" placeholder="Client Name"
-                                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.clientName.errors }" />
-                            <div *ngIf="submitted && f.clientName.errors" class="invalid-feedback">
-                                <div *ngIf="f.clientName.errors.required">Client Name is required</div>
+                <div class="col-md-12"> <h1 class="heading">New Proposal Form</h1></div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                           <label>Client Name</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"
+                                            aria-hidden="true"></i></span>
+                                </div>
+                             <input type="text" formControlName="clientName" placeholder="Client Name"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.clientName.errors }" />
+                                <div *ngIf="submitted && f.clientName.errors" class="invalid-feedback">
+                                    <div *ngIf="f.clientName.errors.required">Client Name is required</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <div class="form-group">
-
                             <label>Start Date</label>
-                            <input type="date" formControlName="startDate" class="form-control"
-                                [ngClass]="{ 'is-invalid': submitted && f.startDate.errors }" />
-                            <div *ngIf="submitted && f.startDate.errors" class="invalid-feedback">
-                                <div *ngIf="f.startDate.errors.required">Date is required</div>
-
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar"
+                                            aria-hidden="true"></i></span>
+                                </div>
+                                <input type="date" formControlName="startDate" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.startDate.errors }" />
+                                <div *ngIf="submitted && f.startDate.errors" class="invalid-feedback">
+                                    <div *ngIf="f.startDate.errors.required">Date is required</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <div class="form-group">
 
                             <label>End Date</label>
-                            <input type="date" formControlName="endDate" class="form-control"
-                                [ngClass]="{ 'is-invalid': submitted && f.endDate.errors }" />
-                            <div *ngIf="submitted && f.startDate.errors" class="invalid-feedback">
-                                <div *ngIf="f.endDate.errors.required">Date is required</div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar"
+                                            aria-hidden="true"></i></span>
+                                </div>
+                                <input type="date" formControlName="endDate" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.endDate.errors }" />
+                                <div *ngIf="submitted && f.startDate.errors" class="invalid-feedback">
+                                    <div *ngIf="f.endDate.errors.required">Date is required</div>
 
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="form-group">
 
                             <label> Requirement</label>
-                            <input type="text" formControlName="requirement" placeholder="Requirment"
-                                class="form-control" [ngClass]="{ 'is-invalid': submitted && f. requirement.errors }" />
-                            <div *ngIf="submitted && f. requirement.errors" class="invalid-feedback">
-                                <div *ngIf="f. requirement.errors.required"> Requirement is required</div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-tasks"></i>
+                            </span>
+                                </div>
+                                <input type="text" formControlName="requirement" placeholder="Requirment"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f. requirement.errors }" />
+                                <div *ngIf="submitted && f. requirement.errors" class="invalid-feedback">
+                                    <div *ngIf="f. requirement.errors.required"> Requirement is required</div>
 
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="form-group">
+                           <label> Region/BU </label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-globe"
+                                            aria-hidden="true"></i></span>
+                                </div>
+                                <input type="text" formControlName="region" placeholder="Region/BU" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.region.errors }" />
+                                <div *ngIf="submitted && f.region.errors" class="invalid-feedback">
+                                    <div *ngIf="f.region.errors.required"> Region/BU is required</div>
 
-                            <label> Region/BU </label>
-                            <input type="text" formControlName="region" placeholder="Region/BU" class="form-control"
-                                [ngClass]="{ 'is-invalid': submitted && f.region.errors }" />
-                            <div *ngIf="submitted && f.region.errors" class="invalid-feedback">
-                                <div *ngIf="f.region.errors.required"> Region/BU is required</div>
-
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="form-group">
 
                             <label> Status</label>
-                            <input type="text" formControlName="status" class="form-control" placeholder="Status"
-                                [ngClass]="{ 'is-invalid': submitted && f.status.errors }" />
-                            <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
-                                <div *ngIf="f.status.errors.required"> Status is required</div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-spinner"></i>
 
+                                           </span>
+                                </div>
+                                <input type="text" formControlName="status" class="form-control" placeholder="Status"
+                                    [ngClass]="{ 'is-invalid': submitted && f.status.errors }" />
+                                <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                                    <div *ngIf="f.status.errors.required"> Status is required</div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
-                    <div class="col-md-8 ">
+                    <div class="col-md-10 ">
                         <div class="form-group">
 
                             <div class="pt-25">
-                                <input type="file" name="file" multiple tooltip="You can upload New Collateral Here..."
-                                placement="top" >
-                                <button class="btn ml-55 custom-button" [disabled]="!newFileForm.valid">Upload</button>
-                                <button class="btn ml-5 custom-button" [disabled]="!newFileForm.valid">Save</button>
-                            </div>
+
+                              <label class="btn btn-default">
+                                    <i class="fa fa-upload fa-2x " aria-hidden="true"></i><input type="file" hidden>
+                                </label>
+                                <button class="btn ml-90 custom-button" >Upload</button>
+                                <button class="btn ml-5 custom-button" >Save</button>
+                                </div>
+                                
                         </div>
                     </div>
                 </div>
+                
             </form>
+          
         </div>
-        <div class="col-md-2"></div>
+    
+        <div class="col-md-3"></div>
     </div>
 
-</div>
+</div> 

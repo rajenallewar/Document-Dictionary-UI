@@ -16,6 +16,8 @@ import { ProposalModule } from './proposals/proposal.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { ProposalServices } from './services/proposal.service';
 import { CollateralServices } from './services/collateral.service';
+import { AnnotationModule } from './annotation/annotation.module';
+
 
 
 
@@ -26,6 +28,8 @@ import { CollateralServices } from './services/collateral.service';
     ViewFileComponent,
     ColumnFilterDataPipe,
     LeftbarComponent,
+    
+
   
   
     
@@ -33,6 +37,7 @@ import { CollateralServices } from './services/collateral.service';
    ],
   imports: [
     BrowserModule,
+    
     AppRoutingModule,
     AngularFontAwesomeModule,
     FormsModule,
@@ -41,7 +46,8 @@ import { CollateralServices } from './services/collateral.service';
     ReactiveFormsModule,
     ProposalModule,
     CollateralModule,
-    DashboardModule
+    DashboardModule,
+    AnnotationModule,
 
  
     

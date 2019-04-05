@@ -1,0 +1,20 @@
+.topnav {
+    background-color: #4f32b6;
+    overflow: hidden;
+    height: 30px;
+  }
+ .pdf-container{
+  overflow-x: hidden !important;
+  overflow-y: auto;
+  max-height: 500px;
+ }
+ .download-btn {
+  float: right;
+  background-color: white;
+  border: none;
+  color: #4f32b6;
+  padding: 6px 30px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 20px;
+}

@@ -14,35 +14,52 @@ import { ProposalServices } from 'src/app/services/proposal.service';
     styleUrls: ['./view-proposal.component.scss']
 })
 export class ViewProposalComponent implements OnInit {
-
-
-    fileList;
-    filetype: Array<string>;
-    uploadBox: boolean;
     Proposals:any;
-    // docModel = new DocumentModel();
-    // docModels: any[];
     statusMessage: string;
     constructor(private route: Router,
         private proposals:ProposalServices) {
 
     }
+     ngOnInit() {
+        let proposalType = localStorage.getItem('proposalType');
+        console.log("proposal type ", proposalType)
+        if (proposalType == 'ALL') {
+            this.getAllProposals();
+        } else if (proposalType == 'COMPLETED') {
+            this. getCompletedProposals();
+        } else if (proposalType == 'IN_PROGRESS') {
+            this.getInProgressProposals();}
+            else if (proposalType == 'REJECTED') {
+                this. getLostProposals();} 
+        else {
+            this.getAllProposals();
+        }
 
-    ngOnInit() {
-
-        this.getAllProposals();
-
-      
-    }
-
- 
-        getAllProposals(){
-
+        localStorage.removeItem('proposalType');
+      }
+     getAllProposals(){
         this.proposals.getAllProposals().subscribe((data) => {
         this.Proposals = data;
         console.log(data);
-        
-            })
+          })
+    }
+    getCompletedProposals(){
+        this.proposals.getCompletedProposals().subscribe((data) => {
+            this.Proposals = data;
+            console.log(data);
+              })
+    }
+    getInProgressProposals(){
+        this.proposals.getInProgressProposals().subscribe((data) => {
+            this.Proposals = data;
+            console.log(data);
+              })
+    }
+    getLostProposals(){
+        this.proposals.getLostProposals().subscribe((data) => {
+            this.Proposals = data;
+            console.log(data);
+              })
     }
 
     // displayFile(url) {

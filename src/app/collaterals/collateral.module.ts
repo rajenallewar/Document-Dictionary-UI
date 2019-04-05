@@ -3,9 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewCollateralComponent } from './new-collateral/new-collateral.component';
 import { ViewCollateralComponent } from './view-collateral/view-collateral.component';
-import { CollateralServices } from '../services/collateral.service';
-
-
+// import {StarRatingModule} from 'angular-star-rating';
+// import {RatingModule} from 'primeng/rating';
 
 @NgModule({
     declarations: [
@@ -16,8 +15,9 @@ import { CollateralServices } from '../services/collateral.service';
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
+        // RatingModule,
         // StarRatingModule.forRoot()
-    ],
+       ],
     providers: [],
     bootstrap: []
   })

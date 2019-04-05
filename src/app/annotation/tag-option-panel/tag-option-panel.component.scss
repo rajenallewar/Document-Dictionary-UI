@@ -1,0 +1,32 @@
+#cardheader{
+    background-color: #4f32b6;
+    color: white;
+    font-size: 15px;
+    text-align: center;
+  
+}
+.account{
+    background-color: chartreuse;
+    font-size: 12px;
+}
+.accountfeature{
+    background-color: lightcoral;
+}
+.accountinformation{
+    background-color: lightsalmon;
+}
+.asset{
+    background-color: hotpink;
+}
+.document{
+    background-color: yellow;
+}
+.menu{
+    font-size: 15px;
+    color: black !important;
+}
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}

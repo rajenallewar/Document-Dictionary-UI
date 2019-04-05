@@ -6,6 +6,7 @@ import { NewProposalComponent } from './proposals/new-proposal/new-proposal.comp
 import { ViewProposalComponent } from './proposals/view-proposal/view-proposal.component';
 import { NewCollateralComponent } from './collaterals/new-collateral/new-collateral.component';
 import { ViewCollateralComponent } from './collaterals/view-collateral/view-collateral.component';
+import { AnnotationComponent } from './annotation/annotation/annotation.component';
 
 const routes: Routes = [
   {path:'dashboard', component: DashboardComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path:'newcollateral', component: NewCollateralComponent},
   {path:'viewcollateral', component: ViewCollateralComponent},
   {path:'view/:filename', component: ViewFileComponent},
+  {path:'viewannotation', component: AnnotationComponent},
   {path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {path:'**', component: DashboardComponent}
 ];

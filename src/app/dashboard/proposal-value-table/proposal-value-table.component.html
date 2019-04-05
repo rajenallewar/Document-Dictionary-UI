@@ -1,0 +1,43 @@
+<h6 style="color:#616161">
+    PROPOSAL VALUE
+</h6>
+<div class="value-tb">
+
+  <table class="table table-borderless">
+    <thead>
+      <tr>
+        <th scope="col">Stage</th>
+        <th scope="col">Projects</th>
+        <th scope="col">Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- <tr>
+
+        <td>Won</td>
+        <td>14</td>
+        <td>$14.63</td>
+      </tr>
+      <tr>
+
+        <td>Lost</td>
+        <td>14</td>
+        <td>$14.63</td>
+      </tr>
+      <tr>
+
+        <td>In-Progress</td>
+        <td>14</td>
+        <td>$14.63</td>
+      </tr> -->
+      <tbody>
+          <tr *ngFor="let proposal of ProposalsValue">
+              <td>{{proposal.status}}</td>
+              <td>{{proposal.countOfProposals}}</td>
+              <td>{{proposal.totalCostOfProposals}}</td>
+             </tr>
+      </tbody>
+   
+  </table>
+
+</div>

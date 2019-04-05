@@ -1,14 +1,20 @@
 <div class="container ">
-  <h2 style="text-align: center"> New Collateral Form</h2>
+
   <div class="row">
     <div class="col-md-3"></div>
-    <div class="col-md-9">
+    <div class="col-md-6" id="form">
       <form [formGroup]="newCollateralForm" (ngSubmit)="onSubmit(newCollateralForm)">
         <div class="row">
-          <div class="col-md-8">
+            <div class="col-md-12"> <h1 class="heading">New Collateral Form</h1></div>
+          <div class="col-md-12">
             <div class="form-group">
 
               <label>Collateral Type</label>
+              <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-file" aria-hidden="true"></i>
+                             </span>
+                  </div>
 
               <input type="text" formControlName="collateralType" placeholder="Collateral Type" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.collateralType.errors }" />
@@ -16,14 +22,20 @@
                 <div *ngIf="f.collateralType.errors.required">Collateral Type is required</div>
               </div>
             </div>
+            </div>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-12">
             <div class="form-group">
 
               <label>Document Name</label>
+              <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-book" aria-hidden="true"></i>
+                             </span>
+                  </div>
               <input type="text" formControlName="documentName" placeholder="Document Name" class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f.documentName.errors }" />
               <div *ngIf="submitted && f.documentName.errors" class="invalid-feedback">
@@ -31,13 +43,15 @@
 
               </div>
             </div>
+            </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-12">
             <div class="form-group">
 
               <label> Annotated </label>
+              
               <label class="form-check-inline ml-5">
                 <input class="form-check-input" formControlName="annotated" type="radio" name="annotated"
                   [value]="true">
@@ -55,11 +69,11 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-12">
             <div class="form-group">
               <label> Rating </label>
-              
-
+             
+            <!-- <p-rating readonly="true" stars="3" [cancel]="false" formControlName="rating"></p-rating> -->
               <!-- <input formControlName="rating" class="form-control" 
                               [ngClass]="{ 'is-invalid': submitted && f.rating.errors }" /> -->
               <!-- <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
@@ -70,12 +84,12 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-8 ">
+          <div class="col-md-12 ">
             <div class="form-group">
               <div class="pt-25">
-                <input type="file" name="file" multiple tooltip="You can upload New Collateral Here..." placement="top">
-                <button class="btn ml-45 custom-button" [disabled]="!newCollateralForm.valid">Upload</button>
-                <button class="btn ml-5 custom-button" [disabled]="!newCollateralForm.valid">Save</button>
+                <input type="file" name="file">
+                <button class="btn ml-45 custom-button">Upload</button>
+                <button class="btn ml-5 custom-button">Save</button>
               </div>
             </div>
           </div>

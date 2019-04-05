@@ -2,5 +2,8 @@
  <h6 style="color:#616161">PROPOSAL STAGE</h6>
  <div class="char-dough">
      
-  <p-chart class="doughnut" type="doughnut" width="500px" height="200px" [data]="data" [options]="options" [responsive]="true" ></p-chart>
+  <p-chart *ngIf="doughnutChartData" type="doughnut" width="500px" height="200px" [data]="doughnutChartData" [options]="options" [responsive]="true" ></p-chart>
+  <div class ="doughnut-spinner">
+  <span *ngIf="!doughnutChartData"> <i class="fa fa-circle-o-notch fa-spin fa-3x"></i></span> 
+  </div>
   </div>
