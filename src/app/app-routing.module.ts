@@ -7,6 +7,8 @@ import { ViewProposalComponent } from './proposals/view-proposal/view-proposal.c
 import { NewCollateralComponent } from './collaterals/new-collateral/new-collateral.component';
 import { ViewCollateralComponent } from './collaterals/view-collateral/view-collateral.component';
 import { AnnotationComponent } from './annotation/annotation/annotation.component';
+import { AskmeComponent } from './askme/askme.component';
+import { SmelistComponent } from './smelist/smelist.component';
 
 const routes: Routes = [
   {path:'dashboard', component: DashboardComponent},
@@ -15,7 +17,9 @@ const routes: Routes = [
   {path:'newcollateral', component: NewCollateralComponent},
   {path:'viewcollateral', component: ViewCollateralComponent},
   {path:'view/:filename', component: ViewFileComponent},
-  {path:'viewannotation', component: AnnotationComponent},
+  {path:'askme', component: AskmeComponent},
+  {path:'smelist', component: SmelistComponent},
+  {path:'viewannotation/:collateralId', component: AnnotationComponent},
   {path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {path:'**', component: DashboardComponent}
 ];

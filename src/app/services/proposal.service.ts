@@ -35,5 +35,6 @@ export class ProposalServices {
   public getSummaryofProposalsByStatus(){
     return this._http.get<Proposal[]>(appURL + '/getSummaryOfProposalsByStatus');
   }
+ 
   }
 

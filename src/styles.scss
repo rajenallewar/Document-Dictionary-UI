@@ -42,7 +42,7 @@ html, body {
 .custom-button{
     width: 100px;
     background-color:rgba(73, 73, 73, 0.9) !important;
-   color: white !important;
+    color: white !important;
     padding:3px;
     
 }
@@ -67,4 +67,19 @@ html, body {
 .mt-15{
   margin-top: 15px;
 }
+.ml-150{
+  margin-left:150px;
+}
+.ml-30{
+  margin-left:30px;
+}
+
+.ui-fileupload-buttonbar {
+  display: flex;
+}
+.ui-widget-header .ui-button{
+color:gray;
+}
+
+
 

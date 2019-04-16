@@ -10,20 +10,32 @@ export class ChartBarComponent  {
   options : any;
   constructor() { 
     this.data = {
-      labels: ['April 1', 'April 3', 'April 6', 'April 9', 'April 13 ', 'April 17', 'April 23', 'April 30'],
+      labels: ['Wells Fargo', 'Citi', 'HSBC', 'Assurian', 'Markit Group', 'DMT' ],
       datasets: [
           {
               label: 'Total',
-              backgroundColor: '#3023ae',
-              borderColor: '#3023ae',
-              data: [65, 59, 80, 81, 56, 55, 40,35]
+              backgroundColor: '#4ac1ff',
+              borderColor: '#4ac1ff',
+              data: [65, 59, 80, 81, 86,60]
           },
           {
-              label: 'In-Progress',
-              backgroundColor: '#ff69a4',
-              borderColor: '#ff69a4',
-              data: [28, 48, 40, 19, 86, 27, 90,52]
-          }
+              label: 'Won',
+              backgroundColor: '#3023ae',
+              borderColor: '#3023ae',
+              data: [38, 48, 40, 39, 56,40]
+          },
+          {
+            label: 'In Progress',
+            backgroundColor: '#ff69a4',
+            borderColor: '#ff69a4',
+            data: [21, 28, 30, 19, 36,20]
+        },
+        {
+          label: 'Lost',
+          backgroundColor: '#74f5ab',
+          borderColor: '#74f5ab',
+          data: [11, 18, 20, 14, 30,13]
+      }
       ]
   }
   this.options = {

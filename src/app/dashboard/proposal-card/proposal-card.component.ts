@@ -31,11 +31,11 @@ constructor(private router: Router,private proposals:ProposalServices) { }
    getSummaryOfProposal(){
     this.proposals.getSummaryofProposalsByStatus().subscribe((data) => {      
       data.forEach((proposal) => {
-        if(proposal.status === "Won") {
+        if(proposal.status.toUpperCase() === "WON") {
           this.proposalCardsData.wonProposalCount = proposal["countOfProposals"];
-        } else if(proposal.status === "In-Progress") {
+        } else if(proposal.status.toUpperCase() === "IN-PROGRESS") {
           this.proposalCardsData.inProgressProposalCount = proposal["countOfProposals"];
-        } else if(proposal.status === "Lost") {
+        } else if(proposal.status.toUpperCase() === "LOST") {
           this.proposalCardsData.lostProposalCount = proposal["countOfProposals"];
         }
       });

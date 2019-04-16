@@ -1,13 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Router } from '@angular/router';
-import { DocumentModel } from 'src/app/models/documentViewer';
-import { DocumentServices } from 'src/app/services/document.service';
-import { DataShareService } from 'src/app/shared/data-share.service';
 import { ProposalServices } from 'src/app/services/proposal.service';
-
-
-
+import { CollateralServices } from 'src/app/services/collateral.service';
 @Component({
     selector: 'app-view-proposal',
     templateUrl: './view-proposal.component.html',
@@ -17,7 +11,7 @@ export class ViewProposalComponent implements OnInit {
     Proposals:any;
     statusMessage: string;
     constructor(private route: Router,
-        private proposals:ProposalServices) {
+        private proposalService:ProposalServices,private collateralService:CollateralServices) {
 
     }
      ngOnInit() {
@@ -34,39 +28,37 @@ export class ViewProposalComponent implements OnInit {
         else {
             this.getAllProposals();
         }
-
-        localStorage.removeItem('proposalType');
+     localStorage.removeItem('proposalType');
       }
      getAllProposals(){
-        this.proposals.getAllProposals().subscribe((data) => {
+        this.proposalService.getAllProposals().subscribe((data) => {
         this.Proposals = data;
         console.log(data);
           })
     }
     getCompletedProposals(){
-        this.proposals.getCompletedProposals().subscribe((data) => {
+        this.proposalService.getCompletedProposals().subscribe((data) => {
             this.Proposals = data;
             console.log(data);
               })
     }
     getInProgressProposals(){
-        this.proposals.getInProgressProposals().subscribe((data) => {
+        this.proposalService.getInProgressProposals().subscribe((data) => {
             this.Proposals = data;
             console.log(data);
               })
     }
     getLostProposals(){
-        this.proposals.getLostProposals().subscribe((data) => {
+        this.proposalService.getLostProposals().subscribe((data) => {
             this.Proposals = data;
             console.log(data);
               })
     }
+    getCollateral(id:number){
+        localStorage.setItem('proposalId', id.toString());
+        this.route.navigateByUrl('viewcollateral');
+    }
 
-    // displayFile(url) {
-    //     this.dataShareService.setfileUrl(url);
-    //     var filename = url.split('\\').pop();
-    //     this.route.navigateByUrl(`view/${filename}`);
-
-    // }
+  
 }
 

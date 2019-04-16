@@ -52,12 +52,14 @@
 
   .card-counter .count-name{
     position: absolute;
-    right: 35px;
+    right: 0px;
     top: 65px;
-    font-style: normal;
+    font-style: bold;
     text-transform: capitalize;
     opacity: 0.5;
     display: block;
     font-size: 15px;
+    width: 125px;
+
    
   }

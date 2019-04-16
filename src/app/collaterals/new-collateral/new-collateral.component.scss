@@ -1,16 +1,44 @@
 .checked {
     color:darkgoldenrod
   }
-
   #form{
      background-color:#ffffff;
      min-height:300px;
-    
-    
-  }
+     }
   .heading{
   text-align: center;
   border-bottom-style: ridge;
   font-family: Agency FB;
+  color: #8b50c7
 
+}
+.upload-btn {
+  position: relative;
+  overflow: hidden;
+}
+.upload-input {
+  position: absolute;
+  font-size: 50px;
+  opacity: 0;
+  right: 0;
+  top: 0;
+}
+.btn-save{
+  width: 100px;
+  height: 35px;
+  border-radius: 20px;
+  background-color: #8b50c7;
+  border-color:  #8b50c7;
+  color: white;
+  font-size: 16px;
+}
+.btn-reset{
+  width: 100px;
+  height: 35px;
+  border-radius: 20px;
+  background-color: #649bf6;
+  border-color:  #649bf6;
+  color: white;
+  margin-left: 20px;
+  font-size: 16px;
 }

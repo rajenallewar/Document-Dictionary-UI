@@ -1,19 +1,42 @@
- <div class="container">
-      <div class="row">
+<div class="container">
+    <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6" id="form">
-               <form [formGroup]="newFileForm" (ngSubmit)="onSubmit(newFileForm)">
+            <form [formGroup]="newFileForm" (ngSubmit)="onSubmit(newFileForm)">
                 <div class="row">
-                <div class="col-md-12"> <h1 class="heading">New Proposal Form</h1></div>
                     <div class="col-md-12">
-                      <div class="form-group">
-                           <label>Client Name</label>
+                        <h1 class="heading">New Proposal Form</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Proposal Name</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="fa fa-file" aria-hidden="true"></i></span>
+                                </div>
+                                <input type="text" formControlName="proposalName" placeholder="Proposal Name"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.proposalName.errors }" />
+                                <div *ngIf="submitted && f.proposalName.errors" class="invalid-feedback">
+                                    <div *ngIf="f.proposalName.errors.required"> Proposal Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Client Name</label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-user"
                                             aria-hidden="true"></i></span>
                                 </div>
-                             <input type="text" formControlName="clientName" placeholder="Client Name"
+                                <input type="text" formControlName="clientName" placeholder="Client Name"
                                     class="form-control"
                                     [ngClass]="{ 'is-invalid': submitted && f.clientName.errors }" />
                                 <div *ngIf="submitted && f.clientName.errors" class="invalid-feedback">
@@ -62,12 +85,11 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-
                             <label> Requirement</label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-tasks"></i>
-                            </span>
+                                    </span>
                                 </div>
                                 <input type="text" formControlName="requirement" placeholder="Requirment"
                                     class="form-control"
@@ -83,7 +105,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                           <label> Region/BU </label>
+                            <label> Region/BU </label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-globe"
@@ -103,46 +125,54 @@
                     <div class="col-md-12">
                         <div class="form-group">
 
-                            <label> Status</label>
+                            <label> Cost</label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-spinner"></i>
-
-                                           </span>
+                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-inr"></i>
+                                    </span>
                                 </div>
-                                <input type="text" formControlName="status" class="form-control" placeholder="Status"
+                                <input type="text" formControlName="cost" class="form-control" placeholder="Cost"
                                     [ngClass]="{ 'is-invalid': submitted && f.status.errors }" />
-                                <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
-                                    <div *ngIf="f.status.errors.required"> Status is required</div>
+                                <div *ngIf="submitted && f.cost.errors" class="invalid-feedback">
+                                    <div *ngIf="f.cost.errors.required"> Cost is required</div>
 
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
-                    <div class="col-md-10 ">
-                        <div class="form-group">
+                    <div class="col-md-12">
+                        <label>Status</label>
+                        <select formControlName="status" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                            <option value="" selected disabled hidden>Choose here</option>
+                            <option value="New">New</option>
+                            <option value="In-Progress">In Progress</option>
+                            <option value="Won">Won</option>
+                            <option value="Lost">Lost</option>
+                        </select>
+                        <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                            <div *ngIf="f.status.errors.required"> Status is required</div>
 
-                            <div class="pt-25">
-
-                              <label class="btn btn-default">
-                                    <i class="fa fa-upload fa-2x " aria-hidden="true"></i><input type="file" hidden>
-                                </label>
-                                <button class="btn ml-90 custom-button" >Upload</button>
-                                <button class="btn ml-5 custom-button" >Save</button>
-                                </div>
-                                
                         </div>
                     </div>
                 </div>
-                
+
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6 text-center pt-25">
+                        <input type="submit" class="btn btn-save" value="Save">
+                        <input type="reset" value="Reset" class="btn-reset">
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+
             </form>
-          
+
         </div>
-    
+
         <div class="col-md-3"></div>
     </div>
 
-</div> 
+</div>

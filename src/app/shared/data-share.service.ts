@@ -12,7 +12,7 @@ export class DataShareService {
   }
 
   getfileUrl () {
-    return this.filePath;
+    return this.filePath ? this.filePath : '';
   }
 
 }

@@ -6,6 +6,9 @@ import { ViewCollateralComponent } from './view-collateral/view-collateral.compo
 // import {StarRatingModule} from 'angular-star-rating';
 // import {RatingModule} from 'primeng/rating';
 
+import {FileUploadModule} from 'primeng/fileupload';
+
+
 @NgModule({
     declarations: [
         NewCollateralComponent,
@@ -15,6 +18,7 @@ import { ViewCollateralComponent } from './view-collateral/view-collateral.compo
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
+        FileUploadModule
         // RatingModule,
         // StarRatingModule.forRoot()
        ],

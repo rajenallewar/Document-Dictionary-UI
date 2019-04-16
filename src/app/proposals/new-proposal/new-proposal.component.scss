@@ -8,7 +8,31 @@
   border-bottom-style: ridge;
   font-family: Agency FB;
   padding-bottom: 9px;
+  color: #8b50c7;
 }
 [hidden] {
   display: none !important;
+}
+
+.drop-down-status{
+  width: 100px;
+}
+.btn-save{
+  width: 100px;
+  height: 35px;
+  border-radius: 20px;
+  background-color: #8b50c7;
+  border-color:  #8b50c7;
+  color: white;
+  font-size: 16px;
+}
+.btn-reset{
+  width: 100px;
+  height: 35px;
+  border-radius: 20px;
+  background-color: #649bf6;
+  border-color:  #649bf6;
+  color: white;
+  margin-left: 20px;
+  font-size: 16px;
 }

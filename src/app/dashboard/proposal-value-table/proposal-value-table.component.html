@@ -12,29 +12,12 @@
       </tr>
     </thead>
     <tbody>
-      <!-- <tr>
-
-        <td>Won</td>
-        <td>14</td>
-        <td>$14.63</td>
-      </tr>
-      <tr>
-
-        <td>Lost</td>
-        <td>14</td>
-        <td>$14.63</td>
-      </tr>
-      <tr>
-
-        <td>In-Progress</td>
-        <td>14</td>
-        <td>$14.63</td>
-      </tr> -->
+    
       <tbody>
           <tr *ngFor="let proposal of ProposalsValue">
               <td>{{proposal.status}}</td>
               <td>{{proposal.countOfProposals}}</td>
-              <td>{{proposal.totalCostOfProposals}}</td>
+              <td>{{proposal.totalCostOfProposals | currency:"CAD":"symbol-narrow"}}</td>
              </tr>
       </tbody>
    

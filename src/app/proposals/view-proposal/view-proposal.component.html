@@ -3,29 +3,33 @@
     <table class="table table-striped">
         <thead>
             <tr>
+                <th>Proposal Name</th>
                 <th>Client Name</th>
                 <th>Start</th>
                 <th>End</th>
                 <th>Requirement</th>
                 <th>Region/BU</th>
                 <th>Status</th>
-                <!-- <th>Related Documents</th> -->
+                <th>Cost</th>
+                <th>Related Collateral</th>
             </tr>
 
         </thead>
         <tbody>
             <tr *ngFor="let proposal of Proposals">
+                <td>{{proposal.proposalName}}</td>
                 <td>{{proposal.clientName}}</td>
                 <td>{{proposal.startDate  | date: 'dd/MM/yyyy' }}</td>
                 <td>{{proposal.endDate  | date: 'dd/MM/yyyy'  }}</td>
                 <td>{{proposal.requirement}}</td>
                 <td>{{proposal.region}}</td>
                 <td>{{proposal.status}}</td>
+                <td>{{proposal.cost | currency:"CAD":"symbol-narrow"}}</td>
 
-                <!-- <td>
+                <td>
                     <div class="file-type btn btn-default upload-btn " input type="button"
-                        (click)="displayFile(file.filePath)">View Document</div>
-                </td> -->
+                        (click)="getCollateral(proposal.proposalId)">View Collateral</div>
+                </td>
             </tr>
         </tbody>
 

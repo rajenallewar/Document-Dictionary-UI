@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-md-12">
+        <input type="text" placeholder="Search" size="50" #tag (keyup.enter)="searchByTags(tag.value)">
+    </div>
+</div>
+<div class="row pt-25" >
+    <div class="col-md-12">
+        <section class="file-list">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Domain </th>
+                        <th> Sub Domain</th>
+                        <th>SME/Architects </th>
+                        <th>Location</th>
+                      
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <tr *ngFor="let smeList of SmeList ">
+                        <td>{{smeList.domain}}</td>
+                        <td>{{smeList.subDomain}}</td>
+                        <td>{{smeList.smeArchitects }}</td>
+                        <td>{{smeList.location }}</td>
+                     
+                    </tr>
+                </tbody>
+             </table>
+         </section>
+        </div>
+</div>

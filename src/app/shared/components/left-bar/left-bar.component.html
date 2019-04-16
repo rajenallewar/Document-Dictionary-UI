@@ -1,27 +1,64 @@
 <div class="wrapper">
-   <nav id="sidebar">
+    <nav id="sidebar">
         <ul class="list-unstyled components">
-               <li class="active">
+            <li class="active">
+                <a [routerLink]="['/dashboard']" routerLinkActive="router-link-active">DASHBOARD</a>
+            </li>
+            <li>
+                <a href="#proposalSubmenu" data-toggle="collapse" aria-expanded="false"
+                    class="dropdown-toggle">PROPOSALS</a>
+                <ul class="collapse list-unstyled" id="proposalSubmenu">
+                    <li>
+                        <a [routerLink]="['/newproposal']" routerLinkActive="router-link-active">NEW PROPOSALS</a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/viewproposal']" routerLinkActive="router-link-active">LIST OF PROPOSALS</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#collateralSubmenu" data-toggle="collapse" aria-expanded="false"
+                    class="dropdown-toggle">COLLATERALS</a>
+                <ul class="collapse list-unstyled" id="collateralSubmenu">
+                    <li>
+                        <a [routerLink]="['/newcollateral']" routerLinkActive="router-link-active">NEW COLLATERAL</a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/viewcollateral']" routerLinkActive="router-link-active">LIST OF COLLATERALS
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li>
+                <a [routerLink]="['/askme']" routerLinkActive="router-link-active">ASK ME</a>
+            </li>
+            <li>
+                <a [routerLink]="['/smelist']" routerLinkActive="router-link-active">SME LIST</a>
+            </li>
+
+            <!-- <li class="active">
+                
                  <a [routerLink]="['/dashboard']" routerLinkActive="router-link-active">DASHBOARD</a>
             </li>
             <li>
-                <a [routerLink]="['/newproposal']" routerLinkActive="router-link-active">NEW PROPOSAL</a>
+                 <a [routerLink]="['/dashboard']" routerLinkActive="router-link-active">DASHBOARD</a>
             </li>
             <li>
-                <a [routerLink]="['/viewproposal']" routerLinkActive="router-link-active">LIST OF PROPOSAL</a>
+                <a [routerLink]="['/viewproposal']" routerLinkActive="router-link-active">LIST OF PROPOSALS</a>
             </li>
             <li>
                 <a [routerLink]="['/newcollateral']" routerLinkActive="router-link-active">NEW COLLATERAL</a>
             </li>
             <li>
-                <a [routerLink]="['/viewcollateral']" routerLinkActive="router-link-active">LIST OF COLLATERAL </a>
+                <a [routerLink]="['/viewcollateral']" routerLinkActive="router-link-active">LIST OF COLLATERALS </a>
             </li>
             <li>
-                <a [routerLink]="['/']" routerLinkActive="router-link-active">ASK ME</a>
+                <a  [routerLink]="['/askme']" routerLinkActive="router-link-active">ASK ME</a>
             </li>
             <li>
-                <a [routerLink]="['/viewannotation']" routerLinkActive="router-link-active">SME LIST</a>
-            </li>
+                <a [routerLink]="['/smelist']" routerLinkActive="router-link-active">SME LIST</a>
+            </li> -->
         </ul>
     </nav>
 

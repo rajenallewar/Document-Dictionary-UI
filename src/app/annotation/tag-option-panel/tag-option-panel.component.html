@@ -1,41 +1,24 @@
-     <div class="card" style="min-height: 300px;">
-        <div class="card-header" id="cardheader">
-         New Annotation
+<div class="card" style="min-height: 500px;">
+  <div class="card-header" id="cardheader">
+    Annotation
+  </div>
+  <div class="card-body">
+    <div class="input-group">
+      <div>
+        <input #newAnnotation (keyup.enter)="addAnnotation(newAnnotation.value); newAnnotation.value=''"
+          (blur)="addAnnotation(newAnnotation.value); newAnnotation.value='' " class="form-control"
+          placeholder="Add Tags" style="width:100%">
+        <div>
+          <ul style="list-style-type:none; padding-left:0px">
+            <li *ngFor="let tag of tags" [ngStyle]="{'background-color': tag.bgColor}" class="list-box-items">
+              {{tag.tagsDescription}}
+            </li>
+          </ul>
         </div>
-        <div class="card-body">
-          <div class="dropdown" style="min-height: 100px">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width:100%; background-color: white; color:black;">Select
-            <span class="caret"></span></button>
-            <ul class="dropdown-menu scrollable-menu" style="width:100%;">
-              <li class="account"><a class="menu" href="#">Account</a></li>
-              <li class="accountfeature"><a class="menu"href="#">AccountFeature</a></li>
-              <li class="accountinformation"><a class="menu" href="#">AccountInformation</a></li>
-              <li class="asset"><a class="menu" href="#">Asset</a></li>
-              <li class="document"><a class="menu" href="#">Document</a></li>
-              <li class="account"><a class="menu" href="#">Account</a></li>
-              <li class="accountfeature "><a class="menu" href="#">AccountFeature</a></li>
-              <li class="accountinformation"><a class="menu" href="#">AccountInformation</a></li>
-              <li class="asset"><a class="menu" href="#">Asset</a></li>
-              <li class="document"><a class="menu" href="#">Document</a></li>
-              <li class="account"><a class="menu" href="#">Account</a></li>
-              <li class="accountfeature "><a class="menu" href="#">AccountFeature</a></li>
-              <li class="accountinformation"><a class="menu" href="#">AccountInformation</a></li>
-              <li class="asset"><a class="menu" href="#">Asset</a></li>
-              <li class="document"><a class="menu" href="#">Document</a></li>
-      
-           </ul>
-          </div>
-        </div>
-        
-       
       </div>
-
-      <div class="card mt-15" style="min-height:150px;">
-        <div class="card-header" id="cardheader">
-        Concept type Cloud
-        </div>
-      
-        </div>
-        
-       
-    
+      <span class="input-group-btn">
+        <button class="btn add-tag-btn" (click)="saveTags()">Save</button>
+      </span>
+    </div>
+  </div>
+</div>

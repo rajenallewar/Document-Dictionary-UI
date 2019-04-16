@@ -17,9 +17,12 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { ProposalServices } from './services/proposal.service';
 import { CollateralServices } from './services/collateral.service';
 import { AnnotationModule } from './annotation/annotation.module';
-
-
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TagServices } from './services/tag.service';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import { AskmeComponent } from './askme/askme.component';
+import { SmelistComponent } from './smelist/smelist.component';
+import { SMEListServices } from './services/smelist.service';
 
 @NgModule({
   declarations: [
@@ -28,16 +31,11 @@ import { AnnotationModule } from './annotation/annotation.module';
     ViewFileComponent,
     ColumnFilterDataPipe,
     LeftbarComponent,
-    
-
-  
-  
-    
-    
-   ],
+    AskmeComponent,
+    SmelistComponent,
+     ],
   imports: [
     BrowserModule,
-    
     AppRoutingModule,
     AngularFontAwesomeModule,
     FormsModule,
@@ -48,15 +46,10 @@ import { AnnotationModule } from './annotation/annotation.module';
     CollateralModule,
     DashboardModule,
     AnnotationModule,
-
- 
-    
-   
-
-   
-   
-  ],
-  providers: [DocumentServices, ProposalServices, CollateralServices],
+    BrowserAnimationsModule,
+    AutoCompleteModule
+],
+  providers: [DocumentServices, ProposalServices, CollateralServices, TagServices,SMEListServices],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
