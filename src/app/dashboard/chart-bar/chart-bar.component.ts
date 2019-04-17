@@ -34,7 +34,7 @@ export class ChartBarComponent  {
           label: 'Lost',
           backgroundColor: '#74f5ab',
           borderColor: '#74f5ab',
-          data: [11, 18, 20, 14, 30,13]
+          data: [18, 18, 20, 14, 30,16]
       }
       ]
   }
