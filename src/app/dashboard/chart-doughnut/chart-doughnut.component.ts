@@ -14,13 +14,13 @@ export class ChartDoughnutComponent implements OnInit {
   Proposals:any;
   @Input() doughtnutData: any;
   constructor(private router: Router, private proposals:ProposalServices) {
-   
-  }
+    }
 
    ngOnInit() {
      this.getProposalSummary();
    }
-
+  
+  //  To get count of proposal by status (to show on doughtnut chart)
    getProposalSummary(){
     this.proposals.getSummaryofProposalsByStatus().subscribe((data) => {
       this.Proposals = data;
@@ -28,7 +28,7 @@ export class ChartDoughnutComponent implements OnInit {
       this.generateDoughtnutData();
         })
    }
-
+  //  To get doughtnut chart data
     generateDoughtnutData(){
        this.doughnutChartData = {
         labels: this.doughtnutData.label,
@@ -53,7 +53,10 @@ export class ChartDoughnutComponent implements OnInit {
         };
        this.options = {
           legend:{
-              position: 'bottom'
+              position: 'bottom',
+              labels: {
+                boxWidth: 12
+            } 
             },
             layout: {
               padding: {

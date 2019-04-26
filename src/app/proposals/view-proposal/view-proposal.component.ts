@@ -30,12 +30,14 @@ export class ViewProposalComponent implements OnInit {
         }
      localStorage.removeItem('proposalType');
       }
+      // To fetch all Proposal data 
      getAllProposals(){
         this.proposalService.getAllProposals().subscribe((data) => {
         this.Proposals = data;
         console.log(data);
           })
     }
+      // To fetch Proposal data by status (by clicking on dashboard cards) 
     getCompletedProposals(){
         this.proposalService.getCompletedProposals().subscribe((data) => {
             this.Proposals = data;
@@ -54,6 +56,7 @@ export class ViewProposalComponent implements OnInit {
             console.log(data);
               })
     }
+    // To fetch collateral linking with that proposal
     getCollateral(id:number){
         localStorage.setItem('proposalId', id.toString());
         this.route.navigateByUrl('viewcollateral');

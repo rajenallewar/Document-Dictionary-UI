@@ -12,8 +12,7 @@
     <div class="card-counter danger" (click)="proposalCardClick('COMPLETED')">
       <i class="fa fa-check-square"></i>
       <span class="count-numbers">{{proposalCardsData.wonProposalCount}}</span>
-      <span class="count-name">COMPLETED
-        PROPOSALS</span>
+      <span class="count-name">WON PROPOSALS</span>
     </div>
   </div>
 
@@ -21,8 +20,7 @@
     <div class="card-counter success" (click)="proposalCardClick('IN_PROGRESS')">
       <i class="fa fa-circle-o-notch"></i>
       <span class="count-numbers">{{proposalCardsData.inProgressProposalCount}}</span>
-      <span class="count-name">IN PROGRESS
-        PROPOSALS</span>
+      <span class="count-name">IN PROGRESS PROPOSALS</span>
     </div>
   </div>
 
@@ -30,8 +28,7 @@
     <div class="card-counter info" (click)="proposalCardClick('REJECTED')">
     <i class="fa fa-ban" aria-hidden="true"></i>
       <span class="count-numbers">{{proposalCardsData.lostProposalCount}}</span>
-      <span class="count-name">REJECTED
-        PROPOSALS</span>
+      <span class="count-name">LOST PROPOSALS</span>
     </div>
   </div>
 </div>

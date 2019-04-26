@@ -4,11 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/components/header/header.component';
-import { ViewFileComponent } from './view-file/view-file.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ColumnFilterDataPipe } from './pipes/column.filterdata.pipe';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { DocumentServices } from './services/document.service';
 import { HttpClientModule } from '@angular/common/http';
 import { LeftbarComponent } from './shared/components/left-bar/left-bar.component';
 import { CollateralModule } from './collaterals/collateral.module';
@@ -19,7 +15,6 @@ import { CollateralServices } from './services/collateral.service';
 import { AnnotationModule } from './annotation/annotation.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TagServices } from './services/tag.service';
-import {AutoCompleteModule} from 'primeng/autocomplete';
 import { AskmeComponent } from './askme/askme.component';
 import { SmelistComponent } from './smelist/smelist.component';
 import { SMEListServices } from './services/smelist.service';
@@ -28,18 +23,15 @@ import { SMEListServices } from './services/smelist.service';
   declarations: [
     AppComponent,
     HeaderComponent,
-    ViewFileComponent,
-    ColumnFilterDataPipe,
     LeftbarComponent,
     AskmeComponent,
-    SmelistComponent,
+    SmelistComponent
      ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFontAwesomeModule,
     FormsModule,
-    PdfViewerModule,
     HttpClientModule,
     ReactiveFormsModule,
     ProposalModule,
@@ -47,9 +39,8 @@ import { SMEListServices } from './services/smelist.service';
     DashboardModule,
     AnnotationModule,
     BrowserAnimationsModule,
-    AutoCompleteModule
-],
-  providers: [DocumentServices, ProposalServices, CollateralServices, TagServices,SMEListServices],
+    ],
+  providers: [ProposalServices, CollateralServices, TagServices,SMEListServices],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -10,7 +10,7 @@ a, a:hover, a:focus {
     transition: all 0.3s;
     text-align: left;
     font-size: 10px;
-     position: fixed;
+    position: fixed;
 }
 
 #sidebar .sidebar-header {
@@ -21,16 +21,9 @@ a, a:hover, a:focus {
     padding: 20px 0;
     border-bottom: -1px solidwhitesmoke;
 }
-
-#sidebar ul p {
-    color:#ffffff;
-    padding: 10px;
-   
-}
-
 #sidebar ul li a {
     padding: 12px;
-    padding-right: 90px;
+    padding-right: 150px;
     font-size: 1.2em;
     display: block;
 }
@@ -41,8 +34,8 @@ a, a:hover, a:focus {
 }
 a[data-toggle="collapse"] {
     position: relative;
+    
 }
-
 .dropdown-toggle::after {
     display: block;
     position: absolute;
@@ -51,3 +44,9 @@ a[data-toggle="collapse"] {
     transform: translateY(-50%);
 }
 
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 10px !important;
+    background: #ffffff;
+    color:black;
+}

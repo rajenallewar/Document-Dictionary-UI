@@ -3,6 +3,7 @@ export class SMEList{
     subDomain:string;
     smeArchitects:string;
     location:string;
-    
+    email:string;
+    contact:string;
 
 }

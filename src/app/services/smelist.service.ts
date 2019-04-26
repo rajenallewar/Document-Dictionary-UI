@@ -7,7 +7,10 @@ import { SMEList } from '../models/smelist';
 export class SMEListServices {
   constructor(private _http: HttpClient) { }
   public getSMEList(){
-    return this._http.get<SMEList[]>(appURL + '/getListOfSme');
+    return this._http.get<SMEList[]>(appURL + '/getListOfSmeData');
+  }
+  public getDomainByUserkeyword(domain:string){
+    return this._http.get<SMEList[]>(appURL + '/getDomainByUserKeyword/'+domain);
   }
   
   }

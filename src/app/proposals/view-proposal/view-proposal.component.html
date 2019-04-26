@@ -1,52 +1,67 @@
- <section class="file-list">
-        <div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Proposal Name</th>
-                <th>Client Name</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Requirement</th>
-                <th>Region/BU</th>
-                <th>Status</th>
-                <th>Cost</th>
-                <th>Related Collateral</th>
-            </tr>
-
-        </thead>
-        <tbody>
-            <tr *ngFor="let proposal of Proposals">
-                <td>{{proposal.proposalName}}</td>
-                <td>{{proposal.clientName}}</td>
-                <td>{{proposal.startDate  | date: 'dd/MM/yyyy' }}</td>
-                <td>{{proposal.endDate  | date: 'dd/MM/yyyy'  }}</td>
-                <td>{{proposal.requirement}}</td>
-                <td>{{proposal.region}}</td>
-                <td>{{proposal.status}}</td>
-                <td>{{proposal.cost | currency:"CAD":"symbol-narrow"}}</td>
-
-                <td>
-                    <div class="file-type btn btn-default upload-btn " input type="button"
-                        (click)="getCollateral(proposal.proposalId)">View Collateral</div>
-                </td>
-            </tr>
-        </tbody>
-
-    </table>
-    </div>
-    <!-- <div class="row" *ngIf="!fileList.length">
-        <div class="col-md-12">
-            <div>
-                <h3 class="text-center">
-                    <span class="text-danger fa fa-search"> No Matching data found.....!</span>
-                </h3>
-            </div>
-        </div> -->
-
-
-
-
-</section> 
-
+<div class="row">
+    <div class="col-md-12">
+        <section class="file-list">
+            <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>  
+                    <th>Client Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Requirement</th>
+                    <th>Region/BU</th>
+                    <th>Status</th>
+                    <th>Cost</th>
+                    <th>Related Collateral</th>
+                </tr>
+    
+            </thead>
+            <tbody>
+                <tr *ngFor="let proposal of Proposals">
+                 
+                    <td>{{proposal.clientName}}</td>
+                    <td>{{proposal.startDate  | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{proposal.endDate  | date: 'dd/MM/yyyy'  }}</td>
+                    <td>{{proposal.requirement}}</td>
+                    <td>{{proposal.region}}</td>
+                    <td>{{proposal.status}}</td>
+                    <td>{{proposal.cost | currency:"CAD":"symbol-narrow"}}</td>
+    
+                    <td>
+                        <div class="file-type btn btn-default upload-btn " input type="button"
+                            (click)="getCollateral(proposal.proposalId)">View Collateral</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+         <!-- <div class="row" *ngIf="!fileList.length">
+            <div class="col-md-12">
+                <div>
+                    <h3 class="text-center">
+                        <span class="text-danger fa fa-search"> No Matching data found.....!</span>
+                    </h3>
+                </div>
+            </div> -->
+       </section> 
+      </div>
+</div>
+ 
+<div class="row">
+    <div class="col-md-12">
+      
+            <ul class="pagination justify-content-end">
+              <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+        
+</div>
+</div>
 

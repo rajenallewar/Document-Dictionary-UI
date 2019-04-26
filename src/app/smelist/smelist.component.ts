@@ -9,16 +9,27 @@ import { Router } from '@angular/router';
 })
 export class SmelistComponent implements OnInit {
   SmeList:any;
+  
   constructor(private route: Router,
     private smelistservice:SMEListServices) { }
 
   ngOnInit() {
     this.getSMEList();
   }
+  // To fetch all SME list data
   getSMEList(){
     this.smelistservice.getSMEList().subscribe((data)=>
     {
+      this.SmeList = data;
+    })
+  }
+ 
+  // To fetch SME list data search by domain
+  getDomainByUserkeyword(domain:string){
+   this.smelistservice.getDomainByUserkeyword(domain).subscribe((data)=>{
       this.SmeList=data;
     })
+
+    
   }
 }

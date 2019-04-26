@@ -33,8 +33,6 @@ export class NewProposalComponent  {
     if(this.newFileForm.valid) {
       this.proposals.saveProposals(form.value).subscribe(data => {
         this.router.navigateByUrl('/viewproposal');
-
-        console.log("success ", data)
       });
     }
 

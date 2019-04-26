@@ -17,10 +17,7 @@ export class ViewCollateralComponent implements OnInit {
     let tagName = localStorage.getItem('tagName');
     localStorage.removeItem('tagName');
         let proposalId = localStorage.getItem('proposalId');
-        console.log("proposalId ",proposalId);
-  
-        console.log("tagName ", tagName)
-        if (tagName) {
+         if (tagName) {
            this.searchByTags(tagName);
         } else {
          if (proposalId) {
@@ -30,29 +27,27 @@ export class ViewCollateralComponent implements OnInit {
          }
       }
      localStorage.removeItem('proposalId');
-   
-   }
+    }
+    // To fetch all collaterals
   getAllCollaterals(){
     this.collateralService.getCollaterals().subscribe((data) =>{
-      
-      this.collaterals = data;
-      console.log("getAllCollaterals ",data);
-      
+        this.collaterals = data;   
     })
   }
+    // To fetch collaterals related to tags
   searchByTags(tag : string){
     this.tagService.searchByTags(tag).subscribe((data)=>{
       this.collaterals = data;
-      console.log("searchByTags ",data);
-    })
+       })
   }
+    // To fetch collateral linking with that proposal
   getCollateralByProposalId(id :number){
     this.collaterals = [];
     this.collateralService.getCollateralsByProposalId(id).subscribe((data)=>{
       this.collaterals = data;
-      console.log("getCollateralByProposalId ",data);
-    })
+      })
   }
+  // To view collateral 
    displayFile(Id: number) {
         localStorage.setItem('collateralId', Id.toString());
         this.route.navigateByUrl(`viewannotation/${Id}`);

@@ -16,11 +16,10 @@ export class AnnotationComponent implements OnInit {
     this.collateralId = Number(localStorage.getItem('collateralId'))
      this.getConvertedHtmlFile(this.collateralId);
   }
-
+// To read the file in html formate
 public getConvertedHtmlFile(Id:number){
   this.collaterealServices.readHtmlConvertedFile(Id).subscribe((data)=> {
- 
- this.htmlCode = this.domSan.bypassSecurityTrustHtml(data.toString());
+  this.htmlCode = this.domSan.bypassSecurityTrustHtml(data.toString());
    })
 
   

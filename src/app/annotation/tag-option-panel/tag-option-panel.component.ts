@@ -16,7 +16,7 @@ class TagsUIModel {
   styleUrls: ['./tag-option-panel.component.scss']
 })
 export class TagOptionPanelComponent implements OnInit {
-  tags: TagsUIModel[];
+  tags: TagsUIModel[] = [];
   texts: string[];
   results: string[];
   collateralId: number;
@@ -25,6 +25,7 @@ export class TagOptionPanelComponent implements OnInit {
     this.collateralId = Number(localStorage.getItem('collateralId'))
     this.getAllTags();
   }
+  // To get all tags saved against that file
   getAllTags() {
     this.tagservice.getAllTags(this.collateralId).subscribe((data: any) => {
       let tags: TagsUIModel[] = [];
@@ -36,18 +37,21 @@ export class TagOptionPanelComponent implements OnInit {
       this.tags = tags;
     });
   }
+  //  To add tags related with that file
   addAnnotation(newAnnotation: string) {
     if (newAnnotation) {
       const tagsModel = new TagsUIModel();
       tagsModel.tagsDescription = newAnnotation;
       tagsModel.bgColor = this.getRandomColor();
-      this.tags.push(tagsModel);
+     this.tags.push(tagsModel);
     }
   }
+  // To give random color to each tag
   getRandomColor() {
     var color = Math.floor(0x1000000 * Math.random()).toString(16);
     return '#' + ('000000' + color).slice(-6);
   }
+  // For saving all added tags
   saveTags() {
     let requestData = {
       collateralId: Number(localStorage.getItem('collateralId')),

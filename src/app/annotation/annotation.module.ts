@@ -5,9 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { TagOptionPanelComponent } from './tag-option-panel/tag-option-panel.component';
 import { AnnotationComponent } from './annotation/annotation.component';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-
-
-
 @NgModule({
   declarations: [
     AnnotationComponent,

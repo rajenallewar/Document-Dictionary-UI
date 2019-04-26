@@ -14,6 +14,8 @@ export class ProposalValueTableComponent implements OnInit {
   ngOnInit() {
    this.getProposalValue();    
   }
+
+  // To fetching proposal value table data on dashboard
   getProposalValue(){
     this.proposals.getSummaryofProposalsByStatus().subscribe((data) => {
     this. ProposalsValue = data;

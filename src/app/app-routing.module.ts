@@ -1,4 +1,3 @@
-import { ViewFileComponent } from './view-file/view-file.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -16,7 +15,6 @@ const routes: Routes = [
   {path:'viewproposal', component: ViewProposalComponent},
   {path:'newcollateral', component: NewCollateralComponent},
   {path:'viewcollateral', component: ViewCollateralComponent},
-  {path:'view/:filename', component: ViewFileComponent},
   {path:'askme', component: AskmeComponent},
   {path:'smelist', component: SmelistComponent},
   {path:'viewannotation/:collateralId', component: AnnotationComponent},

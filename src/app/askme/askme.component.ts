@@ -11,5 +11,5 @@ export class AskmeComponent implements OnInit {
 
   ngOnInit() {
   }
-
+// currently hard coded data
 }

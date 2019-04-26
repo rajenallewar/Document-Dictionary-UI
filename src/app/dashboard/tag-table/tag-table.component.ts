@@ -14,17 +14,16 @@ export class TagTableComponent implements OnInit {
   ngOnInit() {
     this.getTrendingTags();
   }
+  // To fetching most Trending tags on dashboard
   getTrendingTags(){
     this.tagservice.getMostTrendingTags().subscribe((data) => {
     this.tags = data;
-   
      })
   
   }
+  // To fetching related collaterals on tag click 
   getCollateralByTag(tag:string){
     localStorage.setItem('tagName',tag);
-    console.log(tag);
-    
     this.router.navigateByUrl('viewcollateral');
 
   }

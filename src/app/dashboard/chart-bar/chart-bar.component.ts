@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ProposalServices } from 'src/app/services/proposal.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chart-bar',
@@ -8,39 +10,52 @@ import { Component } from '@angular/core';
 export class ChartBarComponent  {
   data : any;
   options : any;
-  constructor() { 
-    this.data = {
-      labels: ['Wells Fargo', 'Citi', 'HSBC', 'Assurian', 'Markit Group', 'DMT' ],
+  barData;
+  @Input() barChartData: any;
+  constructor(private router: Router, private proposals:ProposalServices) { 
+  }
+  ngOnInit() {
+     this.generateChartData();
+  }
+// To get bar chart data
+  generateChartData(){
+    this.barData = {
+      labels: this.barChartData.labels,
+
       datasets: [
-          {
+         {
               label: 'Total',
-              backgroundColor: '#4ac1ff',
-              borderColor: '#4ac1ff',
-              data: [65, 59, 80, 81, 86,60]
+              backgroundColor: '#74f5ab',
+              borderColor: '#74f5ab',
+              data: this.barChartData.dataTotal
           },
           {
               label: 'Won',
               backgroundColor: '#3023ae',
               borderColor: '#3023ae',
-              data: [38, 48, 40, 39, 56,40]
+              data: this.barChartData.dataWon
           },
           {
             label: 'In Progress',
             backgroundColor: '#ff69a4',
             borderColor: '#ff69a4',
-            data: [21, 28, 30, 19, 36,20]
+            data: this.barChartData.dataInProgrss
         },
         {
           label: 'Lost',
-          backgroundColor: '#74f5ab',
-          borderColor: '#74f5ab',
-          data: [18, 18, 20, 14, 30,16]
+          backgroundColor: '#7254f2',
+          borderColor: '#7254f2',
+          data: this.barChartData.dataLost
       }
       ]
   }
   this.options = {
+
     legend:{
       position: 'bottom',
+      labels: {
+        boxWidth: 12
+    },
      
     layout: {
       padding: {
@@ -51,9 +66,12 @@ export class ChartBarComponent  {
       }
     
     }
+  
   }
 }
   }
 
+  }
+    
  
-}
+

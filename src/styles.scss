@@ -36,6 +36,9 @@ html, body {
 .mr-0{
   margin-right: 0px;
 }
+.mr-2{
+  margin-right: 2px;
+}
 .mr-98{
   margin-right: 98px;
 }
@@ -70,8 +73,14 @@ html, body {
 .ml-150{
   margin-left:150px;
 }
+.ml-92{
+  margin-left:92px;
+}
 .ml-30{
   margin-left:30px;
+}
+.ml-100{
+  margin-left:100px;
 }
 
 .ui-fileupload-buttonbar {
@@ -85,5 +94,11 @@ color:gray;
     height:40px;
     
 }
+.spinner{
+  color: #4f32b6;
+  padding:80px;
+  margin-left: 160px;
+}
+
 
 

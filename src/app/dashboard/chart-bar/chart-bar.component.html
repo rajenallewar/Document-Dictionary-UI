@@ -3,5 +3,7 @@
 </h6>
 <div class="chart-bar">
 
-<p-chart class="bar" type="bar" [data]="data" width="500px" height="200px"  [options]="options" [responsive]="true"></p-chart>
+<p-chart class="bar"  *ngIf="barData" type="bar" [data]="barData" width="500px" height="200px"  [options]="options" [responsive]="true"></p-chart>
+<div class ="spinner">
+<span *ngIf="!barData"> <i class="fa fa-circle-o-notch fa-spin fa-3x"></i></span>  </div>
 </div>
