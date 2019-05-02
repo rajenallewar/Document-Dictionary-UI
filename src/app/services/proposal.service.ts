@@ -36,7 +36,7 @@ export class ProposalServices {
     return this._http.get<Proposal[]>(appURL + '/getSummaryOfProposalsByStatus');
   }
   public getSummaryofProposalsByAccount(){
-    return this._http.get<Proposal[]>(appURL + '/getSummaryOfProposalsByAccount');
+    return this._http.get<Proposal[]>(appURL + '/getproposalStatusCountByAccount ');
   }
  
   }

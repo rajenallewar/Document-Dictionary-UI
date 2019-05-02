@@ -24,7 +24,6 @@ export class ChartDoughnutComponent implements OnInit {
    getProposalSummary(){
     this.proposals.getSummaryofProposalsByStatus().subscribe((data) => {
       this.Proposals = data;
-      console.log(data);
       this.generateDoughtnutData();
         })
    }

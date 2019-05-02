@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnChanges, Input } from '@angular/core';
 import { ProposalServices } from 'src/app/services/proposal.service';
 import { Router } from '@angular/router';
 
@@ -7,15 +7,22 @@ import { Router } from '@angular/router';
   templateUrl: './chart-bar.component.html',
   styleUrls: ['./chart-bar.component.scss']
 })
-export class ChartBarComponent  {
+export class ChartBarComponent implements OnChanges  {
   data : any;
   options : any;
-  barData;
+  barData: any;
   @Input() barChartData: any;
+  @Input() totalProposals: number;
+  // @Input() labels: any;
   constructor(private router: Router, private proposals:ProposalServices) { 
   }
   ngOnInit() {
-     this.generateChartData();
+   
+  }
+  ngOnChanges() {
+    console.log("ng on changes");
+    console.log("totalProposals ", this.totalProposals)
+   this.generateChartData();
   }
 // To get bar chart data
   generateChartData(){
@@ -49,6 +56,9 @@ export class ChartBarComponent  {
       }
       ]
   }
+
+  console.log("this.barChartData.dataInProgrss ",this.barChartData.dataInProgrss);
+  
   this.options = {
 
     legend:{

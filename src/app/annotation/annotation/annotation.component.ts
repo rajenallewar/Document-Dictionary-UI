@@ -11,13 +11,14 @@ export class AnnotationComponent implements OnInit {
    htmlCode:SafeHtml = '';
    collateralId: number;
   
-  constructor(private dataShareService: DataShareService, private collaterealServices:CollateralServices, private domSan: DomSanitizer) { }
+  constructor(private dataShareService: DataShareService, private collaterealServices:CollateralServices,
+  private domSan: DomSanitizer) { }
   ngOnInit() {
     this.collateralId = Number(localStorage.getItem('collateralId'))
-     this.getConvertedHtmlFile(this.collateralId);
+    this.getConvertedHtmlFile(this.collateralId);
   }
 // To read the file in html formate
-public getConvertedHtmlFile(Id:number){
+  public getConvertedHtmlFile(Id:number){
   this.collaterealServices.readHtmlConvertedFile(Id).subscribe((data)=> {
   this.htmlCode = this.domSan.bypassSecurityTrustHtml(data.toString());
    })

@@ -70,9 +70,9 @@
                 <input class="form-check-input" formControlName="annotated" type="radio" name="annotated"
                   [value]="false"> No
               </label>
-              <div *ngIf="submitted && f.anntated.errors" class="invalid-feedback">
+              <!-- <div *ngIf="submitted && f.anntated.errors" class="invalid-feedback">
                 <div *ngIf="f.anntated.errors.required"> Annotated is required</div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -80,7 +80,7 @@
           <div class="col-md-12">
             <div class="form-group">
               <p-fileUpload name="demo[]" url="./upload.php" (onUpload)="onUpload($event)" multiple="multiple"
-                accept=".img, .js, .pdf">
+                accept=".pdf">
                 <ng-template pTemplate="content">
                   <ul *ngIf="uploadedFiles.length">
                     <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
