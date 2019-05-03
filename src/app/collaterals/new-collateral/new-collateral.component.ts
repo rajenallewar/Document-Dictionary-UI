@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ɵangular_packages_router_router_j } from '@angular/router';
 import { CollateralServices } from 'src/app/services/collateral.service';
 import { ProposalServices } from 'src/app/services/proposal.service';
 
@@ -53,7 +53,11 @@ export class NewCollateralComponent implements OnInit {
     // this.CollateralServices.add({severity: 'info', summary: 'File Uploaded', detail: ''});
 
 getAllProposals(){
-  this.proposalService.getAllProposals().subscribe((data) => {
+  let pageJSON={
+    pageNumber:1,
+    pageSize:10
+}
+  this.proposalService.getAllProposals(pageJSON).subscribe((data) => {
     this.Proposals = data;
     console.log(data);
       })

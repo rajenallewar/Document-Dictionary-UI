@@ -35,26 +35,26 @@ export class ChartDoughnutComponent implements OnInit {
             {
               data: this.doughtnutData.data,
               backgroundColor: [
-                "#12a73a",
-                "#ff2924",
-                 "#ffb902",
-                 "#016bc6",
-                 "#c6db03",   
+                "#FFC733",
+                 "#ff2924",
+                 "#33FF8D",
+                 "#F028E9",
+                 "#284FF0",   
               ],
               hoverBackgroundColor: [
-                "#12a73a",
+                "#FFC733",
                 "#ff2924",
-                "#ffb902",
-                "#016bc6",
-                "#c6db03",  
+                "#33FF8D",
+                "#F028E9",
+                "#284FF0",  
               ]
             }]
         };
        this.options = {
           legend:{
-              position: 'bottom',
+              position: 'right',
               labels: {
-                boxWidth: 12
+                boxWidth: 5
             } 
             },
             layout: {

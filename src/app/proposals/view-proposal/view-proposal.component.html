@@ -1,5 +1,6 @@
 <div class="row">
     <div class="col-md-12">
+       
         <section class="file-list">
             <div class="table-responsive">
         <table class="table table-striped">
@@ -17,9 +18,9 @@
     
             </thead>
             <tbody>
-                <tr *ngFor="let proposal of Proposals">
-                 
-                    <td>{{proposal.clientName}}</td>
+             
+                    <tr *ngFor="let proposal of Proposals">
+                   <td>{{proposal.clientName}}</td>
                     <td>{{proposal.startDate  | date: 'dd/MM/yyyy' }}</td>
                     <td>{{proposal.endDate  | date: 'dd/MM/yyyy'  }}</td>
                     <td>{{proposal.requirement}}</td>
@@ -31,8 +32,9 @@
                         <div class="file-type btn btn-default upload-btn " input type="button"
                             (click)="getCollateral(proposal.proposalId)">View Collateral</div>
                     </td>
-                </tr>
-            </tbody>
+                </tr>           
+            </tbody> 
+          
         </table>
         </div>
          <!-- <div class="row" *ngIf="!fileList.length">
@@ -65,3 +67,4 @@
 </div>
 </div>
 
+ 

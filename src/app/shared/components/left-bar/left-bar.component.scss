@@ -5,8 +5,8 @@ a, a:hover, a:focus {
 }
 
 #sidebar {
-    background: #ffffff;
-    color:black;
+    background: rgba(0,0,0,0.7);
+    color:white;
     transition: all 0.3s;
     text-align: left;
     font-size: 10px;
@@ -23,14 +23,14 @@ a, a:hover, a:focus {
 }
 #sidebar ul li a {
     padding: 12px;
-    padding-right: 150px;
+    padding-right: 10px;
     font-size: 1.2em;
     display: block;
 }
 #sidebar ul li a:hover {
-    color:#4f32b6;
-    background:#f5f5f5;
-    border-left: solid #4f32b6;
+    color:black;
+     background:#f5f5f5;
+    border-left: solid black;
 }
 a[data-toggle="collapse"] {
     position: relative;
@@ -47,6 +47,6 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 10px !important;
-    background: #ffffff;
-    color:black;
+    // background: #ffffff;
+    color:white;
 }

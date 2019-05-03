@@ -23,7 +23,11 @@ constructor(private router: Router,private proposals:ProposalServices) { }
   } 
 
   getProposal(){
-      this.proposals.getAllProposals().subscribe((data) => {
+    let pageJSON={
+      pageNumber:1,
+      pageSize:10
+  }
+      this.proposals.getAllProposals(pageJSON).subscribe((data) => {
       this.Proposals = data;
       this.totalProposalCount = this.Proposals.length;
       })

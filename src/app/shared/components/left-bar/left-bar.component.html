@@ -1,4 +1,4 @@
-<div class="wrapper">
+ <div class="wrapper">
     <nav id="sidebar">
         <ul class="list-unstyled components">
         
@@ -7,7 +7,7 @@
             </li>
             <li>
                 <a href="#proposalSubmenu" data-toggle="collapse" aria-expanded="false"
-                    class="dropdown-toggle"  (click)="showProposalSubmenu=!showProposalSubmenu"><div><span >PROPOSALS</span><i *ngIf="!showProposalSubmenu" class="fa fa-angle-down ml-100"></i> <i *ngIf="showProposalSubmenu" class="fa fa-angle-right ml-100"></i></div></a>
+                     (click)="showProposalSubmenu=!showProposalSubmenu"><div><span >PROPOSALS</span><i *ngIf="!showProposalSubmenu" class="fa fa-angle-down ml-100"></i><i *ngIf="showProposalSubmenu" class="fa fa-angle-right ml-100"></i></div></a>
                 <ul class="collapse list-unstyled" id="proposalSubmenu">
                     <li>
                          <a [routerLink]="['/newproposal']" routerLinkActive="router-link-active"><i class="fas fa-dot-circle mr-2"></i>NEW PROPOSALS</a>
@@ -19,7 +19,7 @@
             </li>
             <li>
                 <a href="#collateralSubmenu" data-toggle="collapse" aria-expanded="false"
-                    class="dropdown-toggle"  (click)="showCollateralSubmenu=!showCollateralSubmenu"><div><span >COLLATERALS</span><i *ngIf="!showCollateralSubmenu" class="fa fa-angle-down ml-92"></i><i *ngIf="showCollateralSubmenu" class="fa fa-angle-right ml-92"></i></div></a>
+                    (click)="showCollateralSubmenu=!showCollateralSubmenu"><div><span >COLLATERALS</span><i *ngIf="!showCollateralSubmenu" class="fa fa-angle-down ml-92"></i><i *ngIf="showCollateralSubmenu" class="fa fa-angle-right ml-92"></i></div></a>
                 <ul class="collapse list-unstyled" id="collateralSubmenu">
                     <li>
                         <a [routerLink]="['/newcollateral']" routerLinkActive="router-link-active"><i class="fas fa-dot-circle mr-2"></i>  NEW COLLATERAL</a>
@@ -43,4 +43,4 @@
     </nav>
 
 </div>
-
+ 

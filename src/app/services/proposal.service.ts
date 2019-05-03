@@ -12,7 +12,7 @@ export class ProposalServices {
   constructor(private _http: HttpClient) { }
 
   public getAllProposals():Observable<any> {
-    return this._http.get<Proposal[]>(appURL + '/getProposals');
+    return this._http.get<Proposal[]>(appURL + '/getProposals' );
   }
   public saveProposals(Proposal:any) {
     return this._http.post(appURL + '/save',Proposal);

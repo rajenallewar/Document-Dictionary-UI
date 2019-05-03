@@ -32,26 +32,26 @@ export class ChartBarComponent implements OnChanges  {
       datasets: [
          {
               label: 'Total',
-              backgroundColor: '#74f5ab',
-              borderColor: '#74f5ab',
+              backgroundColor: '#33B5FF',
+              borderColor: '#33B5FF',
               data: this.barChartData.dataTotal
           },
           {
               label: 'Won',
-              backgroundColor: '#3023ae',
-              borderColor: '#3023ae',
+              backgroundColor: '#284FF0',
+              borderColor: '#284FF0',
               data: this.barChartData.dataWon
           },
           {
             label: 'In Progress',
-            backgroundColor: '#ff69a4',
-            borderColor: '#ff69a4',
+            backgroundColor: '#FFC733',
+            borderColor: '#FFC733',
             data: this.barChartData.dataInProgrss
         },
         {
           label: 'Lost',
-          backgroundColor: '#7254f2',
-          borderColor: '#7254f2',
+          backgroundColor: '#FF3333',
+          borderColor: '#FF3333',
           data: this.barChartData.dataLost
       }
       ]
@@ -64,7 +64,8 @@ export class ChartBarComponent implements OnChanges  {
     legend:{
       position: 'bottom',
       labels: {
-        boxWidth: 12
+        boxWidth: 5
+       
     },
      
     layout: {

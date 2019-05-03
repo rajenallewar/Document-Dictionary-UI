@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-3">
     <div class="card-counter primary " (click)="proposalCardClick('ALL')">
-      <i class="fa fa-database"></i>
+    <img class="logo-img" src="../../../../assets/images/package.svg" alt="">
       <span class="count-numbers">{{totalProposalCount}}</span>
       <span class="count-name">TOTAL PROPOSALS</span>
         
@@ -10,7 +10,7 @@
 
   <div class="col-md-3">
     <div class="card-counter danger" (click)="proposalCardClick('COMPLETED')">
-      <i class="fa fa-check-square"></i>
+     <img class="logo-img" src="../../../../assets/images/trophy.svg" alt="">
       <span class="count-numbers">{{proposalCardsData.wonProposalCount}}</span>
       <span class="count-name">WON PROPOSALS</span>
     </div>
@@ -18,7 +18,7 @@
 
   <div class="col-md-3">
     <div class="card-counter success" (click)="proposalCardClick('IN_PROGRESS')">
-      <i class="fa fa-circle-o-notch"></i>
+      <img class="logo-img" src="../../../../assets/images/hourglass.svg" alt="">
       <span class="count-numbers">{{proposalCardsData.inProgressProposalCount}}</span>
       <span class="count-name">IN PROGRESS PROPOSALS</span>
     </div>
@@ -26,7 +26,7 @@
 
   <div class="col-md-3">
     <div class="card-counter info" (click)="proposalCardClick('REJECTED')">
-    <i class="fa fa-ban" aria-hidden="true"></i>
+     <img class="logo-img" src="../../../../assets/images/like.svg" alt="">
       <span class="count-numbers">{{proposalCardsData.lostProposalCount}}</span>
       <span class="count-name">LOST PROPOSALS</span>
     </div>

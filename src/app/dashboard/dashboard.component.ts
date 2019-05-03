@@ -36,24 +36,30 @@ getSummaryOfProposal(){
 // To pass data to bar chart
 
 getSummaryOfProposalByAccount(){
-   this.proposalservice.getSummaryofProposalsByAccount().subscribe((data)=>{
+  //  this.proposalservice.getSummaryofProposalsByAccount().subscribe((data)=>{
     this.barChartData["dataInProgrss"] = [];
     this.barChartData["dataTotal"] = [];
     this.barChartData["dataWon"] = [];
     this.barChartData["dataLost"] = [];
     this.barChartData["labels"] = [];
-     data.forEach((proposal)=>{
-       this.barChartData.dataInProgrss.push(proposal["countInprogress"])
-       this.barChartData.dataTotal.push(proposal["countOfProposals"])
-       this.barChartData.dataWon.push(proposal["countWon"])
-       this.barChartData.dataLost.push(proposal["countLost"])
-       this.barChartData.labels.push(proposal["clientName"])
-     })  
-     this.totalProposals = data.length;
-     console.log("end of chart bar ", this.totalProposals);
-     console.log("this.barChartData ", this.barChartData);
+    //  data.forEach((proposal)=>{
+    //    this.barChartData.dataInProgrss.push(proposal["countInprogress"])
+    //    this.barChartData.dataTotal.push(proposal["countOfProposals"])
+    //    this.barChartData.dataWon.push(proposal["countWon"])
+    //    this.barChartData.dataLost.push(proposal["countLost"])
+    //    this.barChartData.labels.push(proposal["clientName"])
+    //  })  
+    ['Wells Fargo','Citi','Markit Group','Asurian','HSBC'].forEach((clientName)=>{
+      this.barChartData.dataInProgrss.push(2,2,1,2,1)
+      this.barChartData.dataTotal.push(5,4,4,6,4)
+      this.barChartData.dataWon.push(1,1,1,2,2)
+      this.barChartData.dataLost.push(2,1,2,2,1)
+      this.barChartData.labels.push(clientName)
+    })  
+    //  this.totalProposals = data.length;
+    
            
-  })
+  // })
 
  }
  }

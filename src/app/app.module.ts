@@ -18,6 +18,7 @@ import { TagServices } from './services/tag.service';
 import { AskmeComponent } from './askme/askme.component';
 import { SmelistComponent } from './smelist/smelist.component';
 import { SMEListServices } from './services/smelist.service';
+import {CalendarModule} from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,8 @@ import { SMEListServices } from './services/smelist.service';
     DashboardModule,
     AnnotationModule,
     BrowserAnimationsModule,
+    CalendarModule
+    
     ],
   providers: [ProposalServices, CollateralServices, TagServices,SMEListServices],
   bootstrap: [AppComponent]
