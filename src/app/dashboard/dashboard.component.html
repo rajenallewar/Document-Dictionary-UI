@@ -1,13 +1,22 @@
 <div class="row">
-    <div class="col-md-12">
-        <div>
-           <h5 style="color:black">DASHBOARD </h5> <h6>Welcome to Dashboard</h6>
-         </div>
+    <div class="ui-g-12">
+        <div class="ui-g-6 ds-hd-con">
+            <div class="heading">Dashboard</div>
+            <span class="sub-heading">Welcome Back, </span><span>{{"Firstname, Lastname"}}</span>
+        </div>
+        <div class="ui-g-6 text-right">
+            <div class="calendar">
+                <img class="calendar-icon" src="../../../../assets/images/Calendar.svg" alt="">
+                <p-calendar [(ngModel)]="value" selectionMode="range"></p-calendar>
+            </div>
+            <button class="btn btn-primary">Create New Proposal</button>
+        </div>
     </div>
+
 </div>
 <div class="row">
     <div class="col-md-12">
-        <app-proposal-card ></app-proposal-card>
+        <app-proposal-card></app-proposal-card>
     </div>
 </div>
 <div class="row">
@@ -15,7 +24,7 @@
         <app-chart-doughnut [doughtnutData]="doughtnutData"></app-chart-doughnut>
     </div>
     <div class="col-md-8">
-      <app-chart-bar [barChartData]="barChartData" [totalProposals]="totalProposals"></app-chart-bar>
+        <app-chart-bar [barChartData]="barChartData" [totalProposals]="totalProposals"></app-chart-bar>
     </div>
 </div>
 <div class="row">
@@ -23,6 +32,6 @@
         <app-proposal-value-table></app-proposal-value-table>
     </div>
     <div class="col-md-6">
-     <app-tag-table></app-tag-table>
+        <app-tag-table></app-tag-table>
     </div>
 </div>

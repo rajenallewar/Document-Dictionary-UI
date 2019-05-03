@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ViewProposalComponent } from './view-proposal/view-proposal.component';
 import { NewProposalComponent } from './new-proposal/new-proposal.component';
 import { ProposalServices } from '../services/proposal.service';
-import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
     declarations: [
@@ -14,8 +13,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     imports: [
         BrowserModule,
         FormsModule,
-        ReactiveFormsModule,
-        NgxPaginationModule
+        ReactiveFormsModule
        ],
     providers: [],
     bootstrap: []

@@ -11,7 +11,7 @@
     -ms-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
     width: 100%;
-    padding: 10px 0 10px;
+    padding: 0;
     z-index: 200;
    
     left: 0;
@@ -62,4 +62,7 @@
 }
 .login{
     padding: 8px 10px;
+}
+.header-container{
+    height: 100%;
 }

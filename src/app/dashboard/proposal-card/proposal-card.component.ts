@@ -27,7 +27,7 @@ constructor(private router: Router,private proposals:ProposalServices) { }
       pageNumber:1,
       pageSize:10
   }
-      this.proposals.getAllProposals(pageJSON).subscribe((data) => {
+      this.proposals.getAllProposals().subscribe((data) => {
       this.Proposals = data;
       this.totalProposalCount = this.Proposals.length;
       })

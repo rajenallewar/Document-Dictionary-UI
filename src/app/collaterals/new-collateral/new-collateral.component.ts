@@ -57,7 +57,7 @@ getAllProposals(){
     pageNumber:1,
     pageSize:10
 }
-  this.proposalService.getAllProposals(pageJSON).subscribe((data) => {
+  this.proposalService.getAllProposals().subscribe((data) => {
     this.Proposals = data;
     console.log(data);
       })

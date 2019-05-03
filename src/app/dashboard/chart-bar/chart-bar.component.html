@@ -1,9 +1,11 @@
-<h6 style="color:#616161">
-        PROPOSAL GRAPH THIS MONTH
-</h6>
 <div class="chart-bar">
+        <div class="heading-container">
+                <div class="heading">Proposal by Account</div>
+                <span class="sub-heading">View a proposal breakdown by account</span>
+        </div>
 
-<p-chart class="bar"  *ngIf="barData" type="bar" [data]="barData" width="700px" height="200px"  [options]="options" [responsive]="true"></p-chart>
-<div class ="spinner">
-<span *ngIf="!barData"> <i class="fa fa-circle-o-notch fa-spin fa-3x"></i></span>  </div>
+        <p-chart class="bar" *ngIf="barData" type="bar" [data]="barData" width="700px" height="180px"
+                [options]="options" [responsive]="true"></p-chart>
+        <div class="spinner">
+                <span *ngIf="!barData"> <i class="fa fa-circle-o-notch fa-spin fa-3x"></i></span> </div>
 </div>

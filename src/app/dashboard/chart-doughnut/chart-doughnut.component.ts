@@ -18,6 +18,7 @@ export class ChartDoughnutComponent implements OnInit {
 
    ngOnInit() {
      this.getProposalSummary();
+     
    }
   
   //  To get count of proposal by status (to show on doughtnut chart)
@@ -26,14 +27,15 @@ export class ChartDoughnutComponent implements OnInit {
       this.Proposals = data;
       this.generateDoughtnutData();
         })
+        this.generateDoughtnutData();
    }
   //  To get doughtnut chart data
     generateDoughtnutData(){
        this.doughnutChartData = {
-        labels: this.doughtnutData.label,
+        labels: ["New", "In-Progress", "Review", "Won", "Lost"],// this.doughtnutData.label,
           datasets: [
             {
-              data: this.doughtnutData.data,
+              data: [300, 50, 100, 35, 90],//this.doughtnutData.data,
               backgroundColor: [
                 "#FFC733",
                  "#ff2924",
@@ -57,6 +59,7 @@ export class ChartDoughnutComponent implements OnInit {
                 boxWidth: 5
             } 
             },
+            cutoutPercentage: 70,
             layout: {
               padding: {
                   left: 15,

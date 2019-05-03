@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   barChartData: any = {};
   proposalCardsData :any;
   totalProposals: number = 0;
+  value:Date;
 
   constructor(private proposalservice:ProposalServices) {
  }
@@ -50,7 +51,7 @@ getSummaryOfProposalByAccount(){
     //    this.barChartData.labels.push(proposal["clientName"])
     //  })  
     ['Wells Fargo','Citi','Markit Group','Asurian','HSBC'].forEach((clientName)=>{
-      this.barChartData.dataInProgrss.push(2,2,1,2,1)
+      this.barChartData.dataInProgrss.push(61,25,39,25,1)
       this.barChartData.dataTotal.push(5,4,4,6,4)
       this.barChartData.dataWon.push(1,1,1,2,2)
       this.barChartData.dataLost.push(2,1,2,2,1)

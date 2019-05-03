@@ -8,6 +8,7 @@ import { DashboardComponent } from './dashboard.component';
 import { ProposalCardComponent } from './proposal-card/proposal-card.component';
 import { ProposalValueTableComponent } from './proposal-value-table/proposal-value-table.component';
 import { TagTableComponent } from './tag-table/tag-table.component';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,8 @@ import { TagTableComponent } from './tag-table/tag-table.component';
     imports: [
         BrowserModule,
         FormsModule,
-        ChartModule
+        ChartModule,
+        CalendarModule
       
     ],
     providers: [],

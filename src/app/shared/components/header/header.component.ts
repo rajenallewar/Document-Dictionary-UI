@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  logoUrl = "assets/images/synechron_logo-black.png";
   constructor() { }
 
   ngOnInit() {
