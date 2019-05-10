@@ -38,8 +38,8 @@ export class ChartBarComponent implements OnChanges  {
           },
           {
               label: 'Won',
-              backgroundColor: '#284FF0',
-              borderColor: '#284FF0',
+              backgroundColor: '#2543ea',
+              borderColor: '#2543ea',
               data: this.barChartData.dataWon
           },
           {

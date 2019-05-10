@@ -90,10 +90,9 @@ html, body {
 color:gray;
 }
 .search-bar{
-    background-color: gray; 
+    // background-color: gray; 
     height:40px;
-    
-}
+  }
 .spinner{
   text-align: center;
   padding-top: 85px;
@@ -108,6 +107,46 @@ color:gray;
   color: #7E7E84;
   font-size: 0.875rem;
 }
+.ds-hd-con {
+  padding-left: 2em;
+}
+.calendar{
+  display: inline-block;
+  margin-right: 1em;
+}
+.calendar-icon {
+  margin-right: 0.5em;
+}
+.ui-table .ui-table-thead > tr > th{
+  border: none !important;
+  background-color: white !important;
+  color: #20202B;
+  font-size: 1.125rem;
+  font-weight: bold;
+  padding: 8px;
+}
+.ui-table .ui-table-tbody > tr > td {
+  border: none !important;
+  background-color: white !important;
+  color: #7E7E84;
+  font-size: 0.875rem;
+  
+}
+.ui-table .ui-table-thead>tr>th, .ui-table .ui-table-tbody>tr>td, .ui-table .ui-table-tfoot>tr>td {
+  padding: 10px !important;
+}
+.ui-paginator {
+  margin: 0;
+  text-align: right;
+  padding: 12px;
+  background: white;
+  
+}
 
-
+.ui-inputtext {
+  background: #ffffff;
+  color: #222222;
+  transition: 0.2s;
+  width: 165px;
+}
 

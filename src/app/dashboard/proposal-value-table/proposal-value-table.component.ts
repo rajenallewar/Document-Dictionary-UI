@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ProposalServices } from 'src/app/services/proposal.service';
 
 @Component({
@@ -7,6 +7,7 @@ import { ProposalServices } from 'src/app/services/proposal.service';
   styleUrls: ['./proposal-value-table.component.scss']
 })
 export class ProposalValueTableComponent implements OnInit {
+  @Input() proposalValueData:any;
   ProposalsValue: any;
   ProposalValuejson: any;
   constructor(private proposals: ProposalServices) { }
@@ -14,15 +15,18 @@ export class ProposalValueTableComponent implements OnInit {
   ngOnInit() {
     this.getProposalValue();
   }
+  ngOnChanges() {
+    this.getProposalValue();
+  }
 
   // To fetching proposal value table data on dashboard
   getProposalValue() {
-    this.proposals.getSummaryofProposalsByStatus().subscribe((data) => {
-      this.ProposalsValue = data;
+    // this.proposals.getSummaryofProposalsByStatus().subscribe((data) => {
+      this.ProposalsValue = this.proposalValueData;
       this.ProposalsValue.forEach(item => {
         switch (item.status) {
           case "In-Progress":
-            item.color = "#FFFF00";   
+            item.color = "#FFC733";   
             break;
           case "Lost":
             item.color = "#FF0000";   
@@ -41,6 +45,6 @@ export class ProposalValueTableComponent implements OnInit {
             break;
         }        
       });
-    });
+    // });
   }
 }

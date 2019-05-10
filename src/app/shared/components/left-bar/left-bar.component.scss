@@ -35,6 +35,7 @@ a[data-toggle="collapse"] {
     
 }
 .dropdown-toggle::after {
+   
     display: block;
     position: absolute;
     top: 50%;
@@ -43,8 +44,8 @@ a[data-toggle="collapse"] {
 }
 
 ul ul a {
+   
     font-size: 0.9em !important;
-    padding-left: 10px !important;
-    // background: #ffffff;
+    padding-left: 35px !important;
     color:white;
 }

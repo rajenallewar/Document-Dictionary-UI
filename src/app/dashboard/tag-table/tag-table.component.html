@@ -3,5 +3,5 @@
                 <div class="heading">Top Trending RFP Tags</div>
         </div>
         <span *ngFor="let tag of tags" class="badge badge-pill annotation-tag"
-                (click)="getCollateralByTag(tag.tagsDescription)">{{tag.tagsDescription}}</span>
+                (click)="getCollateralByTag(tag.tagsDescription)">{{tag.tagsDescription | uppercase}}</span>
 </div>

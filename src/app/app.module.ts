@@ -18,7 +18,9 @@ import { TagServices } from './services/tag.service';
 import { AskmeComponent } from './askme/askme.component';
 import { SmelistComponent } from './smelist/smelist.component';
 import { SMEListServices } from './services/smelist.service';
-import {CalendarModule} from 'primeng/calendar';
+import { DatePipe } from '@angular/common';
+import { TableModule } from 'primeng/table';
+import { DataShareService } from './shared/data-share.service';
 
 @NgModule({
   declarations: [
@@ -40,10 +42,11 @@ import {CalendarModule} from 'primeng/calendar';
     DashboardModule,
     AnnotationModule,
     BrowserAnimationsModule,
-    CalendarModule
+    TableModule,
     
+
     ],
-  providers: [ProposalServices, CollateralServices, TagServices,SMEListServices],
+  providers: [ProposalServices, CollateralServices, TagServices, SMEListServices, DatePipe,DataShareService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

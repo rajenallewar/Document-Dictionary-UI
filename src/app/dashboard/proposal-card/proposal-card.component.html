@@ -2,8 +2,8 @@
   <div class="col-md-3">
     <div class="card-counter primary " (click)="proposalCardClick('ALL')">
     <img class="logo-img" src="../../../../assets/images/package.svg" alt="">
-      <span class="count-numbers">{{totalProposalCount}}</span>
-      <span class="count-name">TOTAL PROPOSALS</span>
+      <span class="count-numbers">{{proposalCardsTotalCountData}}</span>
+      <span class="count-name">Total Proposals</span>
         
     </div>
   </div>
@@ -11,24 +11,24 @@
   <div class="col-md-3">
     <div class="card-counter danger" (click)="proposalCardClick('COMPLETED')">
      <img class="logo-img" src="../../../../assets/images/trophy.svg" alt="">
-      <span class="count-numbers">{{proposalCardsData.wonProposalCount}}</span>
-      <span class="count-name">WON PROPOSALS</span>
+      <span class="count-numbers">{{proposalCardsDetails.wonProposalCount}}</span>
+      <span class="count-name">Completed Proposals</span>
     </div>
   </div>
 
   <div class="col-md-3">
     <div class="card-counter success" (click)="proposalCardClick('IN_PROGRESS')">
       <img class="logo-img" src="../../../../assets/images/hourglass.svg" alt="">
-      <span class="count-numbers">{{proposalCardsData.inProgressProposalCount}}</span>
-      <span class="count-name">IN PROGRESS PROPOSALS</span>
+      <span class="count-numbers">{{proposalCardsDetails.inProgressProposalCount}}</span>
+      <span class="count-name">In-progress Proposals</span>
     </div>
   </div>
 
   <div class="col-md-3">
     <div class="card-counter info" (click)="proposalCardClick('REJECTED')">
      <img class="logo-img" src="../../../../assets/images/like.svg" alt="">
-      <span class="count-numbers">{{proposalCardsData.lostProposalCount}}</span>
-      <span class="count-name">LOST PROPOSALS</span>
+      <span class="count-numbers">{{proposalCardsDetails.lostProposalCount}}</span>
+      <span class="count-name">Rejected Proposals</span>
     </div>
   </div>
 </div>

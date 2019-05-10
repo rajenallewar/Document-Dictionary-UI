@@ -23,20 +23,24 @@ export class ProposalServices {
   public getProposalsStatus() {
     return this._http.get<Proposal[]>(appURL + '/getProposalStatus');
   }
-  public getCompletedProposals():Observable<any> {
-    return this._http.get<Proposal[]>(appURL + '/statusOfCompletedProposals');
+  public getCompletedProposals(startDate: string,endDate: string):Observable<any> {
+    return this._http.get<Proposal[]>(appURL + `/statusOfCompletedProposals/${startDate}/${endDate}`);
   }
-  public getInProgressProposals():Observable<any> {
-    return this._http.get<Proposal[]>(appURL + '/statusOfInProgressProposals');
+  public getInProgressProposals(startDate: string,endDate: string):Observable<any> {
+    return this._http.get<Proposal[]>(appURL + `/statusOfInProgressProposals/${startDate}/${endDate}`);
   }
-  public getLostProposals():Observable<any> {
-    return this._http.get<Proposal[]>(appURL + '/statusOfLostProposals');
+  public getLostProposals(startDate: string,endDate: string):Observable<any> {
+    return this._http.get<Proposal[]>(appURL + `/statusOfLostProposals/${startDate}/${endDate}`);
   }
-  public getSummaryofProposalsByStatus(){
-    return this._http.get<Proposal[]>(appURL + '/getSummaryOfProposalsByStatus');
+  public getSummaryofProposalsByStatus(requestParams: any){
+    console.log("calling getSummaryofProposalsByStatus ", requestParams)
+    return this._http.get<Proposal[]>(appURL + `/getSummaryOfProposalsByStatus/${requestParams.startDate}/${requestParams.endDate}`);
   }
-  public getSummaryofProposalsByAccount(){
-    return this._http.get<Proposal[]>(appURL + '/getproposalStatusCountByAccount ');
+  public getSummaryofProposalsByAccount(requestParams:any){
+    return this._http.get<Proposal[]>(appURL + `/getproposalStatusCountByAccount/${requestParams.startDate}/${requestParams.endDate} `);
+  }
+  public getProposalCountByDate(requestParams:any){
+    return this._http.get<Proposal[]>(appURL + `/getToltalProposalCount/${requestParams.startDate}/${requestParams.endDate} `);
   }
  
   }

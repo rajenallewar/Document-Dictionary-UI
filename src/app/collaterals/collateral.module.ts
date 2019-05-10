@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewCollateralComponent } from './new-collateral/new-collateral.component';
 import { ViewCollateralComponent } from './view-collateral/view-collateral.component';
 import {FileUploadModule} from 'primeng/fileupload';
+import { TableModule } from 'primeng/table';
+
 @NgModule({
     declarations: [
         NewCollateralComponent,
@@ -13,7 +15,8 @@ import {FileUploadModule} from 'primeng/fileupload';
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
-        FileUploadModule
+        FileUploadModule,
+        TableModule,
        ],
     providers: [],
     bootstrap: []

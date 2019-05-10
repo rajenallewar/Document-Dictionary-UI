@@ -13,43 +13,38 @@ export class ChartDoughnutComponent implements OnInit {
   doughnutChartData;
   Proposals:any;
   @Input() doughtnutData: any;
-  constructor(private router: Router, private proposals:ProposalServices) {
-    }
+  constructor(private router: Router, private proposals:ProposalServices) { }
 
    ngOnInit() {
-     this.getProposalSummary();
-     
+    //  this.getProposalSummary();
+      this.generateDoughtnutData();     
+   }
+
+   ngOnChanges() {
+     console.log("input data is changed in donut chart");
+     this.generateDoughtnutData();
    }
   
   //  To get count of proposal by status (to show on doughtnut chart)
-   getProposalSummary(){
-    this.proposals.getSummaryofProposalsByStatus().subscribe((data) => {
-      this.Proposals = data;
-      this.generateDoughtnutData();
-        })
-        this.generateDoughtnutData();
-   }
+  //  getProposalSummary(){
+  //   this.proposals.getSummaryofProposalsByStatus().subscribe((data) => {
+  //     this.Proposals = data;
+  //     this.generateDoughtnutData();
+  //       })
+  //       this.generateDoughtnutData();
+  //  }
   //  To get doughtnut chart data
     generateDoughtnutData(){
+      console.log("donutData ", this.doughtnutData);
+      
        this.doughnutChartData = {
-        labels: ["New", "In-Progress", "Review", "Won", "Lost"],// this.doughtnutData.label,
+         labels: this.doughtnutData.label,
+        // labels: ['In-Progress','Lost','New','Review','Won'],
           datasets: [
             {
-              data: [300, 50, 100, 35, 90],//this.doughtnutData.data,
-              backgroundColor: [
-                "#FFC733",
-                 "#ff2924",
-                 "#33FF8D",
-                 "#F028E9",
-                 "#284FF0",   
-              ],
-              hoverBackgroundColor: [
-                "#FFC733",
-                "#ff2924",
-                "#33FF8D",
-                "#F028E9",
-                "#284FF0",  
-              ]
+              data:this.doughtnutData.data,
+              backgroundColor:this.doughtnutData.bgColor,
+              hoverBackgroundColor:this.doughtnutData.bgColor
             }]
         };
        this.options = {

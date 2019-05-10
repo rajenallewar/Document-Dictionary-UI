@@ -3,7 +3,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { ViewProposalComponent } from './view-proposal/view-proposal.component';
 import { NewProposalComponent } from './new-proposal/new-proposal.component';
-import { ProposalServices } from '../services/proposal.service';
+import {TableModule} from 'primeng/table';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
     declarations: [
@@ -13,7 +14,10 @@ import { ProposalServices } from '../services/proposal.service';
     imports: [
         BrowserModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        TableModule,
+        CalendarModule
+        
        ],
     providers: [],
     bootstrap: []

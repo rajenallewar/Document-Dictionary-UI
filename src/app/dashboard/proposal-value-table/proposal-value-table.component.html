@@ -15,7 +15,7 @@
 
       <tbody>
         <tr *ngFor="let proposal of ProposalsValue">
-          <td><span [ngStyle]="{'background-color': proposal?.color}">&nbsp;&nbsp;</span>&nbsp;{{proposal?.status}}</td>
+          <td><span [ngStyle]="{'background-color': proposal?.color}" >&nbsp;&nbsp;</span>&nbsp;{{proposal?.status}}</td>
           <td>{{proposal?.countOfProposals}}</td>
           <td>{{proposal?.totalCostOfProposals | currency:"CAD":"symbol-narrow"}}</td>
         </tr>
