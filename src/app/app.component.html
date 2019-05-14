@@ -1,13 +1,1 @@
-<ng-container>
-    <ng-container *ngIf="appSharedService && appSharedService.getUserLoggedIn()">
-        <app-header></app-header>
-        <app-sidebar></app-sidebar>
-    </ng-container>
-    <div class="app-container">
-        <router-outlet></router-outlet>
-    </div>
-    <router-outlet name="dialogs"></router-outlet>
-</ng-container>
-<!-- <ng-container *ngIf="appSharedService && !appSharedService.getUserLoggedIn()">
-    <app-login></app-login>
-</ng-container> -->
+<router-outlet></router-outlet>

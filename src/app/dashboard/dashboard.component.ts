@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AppSharedService } from '../shared/services/shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router, private appSharedService:AppSharedService) { }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.appSharedService.setUserLoggedIn(true);
+      this.router.navigate(['/proposals']);
+    }, 3000);
   }
 
 }

@@ -14,6 +14,7 @@ import { ProposallistComponent } from './proposallist/proposallist.component';
 import { CollaterallistComponent } from './collaterallist/collaterallist.component';
 import { NewproposalComponent } from './newproposal/newproposal.component';
 import { NewcollateralComponent } from './newcollateral/newcollateral.component';
+import { RfpContainerComponent } from './rfp-container/rfp-container.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { NewcollateralComponent } from './newcollateral/newcollateral.component'
     ProposallistComponent,
     CollaterallistComponent,
     NewproposalComponent,
-    NewcollateralComponent
+    NewcollateralComponent,
+    RfpContainerComponent
   ],
   imports: [
     BrowserModule,

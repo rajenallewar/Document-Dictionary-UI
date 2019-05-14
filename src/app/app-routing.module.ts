@@ -8,10 +8,11 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './shared/services/auth.guard';
 import { AuthChildGuard } from './shared/services/auth-child.guard';
 import { LoginComponent } from './login/login.component';
+import { RfpContainerComponent } from './rfp-container/rfp-container.component';
 
 const routes: Routes = [
   {
-    path:'', component: AppComponent,
+    path:'', component: RfpContainerComponent,
     canActivateChild:[AuthChildGuard],
     children:[
       {path:'', component: LoginComponent},
@@ -22,8 +23,7 @@ const routes: Routes = [
     ]
   },
   {path:'login', component: LoginComponent},
-  
-  // {path:'**', component: AppComponent}
+  {path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];
 
 @NgModule({

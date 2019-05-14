@@ -12,10 +12,10 @@ export class LoginComponent implements OnInit {
   constructor(private router:Router, private appSharedService:AppSharedService) { }
 
   ngOnInit() {
-    // setTimeout(() => {
-    //   this.appSharedService.setUserLoggedIn(true);
-    //   this.router.navigate(['/dashboard']);
-    // }, 60000);
+    setTimeout(() => {
+      this.appSharedService.setUserLoggedIn(true);
+      this.router.navigate(['/dashboard']);
+    }, 3000);
   }
 
 }

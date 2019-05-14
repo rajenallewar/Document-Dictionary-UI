@@ -19,8 +19,7 @@ export class AuthChildGuard implements CanActivateChild {
       this.router.navigate(['/login']);
       return false;
     } else {
-      let f = false;
-      if (f) {
+      if (this.appSharedService.getUserLoggedIn()) {
         return true;
       } else {
         this.appSharedService.setUserLoggedIn(false);
