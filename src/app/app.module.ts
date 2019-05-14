@@ -1,49 +1,41 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './shared/components/header/header.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { LeftbarComponent } from './shared/components/left-bar/left-bar.component';
-import { CollateralModule } from './collaterals/collateral.module';
-import { ProposalModule } from './proposals/proposal.module';
-import { DashboardModule } from './dashboard/dashboard.module';
-import { ProposalServices } from './services/proposal.service';
-import { CollateralServices } from './services/collateral.service';
-import { AnnotationModule } from './annotation/annotation.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TagServices } from './services/tag.service';
-import { AskmeComponent } from './askme/askme.component';
-import { SmelistComponent } from './smelist/smelist.component';
-import { SMEListServices } from './services/smelist.service';
-import {CalendarModule} from 'primeng/calendar';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { AppComponent } from './app.component';
+import { AppSharedModule } from './shared/shared.module';
+import { AppRoutingModule } from './app-routing.module';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from './login/login.component';
+import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProposallistComponent } from './proposallist/proposallist.component';
+import { CollaterallistComponent } from './collaterallist/collaterallist.component';
+import { NewproposalComponent } from './newproposal/newproposal.component';
+import { NewcollateralComponent } from './newcollateral/newcollateral.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     HeaderComponent,
-    LeftbarComponent,
-    AskmeComponent,
-    SmelistComponent
-     ],
+    SidebarComponent,
+    DashboardComponent,
+    ProposallistComponent,
+    CollaterallistComponent,
+    NewproposalComponent,
+    NewcollateralComponent
+  ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    AngularFontAwesomeModule,
-    FormsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    ProposalModule,
-    CollateralModule,
-    DashboardModule,
-    AnnotationModule,
     BrowserAnimationsModule,
-    CalendarModule
-    
-    ],
-  providers: [ProposalServices, CollateralServices, TagServices,SMEListServices],
+    HttpClientModule,
+    AppSharedModule.forRoot(),
+    AppRoutingModule,
+    NgbModule
+  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
