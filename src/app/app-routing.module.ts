@@ -4,8 +4,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProposallistComponent } from './proposallist/proposallist.component';
 import { CollaterallistComponent } from './collaterallist/collaterallist.component';
 import { NewproposalComponent } from './newproposal/newproposal.component';
-import { AppComponent } from './app.component';
-import { AuthGuard } from './shared/services/auth.guard';
 import { AuthChildGuard } from './shared/services/auth-child.guard';
 import { LoginComponent } from './login/login.component';
 import { RfpContainerComponent } from './rfp-container/rfp-container.component';

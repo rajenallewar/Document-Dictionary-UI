@@ -12,10 +12,7 @@ export class DashboardComponent implements OnInit {
   constructor(private router:Router, private appSharedService:AppSharedService) { }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.appSharedService.setUserLoggedIn(true);
-      this.router.navigate(['/proposals']);
-    }, 3000);
+    
   }
 
 }

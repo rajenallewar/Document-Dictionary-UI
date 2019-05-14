@@ -1,17 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 /* You can add global styles to this file, and also import other style files */
-
+html { height: 100%; }
+body {height: 100%; }
 .inline-block{
     display: inline-block !important;
 }
 
 .pd-0{
-    padding: 0;
+    padding: 0!important;
 }
 .mr-0{
-    margin: 0;
+    margin: 0!important;
 }
-.app-container{
-    background-color: #f2f2f2;
-    margin-left: 2.5em;
+
+.pd-r-0{
+    padding-right: 0!important;
 }
