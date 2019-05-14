@@ -12,9 +12,9 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
   {
     path:'', component: AppComponent,
-    canActivate:[AuthGuard],
     canActivateChild:[AuthChildGuard],
     children:[
+      {path:'', component: LoginComponent},
       {path:'dashboard', component: DashboardComponent},
       {path:'proposals', component: ProposallistComponent},
       {path:'collaterals', component: CollaterallistComponent},
@@ -22,8 +22,8 @@ const routes: Routes = [
     ]
   },
   {path:'login', component: LoginComponent},
-  {path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  {path:'**', component: LoginComponent}
+  
+  // {path:'**', component: AppComponent}
 ];
 
 @NgModule({
