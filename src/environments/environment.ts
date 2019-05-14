@@ -5,6 +5,19 @@
 export const environment = {
   production: false
 };
+export const AppSettings = {
+  hasResource(url: string): boolean {
+      return !!this.resources[url];
+  },
+  resources : {
+    'posts': {
+      name: 'posts',
+      url: '/posts'
+    },
+  },
+  // BASE_URL: 'assets/mockdata'
+  BASE_URL: 'https://jsonplaceholder.typicode.com'
+};
 
 /*
  * For easier debugging in development mode, you can import the following file

@@ -3,21 +3,21 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "docDictionary": {
+    "wiki-note": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "sass"
+          "style": "scss"
         }
       },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/docDictionary",
+            "outputPath": "dist/wiki-note",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -28,18 +28,9 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/font-awesome/css/font-awesome.css",
-              "node_modules/primeng/resources/themes/omega/theme.css",
-              "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeicons/primeicons.css"
+              "bootstrap.min.css"
             ],
-            "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/popper.js/dist/umd/popper.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/chart.js/dist/Chart.js"
-            ],
+            "scripts": [],
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -72,18 +63,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "docDictionary:build"
+            "browserTarget": "wiki-note:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "docDictionary:build:production"
+              "browserTarget": "wiki-note:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "docDictionary:build"
+            "browserTarget": "wiki-note:build"
           }
         },
         "test": {
@@ -117,7 +108,7 @@
         }
       }
     },
-    "docDictionary-e2e": {
+    "wiki-note-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -126,11 +117,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "docDictionary:serve"
+            "devServerTarget": "wiki-note:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "docDictionary:serve:production"
+              "devServerTarget": "wiki-note:serve:production"
             }
           }
         },
@@ -146,5 +137,5 @@
       }
     }
   },
-  "defaultProject": "docDictionary"
+  "defaultProject": "wiki-note"
 }

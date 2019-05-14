@@ -1,25 +1,29 @@
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { NewProposalComponent } from './proposals/new-proposal/new-proposal.component';
-import { ViewProposalComponent } from './proposals/view-proposal/view-proposal.component';
-import { NewCollateralComponent } from './collaterals/new-collateral/new-collateral.component';
-import { ViewCollateralComponent } from './collaterals/view-collateral/view-collateral.component';
-import { AnnotationComponent } from './annotation/annotation/annotation.component';
-import { AskmeComponent } from './askme/askme.component';
-import { SmelistComponent } from './smelist/smelist.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProposallistComponent } from './proposallist/proposallist.component';
+import { CollaterallistComponent } from './collaterallist/collaterallist.component';
+import { NewproposalComponent } from './newproposal/newproposal.component';
+import { AppComponent } from './app.component';
+import { AuthGuard } from './shared/services/auth.guard';
+import { AuthChildGuard } from './shared/services/auth-child.guard';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  {path:'dashboard', component: DashboardComponent},
-  {path:'newproposal', component:NewProposalComponent},
-  {path:'viewproposal', component: ViewProposalComponent},
-  {path:'newcollateral', component: NewCollateralComponent},
-  {path:'viewcollateral', component: ViewCollateralComponent},
-  {path:'askme', component: AskmeComponent},
-  {path:'smelist', component: SmelistComponent},
-  {path:'viewannotation/:collateralId', component: AnnotationComponent},
+  {
+    path:'', component: AppComponent,
+    canActivate:[AuthGuard],
+    canActivateChild:[AuthChildGuard],
+    children:[
+      {path:'dashboard', component: DashboardComponent},
+      {path:'proposals', component: ProposallistComponent},
+      {path:'collaterals', component: CollaterallistComponent},
+      {path:'newproposal', component: NewproposalComponent, outlet:'dialogs'},
+    ]
+  },
+  {path:'login', component: LoginComponent},
   {path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  {path:'**', component: DashboardComponent}
+  {path:'**', component: LoginComponent}
 ];
 
 @NgModule({
