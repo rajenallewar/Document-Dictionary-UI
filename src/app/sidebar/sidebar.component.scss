@@ -2,6 +2,65 @@
     text-align: center;
     height: 3.3em;
     vertical-align: middle;
-    padding-top: 0.5em;
+    padding: 0.5em;
     background-color: #1c1e26;
+}
+
+.side-logo{
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.5em 0;
+    display: inline-block;
+    width: 100%;
+}
+.img {
+    padding: 1em 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto;
+}
+
+.ds-pd-tp{
+    padding-top: 1em;
+}
+.ds-img {
+    background-image: url("/assets/images/dashboard.svg");
+}
+
+.active-nav .ds-img {
+    background-image: url("/assets/images/dashboard2.svg");   
+    border-right: 4px solid #f8e52d;
+    margin-left: 0.3em; 
+}
+.praposals-img {
+    background-image: url("/assets/images/praposallisting.svg");
+}
+.active-nav .praposals-img {
+    background-image: url("/assets/images/praposallisting2.svg");
+    border-right: 4px solid #f8e52d;
+    margin-left: 0.2em;
+}
+.collaterals-img{
+    background-image: url("/assets/images/collaterallisting.svg");
+}
+.active-nav .collaterals-img{
+    background-image: url("/assets/images/collaterallisting2.svg");
+    border-right: 4px solid #f8e52d;
+    margin-left: 0.3em;
+}
+.qaf-img{
+    background-image: url("/assets/images/q-a-forum.svg");
+}
+.active-nav .qaf-img{
+    background-image: url("/assets/images/q-a-forum2.svg");
+    border-right: 4px solid #f8e52d;
+    margin-left: 0.3em;
+}
+.sme-img{
+    background-image: url("/assets/images/sme-icon.svg");
+}
+.active-nav .sme-img{
+    background-image: url("/assets/images/sme-icon2.svg");
+    border-right: 4px solid #f8e52d;
+    margin-left: 0.3em;
 }
