@@ -1,3 +1,61 @@
-<p>
-  login works!
-</p>
+<!-- <div class="dummy">
+    <img src="../../assets/images/dummy/01_Login.png" class="">
+</div> -->
+<div class="container">
+    <!-- <img src="../../assets/images/synechron-logo.svg" class="logo">
+  
+   <img src="../../assets/images/login.svg"  class="Image"> -->
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3 logo">
+            <img src="../../assets/images/synechron-logo.svg">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 offset-md-3 title">
+            <span>Docket Management System</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 offset-md-3 sub-title">
+            <span>a comprehensive collaboration tool</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col Image"> <img src="../../assets/images/login.svg">
+            <p class="login-text">
+                Annotations/Tags can be added to a document or even an image.
+                <br>
+                <br>
+                Users can annotate in collaboration with team members and then track these annotations as issues, assign
+                them to other collaborators for resolution, add tags to sort the issues and set priorities for each
+                annotation.
+            </p>
+        </div>
+
+        <div class="col login-box">
+            <h1 class="sign-in">
+                SIGN IN TO YOUR ACCOUNT
+            </h1>
+            <div class="login-cont">
+                <form [formGroup]="loginForm">
+                    <pre>{{loginForm.get('userName')|json}}</pre>
+                    <input type="text" formControlName="userName" class="tx-box" placeholder="User Name"
+                      [ngClass]="{ 'is-invalid': loginForm.userName?.errors }" />
+                      <div *ngIf="loginForm.get('userName')?.errors" class="invalid-feedback">
+                            <div *ngIf="loginForm.get('userName')?.errors.required">Username is required</div>
+                        </div>
+
+                    <input type="password" formControlName="password" class="tx-box" placeholder="Password"
+                        style="margin-top: 1em" />
+                    <input type="checkbox" name="signIn" style="margin-top:1.5em"> keep me signed in
+                    <button type="button" class="btn btn-primary sign-btn" (click) ="onLogin()">SIGN IN</button>
+                    <a href="https://synepwd.synechron.com/"><span class="forget-pwd"> Forget your Password? </span></a>
+                </form>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

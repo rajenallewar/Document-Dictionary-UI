@@ -10,13 +10,16 @@ export const AppSettings = {
       return !!this.resources[url];
   },
   resources : {
-    'posts': {
-      name: 'posts',
-      url: '/posts'
+    'authLogin': {
+      name: 'authLogin',
+      url: '/auth/authLogin '
+    },
+    'getProposals': {
+      name: 'getProposals',
+      url: '/getAllProposals'
     },
   },
-  // BASE_URL: 'assets/mockdata'
-  BASE_URL: 'https://jsonplaceholder.typicode.com'
+  BASE_URL: 'http://172.20.201.170:8080/docketManagement'
 };
 
 /*

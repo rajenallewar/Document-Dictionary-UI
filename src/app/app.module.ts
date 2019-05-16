@@ -15,6 +15,7 @@ import { CollaterallistComponent } from './collaterallist/collaterallist.compone
 import { NewproposalComponent } from './newproposal/newproposal.component';
 import { NewcollateralComponent } from './newcollateral/newcollateral.component';
 import { RfpContainerComponent } from './rfp-container/rfp-container.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,10 @@ import { RfpContainerComponent } from './rfp-container/rfp-container.component';
     HttpClientModule,
     AppSharedModule.forRoot(),
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+   
+    ReactiveFormsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
