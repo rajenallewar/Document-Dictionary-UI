@@ -16,6 +16,7 @@ import { NewproposalComponent } from './newproposal/newproposal.component';
 import { NewcollateralComponent } from './newcollateral/newcollateral.component';
 import { RfpContainerComponent } from './rfp-container/rfp-container.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NgbModule,
    
     ReactiveFormsModule,
-    
+    DialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
