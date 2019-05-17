@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AppSharedService } from '../shared/services/shared.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { LoginService } from './login.service';
@@ -14,7 +14,7 @@ import { LoginService } from './login.service';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private router: Router,
+  constructor(private router: Router,private activatedRoute: ActivatedRoute,
     private appSharedService: AppSharedService,
     private formBuilder: FormBuilder,
     private loginService: LoginService) { }
@@ -27,12 +27,14 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
+    // this.appSharedService.setUserLoggedIn(true);
+    // this.router.navigate(['/app/dashboard']);
     if (this.loginForm.valid) {
       const obj = this.loginForm.value;
       this.loginService.login(obj).subscribe((res) => {
         console.log(res);
         this.appSharedService.setUserLoggedIn(true);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/app/dashboard']);
       }, (err) => {
         console.log(err);
         

@@ -1,3 +1,13 @@
-<p>
-  newproposal works!
-</p>
+<p-dialog [visible]="true" [modal]="true" [resizable]="false" 
+[closable]="false" [draggable]="false" (onHide)="goBack()" appendTo="body"
+[style]="{'max-width':'75%', 'min-width':'25%', 'width':'65%'}">
+    <p-header>
+        <span>New Proposal</span>
+        <a role="button" tabindex="0" (click)="goBack()" class="ng-tns-c5-2 ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all">
+            <span class="pi pi-times"></span>
+        </a>
+    </p-header>
+    <div class="newproposal-container">
+       Hello 
+    </div>
+</p-dialog>

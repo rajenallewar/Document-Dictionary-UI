@@ -4,24 +4,26 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProposallistComponent } from './proposallist/proposallist.component';
 import { CollaterallistComponent } from './collaterallist/collaterallist.component';
 import { NewproposalComponent } from './newproposal/newproposal.component';
-import { AuthChildGuard } from './shared/services/auth-child.guard';
+import { AuthGuard } from './shared/services/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { RfpContainerComponent } from './rfp-container/rfp-container.component';
 
 const routes: Routes = [
   {
-    path:'', component: RfpContainerComponent,
-    canActivateChild:[AuthChildGuard],
-    children:[
-      {path:'', component: LoginComponent},
-      {path:'dashboard', component: DashboardComponent},
-      {path:'proposals', component: ProposallistComponent},
-      {path:'collaterals', component: CollaterallistComponent},
-      {path:'newproposal', component: NewproposalComponent, outlet:'dialogs'}
+    path: 'app',
+    component: RfpContainerComponent,
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'proposals', component: ProposallistComponent },
+      { path: 'collaterals', component: CollaterallistComponent },
+      { path: 'newproposal', component: NewproposalComponent, outlet: 'dialogs' }
     ]
   },
-  {path:'login', component: LoginComponent},
-  {path: '**', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: "", pathMatch: "full", redirectTo: "login" },
+  { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];
 
 @NgModule({

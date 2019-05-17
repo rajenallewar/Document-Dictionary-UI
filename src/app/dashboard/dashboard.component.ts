@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppSharedService } from '../shared/services/shared.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,10 +9,12 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private router:Router, private appSharedService:AppSharedService) { }
+  constructor(private router:Router, private acr:ActivatedRoute, private appSharedService:AppSharedService) { }
 
   ngOnInit() {
-    
+    setTimeout(() => {
+      this.router.navigate([{outlets:{dialogs:'newproposal'}}], {relativeTo:this.acr.parent});
+    }, 1000);
   }
 
 }

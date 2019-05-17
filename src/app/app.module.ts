@@ -17,6 +17,8 @@ import { NewcollateralComponent } from './newcollateral/newcollateral.component'
 import { RfpContainerComponent } from './rfp-container/rfp-container.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {DialogModule} from 'primeng/dialog';
+import { UrlSerializer } from '@angular/router';
+import { CustomUrlSerializer } from './shared/utils/customUrlSerializer';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import {DialogModule} from 'primeng/dialog';
     ReactiveFormsModule,
     DialogModule
   ],
-  providers: [],
+  providers: [
+    { provide: UrlSerializer, useClass: CustomUrlSerializer }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

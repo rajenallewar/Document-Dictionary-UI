@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-newproposal',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewproposalComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private acr:ActivatedRoute,) { }
 
   ngOnInit() {
   }
-
+  goBack(){
+    this.router.navigate([{outlets:{dialogs:null}}], {relativeTo:this.acr.parent});
+  }
 }
