@@ -23,6 +23,9 @@ export class HeaderComponent implements OnInit {
           case '/collaterals':
             this.headerText = "Collateral Listings";
             break;
+            case '/sme':
+            this.headerText = "SMEs/Architects Listings";
+            break;
         
           default:
             break;

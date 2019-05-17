@@ -17,8 +17,11 @@ import { NewcollateralComponent } from './newcollateral/newcollateral.component'
 import { RfpContainerComponent } from './rfp-container/rfp-container.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {DialogModule} from 'primeng/dialog';
+import { SmelistComponent } from './smelist/smelist.component';
 import { UrlSerializer } from '@angular/router';
 import { CustomUrlSerializer } from './shared/utils/customUrlSerializer';
+import {TableModule} from 'primeng/table';
+import {ChartModule} from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,8 @@ import { CustomUrlSerializer } from './shared/utils/customUrlSerializer';
     CollaterallistComponent,
     NewproposalComponent,
     NewcollateralComponent,
-    RfpContainerComponent
+    RfpContainerComponent,
+    SmelistComponent
   ],
   imports: [
     BrowserModule,
@@ -40,9 +44,11 @@ import { CustomUrlSerializer } from './shared/utils/customUrlSerializer';
     AppSharedModule.forRoot(),
     AppRoutingModule,
     NgbModule,
-   
+    TableModule,
     ReactiveFormsModule,
-    DialogModule
+    DialogModule,
+    ChartModule
+    
   ],
   providers: [
     { provide: UrlSerializer, useClass: CustomUrlSerializer }

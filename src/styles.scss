@@ -19,3 +19,32 @@ body {height: 100%; }
 .pd-r-0{
     padding-right: 0!important;
 }
+.side-panel{
+    width: 12em;
+    background-color: #494e5e;
+    height: 100%;
+    float: left;
+}
+body .ui-table .ui-table-thead > tr > th {
+    padding: 0.800em 0.857em;
+    font-weight: 700;
+    color: white;
+    border: none;
+    background-color: rgba(98, 102, 107, 0.62);
+}
+body .ui-table .ui-table-tbody > tr > td {
+    background-color: inherit;
+    border: none;
+}
+body .ui-paginator {
+    background-color: #f4f4f4;
+    border: 1px solid #c8c8c8;
+    padding: 0; 
+    text-align: right;
+    
+}
+body .ui-paginator {
+    background-color: #f4f4f4;
+    border: none;
+    padding: 0;
+}
