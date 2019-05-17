@@ -10,7 +10,7 @@ import { RfpContainerComponent } from './rfp-container/rfp-container.component';
 
 const routes: Routes = [
   {
-    path: 'app',
+    path: 'dms',
     component: RfpContainerComponent,
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
