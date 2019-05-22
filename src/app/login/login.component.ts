@@ -27,17 +27,19 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    if (this.loginForm.valid) {
-      const obj = this.loginForm.value;
-      this.loginService.login(obj).subscribe((res) => {
-        console.log(res);
-        this.appSharedService.setUserLoggedIn(true);
-        this.router.navigate(['/dms/dashboard']);
-      }, (err) => {
-        console.log(err);
+    this.appSharedService.setUserLoggedIn(true);
+    this.router.navigate(['/dms/dashboard']);
+    // if (this.loginForm.valid) {
+    //   const obj = this.loginForm.value;
+    //   this.loginService.login(obj).subscribe((res) => {
+    //     console.log(res);
+    //     this.appSharedService.setUserLoggedIn(true);
+    //     this.router.navigate(['/dms/dashboard']);
+    //   }, (err) => {
+    //     console.log(err);
         
-      });
-    }
+    //   });
+    // }
   }
 
 }

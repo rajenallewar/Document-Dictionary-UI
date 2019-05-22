@@ -22,6 +22,8 @@ import { UrlSerializer } from '@angular/router';
 import { CustomUrlSerializer } from './shared/utils/customUrlSerializer';
 import {TableModule} from 'primeng/table';
 import {ChartModule} from 'primeng/chart';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import {ChartModule} from 'primeng/chart';
     NewproposalComponent,
     NewcollateralComponent,
     RfpContainerComponent,
-    SmelistComponent
+    SmelistComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,9 @@ import {ChartModule} from 'primeng/chart';
     TableModule,
     ReactiveFormsModule,
     DialogModule,
-    ChartModule
+    ChartModule,
+    OverlayPanelModule,
+    AngularFontAwesomeModule
     
   ],
   providers: [

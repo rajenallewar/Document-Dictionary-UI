@@ -35,7 +35,7 @@
     position: relative;
 }
 .legends-container {
-
+    height: 43vh;
 }
 .legends-title{
     font-size: 0.75rem;
@@ -66,17 +66,19 @@
 .left-legend {
     width: 50%;
     float: left;
+    margin-top: 0.5em;
 }
 
 .right-legend {
     width: 50%;
     float: left;
+    margin-top: 0.5em;
 }
 hr {
     border: 0;
     border-top: 1px solid rgba(0,0,0,.1);
     border-width: 4px;
-    border-radius: 2px;
+    border-radius: 5px;
     width: 22px;
     margin-top: 0;
     margin-bottom: 0;
@@ -90,10 +92,60 @@ hr {
     color: #a1aed1;
 }
 .legend-box-left{
-    padding-left: 1.5em;
-    padding-top: 1em;
+    // padding-left: 1.5em;
+    // padding-top: 1em;
+    margin-left: 1em;
+    padding: 0.5em ;
+    // padding: 0px 0px 0.5em 0px;
 }
 .legend-box-right{
-    padding-left: 1em;
-    padding-top: 1em;
+    // padding-left: 1em;
+    // padding-top: 1em;
+    margin-right: 1em;
+    padding: 0.5em ;
+    // padding-left: 0.5em;
+    // padding: 0px 0px 0.5em 0px;
+}
+
+.legend-box-border{
+    margin-left: 1em;
+    margin-top: 1em;
+}
+.total-count{
+    padding-left: 1.5em;
+    // padding-top: 1em !important;
+}
+.total-count-name{
+    font-size: 0.75rem;
+    color: #a3acc6;
+}
+.hl{
+    border-bottom: 1px solid #f2f2f24f;
+}
+.v1{
+    border-right: 1px solid #f2f2f24f;
+}
+.sme-name{
+    color: #333333;
+}
+.icon-color{
+    color: #c3cede;
+}
+.fs-10{
+    font-size: 10px;
+}
+.fs-12{
+    font-size: 12px;
+}
+.fs-14{
+    font-size: 14px;
+    color: #515e6b;
+    font-weight: 800;
+}
+.user-img{
+    margin: 0.5em;
+}
+.sme-stats {
+    background-color: #3b4357;
+    padding: 6px 0px;
 }

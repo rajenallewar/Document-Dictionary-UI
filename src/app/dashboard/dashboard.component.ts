@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      this.router.navigate([{outlets:{dialogs:'newproposal'}}], {relativeTo:this.acr.parent});
+      this.router.navigate([{outlets:{dialogs:'uploadcollateral'}}], {relativeTo:this.acr.parent});
     }, 1000);
   }
 

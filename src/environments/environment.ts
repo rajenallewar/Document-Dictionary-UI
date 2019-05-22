@@ -18,8 +18,19 @@ export const AppSettings = {
       name: 'getProposals',
       url: '/getAllProposals'
     },
+    'getSmeList': {
+      name: 'getSmeList',
+      url: '/smedata/domainSMEDetail'
+      // url: '/assets/mockdata/domainSMED.json'
+    },
+    'getTotalSmeCount': {
+      name: 'getTotalSmeCount',
+      url: '/smedata/countOfSmeAndDomain'
+      // url: '/assets/mockdata/getTotalSmeCount.json'
+    }
   },
   BASE_URL: 'http://172.20.201.170:8080/docketManagement'
+  // BASE_URL: ''
 };
 
 /*

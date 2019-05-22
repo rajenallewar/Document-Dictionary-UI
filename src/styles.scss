@@ -1,7 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
-/* You can add global styles to this file, and also import other style files */
+@import './scss/_fonts';
 html { height: 100%; }
-body {height: 100%; }
+body {
+    height: 100%; 
+    font-family: 'Carnas-Regular';
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+}
 .inline-block{
     display: inline-block !important;
 }
@@ -28,13 +35,13 @@ body {height: 100%; }
 body .ui-table .ui-table-thead > tr > th {
     padding: 0.800em 0.857em;
     font-weight: 700;
-    color: white;
-    border: none;
-    background-color: rgba(98, 102, 107, 0.62);
+    color: white !important;
+    border: none !important;
+    background-color: rgba(98, 102, 107, 0.62)!important;
 }
 body .ui-table .ui-table-tbody > tr > td {
     background-color: inherit;
-    border: none;
+    border: none !important;
 }
 body .ui-paginator {
     background-color: #f4f4f4;
@@ -45,6 +52,12 @@ body .ui-paginator {
 }
 body .ui-paginator {
     background-color: #f4f4f4;
-    border: none;
+    border: none !important;
     padding: 0;
+}
+.pt-1{
+    padding-top: 1em;
+}
+.pt-0 {
+    padding-top: 0px !important;
 }

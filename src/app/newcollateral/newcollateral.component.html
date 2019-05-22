@@ -1,3 +1,25 @@
-<p>
-  newcollateral works!
-</p>
+<p-dialog [visible]="true" [modal]="true" [resizable]="false" [closable]="false" [draggable]="false" (onHide)="goBack()"
+    appendTo="body" [style]="{'max-width':'75%', 'min-width':'25%', 'width':'35%'}">
+    <p-header>
+        <img src="../../assets/images/upload-icon.svg"> <span>Upload Collateral </span>
+        <a role="button" tabindex="0" (click)="goBack()"
+            class="ng-tns-c5-2 ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all">
+            <span class="pi pi-times"></span>
+        </a>
+    </p-header>
+    <div class="collateral-container">
+        <form [formGroup]="collateralForm">
+                <div>
+                        <span> Collateral Type </span>
+                        <input type="text" placeholder="Enter Collateral Type here…." formControlName="collateralType" />
+                    </div>
+                    <div>
+                        <span>Document Name </span>
+                         <input type="text" placeholder="Enter Document Name here…."  formControlName="documentName" />
+                    </div>
+            
+        </form>
+      
+
+    </div>
+</p-dialog>

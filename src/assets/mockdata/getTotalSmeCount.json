@@ -1,0 +1,15 @@
+{
+    "totalSmeArchitects": 4,
+    "totalSubDomains": 2,
+    "totalDomains": 2,
+    "mapOfBuVsCount": {
+        "UAE": 31,
+        "Charlotte": 53,
+        "USCentral": 40,
+        "New York": 10,
+        "Paris": 60,
+        "Singapore": 40,
+        "UK": 40,
+        "Amsterdam": 80
+    }
+} 

@@ -6,57 +6,67 @@
         <div class="doughnut-info">
           <img class="sme-d-ic" src="../../assets/images/sme-icon.svg" alt="">
           <div class="sme-arch">Total SMEs/Architects</div>
-          <div class="sme-count">{{totalCount|number: '2.'}}</div>
+          <div class="sme-count">{{smeArchData?.totalSmeArchitects|number: '2.'}}</div>
         </div>
       </div>
       <div class="legends-container">
           <div class="legends-title">BU wise SMEs/Architects</div>
           <div class="l-con">
               <div class="left-legend">
-                  <div class="legend-box-left">
+                  <div class="legend-box-left hl v1 pt-0">
                     <hr style="border-color: #f17f7b;" align="left">
-                    <div class="ch-bu-count">836</div>
+                    <div class="ch-bu-count">{{smeArchData?.mapOfBuVsCount.Charlotte}}</div>
                     <div class="ch-bu-text">Charlotte BU</div>
                   </div>
-                  <div class="legend-box-left">
-                    <hr style="border-color: #f17f7b;" align="left">
-                    <div class="ch-bu-count">836</div>
-                    <div class="ch-bu-text">Charlotte BU</div>
+                  <div class="legend-box-left hl v1">
+                    <hr style="border-color:#71ecb3;" align="left">
+                    <div class="ch-bu-count">{{smeArchData?.mapOfBuVsCount["New York"]}}</div>
+                    <div class="ch-bu-text">New York</div>
                   </div>
-                  <div class="legend-box-left">
-                    <hr style="border-color: #f17f7b;" align="left">
-                    <div class="ch-bu-count">836</div>
-                    <div class="ch-bu-text">Charlotte BU</div>
+                  <div class="legend-box-left hl v1">
+                    <hr style="border-color:#ebcd84;" align="left">
+                    <div class="ch-bu-count">{{smeArchData?.mapOfBuVsCount.Paris}}</div>
+                    <div class="ch-bu-text">Paris</div>
                   </div>
-                  <div class="legend-box-left">
-                    <hr style="border-color: #f17f7b;" align="left">
-                    <div class="ch-bu-count">836</div>
-                    <div class="ch-bu-text">Charlotte BU</div>
+                  <div class="legend-box-left v1">
+                    <hr style="border-color: #e15079;" align="left">
+                    <div class="ch-bu-count">{{smeArchData?.mapOfBuVsCount.Amsterdam}}</div>
+                    <div class="ch-bu-text">Amsterdam</div>
                   </div>
               </div>
               <div class="right-legend">
-                  <div class="legend-box-right">
-                    <hr style="border-color: #f17f7b;" align="left">
-                    <div class="ch-bu-count">836</div>
-                    <div class="ch-bu-text">Charlotte BU</div>
+                  <div class="legend-box-right hl pt-0">
+                    <hr style="border-color: #67e7f1;" align="left">
+                    <div class="ch-bu-count">{{smeArchData?.mapOfBuVsCount.USCentral}}</div>
+                    <div class="ch-bu-text">US Central</div>
                   </div>
-                  <div class="legend-box-right">
-                    <hr style="border-color: #f17f7b;" align="left">
-                    <div class="ch-bu-count">836</div>
-                    <div class="ch-bu-text">Charlotte BU</div>
+                  <div class="legend-box-right hl">
+                    <hr style="border-color: #d478bc;" align="left">
+                    <div class="ch-bu-count">{{smeArchData?.mapOfBuVsCount.Singapore}}</div>
+                    <div class="ch-bu-text">Singapore</div>
                   </div>
-                  <div class="legend-box-right">
-                    <hr style="border-color: #f17f7b;" align="left">
-                    <div class="ch-bu-count">836</div>
-                    <div class="ch-bu-text">Charlotte BU</div>
+                  <div class="legend-box-right hl">
+                    <hr style="border-color: #9e74f7;" align="left">
+                    <div class="ch-bu-count">{{smeArchData?.mapOfBuVsCount.UK}}</div>
+                    <div class="ch-bu-text">UK</div>
                   </div>
-                  <div class="legend-box-right">
-                    <hr style="border-color: #f17f7b;" align="left">
-                    <div class="ch-bu-count">836</div>
-                    <div class="ch-bu-text">Charlotte BU</div>
+                  <div class="legend-box-right ">
+                    <hr style="border-color: #5ce35b;" align="left">
+                    <div class="ch-bu-count">{{smeArchData?.mapOfBuVsCount.UAE}}</div>
+                    <div class="ch-bu-text">UAE</div>
                   </div>
               </div>
           </div>
+      </div>
+      <div class="sme-stats">
+        <div class="total-count">
+            <div class="total-count-name">Total Domains</div>
+            <div class="sme-count">{{smeArchData?.totalDomains}}</div>
+        </div>
+        <div class="total-count">
+            <div class="total-count-name">Total Sub-Domains</div>
+            <div class="sme-count">{{smeArchData?.totalSubDomains}}</div>
+        </div>
       </div>
     </div>
     <div class="sme-txt">
@@ -68,25 +78,43 @@
             <tr>
               <th>Domain </th>
               <th>Sub Domain</th>
-              <th>SME Name</th>
-              <th>Email Id</th>
-              <th>Contact No.</th>
-              <th>Location</th>
+              <th>SMEs/Architects</th>
+              <th>BU</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-sme>
             <tr>
               <td>{{sme.domain}}</td>
               <td>{{sme.subDomain}}</td>
-              <td>{{sme.name }}</td>
-              <td>{{sme.email }}</td>
-              <td>{{sme.mobileContact}}</td>
-              <td>{{sme.city }}, {{sme.country}}</td>
-              
-    
-            </tr>
+              <td> <a class="sme-name" href="#" *ngFor="let smeInfo of sme?.listOfSMEUIModel; last as isLast" 
+                (click)="onSmeNameClickHandler($event,smeInfo, sme.region, op)">{{smeInfo?.name}}{{!isLast?", ":""}}</a></td>
+              <td>{{sme.region}}</td>
+               </tr>
         </ng-template>
     </p-table>
+    <p-overlayPanel #op>
+      <div *ngIf="selectedUser" >
+        <div>
+            <img src="../../assets/images/man.svg"  class="user-img" width="100" height="70">
+        </div>
+        <div>
+            <span *ngIf="selectedUser" class="fs-14">{{selectedUser.name}} </span>
+        </div>
+        <div>
+            <span class="fs-12">{{selectedUser.designation}} </span>
+        </div>
+        <div class="pt-1">
+            <i class="fa fa-phone icon-color"></i>   :   <span class="fs-10"> {{selectedUser.contactInfo}} </span>
+        </div>
+        <div>
+            <i class="fa fa-envelope icon-color"></i>  :  <span class="fs-10"> {{selectedUser.email}} </span>
+        </div>
+         <div>
+            <i class="fa fa-map-marker icon-color"></i>  : <span class="fs-10"> {{selectedUser.region}} </span>
+        </div>
+      </div>
+
+    </p-overlayPanel>
   </div>
   
 
