@@ -24,6 +24,7 @@ import {TableModule} from 'primeng/table';
 import {ChartModule} from 'primeng/chart';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { QaComponent } from './qa/qa.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     NewcollateralComponent,
     RfpContainerComponent,
     SmelistComponent,
+    QaComponent,
    
   ],
   imports: [

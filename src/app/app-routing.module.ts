@@ -8,6 +8,7 @@ import { AuthGuard } from './shared/services/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { RfpContainerComponent } from './rfp-container/rfp-container.component';
 import { SmelistComponent } from './smelist/smelist.component';
+import { QaComponent } from './qa/qa.component';
 import { NewcollateralComponent } from './newcollateral/newcollateral.component';
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: 'proposals', component: ProposallistComponent },
       { path: 'collaterals', component: CollaterallistComponent },
       {path:'sme', component: SmelistComponent},
+      {path:'qa', component: QaComponent},
       { path: 'newproposal', component: NewproposalComponent, outlet: 'dialogs' },
       { path: 'uploadcollateral', component: NewcollateralComponent, outlet: 'dialogs' }
     ]
