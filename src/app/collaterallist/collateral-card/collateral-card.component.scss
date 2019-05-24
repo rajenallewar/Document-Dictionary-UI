@@ -1,0 +1,94 @@
+.card{
+    float: left;
+    padding: 0.5em 1em;
+    width: 19%;
+    margin: 0.35em;
+    background-color: #fff;
+    box-shadow: 2px 2px 10px #DADADA;
+    border-radius: 5px;
+    transition: .3s linear all;
+    border-top: 5px solid #000;
+}
+
+.card:hover{
+    box-shadow: 4px 4px 20px #DADADA;
+    transition: .3s linear all;
+}
+.card-row {
+    padding: 0.35em 0;
+}
+.card-label {
+    color: #a7b0ba;
+    font-size:0.625rem;
+    font-family: 'Carnas-ExtraLight';
+    font-weight: 200;
+    margin: 0.1em 0;
+
+}
+.card-label-value1 {
+    color: #515e6b;
+    font-size:0.625rem;
+    font-weight: 500;
+    font-family:'Carnas-Medium';
+    text-overflow: ellipsis;
+}
+.card-label-value2 {
+    color: #515e6b;
+    font-size:0.75rem;
+    font-weight: 500;
+    font-family: 'Carnas-Regular';
+    text-overflow: ellipsis;
+}
+.tag-value {
+    min-height: 30px;
+    max-height: 30px;
+    overflow: hidden;
+}
+.ann-cn{
+    width: 50%;
+    float: left;
+}
+.dc-cn{
+    margin-bottom: 0.5em;
+}
+.ann-up-con{
+    border-top: 1px solid #e8e6e6;
+    border-bottom: 1px solid #e8e6e6;
+}
+.ann-vl{
+    font-weight: 500;
+    color: #7bc5f1;
+    font-family: 'Carnas-Medium';
+}
+.upd-vl{
+    font-weight: 500;
+    color: #515e6b;
+    font-family: 'Carnas-Medium';
+    text-overflow: ellipsis;
+}
+.card-btn{
+    text-align: center;
+    font-size: 0.625rem;
+    font-family: 'Carnas-Regular';
+    border-radius: 3px;
+    background-color: #ffffff;
+    padding: 3px 6px;
+    margin-right: 0.5em;
+}
+.del-btn{
+    color: #f07c7c;
+    border: solid 1px #f07c7c;
+}
+.edit-btn{
+    color: #95a6dd;
+    border: solid 1px #95a6dd;
+}
+.view-btn{
+    color: #4a90e2;
+    border: solid 1px #4a90e2;
+    font-family: 'Carnas-Medium';
+}
+.separater{
+    font-family: Carnas-ExtraLight;
+    color: #b7cad2;
+}

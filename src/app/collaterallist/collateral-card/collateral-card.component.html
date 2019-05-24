@@ -1,0 +1,39 @@
+<ng-container *ngIf="card">
+    <div [style.borderTopColor]="card.topColor?card.topColor:'#f00'" class="card" style="margin-left: 0;">
+        <div class="col-type-img-con card-row">
+            <img src="./../../assets/images/word.svg" alt="">
+        </div>
+        <div class="card-row">
+            <div class="card-label">{{"Collateral Type : "}}</div>
+            <div class="card-label-value1">{{card.collateralType}}</div>
+        </div>
+        <div class="card-row dc-cn">
+            <div class="card-label">{{"Document Name : "}}</div>
+            <div class="card-label-value2">{{card.docName}}</div>
+        </div>
+        <div class="card-row ann-up-con">
+            <div class="ann-cn">
+                <div class="card-label ann-lb">{{"Annotated : "}}</div>
+                <div class="card-label ann-vl">{{card.annotated}}</div>
+            </div>
+            <div class="ann-cn">
+                <div class="card-label upd-lb">{{"Uploaded on : "}}</div>
+                <div class="card-label upd-vl">{{card.updatedDate}}</div>
+            </div>
+
+        </div>
+        <div class="card-row">
+            <div class="card-label">{{"Tags : "}}</div>
+            <div class="card-label-value2 tag-value">
+                <span *ngFor="let tag of card?.setOfTagsUIModel; last as isLast"
+                    class="tag">{{tag.tagsDescription}}<span *ngIf="!isLast" class="separater"> | </span></span>
+                <!-- {{"Debit | Webservices | Amazon Web Services (AWS) |….."}} -->
+            </div>
+        </div>
+        <div class="card-row">
+            <button class="card-btn del-btn">DELETE</button>
+            <button class="card-btn edit-btn">EDIT</button>
+            <button class="card-btn view-btn">VIEW</button>
+        </div>
+    </div>
+</ng-container>

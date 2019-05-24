@@ -20,7 +20,7 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'proposals', component: ProposallistComponent },
       { path: 'collaterals', component: CollaterallistComponent },
-      {path:'sme', component: SmelistComponent},
+      { path: 'sme', component: SmelistComponent},
       { path: 'newproposal', component: NewproposalComponent, outlet: 'dialogs' },
       { path: 'uploadcollateral', component: NewcollateralComponent, outlet: 'dialogs' }
     ]

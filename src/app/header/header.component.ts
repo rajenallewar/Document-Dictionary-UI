@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,22 +8,22 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   headerText:string = '';
-  constructor(private router:Router) {}
+  constructor(private router:Router, private acr:ActivatedRoute) {}
 
   ngOnInit() {
     this.router.events.subscribe((event) => {
       if(event instanceof NavigationEnd) {
         switch (this.router.url) {
-          case '/dashboard':
+          case '/dms/dashboard':
             this.headerText = "Dashboard";
             break;
-          case '/proposals':
+          case '/dms/proposals':
             this.headerText = "Proposal Listings";
             break;
-          case '/collaterals':
+          case '/dms/collaterals':
             this.headerText = "Collateral Listings";
             break;
-            case '/sme':
+            case '/dms/sme':
             this.headerText = "SMEs/Architects Listings";
             break;
         
@@ -32,6 +32,13 @@ export class HeaderComponent implements OnInit {
         }
       }
     });
+  }
+
+  onNewCollateral() {
+    this.router.navigate([{outlets:{dialogs:'uploadcollateral'}}], {relativeTo:this.acr});
+  }
+  onNewProposal() {
+    this.router.navigate([{outlets:{dialogs:'newproposal'}}], {relativeTo:this.acr});
   }
 
 }

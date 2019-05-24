@@ -1,0 +1,232 @@
+[
+    {
+        "collateralId": 8,
+        "proposalName": "Debit",
+        "docName": "Capital Markets",
+        "annotated": false,
+        "filepath": "file://SYNPUND7CR35BS/AnnotationPoc/sampleData.pdf",
+        "proposalId": 145,
+        "updatedDate": 1554489000000,
+        "setOfTagsUIModel": [
+            {
+                "tagId": 117,
+                "tagsDescription": "Hello",
+                "tagCount": 0,
+                "collateralId": 0
+            },
+            {
+                "tagId": 117,
+                "tagsDescription": "World",
+                "tagCount": 0,
+                "collateralId": 0
+            },
+            {
+                "tagId": 117,
+                "tagsDescription": "Hello",
+                "tagCount": 0,
+                "collateralId": 0
+            },
+            {
+                "tagId": 117,
+                "tagsDescription": "World",
+                "tagCount": 0,
+                "collateralId": 0
+            },
+            {
+                "tagId": 117,
+                "tagsDescription": "Hello",
+                "tagCount": 0,
+                "collateralId": 0
+            },
+            {
+                "tagId": 117,
+                "tagsDescription": "World",
+                "tagCount": 0,
+                "collateralId": 0
+            }
+        ],
+        "tagsDisplayValue": null,
+        "collateralType": "Proposals & Presentation",
+        "collateralTypeId": 8
+    },
+    {
+        "collateralId": 8,
+        "proposalName": "Debit",
+        "docName": "Debit",
+        "annotated": false,
+        "filepath": "file://SYNPUND7CR35BS/AnnotationPoc/sampleData.pdf",
+        "proposalId": 145,
+        "updatedDate": 1554489000000,
+        "setOfTagsUIModel": [
+            {
+                "tagId": 117,
+                "tagsDescription": "FX",
+                "tagCount": 0,
+                "collateralId": 0
+            }
+        ],
+        "tagsDisplayValue": null,
+        "collateralType": "Proposals & Presentation",
+        "collateralTypeId": 8
+    },
+    {
+        "collateralId": 8,
+        "proposalName": "Debit",
+        "docName": "Debit",
+        "annotated": false,
+        "filepath": "file://SYNPUND7CR35BS/AnnotationPoc/sampleData.pdf",
+        "proposalId": 145,
+        "updatedDate": 1554489000000,
+        "setOfTagsUIModel": [
+            {
+                "tagId": 117,
+                "tagsDescription": "FX",
+                "tagCount": 0,
+                "collateralId": 0
+            }
+        ],
+        "tagsDisplayValue": null,
+        "collateralType": "Proposals & Presentation",
+        "collateralTypeId": 8
+    },
+    {
+        "collateralId": 8,
+        "proposalName": "Debit",
+        "docName": "Debit",
+        "annotated": false,
+        "filepath": "file://SYNPUND7CR35BS/AnnotationPoc/sampleData.pdf",
+        "proposalId": 145,
+        "updatedDate": 1554489000000,
+        "setOfTagsUIModel": [
+            {
+                "tagId": 117,
+                "tagsDescription": "FX",
+                "tagCount": 0,
+                "collateralId": 0
+            }
+        ],
+        "tagsDisplayValue": null,
+        "collateralType": "Proposals & Presentation",
+        "collateralTypeId": 8
+    },
+    {
+        "collateralId": 8,
+        "proposalName": "Debit",
+        "docName": "Debit",
+        "annotated": false,
+        "filepath": "file://SYNPUND7CR35BS/AnnotationPoc/sampleData.pdf",
+        "proposalId": 145,
+        "updatedDate": 1554489000000,
+        "setOfTagsUIModel": [
+            {
+                "tagId": 117,
+                "tagsDescription": "FX",
+                "tagCount": 0,
+                "collateralId": 0
+            }
+        ],
+        "tagsDisplayValue": null,
+        "collateralType": "Proposals & Presentation",
+        "collateralTypeId": 8
+    },
+    {
+        "collateralId": 8,
+        "proposalName": "Debit",
+        "docName": "Debit",
+        "annotated": false,
+        "filepath": "file://SYNPUND7CR35BS/AnnotationPoc/sampleData.pdf",
+        "proposalId": 145,
+        "updatedDate": 1554489000000,
+        "setOfTagsUIModel": [
+            {
+                "tagId": 117,
+                "tagsDescription": "FX",
+                "tagCount": 0,
+                "collateralId": 0
+            }
+        ],
+        "tagsDisplayValue": null,
+        "collateralType": "Proposals & Presentation",
+        "collateralTypeId": 8
+    },
+    {
+        "collateralId": 8,
+        "proposalName": "Debit",
+        "docName": "Debit",
+        "annotated": false,
+        "filepath": "file://SYNPUND7CR35BS/AnnotationPoc/sampleData.pdf",
+        "proposalId": 145,
+        "updatedDate": 1554489000000,
+        "setOfTagsUIModel": [
+            {
+                "tagId": 117,
+                "tagsDescription": "FX",
+                "tagCount": 0,
+                "collateralId": 0
+            }
+        ],
+        "tagsDisplayValue": null,
+        "collateralType": "Proposals & Presentation",
+        "collateralTypeId": 8
+    },
+    {
+        "collateralId": 8,
+        "proposalName": "Debit",
+        "docName": "Debit",
+        "annotated": false,
+        "filepath": "file://SYNPUND7CR35BS/AnnotationPoc/sampleData.pdf",
+        "proposalId": 145,
+        "updatedDate": 1554489000000,
+        "setOfTagsUIModel": [
+            {
+                "tagId": 117,
+                "tagsDescription": "FX",
+                "tagCount": 0,
+                "collateralId": 0
+            }
+        ],
+        "tagsDisplayValue": null,
+        "collateralType": "Proposals & Presentation",
+        "collateralTypeId": 8
+    },
+    {
+        "collateralId": 8,
+        "proposalName": "Debit",
+        "docName": "Debit",
+        "annotated": false,
+        "filepath": "file://SYNPUND7CR35BS/AnnotationPoc/sampleData.pdf",
+        "proposalId": 145,
+        "updatedDate": 1554489000000,
+        "setOfTagsUIModel": [
+            {
+                "tagId": 117,
+                "tagsDescription": "FX",
+                "tagCount": 0,
+                "collateralId": 0
+            }
+        ],
+        "tagsDisplayValue": null,
+        "collateralType": "Proposals & Presentation",
+        "collateralTypeId": 8
+    },
+    {
+        "collateralId": 8,
+        "proposalName": "Debit",
+        "docName": "Debit",
+        "annotated": false,
+        "filepath": "file://SYNPUND7CR35BS/AnnotationPoc/sampleData.pdf",
+        "proposalId": 145,
+        "updatedDate": 1554489000000,
+        "setOfTagsUIModel": [
+            {
+                "tagId": 117,
+                "tagsDescription": "FX",
+                "tagCount": 0,
+                "collateralId": 0
+            }
+        ],
+        "tagsDisplayValue": null,
+        "collateralType": "Proposals & Presentation",
+        "collateralTypeId": 8
+    }
+]

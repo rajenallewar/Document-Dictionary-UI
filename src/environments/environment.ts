@@ -27,10 +27,20 @@ export const AppSettings = {
       name: 'getTotalSmeCount',
       url: '/smedata/countOfSmeAndDomain'
       // url: '/assets/mockdata/getTotalSmeCount.json'
-    }
+    },
+    'getCollaterals': {
+      name: 'getCollaterals',
+      // url: '/collateral/getCollaterals'
+      url: '/assets/mockdata/getCollaterals.json'
+    },
+    'collateralTypeCount': {
+      name: 'collateralTypeCount',
+      // url: '/collateral/collateralTypeCount'
+      url: '/assets/mockdata/collateralTypeCount.json'
+    },
   },
-  BASE_URL: 'http://172.20.201.170:8080/docketManagement'
-  // BASE_URL: ''
+  // BASE_URL: 'http://172.20.201.170:8080/docketManagement'
+  BASE_URL: ''
 };
 
 /*

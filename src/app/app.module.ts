@@ -24,6 +24,8 @@ import {TableModule} from 'primeng/table';
 import {ChartModule} from 'primeng/chart';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import {PaginatorModule} from 'primeng/paginator';
+import { CollateralCardComponent } from './collaterallist/collateral-card/collateral-card.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     NewcollateralComponent,
     RfpContainerComponent,
     SmelistComponent,
-   
+    CollateralCardComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     DialogModule,
     ChartModule,
     OverlayPanelModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+        PaginatorModule
     
   ],
   providers: [

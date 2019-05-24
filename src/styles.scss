@@ -16,6 +16,9 @@ body {
 .pd-0{
     padding: 0!important;
 }
+.pd-1{
+    padding: 1em !important;
+}
 .mr-0{
     margin: 0!important;
 }
@@ -31,6 +34,12 @@ body {
     background-color: #494e5e;
     height: 100%;
     float: left;
+}
+.right-panel{
+    height: 100%;
+    float: left;
+    width: calc(100% - 12em);
+    padding: 1em 2em;
 }
 body .ui-table .ui-table-thead > tr > th {
     padding: 0.800em 0.857em;
