@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { of } from 'rxjs';
 
 export interface Attachment {
     name: string;
@@ -74,27 +75,6 @@ export class QaService {
             emailChain:
                 [dummyEmailChain]
         };
-        // const dummyRes: EmailList = [
-        //     emailChain = {
-        //         [
-        //             {
-        //                 id: '1',
-        //                 from: 'a',
-        //                 to: ['a', 'b'],
-        //                 subject = 'abc',
-        //                 attachment =[
-        //                     {
-        //                         name: 'a',
-        //                         link: 'a.com',
-        //                         size: '124'
-        //                     }
-        //                 ],
-        //                 date: new Date(),
-        //                 body: 'emailbody'
-        //             }
-        //         ]
-        //     }
-        // ];
-        return Observable.create(dummyEmailList);
+        return of(dummyEmailList);
     }
 }

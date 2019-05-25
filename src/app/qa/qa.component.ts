@@ -11,6 +11,7 @@ export class QaComponent implements OnInit {
 
   constructor(private qaservice: QaService) { }
   emailList: EmailList;
+  list = ['', '', '', '', '', '', '', '', '', '', '', '', '', ''];
   ngOnInit() {
     this.getEmailList();
   }
