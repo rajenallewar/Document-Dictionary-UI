@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QaService, Attachment, EmailChain, Email } from './qa.service';
+import { SearchPipe } from './search.pipe';
 
 @Component({
   selector: 'app-qa',
@@ -14,6 +15,7 @@ export class QaComponent implements OnInit {
   selectedEmailChain: EmailChain;
   list = ['', '', '', '', '', '', '', '', '', ''];
   defaultSelIndex = 0;
+  searchQuery = '';
 
   ngOnInit() {
     this.getEmailList();
@@ -29,9 +31,4 @@ export class QaComponent implements OnInit {
       console.error(err);
     });
   }
-
-  hasAttachment(eChain: EmailChain) {
-    return eChain.find(ems => ems.attachment && ems.attachment.length > 0);
-  }
-
 }

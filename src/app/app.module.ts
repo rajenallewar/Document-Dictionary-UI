@@ -25,6 +25,8 @@ import {ChartModule} from 'primeng/chart';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { QaComponent } from './qa/qa.component';
+import { SearchPipe } from './qa/search.pipe';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +42,7 @@ import { QaComponent } from './qa/qa.component';
     RfpContainerComponent,
     SmelistComponent,
     QaComponent,
-   
+     SearchPipe
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,8 @@ import { QaComponent } from './qa/qa.component';
     DialogModule,
     ChartModule,
     OverlayPanelModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    FormsModule
     
   ],
   providers: [
