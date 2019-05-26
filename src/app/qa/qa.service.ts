@@ -19,19 +19,12 @@ export interface Email {
     body: string;
 }
 
-export interface EmailChain {
-    emails: Email[];
-}
-
-// The list which will be displayed on the left pane
-export interface EmailList {
-    emailChain: EmailChain[];
-}
+export type EmailChain = Email[];
 
 @Injectable()
 export class QaService {
     constructor(private http: HttpClient) { }
-    public getEmailList(): Observable<EmailList> {
+    public getEmailList(): Observable<EmailChain[]> {
         const dummyAttachment: Attachment[] = [
             {
                 name: 'testAttach-1',
@@ -51,30 +44,30 @@ export class QaService {
         ];
         const dummyEmail1: Email = {
             id: '1',
-            from: 'a',
-            to: ['b', 'c'],
-            subj: '',
+            from: 'Naveen Goyal',
+            to: ['Amit Kale', 'Vishal Gadekar', 'Naveen Goyal'],
+            subj: 'Annotation - Focus on the screen / workﬂow -1',
             attachment: dummyAttachment,
             date: new Date(),
-            body: 'emailbody1'
-        };
+            body: `Hi Amit,
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Neque egestas congue quisque egestas diam. Nibh sit amet commodo nulla facilisi nullam vehicula. Egestas fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Suscipit tellus mauris a diam maecenas sed enim ut sem. Amet cursus sit amet dictum sit amet justo. Amet porttitor eget dolor morbi non arcu risus. Eget arcu dictum varius duis. Nibh cras pulvinar mattis nunc sed blandit libero. Ultrices sagittis orci a scelerisque purus semper. Nunc faucibus a pellentesque sit amet porttitor eget. Nulla aliquet enim tortor at auctor urna nunc id cursus. Mi bibendum neque egestas congue quisque egestas diam. Kind regards, Naveen Goyal`        };
+
         const dummyEmail2: Email = {
             id: '2',
-            from: 'c',
-            to: ['a', 'b'],
-            subj: '',
-            attachment: dummyAttachment,
+            from: 'Amit Kale',
+            to: ['Vishal Gadekar', 'Naveen Goyal'],
+            subj: 'Annotation - Focus on the screen / workﬂow -2',
+            attachment: null,
             date: new Date(),
-            body: 'emailbody2'
-        };
-        const dummyEmailChain: EmailChain = {
-            emails: [dummyEmail1, dummyEmail2]
-        }
-            ;
-        const dummyEmailList: EmailList = {
-            emailChain:
-                [dummyEmailChain]
-        };
-        return of(dummyEmailList);
+            body: `Hi Amit,
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Neque egestas congue quisque egestas diam. Nibh sit amet commodo nulla facilisi nullam vehicula. Egestas fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Suscipit tellus mauris a diam maecenas sed enim ut sem. Amet cursus sit amet dictum sit amet justo. Amet porttitor eget dolor morbi non arcu risus. Eget arcu dictum varius duis. Nibh cras pulvinar mattis nunc sed blandit libero. Ultrices sagittis orci a scelerisque purus semper. Nunc faucibus a pellentesque sit amet porttitor eget. Nulla aliquet enim tortor at auctor urna nunc id cursus. Mi bibendum neque egestas congue quisque egestas diam. Kind regards, Naveen Goyal`        };
+
+        const dummyEmailChain1: EmailChain = [dummyEmail1];
+        const dummyEmailChain2: EmailChain = [dummyEmail2];
+        const dummyEmailChain3: EmailChain = [dummyEmail1, dummyEmail2];
+
+        return of([dummyEmailChain1, dummyEmailChain2, dummyEmailChain3, dummyEmailChain1, dummyEmailChain2, dummyEmailChain3, dummyEmailChain1, dummyEmailChain2, dummyEmailChain3]);
     }
 }

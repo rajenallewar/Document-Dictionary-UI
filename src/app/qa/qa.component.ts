@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QaService, Attachment, EmailChain, EmailList, Email } from './qa.service';
+import { QaService, Attachment, EmailChain, Email } from './qa.service';
 
 @Component({
   selector: 'app-qa',
@@ -10,8 +10,11 @@ import { QaService, Attachment, EmailChain, EmailList, Email } from './qa.servic
 export class QaComponent implements OnInit {
 
   constructor(private qaservice: QaService) { }
-  emailList: EmailList;
-  list = ['', '', '', '', '', '', '', '', '', '', '', '', '', ''];
+  emailList: EmailChain[];
+  selectedEmailChain: EmailChain;
+  list = ['', '', '', '', '', '', '', '', '', ''];
+  defaultSelIndex = 0;
+
   ngOnInit() {
     this.getEmailList();
   }
@@ -19,9 +22,16 @@ export class QaComponent implements OnInit {
   getEmailList() {
     this.qaservice.getEmailList().subscribe(res => {
       this.emailList = res;
+      console.log(this.emailList);
+      this.selectedEmailChain = this.emailList[this.defaultSelIndex];
+      console.log(this.selectedEmailChain[0]);
     }, err => {
       console.error(err);
     });
+  }
+
+  hasAttachment(eChain: EmailChain) {
+    return eChain.find(ems => ems.attachment && ems.attachment.length > 0);
   }
 
 }
