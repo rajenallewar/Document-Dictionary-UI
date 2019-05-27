@@ -70,7 +70,7 @@
       <input type="text" [(ngModel)]="searchQuery" class="form-control form-control-sm" placeholder="Search by Tags"
         aria-label="Username" aria-describedby="basic-addon1">
     </div>
-    <div class="list-group w-100" style="font-size: smaller;">
+    <div class="list-group w-100 pb-5" style="font-size: smaller;">
       <div *ngFor="let echain of emailList | search:searchQuery" (click)="selectedEmailChain = echain">
         <span class="list-group-item list-group-item-action flex-column align-items-start border-0"
           [ngClass]="{active: selectedEmailChain === echain}">
