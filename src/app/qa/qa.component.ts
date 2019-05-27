@@ -2,15 +2,12 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { QaService, Attachment, EmailChain, Email } from './qa.service';
 import { SearchPipe } from './search.pipe';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import {NgSwitch} from '@angular/common';
-
-declare let require: any;
 
 @Component({
   selector: 'app-qa',
   templateUrl: './qa.component.html',
   styleUrls: ['./qa.component.scss'],
-  providers: [QaService, NgSwitch],
+  providers: [QaService],
 })
 export class QaComponent implements OnInit {
 
@@ -44,8 +41,7 @@ export class QaComponent implements OnInit {
 
   setScreenSize() {
     const deviceInfo = this.deviceService.getDeviceInfo();
-    this.isMobile = this.deviceService.isMobile();
-    console.log(deviceInfo);
-    console.log(this.isMobile);
+    this.isMobile = this.deviceService.isMobile() || (document.body.clientWidth < 700);
+    console.log(this.deviceService.isMobile(), document.body.clientWidth, deviceInfo);
   }
 }
