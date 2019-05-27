@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { AppSharedService } from '../shared/services/shared.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,9 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   headerText:string = '';
-  constructor(private router:Router, private acr:ActivatedRoute) {}
+  constructor(private router:Router,
+    private acr:ActivatedRoute,
+    private appSharedService:AppSharedService) {}
 
   ngOnInit() {
     this.router.events.subscribe((event) => {
@@ -35,7 +38,12 @@ export class HeaderComponent implements OnInit {
   }
 
   onNewCollateral() {
-    this.router.navigate([{outlets:{dialogs:'uploadcollateral'}}], {relativeTo:this.acr});
+    this.appSharedService.setRouteData({
+      "openType":"newFromHeader"
+    });
+    setTimeout(() => {
+      this.router.navigate([{outlets:{dialogs:'uploadcollateral'}}], {relativeTo:this.acr});
+    }, 0);
   }
   onNewProposal() {
     this.router.navigate([{outlets:{dialogs:'newproposal'}}], {relativeTo:this.acr});

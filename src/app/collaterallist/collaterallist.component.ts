@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CollateralListService } from './collaterallist.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AppSharedService } from '../shared/services/shared.service';
 
 @Component({
   selector: 'app-collaterallist',
@@ -7,16 +9,21 @@ import { CollateralListService } from './collaterallist.service';
   styleUrls: ['./collaterallist.component.scss'],
   providers: [CollateralListService]
 })
-export class CollaterallistComponent implements OnInit {
+export class CollaterallistComponent implements OnInit, OnDestroy {
   public data: any;
   public options: any;
   public collateralData:any ={};
   public collateralList:any =[];
+  public routeData:any = null;
   displayLineChart:boolean = false;
   
-  constructor(private collateralListService:CollateralListService) { }
+  constructor(private collateralListService:CollateralListService,
+    private router:Router, 
+    private acr:ActivatedRoute, 
+    private appSharedService:AppSharedService) { }
 
   ngOnInit() {
+    this.routeData = this.appSharedService.getRouteData();
     this.data = {
       labels: [],
       datasets: []
@@ -116,6 +123,31 @@ export class CollaterallistComponent implements OnInit {
   }
   paginate(e) {
 
+  }
+
+  onDelete(event) {
+    console.log("onDelete", event);
+  }
+  onEdit(event) {
+    console.log("onEdit", event);
+    this.appSharedService.setRouteData({
+      "openType":"edit",
+      "index":event.index,
+      "collateralObj":this.collateralList[event.index]
+    });
+    setTimeout(() => {
+      this.router.navigate([{outlets:{dialogs:'uploadcollateral'}}], {relativeTo:this.acr.parent});
+    }, 0);
+  }
+  onView(event) {
+    console.log("onView", event);
+    this.appSharedService.setRouteData({});
+    setTimeout(() => {
+      this.router.navigate([{outlets:{dialogs:'viewcollateral'}}], {relativeTo:this.acr.parent});
+    }, 0);
+  }
+  ngOnDestroy() {
+    this.appSharedService.clearRouteData();
   }
 
 }
