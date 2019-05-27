@@ -1,0 +1,36 @@
+<p-dialog styleClass="view-collateral" [visible]="true" [modal]="true" [resizable]="false" [closable]="false"
+  [draggable]="false" (onHide)="goBack()" appendTo="body">
+  <p-header>
+
+    <a role="button" tabindex="0" (click)="goBack()" class="close-btn pull-right">
+      <img src="../../assets/images/close.svg">
+    </a>
+
+
+  </p-header>
+  <div class="document-panel">
+    <div class="doc-panel" [innerHTML]="htmlCode">
+    </div>
+  </div>
+  <div class="tag-panel">
+    <div>
+      <div class="form-group">
+        <h6>Add New Tag</h6>
+        <input #newAnnotation (keyup.enter)="addAnnotation(newAnnotation.value); newAnnotation.value=''"
+          (blur)="addAnnotation(newAnnotation.value); newAnnotation.value='' " class="form-control"
+          placeholder="Type your tag here…." style="width:100%">
+      </div>
+      <button type="button" class="btn btn-primary" (click)="saveTags()">Save</button>
+    </div>
+    <div style="margin-top: 20px">
+      <h4>Tags</h4>
+      <ul class="tag-list list-inline" style="list-style-type:none;">
+        <li *ngFor="let tag of tags" [ngStyle]="{'background-color': tag.bgColor}" class="list-inline-item">
+          {{tag.tagsDescription}}
+        </li>
+
+      </ul>
+    </div>
+  </div>
+
+</p-dialog>

@@ -1,0 +1,92 @@
+.title{
+   font-size: 1.625rem;
+   font-weight: normal;
+   color: #404040 !important;
+
+}
+.collateral-container{
+    padding: 0.5em;
+}
+.tx-box{
+    width: 100%;
+    height: 100%;
+    opacity: 0.82 !important;
+    padding: 0.5em !important;
+    border-radius: 3px;
+    // border: solid 1px #d7d7d7;
+    font-family: Carnas-Light !important;
+    font-size: 10px !important;
+    font-weight: 300;
+    font-style: normal;
+    color: #404040;
+}
+.upload-btn{
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: auto !important;
+  }
+ .c-btn {
+     width: 7em;
+     padding: 0.61em;
+     border-radius: 0;
+     font-size: 0.75rem;
+     font-display: Carnas-Medium;
+    }
+.drag-drop{
+  font-size: 14px;
+  font-display: Carnas-Medium;
+  color: #091837;
+  border-radius: 3px;
+}
+.cancle-btn{
+    background-color: #d3d3d3;
+    border-color: #d3d3d3;
+}
+.img-icon{
+    vertical-align: inherit;
+}
+.header {
+    padding: 0 0.75em;
+}
+.close-btn{
+    margin-top: 0.5em;
+    cursor: pointer;
+}
+label {
+    margin-bottom: 0.2rem;
+    font-family: Carnas-Light;
+    font-size: 10px;
+    font-weight: 300;
+}
+.drop-box {
+    border-radius: 3px;
+    border: 1px dotted #d7d7d7;
+    padding: 0.5em;
+    position:relative;
+}
+.doc-ppt{
+    font-size: 9px;
+    font-weight: 300;
+    color: #9d9fa3;
+    font-family: Carnas-Light;
+}
+.uploaded-file-ic{    
+	border-radius: 8.5px;
+    border: solid 1px #d7d2d2;
+    background-color: #ffffff;
+    font-size: 8px;
+    color: #404040;
+    font-family: Carnas-Regular;
+    padding: 2px 6px;
+    margin: 0 3px;
+}
+.uploaded-file-close {
+    margin-left: 5px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.file-icon{
+    padding-right: 5px;
+    padding-bottom: 2px;
+}

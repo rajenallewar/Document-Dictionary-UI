@@ -21,12 +21,17 @@
     <div class="row">
         <div class="col Image"> <img src="../../assets/images/group-4.svg">
             <p class="login-text">
-                Annotations/Tags can be added to a document or even an image.
+                The <span class="login-text-dms">
+                    Synechron Docket Management System
+                </span> (SDMS)
+                is a centralized Docket Management system that
+                provides the ability to upload, annotate/tag,
+                search, view, download, and submit documents.
                 <br>
                 <br>
-                Users can annotate in collaboration with team members and then track these annotations as issues, assign
-                them to other collaborators for resolution, add tags to sort the issues and set priorities for each
-                annotation.
+                Relevant annotations/tags
+                can be added for any document and these documents
+                can be easily searched based on the associated tags.
             </p>
         </div>
 
@@ -38,15 +43,15 @@
                 <form [formGroup]="loginForm">
                     <!-- <pre>{{loginForm.get('userName')|json}}</pre> -->
                     <input type="text" formControlName="userName" class="tx-box" placeholder="User Name"
-                      [ngClass]="{ 'is-invalid': loginForm.userName?.errors }" />
-                      <div *ngIf="loginForm.get('userName')?.errors" class="invalid-feedback">
-                            <!-- <div *ngIf="loginForm.get('userName')?.errors.required">Username is required</div> -->
-                        </div>
+                        [ngClass]="{ 'is-invalid': loginForm.userName?.errors }" />
+                    <div *ngIf="loginForm.get('userName')?.errors" class="invalid-feedback">
+                        <!-- <div *ngIf="loginForm.get('userName')?.errors.required">Username is required</div> -->
+                    </div>
 
                     <input type="password" formControlName="password" class="tx-box" placeholder="Password"
                         style="margin-top: 1em" />
-                    <input type="checkbox" name="signIn" style="margin-top:1.5em"> keep me signed in
-                    <button type="button" class="btn btn-primary sign-btn" (click) ="onLogin()">SIGN IN</button>
+                    <input type="checkbox" name="signIn" class="ch-box"> <span class="keep-sign-in"> keep me signed in</span>
+                    <button type="button" class="btn btn-primary sign-btn" (click)="onLogin()">SIGN IN</button>
                     <a href="https://synepwd.synechron.com/"><span class="forget-pwd"> Forget your Password? </span></a>
                 </form>
 

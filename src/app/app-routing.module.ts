@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { RfpContainerComponent } from './rfp-container/rfp-container.component';
 import { SmelistComponent } from './smelist/smelist.component';
 import { NewcollateralComponent } from './newcollateral/newcollateral.component';
+import { ViewcollateralComponent } from './viewcollateral/viewcollateral.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,8 @@ const routes: Routes = [
       { path: 'collaterals', component: CollaterallistComponent },
       { path: 'sme', component: SmelistComponent},
       { path: 'newproposal', component: NewproposalComponent, outlet: 'dialogs' },
-      { path: 'uploadcollateral', component: NewcollateralComponent, outlet: 'dialogs' }
+      { path: 'uploadcollateral', component: NewcollateralComponent, outlet: 'dialogs' },
+      { path: 'viewcollateral', component: ViewcollateralComponent, outlet: 'dialogs'}
     ]
   },
   { path: 'login', component: LoginComponent },
