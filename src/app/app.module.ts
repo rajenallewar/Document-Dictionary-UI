@@ -26,7 +26,7 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { QaComponent } from './qa/qa.component';
 import { SearchPipe } from './qa/search.pipe';
-
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 @NgModule({
   declarations: [
@@ -57,8 +57,8 @@ import { SearchPipe } from './qa/search.pipe';
     ChartModule,
     OverlayPanelModule,
     AngularFontAwesomeModule,
-    FormsModule
-    
+    FormsModule,
+    DeviceDetectorModule.forRoot()
   ],
   providers: [
     { provide: UrlSerializer, useClass: CustomUrlSerializer }
