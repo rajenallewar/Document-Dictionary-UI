@@ -19,13 +19,12 @@ export class QaComponent implements OnInit {
   }
   emailList: EmailChain[];
   selectedEmailChain: EmailChain;
-  list = ['', '', '', '', '', '', '', '', '', ''];
   defaultSelIndex = 0;
   searchQuery = '';
   isMobile: boolean;
 
   @HostListener('window:resize', ['$event'])
-  onResize(event) {
+  onResize() {
     this.setScreenSize();
   }
   ngOnInit() {
