@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 
 class TagsUIModel {
@@ -21,9 +22,12 @@ texts: string[];
 results: string[];
 collateralId: number;
 htmlCode: string = '';
-constructor(private acr:ActivatedRoute,private router: Router) { }
+// htmlCode:SafeHtml = '';
+
+constructor(private acr:ActivatedRoute,private router: Router, private domSan: DomSanitizer) { }
 ngOnInit() {
   this.collateralId = Number(localStorage.getItem('collateralId'))
+  this.getConvertedHtmlFile(this.collateralId);
   this.getAllTags();
   this.htmlCode = `
       <!DOCTYPE html>
@@ -85,9 +89,12 @@ addAnnotation(newAnnotation: string) {
 }
 // To give random color to each tag
 getRandomColor() {
-  var color = Math.floor(0x1000000 * Math.random()).toString(16);
-  return '#' + ('000000' + color).slice(-6);
-}
+  var color = (function lol(m, s, c) {
+    return s[m.floor(m.random() * s.length)] +
+        (c && lol(m, s, c - 1));
+})(Math, '6789ABCDEF', 4);
+return '#' + color;
+ }
 // For saving all added tags
 saveTags() {
   let requestData = {
@@ -104,6 +111,13 @@ saveTags() {
 }
 goBack(){
   this.router.navigate([{outlets:{dialogs:null}}], {relativeTo:this.acr.parent});
+}
+public getConvertedHtmlFile(Id:number){
+  // this.collaterealServices.readHtmlConvertedFile(Id).subscribe((data)=> {
+  // this.htmlCode = this.domSan.bypassSecurityTrustHtml(data.toString());
+  //  })
+
+  
 }
 ngOnDestroy() {
   
