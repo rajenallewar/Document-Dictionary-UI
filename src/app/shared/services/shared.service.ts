@@ -6,6 +6,8 @@ import { Injectable } from '@angular/core';
 export class AppSharedService {
 
   isUserLoggedIn: boolean = false;
+  public _routeData:any;
+
   constructor() { }
 
   setUserLoggedIn (flag) {
@@ -14,5 +16,17 @@ export class AppSharedService {
 
   getUserLoggedIn () {
     return this.isUserLoggedIn;
+  }
+
+  setRouteData(value:any) {
+    this._routeData = value
+  }
+
+  getRouteData():any {
+    return this._routeData;
+  }
+
+  clearRouteData():any {
+    this._routeData = null;
   }
 }

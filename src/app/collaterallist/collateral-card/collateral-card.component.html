@@ -1,7 +1,13 @@
 <ng-container *ngIf="card">
+    <!-- <pre>{{card|json}}</pre> -->
+    <!-- <pre>{{cardIndex}}</pre> -->
     <div [style.borderTopColor]="card.topColor?card.topColor:'#f00'" class="card" style="margin-left: 0;">
         <div class="col-type-img-con card-row">
+            <!-- <pre>{{card.filename?.split('.').pop()|json}}</pre> -->
             <img src="./../../assets/images/word.svg" alt="">
+            <!-- <img *ngIf="card.filename?.split('.').pop() == 'null'" src="./../../assets/images/word.svg" alt="">
+            <img *ngIf="card.filename?.split('.').pop() == 'pdf'" src="./../../assets/images/pdf.svg" alt="">
+            <img *ngIf="card.filename?.split('.').pop() == 'ppt'" src="./../../assets/images/powerpoint.svg" alt=""> -->
         </div>
         <div class="card-row">
             <div class="card-label">{{"Collateral Type : "}}</div>
@@ -31,9 +37,9 @@
             </div>
         </div>
         <div class="card-row">
-            <button class="card-btn del-btn">DELETE</button>
-            <button class="card-btn edit-btn">EDIT</button>
-            <button class="card-btn view-btn">VIEW</button>
+            <button class="card-btn del-btn" (click)="onDelete($event)">DELETE</button>
+            <button class="card-btn edit-btn" (click)="onEdit($event)">EDIT</button>
+            <button class="card-btn view-btn" (click)="onView($event)">VIEW</button>
         </div>
     </div>
 </ng-container>

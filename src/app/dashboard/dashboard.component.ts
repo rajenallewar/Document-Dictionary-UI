@@ -12,10 +12,10 @@ export class DashboardComponent implements OnInit {
   constructor(private router:Router, private acr:ActivatedRoute, private appSharedService:AppSharedService) { }
 
   ngOnInit() {
-    setTimeout(() => {
+    // setTimeout(() => {
       
-      this.router.navigate([{outlets:{dialogs:'viewcollateral'}}], {relativeTo:this.acr.parent});
-    }, 1000);
+    //   this.router.navigate([{outlets:{dialogs:'viewcollateral'}}], {relativeTo:this.acr.parent});
+    // }, 1000);
   }
 
 }

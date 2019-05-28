@@ -2,6 +2,7 @@
    font-size: 1.625rem;
    font-weight: normal;
    color: #404040 !important;
+   margin-left: 0.25em;
 
 }
 .collateral-container{
@@ -89,4 +90,30 @@ label {
 .file-icon{
     padding-right: 5px;
     padding-bottom: 2px;
+}
+.title-pr{
+    font-family: "Carnas-Medium";
+    font-size: 1rem;
+    font-weight: 500;
+    margin-left: 3em;
+    color:#404040;
+}
+.title-ed{
+    margin-left: 0em;
+}
+.sub-title-pr1{
+    font-family: "Carnas-Light";
+    font-size: 0.75rem;
+    margin-left: 1em;
+    color:#c9c9c9;
+}
+.sub-title-pr2{
+    font-family: "Carnas-Regular";
+    font-size: 0.75rem;
+    color:#404040;
+    font-weight: 300;
+}
+.img-icon-pr{
+    vertical-align: inherit;
+    float: left;
 }
