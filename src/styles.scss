@@ -82,7 +82,7 @@ body .ui-paginator {
     top: 0 !important;
     width: 100%;
     height: 100% !important;;
-    padding: 2em !important;
+    padding: 0 !important;
 
     >.ui-dialog-titlebar, .ui-dialog-content {
         background-color:#18191b !important;
@@ -116,4 +116,26 @@ body .ui-paginator {
     float: left;
     width: calc(100% - 18em);
   
+}
+
+.ui-autocomplete {
+    display: block !important;
+    > .ui-autocomplete-input{
+        width: 100%;
+        height: 100%;
+        padding: 0.5em !important;
+        border-radius: 3px;
+        font-family: Carnas-Regular !important;
+        font-size: 12px !important;
+        color: #404040;
+    }
+}
+.is-invalid .ui-autocomplete .ui-autocomplete-input{
+    border-color: #dc3545;
+}
+
+.ui-autocomplete-panel .ui-autocomplete-items .ui-autocomplete-list-item {
+    font-family: Carnas-Regular !important;
+    font-size: 12px !important;
+    color: #404040;
 }

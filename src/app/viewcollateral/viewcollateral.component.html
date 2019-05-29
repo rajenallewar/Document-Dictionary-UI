@@ -9,8 +9,12 @@
 
   </p-header>
   <div class="document-panel">
-    <div class="doc-panel" [innerHTML]="htmlCode">
+    <!-- <div class="doc-panel" [innerHTML]="htmlCode">
+    </div> -->
+    <div class="doc-panel">
+        <iframe [srcdoc]="htmlCode" width="100%" height="100%"></iframe>
     </div>
+    
   </div>
   <div class="tag-panel">
     <div>

@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { AppSharedService } from '../shared/services/shared.service';
+import { ViewCollateralService } from './viewcollateral.service';
 
 
 class TagsUIModel {
@@ -13,7 +15,8 @@ class TagsUIModel {
 @Component({
   selector: 'app-viewcollateral',
   templateUrl: './viewcollateral.component.html',
-  styleUrls: ['./viewcollateral.component.scss']
+  styleUrls: ['./viewcollateral.component.scss'],
+  providers: [ViewCollateralService]
 })
 export class ViewcollateralComponent implements OnInit, OnDestroy {
 
@@ -21,50 +24,57 @@ tags: TagsUIModel[] = [];
 texts: string[];
 results: string[];
 collateralId: number;
-htmlCode: string = '';
-// htmlCode:SafeHtml = '';
+// htmlCode: string = '';
+routeData:any;
+htmlCode:SafeHtml = '';
 
-constructor(private acr:ActivatedRoute,private router: Router, private domSan: DomSanitizer) { }
+constructor(private acr:ActivatedRoute,
+  private router: Router,
+  private domSan: DomSanitizer,
+  private viewCollateralService:ViewCollateralService,
+  private appSharedService: AppSharedService) { }
 ngOnInit() {
   this.collateralId = Number(localStorage.getItem('collateralId'))
+  this.routeData = this.appSharedService.getRouteData();
+  this.collateralId = this.routeData.collateralObj.collateralId;
   this.getConvertedHtmlFile(this.collateralId);
   this.getAllTags();
-  this.htmlCode = `
-      <!DOCTYPE html>
-  <html>
-  <head>
-  <title>Page Title</title>
-  <style>
-    .test {
-      background-color:"red";
-    }
-  </style>
-  </head>
-  <body>
+  // this.htmlCode = `
+  //     <!DOCTYPE html>
+  // <html>
+  // <head>
+  // <title>Page Title</title>
+  // <style>
+  //   .test {
+  //     background-color:"red";
+  //   }
+  // </style>
+  // </head>
+  // <body>
   
-  <h1>My First Heading</h1>
-  <p class="test">My first paragraph.</p>
-  <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
-                              His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
-                              Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
-                              kind and benevolent to those who give respect,
-                              but given to ruthless violence whenever anything stands against the good of the family.</p>
-                              <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
-                              His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
-                              Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
-                              kind and benevolent to those who give respect,
-                              but given to ruthless violence whenever anything stands against the good of the family.</p>
+  // <h1>My First Heading</h1>
+  // <p class="test">My first paragraph.</p>
+  // <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
+  //                             His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
+  //                             Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
+  //                             kind and benevolent to those who give respect,
+  //                             but given to ruthless violence whenever anything stands against the good of the family.</p>
+  //                             <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
+  //                             His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
+  //                             Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
+  //                             kind and benevolent to those who give respect,
+  //                             but given to ruthless violence whenever anything stands against the good of the family.</p>
   
-                              <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
-                              His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
-                              Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
-                              kind and benevolent to those who give respect,
-                              but given to ruthless violence whenever anything stands against the good of the family.</p>
+  //                             <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
+  //                             His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
+  //                             Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
+  //                             kind and benevolent to those who give respect,
+  //                             but given to ruthless violence whenever anything stands against the good of the family.</p>
   
   
-  </body>
-  </html>
-      `;
+  // </body>
+  // </html>
+  //     `;
 }
 // To get all tags saved against that file
 getAllTags() {
@@ -112,15 +122,15 @@ saveTags() {
 goBack(){
   this.router.navigate([{outlets:{dialogs:null}}], {relativeTo:this.acr.parent});
 }
-public getConvertedHtmlFile(Id:number){
-  // this.collaterealServices.readHtmlConvertedFile(Id).subscribe((data)=> {
-  // this.htmlCode = this.domSan.bypassSecurityTrustHtml(data.toString());
-  //  })
+public getConvertedHtmlFile(id:number){
+  this.viewCollateralService.readHtmlConvertedFile(id).subscribe((data: any)=> {
+  this.htmlCode = this.domSan.bypassSecurityTrustHtml(data.docContent.toString());
+   })
 
   
 }
-ngOnDestroy() {
-  
+ngOnDestroy(){
+  this.appSharedService.clearRouteData();
 }
 
 }

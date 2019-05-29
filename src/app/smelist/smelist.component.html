@@ -73,7 +73,9 @@
         <input class="search-box" type="text" placeholder="Search by Tag/Cloud / Big Data / Migration etc."/>
     </div>
   <div class="sme-tb">
-    <p-table [value]="SmeList" [paginator]="true" [rows]="8">
+    <p-table [value]="smeList" [lazy]="true" (onLazyLoad)="loadSmeListLazy($event)" [paginator]="true" 
+      [rows]="10" [totalRecords]="totalRecords">
+        [rows]="10" [totalRecords]="totalRecords">
         <ng-template pTemplate="header">
             <tr>
               <th>Domain </th>

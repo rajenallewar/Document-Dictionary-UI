@@ -17,7 +17,7 @@
 <div class="right-panel">
   <input class="search-box" type="text" placeholder="Search by Tag/Cloud / Big Data / Migration etc." />
   <div class="card-container">
-      <app-collateral-card *ngFor="let card of collateralList;index as i;" 
+      <app-collateral-card *ngFor="let card of displayCollateralList;index as i;" 
       [cardIndex]="i" 
       [card]="card"
       (delete)="onDelete($event)"
@@ -25,5 +25,5 @@
       (view)="onView($event)"
       ></app-collateral-card>
   </div>
-  <p-paginator [rows]="2" totalRecords="100" (onPageChange)="paginate($event)"></p-paginator>
+  <p-paginator [rows]="displayRecordSize" [totalRecords]="totalRecords" (onPageChange)="paginate($event)"></p-paginator>
 </div>

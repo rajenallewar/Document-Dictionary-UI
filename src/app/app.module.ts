@@ -27,6 +27,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import {PaginatorModule} from 'primeng/paginator';
 import { CollateralCardComponent } from './collaterallist/collateral-card/collateral-card.component';
 import { ViewcollateralComponent } from './viewcollateral/viewcollateral.component';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ViewcollateralComponent } from './viewcollateral/viewcollateral.compone
     ChartModule,
     OverlayPanelModule,
     AngularFontAwesomeModule,
-        PaginatorModule
+    PaginatorModule,
+    AutoCompleteModule
     
   ],
   providers: [

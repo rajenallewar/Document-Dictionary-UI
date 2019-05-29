@@ -14,8 +14,11 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
   public options: any;
   public collateralData:any ={};
   public collateralList:any =[];
+  public displayCollateralList:any =[];
   public routeData:any = null;
   displayLineChart:boolean = false;
+  displayRecordSize = 10;
+  totalRecords = 10;
   
   constructor(private collateralListService:CollateralListService,
     private router:Router, 
@@ -113,16 +116,31 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
   }
   getCollateralList() {
     let req = {
-      "limit":1,
-      "offset":10
+      "limit":10,
+      "offset":1
     }
-    this.collateralListService.getCollaterals(req).subscribe((response)=>{
+    this.collateralListService.getCollaterals(req).subscribe((response: any)=>{
       console.log(response);
-      this.collateralList = response;
+
+      this.totalRecords = response.totalCollaterals;
+      this.collateralList = response.listOfCollateralUIModel;
+
+      this.displayCollateralList = this.collateralList.slice(0, this.displayRecordSize);
     });
   }
-  paginate(e) {
-
+  paginate(event) {
+    console.log(event);
+    let req = {
+      "offset":event.first+1,
+      "limit":event.rows
+    }
+    this.collateralListService.getCollaterals(req).subscribe((response: any)=>{
+      console.log(response);
+      this.totalRecords = response.totalCollaterals;
+      this.collateralList = response.listOfCollateralUIModel;
+      this.displayCollateralList = this.collateralList.slice(0, this.displayRecordSize);
+    });
+    
   }
 
   onDelete(event) {
@@ -141,7 +159,10 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
   }
   onView(event) {
     console.log("onView", event);
-    this.appSharedService.setRouteData({});
+    this.appSharedService.setRouteData({
+      "index":event.index,
+      "collateralObj":this.collateralList[event.index]
+    });
     setTimeout(() => {
       this.router.navigate([{outlets:{dialogs:'viewcollateral'}}], {relativeTo:this.acr.parent});
     }, 0);

@@ -17,26 +17,34 @@ export const AppSettings = {
     },
     'getSmeList': {
       name: 'getSmeList',
-      // url: '/smedata/domainSMEDetail'
-      url: '/assets/mockdata/domainSMED.json'
+      url: '/smedata/domainSMEDetail'
     },
     'getTotalSmeCount': {
       name: 'getTotalSmeCount',
-      // url: '/smedata/countOfSmeAndDomain'
-      url: '/assets/mockdata/getTotalSmeCount.json'
+      url: '/smedata/countOfSmeAndDomain'
     },
     'getCollaterals': {
       name: 'getCollaterals',
-      // url: '/collateral/getCollaterals'
-      url: '/assets/mockdata/getCollaterals.json'
+      url: '/collateral/getCollaterals'
     },
     'collateralTypeCount': {
       name: 'collateralTypeCount',
-      // url: '/collateral/collateralTypeCount'
-      url: '/assets/mockdata/collateralTypeCount.json'
+      url: '/collateral/collateralTypeCount'
     },
+    'saveCollateral': {
+      name: 'saveCollateral',
+      url: '/collateral/savecollateral'
+    },
+    'allCollateralTypes': {
+      name: 'allCollateralTypes',
+      url: '/collateral/allCollateralTypes'
+    },
+    'viewCollateral': {
+      name: 'viewCollateral',
+      url: '/collateral/viewCollateral'
+    }
   },
-  // BASE_URL: 'http://172.20.201.170:8080/docketManagement'
-  BASE_URL: ''
+  BASE_URL: 'http://172.20.201.170:8080/docketManagement'
+  // BASE_URL: ''
 };
 

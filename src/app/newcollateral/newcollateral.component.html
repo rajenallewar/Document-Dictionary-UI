@@ -29,14 +29,19 @@
         </a> -->
     </p-header>
     <div class="collateral-container">
-        <form [formGroup]="collateralForm"  (ngSubmit)="onSubmit(collateralForm)">
+        <form [formGroup]="collateralForm">
             <div class="collateral-container">
                 <div class="form-group">
                     <label> Collateral Type </label><br>
-                    <input #first type="text" class="form-control tx-box" placeholder="Enter Collateral Type here…." 
-                    formControlName="collateralType"   [ngClass]="{ 'is-invalid': submitted && f.collateralType.errors }" />
+                    <p-autoComplete class="form-control coll-type" [suggestions]="suggestedCollateralTypes" (completeMethod)="search($event)"
+                        placeholder="Enter Collateral Type here…."
+                        formControlName="collateralType" 
+                        field="collateralType"
+                        dataKey="collateralTypeId"
+                        [ngClass]="{ 'is-invalid': submitted && f.collateralType.errors }">
+                    </p-autoComplete>
                     <div *ngIf="submitted && f.collateralType.errors" class="invalid-feedback">
-                    <div *ngIf="f.collateralType.errors.required">Collateral Type is required</div>
+                        <div *ngIf="f.collateralType.errors.required">Collateral Type is required</div>
                     </div>
                 </div>
                 <div class="form-group mt-1">
@@ -65,8 +70,8 @@
                         </div>
                       
                     </div>
-                    <button type="reset" class="btn btn-primary mt-2 c-btn cancle-btn">CANCEL</button>
-                    <button class="btn btn-primary mt-2 ml-1 c-btn ">SUBMIT</button>
+                    <button type="button" class="btn btn-primary mt-2 c-btn cancle-btn"(click)="goBack()">CANCEL</button>
+                    <button type="button" class="btn btn-primary mt-2 ml-1 c-btn" (click)="onSubmit(collateralForm)">SUBMIT</button>
                   
             </div>
       </form>
