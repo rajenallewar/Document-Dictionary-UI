@@ -5,12 +5,15 @@ import { HttpClient } from '@angular/common/http';
 export class SmeService {
     constructor(private http:HttpClient) {}
     public getSmeList(req){
-        // return this.http.post('getSmeList', req);
-        return this.http.get('/assets/mockdata/domainSMED.json');
+        return this.http.post('getSmeList', req);
+        // return this.http.get('/assets/mockdata/domainSMED.json');
         
       }
      public getTotalSmeCount(){
-        // return this.http.get('getTotalSmeCount');
-        return this.http.get('/assets/mockdata/getTotalSmeCount.json');
+       return this.http.get('getTotalSmeCount');
+        // return this.http.get('/assets/mockdata/getTotalSmeCount.json');
+      }
+      public getDomainByUserkeyword(domain:string){
+        return this.http.get('getDomainByUserKeyword'+domain);
       }
 }

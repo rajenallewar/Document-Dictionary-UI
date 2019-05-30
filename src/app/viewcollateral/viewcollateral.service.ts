@@ -10,4 +10,11 @@ export class ViewCollateralService {
       
     //   return this.http.get('/assets/mockdata/allCollateralTypes.json');
     }
+    public downloadFile(downloadObj:any){
+      return this.http.post('downloadCollateral', downloadObj, {responseType: 'blob' as 'json'});
+    }
+    public saveTag(tags:any){
+      return this.http.post('saveTags',tags);
+    }
+    
 }

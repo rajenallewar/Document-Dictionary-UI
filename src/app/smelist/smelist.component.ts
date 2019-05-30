@@ -56,6 +56,13 @@ export class SmelistComponent implements OnInit {
     this.selectedUser["region"] = region;
     overlaypanel.toggle(event);
   }
+  getDomainByUserkeyword(domain:string){
+    // this.smelistservice.getDomainByUserkeyword(domain).subscribe((data)=>{
+    //    this.SmeList=data;
+    //  })
+ 
+     
+   }
   getTotalSmeCount() {
     this.smelistservice.getTotalSmeCount().subscribe((data: any) => {
 

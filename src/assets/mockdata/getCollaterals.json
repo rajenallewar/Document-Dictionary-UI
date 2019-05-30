@@ -1,4 +1,5 @@
-[
+{
+    "listOfCollateralUIModel":[
     {
         "collateralId": 8,
         "proposalName": "Debit",
@@ -309,4 +310,6 @@
         "collateralType": "Proposals & Presentation",
         "collateralTypeId": 8
     }
-]
+],
+"totalCollaterals":14
+}

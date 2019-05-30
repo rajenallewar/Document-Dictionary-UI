@@ -9,7 +9,7 @@ export class CollateralListService {
     // return this.http.get('/assets/mockdata/getCollaterals.json');
   }
   public collateralTypeCount() {
-    // return this.http.get('collateralTypeCount');
-    return this.http.get('/assets/mockdata/collateralTypeCount.json');
+    return this.http.get('collateralTypeCount');
+    // return this.http.get('/assets/mockdata/collateralTypeCount.json');
   }
 }

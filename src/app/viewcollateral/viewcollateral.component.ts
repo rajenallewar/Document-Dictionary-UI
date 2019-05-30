@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { AppSharedService } from '../shared/services/shared.service';
 import { ViewCollateralService } from './viewcollateral.service';
-
+import { downloadFile } from '../shared/utils/app.utils';
 
 class TagsUIModel {
   tagId: number = null;
@@ -24,9 +24,11 @@ tags: TagsUIModel[] = [];
 texts: string[];
 results: string[];
 collateralId: number;
-// htmlCode: string = '';
 routeData:any;
 htmlCode:SafeHtml = '';
+file:any;
+fileName: string = "";
+fileUrl;
 
 constructor(private acr:ActivatedRoute,
   private router: Router,
@@ -34,47 +36,12 @@ constructor(private acr:ActivatedRoute,
   private viewCollateralService:ViewCollateralService,
   private appSharedService: AppSharedService) { }
 ngOnInit() {
-  this.collateralId = Number(localStorage.getItem('collateralId'))
   this.routeData = this.appSharedService.getRouteData();
   this.collateralId = this.routeData.collateralObj.collateralId;
+  this.fileName = this.routeData.collateralObj.fileName;
   this.getConvertedHtmlFile(this.collateralId);
   this.getAllTags();
-  // this.htmlCode = `
-  //     <!DOCTYPE html>
-  // <html>
-  // <head>
-  // <title>Page Title</title>
-  // <style>
-  //   .test {
-  //     background-color:"red";
-  //   }
-  // </style>
-  // </head>
-  // <body>
-  
-  // <h1>My First Heading</h1>
-  // <p class="test">My first paragraph.</p>
-  // <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
-  //                             His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
-  //                             Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
-  //                             kind and benevolent to those who give respect,
-  //                             but given to ruthless violence whenever anything stands against the good of the family.</p>
-  //                             <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
-  //                             His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
-  //                             Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
-  //                             kind and benevolent to those who give respect,
-  //                             but given to ruthless violence whenever anything stands against the good of the family.</p>
-  
-  //                             <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. 
-  //                             His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. 
-  //                             Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, 
-  //                             kind and benevolent to those who give respect,
-  //                             but given to ruthless violence whenever anything stands against the good of the family.</p>
-  
-  
-  // </body>
-  // </html>
-  //     `;
+ 
 }
 // To get all tags saved against that file
 getAllTags() {
@@ -108,15 +75,14 @@ return '#' + color;
 // For saving all added tags
 saveTags() {
   let requestData = {
-    collateralId: Number(localStorage.getItem('collateralId')),
+    collateralId: this.collateralId,
     listOfTags: this.tags
   };
-  // this.collateralService.saveTagsAgainstCollateral(requestData).subscribe(data => {
-  //   console.log("success to save tags ", data);
-  //   this.getAllTags();
-  // }, (error) => {
-  //   console.log('saveTagsAgainstCollateral error', error);
-  // });
+  this.viewCollateralService.saveTag(requestData).subscribe(data => {
+    console.log("success to save tags ", data);
+  }, (error) => {
+    console.log('saveTags error', error);
+  });
 
 }
 goBack(){
@@ -128,6 +94,30 @@ public getConvertedHtmlFile(id:number){
    })
 
   
+}
+downloadCollateral(){
+  let downloadObj = {
+    "fileName":this.fileName,
+  }
+  this.viewCollateralService.downloadFile(downloadObj).subscribe((data:any)=>{
+
+    downloadFile(data, this.fileName, 'application/octet-stream');
+    
+    // const url = window.URL.createObjectURL(data);
+  
+    // const link = this.downloadZipLink.nativeElement;
+    // link.href = url;
+    // link.download = 'archive.zip';
+    // link.click();
+  
+    // window.URL.revokeObjectURL(url);
+
+    // console.log(data);
+    // const blob = new Blob([data], { type: 'application/octet-stream' });
+
+    // this.fileUrl = this.domSan.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
+    
+  })
 }
 ngOnDestroy(){
   this.appSharedService.clearRouteData();

@@ -42,9 +42,22 @@ export const AppSettings = {
     'viewCollateral': {
       name: 'viewCollateral',
       url: '/collateral/viewCollateral'
-    }
+    },
+    'downloadCollateral': {
+      name: 'downloadCollateral',
+      url: '/fileDownload/download'
+    },
+    'saveTags': {
+      name: 'saveTags',
+      url: '/collateral/savetags'
+    },
+    'getDomainByUserKeyword': {
+      name: 'getDomainByUserKeyword',
+      url: ''
+    },
+
   },
   BASE_URL: 'http://172.20.201.170:8080/docketManagement'
-  // BASE_URL: ''
+  //  BASE_URL: ''
 };
 

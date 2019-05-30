@@ -1,13 +1,80 @@
 <p-dialog [visible]="true" [modal]="true" [resizable]="false" 
 [closable]="false" [draggable]="false" (onHide)="goBack()" appendTo="body"
-[style]="{'max-width':'75%', 'min-width':'25%', 'width':'65%'}">
-    <p-header>
-        <span>New Proposal</span>
-        <a role="button" tabindex="0" (click)="goBack()" class="ng-tns-c5-2 ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all">
-            <span class="pi pi-times"></span>
-        </a>
-    </p-header>
+[style]="{'max-width':'75%', 'min-width':'20%', 'width':'32%'}">
+    
+        <p-header>
+            <div class="header">
+                <ng-container *ngIf="openType !='edit'">
+                    <img src="../../assets/images/new-proposal.svg" class="img-icon">
+                  
+                </ng-container>
+                <a role="button" tabindex="0" (click)="goBack()" class="close-btn pull-right">
+                    <img src="../../assets/images/close.svg">
+                </a>
+                <span class="title"> New Proposal Form</span>
+                <div *ngIf="openType=='edit'" class="">
+                    <div class="">Edit Proposal Form</div>
+                </div>
+                
+            </div>
+         
+        </p-header>
+    
     <div class="newproposal-container">
-       Hello India
-    </div>
+     
+            <form [formGroup]="proposalForm">
+                <div class="newproposal-container">
+                    <div class="form-group">
+                        <label>Proposal Name </label><br>
+                        <input type="text" class="form-control tx-box" placeholder="Enter Proposal Name here…." formControlName="proposalName"
+                        [ngClass]="{ 'is-invalid': submitted && f.proposalName.errors }" />
+                        <div *ngIf="submitted && f.proposalName.errors" class="invalid-feedback">
+                         <div *ngIf="f.proposalName.errors.required">Proposal Name is required</div>
+                         </div>
+                    </div>
+                    <div class="form-group mt-1">
+                        <label>Client Name </label><br>
+                        <input type="text" class="form-control tx-box" placeholder="Enter Client Name here…." formControlName="clientName"
+                        [ngClass]="{ 'is-invalid': submitted && f.clientName.errors }" />
+                        <div *ngIf="submitted && f.clientName.errors" class="invalid-feedback">
+                         <div *ngIf="f.clientName.errors.required">Client Name is required</div>
+                         </div>
+                    </div>
+                    <div class="form-group mt-1"> 
+                      
+                            <label>Start Date </label><br>
+                            <input type="date" class="form-control tx-box date-tx" formControlName="startDate"
+                            [ngClass]="{ 'is-invalid': submitted && f.startDate.errors }" />
+                            <div *ngIf="submitted && f.startDate.errors" class="invalid-feedback">
+                             <div *ngIf="f.startDate.errors.required">Start Date is required</div>
+                             </div>
+                      
+                    </div>
+                    <div class="form-group mt-1"> 
+                       
+                            <label>End Date </label><br>
+                            <input type="date" class="form-control tx-box date-tx" formControlName="endDate"
+                            [ngClass]="{ 'is-invalid': submitted && f.endDate.errors }" />
+                            <div *ngIf="submitted && f.endDate.errors" class="invalid-feedback">
+                             <div *ngIf="f.endDate.errors.required">End Date is required</div>
+                             </div>
+                      
+                    </div>
+                        <div class="form-group mt-1"> 
+                          
+                                <label>Requirement </label><br>
+                                <input type="text" class="form-control tx-box" placeholder="Enter Requirement here…." formControlName="requirement"
+                                [ngClass]="{ 'is-invalid': submitted && f.requirement.errors }" />
+                                <div *ngIf="submitted && f.requirement.errors" class="invalid-feedback">
+                                 <div *ngIf="f.requirement.errors.required">Requirement is required</div>
+                                 </div>
+                          
+                        </div>
+                        <button type="button" class="btn btn-primary mt-2 c-btn cancle-btn"(click)="goBack()">CANCEL</button>
+                        <button type="button" class="btn btn-primary mt-2 ml-1 c-btn" (click)="onSubmit(proposalForm)">SUBMIT</button>
+                      
+                </div>
+          </form>
+        </div>
+  
 </p-dialog>

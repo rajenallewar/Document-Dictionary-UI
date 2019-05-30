@@ -70,7 +70,8 @@
       </div>
     </div>
     <div class="sme-txt">
-        <input class="search-box" type="text" placeholder="Search by Tag/Cloud / Big Data / Migration etc."/>
+        <input class="search-box" type="text" placeholder="Search by Tag/Cloud / Big Data / Migration etc."
+        #domain (keyup.enter)="getDomainByUserkeyword(domain.value)"/>
     </div>
   <div class="sme-tb">
     <p-table [value]="smeList" [lazy]="true" (onLazyLoad)="loadSmeListLazy($event)" [paginator]="true" 

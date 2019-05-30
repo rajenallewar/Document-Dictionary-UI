@@ -84,12 +84,16 @@ body .ui-paginator {
     height: 100% !important;;
     padding: 0 !important;
 
-    >.ui-dialog-titlebar, .ui-dialog-content {
-        background-color:#18191b !important;
+    >.ui-dialog-titlebar {
+        opacity: 0.82;
+        padding: 0.8em !important;
+    }.ui-dialog-titlebar, .ui-dialog-content {
+        background-color: rgba(24,25,27,0.82) !important;
         border-color: transparent !important;
     }
     >.ui-dialog-content {
-        height: calc(100% - 3em);
+        height: calc(100% - 3.5em) !important;
+        padding: 0 !important;
     }
 
     
@@ -100,13 +104,6 @@ body .ui-paginator {
     height: 100%;
     float: right;
     padding: 1em;
-}
-.doc-panel{
-    background-color: white;
-    height: 100%;
-    min-height: 100%;
-    margin: 0 17em;
-    padding: 2em;
 }
 .add-tag-btn{
     float:left;
@@ -139,3 +136,26 @@ body .ui-paginator {
     font-size: 12px !important;
     color: #404040;
 }
+.img-icon{
+    vertical-align: inherit;
+}
+.header {
+    padding: 0 0.75em;
+}
+.close-btn{
+    margin-top: 0.5em;
+    cursor: pointer;
+}
+.c-btn {
+    width: 7em;
+    padding: 0.61em;
+    border-radius: 0;
+    font-size: 0.75rem;
+    font-display: Carnas-Medium;
+   }
+.cancle-btn
+{
+    background-color: #d3d3d3;
+    border-color: #d3d3d3;
+}
+
