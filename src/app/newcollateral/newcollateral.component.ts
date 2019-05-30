@@ -17,7 +17,7 @@ export class NewcollateralComponent implements OnInit, OnDestroy {
   routeData: any;
   openType: string = '';
   collateralId: string = '';
-  collateralObj: any;
+  collateralObj: any = {collateralTypeUIModel:'', docName:''};
   suggestedCollateralTypes = [];
   collateralTypes = [];
 
@@ -28,13 +28,16 @@ export class NewcollateralComponent implements OnInit, OnDestroy {
     private appSharedService: AppSharedService) { }
 
   ngOnInit() {
-    this.routeData = this.appSharedService.getRouteData();
+    this.routeData = {...this.appSharedService.getRouteData()};
     this.openType = this.routeData.openType;
-    this.collateralId = this.routeData.index;
-    this.collateralObj = this.routeData.collateralObj;
+    if(this.openType == 'edit') {
+      this.collateralId = this.routeData.index;
+      this.collateralObj = this.routeData.collateralObj;
+    }
+    
     this.collateralForm = this.formBuilder.group({
-      collateralType: new FormControl("", Validators.required),
-      documentName: new FormControl("", Validators.required),
+      collateralTypeUIModel: new FormControl("", Validators.required),
+      docName: new FormControl("", Validators.required),
       fileUpload: new FormControl(""),
     });
 
@@ -53,12 +56,12 @@ export class NewcollateralComponent implements OnInit, OnDestroy {
       this.collateralTypes = response;
     });
 
-    if (this.collateralObj) {
-      this.collateralForm.patchValue({
-        collateralType: this.collateralObj.collateralType,
-        documentName: this.collateralObj.docName,
-      });
-    }
+    // if (this.collateralObj) {
+    //   this.collateralForm.patchValue({
+    //     collateralType: this.collateralObj.collateralType,
+    //     documentName: this.collateralObj.docName,
+    //   });
+    // }
   }
   get f() { return this.collateralForm.controls; }
 
@@ -75,11 +78,12 @@ export class NewcollateralComponent implements OnInit, OnDestroy {
 
     this.checkFileError();
     if (this.collateralForm.valid) {
-      
-      this.collateralService.saveCollateral(this.collateralService.buildSaveRequest(form.value)).subscribe(data => {
-        // this.router.navigateByUrl('/viewcollateral');
+      this.collateralService.saveCollateral(this.collateralService.buildSaveRequest(this.collateralObj, this.openType)).subscribe(data => {
+        this.goBack();
+        setTimeout(() => {
+          this.router.navigate(['/dms/collaterals']);
+        }, 10);
       });
-
     }
   }
   goBack() {

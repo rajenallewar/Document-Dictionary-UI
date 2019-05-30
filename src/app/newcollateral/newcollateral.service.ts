@@ -11,21 +11,29 @@ export class NewCollateralService {
       // return this.http.get('allCollateralTypes');
       return this.http.get('/assets/mockdata/allCollateralTypes.json');
     }
-    public buildSaveRequest(collateral:any) {
+    public buildSaveRequest(collateral:any, openType) {
       let request: any = {}
-      if(typeof collateral.collateralType == 'string') {
-        request.collateralType = {
-          collateralType:collateral.collateralType,
+      if(typeof collateral.collateralTypeUIModel == 'string') {
+        request["collateralTypeUIModel"] = {
+          "collateralType":collateral.collateralTypeUIModel,
         };
       } else {
-        request.collateralType = {
-          collateralTypeId:collateral.collateralType.collateralTypeId,
-          collateralType:collateral.collateralType.collateralType,
+        request["collateralTypeUIModel"] = {
+          "collateralTypeId":collateral.collateralTypeUIModel.collateralTypeId,
+          "collateralType":collateral.collateralTypeUIModel.collateralType,
         };
       }
-      request.docName = collateral.documentName;
+
+      if (openType == 'edit') {
+        request["collateralId"] = collateral.collateralId;
+      }
+      
+      request["docName"] = collateral.docName;
+      request["fileName"] = "Wells.pdf";
       // request.uploadedFiles = [];
       return request;
     }
-
+    public deleteCollateral(collateral:any){
+      return this.http.delete('deleteCollateral', collateral);
+    }
 }

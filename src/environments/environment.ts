@@ -43,6 +43,10 @@ export const AppSettings = {
       name: 'viewCollateral',
       url: '/collateral/viewCollateral'
     },
+    'deleteCollateral':{
+      name: 'deleteCollateral',
+      url: '/collateral/delete'
+    }
     'downloadCollateral': {
       name: 'downloadCollateral',
       url: '/fileDownload/download'
@@ -54,6 +58,11 @@ export const AppSettings = {
     'getDomainByUserKeyword': {
       name: 'getDomainByUserKeyword',
       url: ''
+    },
+    
+    'countOfProposalStatus':{
+      name: 'countOfProposalStatus',
+      url: '/proposal/countOfProposalStatus'
     },
 
   },

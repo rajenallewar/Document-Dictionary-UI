@@ -12,4 +12,7 @@ export class CollateralListService {
     return this.http.get('collateralTypeCount');
     // return this.http.get('/assets/mockdata/collateralTypeCount.json');
   }
+  public deleteCollateral(collateralId: any){
+    return this.http.delete('deleteCollateral', {params:{"collateralId":collateralId}});
+  }
 }

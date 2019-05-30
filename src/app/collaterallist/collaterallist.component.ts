@@ -26,7 +26,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
     private appSharedService:AppSharedService) { }
 
   ngOnInit() {
-    this.routeData = this.appSharedService.getRouteData();
+    this.routeData = {...this.appSharedService.getRouteData()};
     this.data = {
       labels: [],
       datasets: []
@@ -128,6 +128,11 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
       this.displayCollateralList = this.collateralList.slice(0, this.displayRecordSize);
     });
   }
+
+  resetCollateralListing(){
+    this.getCollateralList();
+  }
+
   paginate(event) {
     console.log(event);
     let req = {
@@ -143,8 +148,12 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
     
   }
 
-  onDelete(event) {
-    console.log("onDelete", event);
+  onDelete(event: any) {
+    let collateralId  = this.collateralList[event.index].collateralId;
+    this.collateralListService.deleteCollateral(collateralId).subscribe(()=>{
+      console.log("collateral deleted");
+      this.resetCollateralListing();
+    });
   }
   onEdit(event) {
     console.log("onEdit", event);
