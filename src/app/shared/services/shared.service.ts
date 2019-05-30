@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ export class AppSharedService {
 
   isUserLoggedIn: boolean = false;
   public _routeData:any;
+  private newCollateralCloseSubject: Subject<boolean> = new Subject<boolean>();
 
   constructor() { }
 
@@ -29,4 +31,16 @@ export class AppSharedService {
   clearRouteData():any {
     this._routeData = null;
   }
+
+  getNewCollateralCloseEvent(){
+    return this.newCollateralCloseSubject.asObservable();
+  }
+
+  setNewCollateralCloseEvent(flag){
+    this.newCollateralCloseSubject.next(flag);
+  }
+
+
+
+
 }

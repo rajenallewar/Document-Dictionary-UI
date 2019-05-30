@@ -8,8 +8,8 @@ export class NewCollateralService {
       return this.http.post('saveCollateral', collateral);
     }
     public getAllCollateralTypes() {
-      // return this.http.get('allCollateralTypes');
-      return this.http.get('/assets/mockdata/allCollateralTypes.json');
+      return this.http.get('allCollateralTypes');
+      // return this.http.get('/assets/mockdata/allCollateralTypes.json');
     }
     public buildSaveRequest(collateral:any, openType) {
       let request: any = {}

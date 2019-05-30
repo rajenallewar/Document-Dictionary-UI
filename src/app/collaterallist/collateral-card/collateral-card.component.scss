@@ -1,4 +1,4 @@
-.card{
+.col-card{
     float: left;
     padding: 0.5em 1em;
     width: 19%;
@@ -11,7 +11,7 @@
     min-height: 275px;
 }
 
-.card:hover{
+.col-card:hover{
     box-shadow: 4px 4px 20px #DADADA;
     transition: .3s linear all;
 }

@@ -54,8 +54,15 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
         }]
       }
     };
+
     this.getCollateralList();
     this.getCollateralsCount();
+
+    this.appSharedService.getNewCollateralCloseEvent().subscribe((flag)=>{
+      if(flag) {
+        this.resetCollateralListing();
+      }
+    });
 
     
   }
@@ -63,18 +70,18 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
     this.collateralListService.collateralTypeCount().subscribe((response:any)=>{      
       if (response) {
         // this.collateralData = response;
-        this.collateralData.totalCount = response.totalCount;
-        if (response.mapOfCollaterlCountUIModel) {
+        this.collateralData.totalCollateralsCount = response.totalCollateralsCount;
+        if (response.mapOfCollateralTypeVsCount) {
           this.collateralData.collateralCounts =[];
-          for (const key in response.mapOfCollaterlCountUIModel) {
-            if (response.mapOfCollaterlCountUIModel.hasOwnProperty(key)) {
+          for (const key in response.mapOfCollateralTypeVsCount) {
+            if (response.mapOfCollateralTypeVsCount.hasOwnProperty(key)) {
               let item:any = {};
               item.label = key;
-              let totalCount = +response.totalCount;
-              let count = +response.mapOfCollaterlCountUIModel[key];
+              let totalCount = +response.totalCollateralsCount;
+              let count = +response.mapOfCollateralTypeVsCount[key];
               let perCount = 100*count/totalCount;
               item.data = [perCount];
-              item.count = +response.mapOfCollaterlCountUIModel[key];
+              item.count = +response.mapOfCollateralTypeVsCount[key];
 
 
               switch (key) {
@@ -120,17 +127,15 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
       "offset":1
     }
     this.collateralListService.getCollaterals(req).subscribe((response: any)=>{
-      console.log(response);
-
       this.totalRecords = response.totalCollaterals;
       this.collateralList = response.listOfCollateralUIModel;
-
       this.displayCollateralList = this.collateralList.slice(0, this.displayRecordSize);
     });
   }
 
   resetCollateralListing(){
     this.getCollateralList();
+    this.getCollateralsCount();
   }
 
   paginate(event) {

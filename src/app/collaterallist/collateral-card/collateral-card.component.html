@@ -1,7 +1,8 @@
 <ng-container *ngIf="card">
     <!-- <pre>{{card|json}}</pre> -->
     <!-- <pre>{{cardIndex}}</pre> -->
-    <div [style.borderTopColor]="card.topColor?card.topColor:'#f00'" class="card" style="margin-left: 0;">
+    <div [style.borderTopColor]="card.topColor?card.topColor:'#f00'" class="col-card" [ngClass]="{'mr-l-0': marginLeftFlag}">
+        <!-- <pre>marginLeftFlag :{{marginLeftFlag|json}}</pre> -->
         <div class="col-type-img-con card-row">
             <!-- <pre>{{card.filename?.split('.').pop()|json}}</pre> -->
             <img src="./../../assets/images/word.svg" alt="">

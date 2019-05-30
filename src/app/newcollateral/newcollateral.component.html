@@ -7,7 +7,7 @@
                 <img *ngIf="openType=='newFromHeader'" src="../../assets/images/upload-col-icon.svg" class="img-icon">
                 <img *ngIf="openType=='newFromPraposal'" src="../../assets/images/upload-from-pr.svg" class="img-icon-pr">
             </ng-container>
-            <a role="button" tabindex="0" (click)="goBack()" class="close-btn pull-right">
+            <a role="button" tabindex="0" (click)="close()" class="close-btn pull-right">
                 <img src="../../assets/images/close.svg">
             </a>
             <span *ngIf="openType=='newFromHeader'" class="title"> Upload New Collateral</span>
@@ -23,10 +23,6 @@
             
             
         </div>
-        <!-- <a role="button" tabindex="0" (click)="goBack()"
-            class="ng-tns-c5-2 ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all">
-            <span class="pi pi-times"></span>
-        </a> -->
     </p-header>
     <div class="collateral-container">
             <pre>{{collateralObj|json}}</pre>
@@ -71,7 +67,7 @@
                         </div>
                       
                     </div>
-                    <button type="button" class="btn btn-primary mt-2 c-btn cancle-btn"(click)="goBack()">CANCEL</button>
+                    <button type="button" class="btn btn-primary mt-2 c-btn cancle-btn"(click)="close()">CANCEL</button>
                     <button type="button" class="btn btn-primary mt-2 ml-1 c-btn" (click)="onSubmit(collateralForm)">SUBMIT</button>
                   
             </div>

@@ -41,27 +41,10 @@ export class NewcollateralComponent implements OnInit, OnDestroy {
       fileUpload: new FormControl(""),
     });
 
-
-    // this.collateralTypes = [
-    //   { id: "1", name: "Corporate Overview" },
-    //   { id: "2", name: "Proposals & Presentation" },
-    //   { id: "3", name: "Capabilities" },
-    //   { id: "4", name: "Case Studies" },
-    //   { id: "5", name: "Newsletters" },
-    //   { id: "6", name: "White Papers" },
-    //   { id: "7", name: "Brand Stories" }
-    // ]
-
     this.collateralService.getAllCollateralTypes().subscribe((response: any)=>{
       this.collateralTypes = response;
     });
 
-    // if (this.collateralObj) {
-    //   this.collateralForm.patchValue({
-    //     collateralType: this.collateralObj.collateralType,
-    //     documentName: this.collateralObj.docName,
-    //   });
-    // }
   }
   get f() { return this.collateralForm.controls; }
 
@@ -79,14 +62,20 @@ export class NewcollateralComponent implements OnInit, OnDestroy {
     this.checkFileError();
     if (this.collateralForm.valid) {
       this.collateralService.saveCollateral(this.collateralService.buildSaveRequest(this.collateralObj, this.openType)).subscribe(data => {
-        this.goBack();
-        setTimeout(() => {
-          this.router.navigate(['/dms/collaterals']);
-        }, 10);
+        this.close();
+
+        console.log('this.router :', this.router.url);
+        if (this.router.url.indexOf('collaterals') != -1) {
+          this.appSharedService.setNewCollateralCloseEvent(true);
+        }else {
+          setTimeout(() => {
+            this.router.navigate(['/dms/collaterals']);
+          }, 10);
+        }
       });
     }
   }
-  goBack() {
+  close() {
     this.router.navigate([{ outlets: { dialogs: null } }], { relativeTo: this.acr.parent });
   }
   removeSelectedFiles(e: Event, file: any) {

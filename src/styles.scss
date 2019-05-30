@@ -25,6 +25,9 @@ body {
 .mt-0{
     margin-top: 0.5em;
 }
+.mr-l-0 {
+    margin-left: 0!important;
+}
 
 .pd-r-0{
     padding-right: 0!important;
@@ -38,7 +41,7 @@ body {
 .right-panel{
     height: 100%;
     float: left;
-    width: calc(100% - 12em);
+    width: calc(100% - 12.75em);
     padding: 1em 2em;
 }
 body .ui-table .ui-table-thead > tr > th {

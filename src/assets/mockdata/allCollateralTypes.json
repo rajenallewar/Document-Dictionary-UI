@@ -4,10 +4,6 @@
         "collateralType": "Case Studies"
     },
     {
-        "collateralTypeId": 2,
-        "collateralType": "Capabilities"
-    },
-    {
         "collateralTypeId": 3,
         "collateralType": "Corporate Overview"
     },
@@ -20,16 +16,8 @@
         "collateralType": "Proposals & Presentation"
     },
     {
-        "collateralTypeId": 6,
-        "collateralType": "Corporate Overview"
-    },
-    {
         "collateralTypeId": 7,
         "collateralType": "White Papers"
-    },
-    {
-        "collateralTypeId": 8,
-        "collateralType": "Proposals & Presentation"
     },
     {
         "collateralTypeId": 9,
