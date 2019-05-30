@@ -11,14 +11,52 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 })
 export class ProposallistComponent implements OnInit {
-
+  public routeData:any = null;
+  public data: any;
+  public options: any;
   constructor(private proposalListService: ProposalListService,
     private router: Router,
     private acr: ActivatedRoute,
     private appSharedService: AppSharedService) { }
 
   ngOnInit() {
-    // this.routeData = {...this.appSharedService.getRouteData()};
+    this.routeData = {...this.appSharedService.getRouteData()};
+    this.data = {
+      labels: [],
+      datasets: []
+    };
+
+    this.options = {
+      legend: {
+        display: false
+      },
+      tooltips: {
+        enabled: false
+      },
+      scales: {
+        xAxes: [{
+          display: false,
+          stacked: true
+        }],
+        yAxes: [{
+          stacked: true,
+          display: false,
+          barPercentage: 0.5,
+          barThickness: 3,
+          maxBarThickness: 3,
+          minBarLength: 3
+        }]
+      }
+    };
+    this.getProposalList();
+    this.getProposalCount();
+
+  }
+  getProposalList(){
+
+  }
+  getProposalCount(){
+    
   }
   ngOnDestroy() {
     this.appSharedService.clearRouteData();

@@ -70,13 +70,12 @@
       </div>
     </div>
     <div class="sme-txt">
-        <input class="search-box" type="text" placeholder="Search by Tag/Cloud / Big Data / Migration etc."
-        #domain (keyup.enter)="getDomainByUserkeyword(domain.value)"/>
+        <input [(ngModel)]="keyword" class="search-box" type="text" placeholder="Search by Tag/Cloud / Big Data / Migration etc."
+         (focusout)="searchDomain($event)"/>
     </div>
   <div class="sme-tb">
     <p-table [value]="smeList" [lazy]="true" (onLazyLoad)="loadSmeListLazy($event)" [paginator]="true" 
       [rows]="10" [totalRecords]="totalRecords">
-        [rows]="10" [totalRecords]="totalRecords">
         <ng-template pTemplate="header">
             <tr>
               <th>Domain </th>
@@ -87,7 +86,7 @@
         </ng-template>
         <ng-template pTemplate="body" let-sme>
             <tr>
-              <td>{{sme.domain}}</td>
+              <td style="font-weight: 600;">{{sme.domain}}</td>
               <td>{{sme.subDomain}}</td>
               <td> <a class="sme-name" href="#" *ngFor="let smeInfo of sme?.listOfSMEUIModel; last as isLast" 
                 (click)="onSmeNameClickHandler($event,smeInfo, sme.region, op)">{{smeInfo?.name}}{{!isLast?", ":""}}</a></td>

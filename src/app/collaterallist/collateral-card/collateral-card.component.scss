@@ -32,6 +32,8 @@
     font-weight: 500;
     font-family:'Carnas-Medium';
     text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap
 }
 .card-label-value2 {
     color: #515e6b;
@@ -39,11 +41,14 @@
     font-weight: 500;
     font-family: 'Carnas-Regular';
     text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap
 }
 .tag-value {
     min-height: 30px;
     max-height: 30px;
     overflow: hidden;
+    white-space: normal
 }
 .ann-cn{
     width: 50%;
@@ -92,4 +97,10 @@
 .separater{
     font-family: Carnas-ExtraLight;
     color: #b7cad2;
+}
+.card-border{
+    border-top: 1px solid #e8e6e6;
+    border-bottom: 1px solid #e8e6e6;
+    padding: 0.3em 0;
+    margin: 0;
 }

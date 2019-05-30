@@ -4,6 +4,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { AppSharedService } from '../shared/services/shared.service';
 import { ViewCollateralService } from './viewcollateral.service';
 import { downloadFile } from '../shared/utils/app.utils';
+import * as _ from 'lodash';
 
 class TagsUIModel {
   tagId: number = null;
@@ -40,20 +41,20 @@ ngOnInit() {
   this.collateralId = this.routeData.collateralObj.collateralId;
   this.fileName = this.routeData.collateralObj.fileName;
   this.getConvertedHtmlFile(this.collateralId);
-  this.getAllTags();
+  this.getTagsByCollateral();
  
 }
 // To get all tags saved against that file
-getAllTags() {
-  // this.tagservice.getAllTags(this.collateralId).subscribe((data: any) => {
-  //   let tags: TagsUIModel[] = [];
-  //   tags = _.map(data, (model) => {
-  //     const tagsModel: TagsUIModel = _.omit(model, 'collateralId');
-  //     if (!tagsModel.bgColor) { tagsModel.bgColor = '#444'; } 
-  //     return tagsModel;
-  //   });
-  //   this.tags = tags;
-  // });
+getTagsByCollateral() {
+  this.viewCollateralService.getTagsByCollateral(this.collateralId).subscribe((data: any) => {
+    let tags: TagsUIModel[] = [];
+    tags = _.map(data, (model) => {
+      const tagsModel: TagsUIModel = _.omit(model, 'collateralId');
+      if (!tagsModel.bgColor) { tagsModel.bgColor = '#f8e52d'; } 
+      return tagsModel;
+    });
+    this.tags = tags;
+  });
 }
 //  To add tags related with that file
 addAnnotation(newAnnotation: string) {
@@ -102,20 +103,6 @@ downloadCollateral(){
   this.viewCollateralService.downloadFile(downloadObj).subscribe((data:any)=>{
 
     downloadFile(data, this.fileName, 'application/octet-stream');
-    
-    // const url = window.URL.createObjectURL(data);
-  
-    // const link = this.downloadZipLink.nativeElement;
-    // link.href = url;
-    // link.download = 'archive.zip';
-    // link.click();
-  
-    // window.URL.revokeObjectURL(url);
-
-    // console.log(data);
-    // const blob = new Blob([data], { type: 'application/octet-stream' });
-
-    // this.fileUrl = this.domSan.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
     
   })
 }

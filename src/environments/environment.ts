@@ -55,10 +55,14 @@ export const AppSettings = {
       name: 'saveTags',
       url: '/collateral/savetags'
     },
+    'getTagsByCollateral': {
+      name: 'getTagsByCollateral',
+      url: '/tag/tagForCollaterals'
+    },
     'getDomainByUserKeyword': {
       name: 'getDomainByUserKeyword',
-      url: ''
-    },
+      url:'/smedata/getDomainByUserKeyword'
+     },
     
     'countOfProposalStatus':{
       name: 'countOfProposalStatus',

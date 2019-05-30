@@ -16,6 +16,7 @@ export class SmelistComponent implements OnInit {
   selectedUser: any = {};
   BUSme: any;
   smeArchData: any;
+  keyword:string;
   totalRecords= 100;
   constructor(private smelistservice: SmeService) {
 
@@ -47,6 +48,8 @@ export class SmelistComponent implements OnInit {
     }
     this.smelistservice.getSmeList(req).subscribe((data: any) => {
       this.smeList = data;
+      console.log("this.smeList ", this.smeList);
+      
       // this.smeList = data.slice(event.first, (event.first + event.rows));
     })
   }
@@ -56,10 +59,15 @@ export class SmelistComponent implements OnInit {
     this.selectedUser["region"] = region;
     overlaypanel.toggle(event);
   }
-  getDomainByUserkeyword(domain:string){
-    // this.smelistservice.getDomainByUserkeyword(domain).subscribe((data)=>{
-    //    this.SmeList=data;
-    //  })
+  searchDomain(event){
+    let keyword= this.keyword;
+    if(keyword != "") {
+      this.smelistservice.getDomainByUserkeyword(keyword).subscribe((data)=>{
+        this.smeList=data;
+      })
+    } else  {
+      this.loadSmeListLazy({first: 0, rows: 10});
+    }
  
      
    }

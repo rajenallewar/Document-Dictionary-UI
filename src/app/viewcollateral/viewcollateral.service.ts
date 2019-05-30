@@ -16,5 +16,7 @@ export class ViewCollateralService {
     public saveTag(tags:any){
       return this.http.post('saveTags',tags);
     }
-    
+    public getTagsByCollateral(id){
+      return this.http.get('getTagsByCollateral' ,{params: {"collateralId": id}});
+    }
 }
