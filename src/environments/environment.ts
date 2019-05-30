@@ -46,7 +46,7 @@ export const AppSettings = {
     'deleteCollateral':{
       name: 'deleteCollateral',
       url: '/collateral/delete'
-    }
+    },
     'downloadCollateral': {
       name: 'downloadCollateral',
       url: '/fileDownload/download'
