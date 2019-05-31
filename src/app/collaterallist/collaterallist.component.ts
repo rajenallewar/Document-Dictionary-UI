@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { CollateralListService } from './collaterallist.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppSharedService } from '../shared/services/shared.service';
@@ -12,21 +12,25 @@ import { AppSharedService } from '../shared/services/shared.service';
 export class CollaterallistComponent implements OnInit, OnDestroy {
   public data: any;
   public options: any;
-  public collateralData:any ={};
-  public collateralList:any =[];
-  public displayCollateralList:any =[];
-  public routeData:any = null;
-  displayLineChart:boolean = false;
+  public collateralData: any = {};
+  public collateralList: any = [];
+  public displayCollateralList: any = [];
+  public routeData: any = null;
+  displayLineChart: boolean = false;
   displayRecordSize = 10;
   totalRecords = 10;
-  
-  constructor(private collateralListService:CollateralListService,
-    private router:Router, 
-    private acr:ActivatedRoute, 
-    private appSharedService:AppSharedService) { }
+  searchTimer;
+  tagSearch: string = '';
+
+  @ViewChild('paginator') paginator: any;
+
+  constructor(private collateralListService: CollateralListService,
+    private router: Router,
+    private acr: ActivatedRoute,
+    private appSharedService: AppSharedService) { }
 
   ngOnInit() {
-    this.routeData = {...this.appSharedService.getRouteData()};
+    this.routeData = { ...this.appSharedService.getRouteData() };
     this.data = {
       labels: [],
       datasets: []
@@ -58,28 +62,28 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
     this.getCollateralList();
     this.getCollateralsCount();
 
-    this.appSharedService.getNewCollateralCloseEvent().subscribe((flag)=>{
-      if(flag) {
+    this.appSharedService.getNewCollateralCloseEvent().subscribe((flag) => {
+      if (flag) {
         this.resetCollateralListing();
       }
     });
 
-    
+
   }
   getCollateralsCount() {
-    this.collateralListService.collateralTypeCount().subscribe((response:any)=>{      
+    this.collateralListService.collateralTypeCount().subscribe((response: any) => {
       if (response) {
         // this.collateralData = response;
         this.collateralData.totalCollateralsCount = response.totalCollateralsCount;
         if (response.mapOfCollateralTypeVsCount) {
-          this.collateralData.collateralCounts =[];
+          this.collateralData.collateralCounts = [];
           for (const key in response.mapOfCollateralTypeVsCount) {
             if (response.mapOfCollateralTypeVsCount.hasOwnProperty(key)) {
-              let item:any = {};
+              let item: any = {};
               item.label = key;
               let totalCount = +response.totalCollateralsCount;
               let count = +response.mapOfCollateralTypeVsCount[key];
-              let perCount = 100*count/totalCount;
+              let perCount = 100 * count / totalCount;
               item.data = [perCount];
               item.count = +response.mapOfCollateralTypeVsCount[key];
 
@@ -113,7 +117,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
               this.collateralData.collateralCounts.push(item);
             }
           }
-          
+
           this.data.datasets = this.data.datasets.slice();
         }
       }
@@ -123,39 +127,57 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
   }
   getCollateralList() {
     let req = {
-      "limit":10,
-      "offset":1
+      "limit": 10,
+      "offset": 1,
+      "searchCriteria": ""
     }
-    this.collateralListService.getCollaterals(req).subscribe((response: any)=>{
-      this.totalRecords = response.totalCollaterals;
+    this.collateralListService.getCollaterals(req).subscribe((response: any) => {
+      this.totalRecords = response.totalCollaterals || 20;
       this.collateralList = response.listOfCollateralUIModel;
       this.displayCollateralList = this.collateralList.slice(0, this.displayRecordSize);
     });
   }
 
-  resetCollateralListing(){
+  resetCollateralListing() {
+    console.log("this.paginator", this.paginator);
+    this.paginator && this.paginator.changePageToFirst();
     this.getCollateralList();
     this.getCollateralsCount();
   }
 
-  paginate(event) {
-    console.log(event);
-    let req = {
-      "offset":event.first+1,
-      "limit":event.rows
+  onTagSearch(event) {
+    if (event.target.value) {
+      let value = event.target.value.trim();
+      let req = {
+        "limit": 10,
+        "offset": 1,
+        "searchCriteria": value
+      }
+      this.collateralListService.getCollaterals(req).subscribe((response: any) => {
+        this.totalRecords = response.totalCollaterals || 20;
+        this.collateralList = response.listOfCollateralUIModel;
+        this.displayCollateralList = this.collateralList.slice(0, this.displayRecordSize);
+      });
     }
-    this.collateralListService.getCollaterals(req).subscribe((response: any)=>{
-      console.log(response);
+  }
+
+  paginate(event) {
+    let req = {
+      "offset": event.first + 1,
+      "limit": event.rows,
+      "searchCriteria": this.tagSearch
+    }
+    this.collateralListService.getCollaterals(req).subscribe((response: any) => {
       this.totalRecords = response.totalCollaterals;
       this.collateralList = response.listOfCollateralUIModel;
       this.displayCollateralList = this.collateralList.slice(0, this.displayRecordSize);
     });
-    
+
   }
 
   onDelete(event: any) {
-    let collateralId  = this.collateralList[event.index].collateralId;
-    this.collateralListService.deleteCollateral(collateralId).subscribe(()=>{
+    let collateralId = this.collateralList[event.index].collateralId;
+    this.collateralListService.deleteCollateral(collateralId).subscribe(() => {
       console.log("collateral deleted");
       this.resetCollateralListing();
     });
@@ -163,22 +185,22 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
   onEdit(event) {
     console.log("onEdit", event);
     this.appSharedService.setRouteData({
-      "openType":"edit",
-      "index":event.index,
-      "collateralObj":this.collateralList[event.index]
+      "openType": "edit",
+      "index": event.index,
+      "collateralObj": this.collateralList[event.index]
     });
     setTimeout(() => {
-      this.router.navigate([{outlets:{dialogs:'uploadcollateral'}}], {relativeTo:this.acr.parent});
+      this.router.navigate([{ outlets: { dialogs: 'uploadcollateral' } }], { relativeTo: this.acr.parent });
     }, 0);
   }
   onView(event) {
     console.log("onView", event);
     this.appSharedService.setRouteData({
-      "index":event.index,
-      "collateralObj":this.collateralList[event.index]
+      "index": event.index,
+      "collateralObj": this.collateralList[event.index]
     });
     setTimeout(() => {
-      this.router.navigate([{outlets:{dialogs:'viewcollateral'}}], {relativeTo:this.acr.parent});
+      this.router.navigate([{ outlets: { dialogs: 'viewcollateral' } }], { relativeTo: this.acr.parent });
     }, 0);
   }
   ngOnDestroy() {
