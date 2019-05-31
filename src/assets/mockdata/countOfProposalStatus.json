@@ -1,0 +1,19 @@
+{
+    "totalAvailableProposals": 13,
+    "mapofStatus": {
+        "Lost": 2,
+        "New": 2,
+        "Won": 4,
+        "In-Progress": 4,
+        "Review": 1
+    },
+    "mapOfBu": {
+        "New York": 2,
+        "Charlotte": 1,
+        "Singapore": 3,
+        "US Central": 4,
+        "Amsterdam": 1,
+        "UAE": 1,
+        "Paris": 1
+    }
+}

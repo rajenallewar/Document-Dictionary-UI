@@ -43,6 +43,9 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
       tooltips: {
         enabled: false
       },
+      hover: {
+        mode: null
+      },
       scales: {
         xAxes: [{
           display: false,
@@ -132,7 +135,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
       "searchCriteria": ""
     }
     this.collateralListService.getCollaterals(req).subscribe((response: any) => {
-      this.totalRecords = response.totalCollaterals || 20;
+      this.totalRecords = response.totalCount || 10;
       this.collateralList = response.listOfCollateralUIModel;
       this.displayCollateralList = this.collateralList.slice(0, this.displayRecordSize);
     });
@@ -154,7 +157,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
         "searchCriteria": value
       }
       this.collateralListService.getCollaterals(req).subscribe((response: any) => {
-        this.totalRecords = response.totalCollaterals || 20;
+        this.totalRecords = response.totalCount || 10;
         this.collateralList = response.listOfCollateralUIModel;
         this.displayCollateralList = this.collateralList.slice(0, this.displayRecordSize);
       });
@@ -168,7 +171,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
       "searchCriteria": this.tagSearch
     }
     this.collateralListService.getCollaterals(req).subscribe((response: any) => {
-      this.totalRecords = response.totalCollaterals;
+      this.totalRecords = response.totalCount || 10;
       this.collateralList = response.listOfCollateralUIModel;
       this.displayCollateralList = this.collateralList.slice(0, this.displayRecordSize);
     });

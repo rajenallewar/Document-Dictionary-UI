@@ -15,7 +15,7 @@
 
 </div>
 <div class="right-panel">
-  <input [(ngModel)]="tagSearch" (blur)="onTagSearch($event)" (keyup.enter)="onTagSearch($event)" class="search-box" type="text" placeholder="Search by Tag/Cloud / Big Data / Migration etc." />
+  <input [(ngModel)]="tagSearch" (change)="onTagSearch($event)" (keyup.enter)="onTagSearch($event)" class="search-box" type="text" placeholder="Search by Tag/Cloud / Big Data / Migration etc." />
   <div class="card-container">
       <app-collateral-card *ngFor="let card of displayCollateralList;index as i;" 
       [cardIndex]="i" 

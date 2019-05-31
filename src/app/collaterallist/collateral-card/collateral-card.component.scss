@@ -17,6 +17,7 @@
 }
 .card-row {
     padding: 0.35em 0;
+    min-height: 2em;
 }
 .card-label {
     color: #a7b0ba;
@@ -47,8 +48,12 @@
 .tag-value {
     min-height: 30px;
     max-height: 30px;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
-    white-space: normal
 }
 .ann-cn{
     width: 50%;
@@ -85,14 +90,28 @@
     color: #f07c7c;
     border: solid 1px #f07c7c;
 }
+
+.del-btn:hover{
+    background-color: #f07c7c;
+    color: #ffffff;
+}
+
 .edit-btn{
     color: #95a6dd;
     border: solid 1px #95a6dd;
+}
+.edit-btn:hover{
+    background-color: #95a6dd;
+    color: #ffffff;
 }
 .view-btn{
     color: #4a90e2;
     border: solid 1px #4a90e2;
     font-family: 'Carnas-Medium';
+}
+.view-btn:hover{
+    background-color: #4a90e2;
+    color: #ffffff;
 }
 .separater{
     font-family: Carnas-ExtraLight;
