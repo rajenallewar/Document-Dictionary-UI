@@ -6,11 +6,11 @@
           <i class="fa fa-search"></i>
         </span>
       </div>
-      <input type="text" [(ngModel)]="searchQuery" class="form-control form-control-sm" placeholder="Search by Tags"
+      <input type="text" [(ngModel)]="searchQuery" (input)="onInput($event)" class="form-control form-control-sm" placeholder="Search by Tags"
         aria-label="Username" aria-describedby="basic-addon1">
     </div>
     <div class="list-group w-100" style="overflow-y: auto; height: calc(100% - 4.6em);font-size: smaller;">
-      <div *ngFor="let echain of emailList | search:searchQuery" (click)="selectedEmailChain = echain">
+      <div *ngFor="let echain of emailList" (click)="selectedEmailChain = echain">
         <span class="list-group-item list-group-item-action flex-column align-items-start border-0"
           [ngClass]="{active: selectedEmailChain === echain}">
           <div class="d-flex w-100 justify-content-between">
@@ -30,9 +30,9 @@
       </div>
     </div>
   </section>
-  <section class="w-75 border-lighter border-left-0  mh-100 pt-2 pl-4 pr-4 bg-white" style="overflow-y:auto;">
+  <section class="w-75 border-lighter border-left-0  mh-100 pt-2 pl-4 pr-4 bg-white" style="overflow-y:auto;" *ngIf="selectedEmailChain">
     <div class="w-100">
-      <h5>{{ this.selectedEmailChain[0]?.subj }}</h5>
+      <h5>{{ selectedEmailChain[0]?.subj }}</h5>
     </div>
     <div class="email-section mt-4 border-bottom pb-4" *ngFor="let email of selectedEmailChain">
       <section class="email-header d-inline-flex w-100">
@@ -71,7 +71,7 @@
         aria-label="Username" aria-describedby="basic-addon1">
     </div>
     <div class="list-group w-100 pb-5" style="font-size: smaller;">
-      <div *ngFor="let echain of emailList | search:searchQuery" (click)="selectedEmailChain = echain">
+      <div *ngFor="let echain of emailList" (click)="selectedEmailChain = echain">
         <span class="list-group-item list-group-item-action flex-column align-items-start border-0"
           [ngClass]="{active: selectedEmailChain === echain}">
           <div class="d-flex w-100 justify-content-between">

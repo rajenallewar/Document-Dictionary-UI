@@ -29,11 +29,11 @@ export class QaComponent implements OnInit {
   }
 
   getEmailList() {
-    this.qaservice.getEmailList().subscribe(res => {
+    this.qaservice.getEmailList().subscribe(res => { 
       this.emailList = res;
       console.log(this.emailList);
       this.selectedEmailChain = this.emailList[this.defaultSelIndex];
-      console.log(this.selectedEmailChain[0]);
+    //  console.log(this.selectedEmailChain[0]);
     }, err => {
       console.error(err);
     });
@@ -43,5 +43,18 @@ export class QaComponent implements OnInit {
     const deviceInfo = this.deviceService.getDeviceInfo();
     this.isMobile = this.deviceService.isMobile() || (document.body.clientWidth < 700);
     console.log(this.deviceService.isMobile(), document.body.clientWidth, deviceInfo);
+  }
+
+  onInput(e){
+    console.log("input");
+    if(e.target.value){
+      this.qaservice.searchEmails(e.target.value).subscribe(res => { 
+        this.emailList = res;
+        console.log(this.emailList);
+        this.selectedEmailChain = this.emailList[this.defaultSelIndex];
+      }, err => {
+        console.error(err);
+      });
+    }
   }
 }

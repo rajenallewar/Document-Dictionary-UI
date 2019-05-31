@@ -27,6 +27,10 @@ export const AppSettings = {
       name: 'getTotalSmeCount',
       url: '/smedata/countOfSmeAndDomain'
       // url: '/assets/mockdata/getTotalSmeCount.json'
+    },
+    'searchemail': {
+      name: 'searchemail',
+      url: '/email/searchemail'
     }
   },
   BASE_URL: 'http://172.20.201.170:8080/docketManagement'
