@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.router.events.subscribe((event) => {
       if(event instanceof NavigationEnd) {
+        console.log(this.router.url);
         switch (this.router.url) {
           case '/dms/dashboard':
             this.headerText = "Dashboard";
@@ -29,6 +30,9 @@ export class HeaderComponent implements OnInit {
             case '/dms/sme':
             this.headerText = "SMEs/Architects Listings";
             break;
+          case '/dms/qa':
+          this.headerText = "Q&A Forum";
+          break;
         
           default:
             break;
