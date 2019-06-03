@@ -28,6 +28,8 @@ import {PaginatorModule} from 'primeng/paginator';
 import { CollateralCardComponent } from './collaterallist/collateral-card/collateral-card.component';
 import { ViewcollateralComponent } from './viewcollateral/viewcollateral.component';
 import {AutoCompleteModule} from 'primeng/autocomplete';
+import {DropdownModule} from 'primeng/dropdown';
+import {CalendarModule} from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,10 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     OverlayPanelModule,
     AngularFontAwesomeModule,
     PaginatorModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    DropdownModule,
+    CalendarModule
+    
     
   ],
   providers: [

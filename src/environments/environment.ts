@@ -53,7 +53,7 @@ export const AppSettings = {
     },
     'saveTags': {
       name: 'saveTags',
-      url: '/collateral/savetags'
+      url: '/collateral/saveCollateralTags'
     },
     'getTagsByCollateral': {
       name: 'getTagsByCollateral',
@@ -68,6 +68,14 @@ export const AppSettings = {
       name: 'countOfProposalStatus',
       url: '/proposal/countOfProposalStatus'
     },
+    'getRegionData':{
+      name: 'getRegionData',
+      url: '/dms/getRegionData'
+    },
+    'saveProposal':{
+      name: 'saveProposal',
+      url: ''
+    }
 
   },
   BASE_URL: 'http://172.20.201.170:8080/docketManagement'

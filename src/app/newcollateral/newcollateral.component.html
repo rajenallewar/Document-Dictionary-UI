@@ -50,10 +50,14 @@
                 </div>
                     <div class="form-group mt-1"> 
                         <label>Upload Document :</label>
-                        <span class="uploaded-file-ic" *ngFor="let file of uploadedFiles"><img class="file-icon" src="../../assets/images/word.svg">{{file?.name?.split('.').slice(0, -1).join('.')}} 
+                        <span class="uploaded-file-ic" *ngFor="let file of uploadedFiles">
+                            <img *ngIf=" file?.fileType == 'doc || docx'" class="file-icon" src="../../assets/images/word.svg">
+                            <img *ngIf=" file?.fileType == 'ppt || pptx'" class="file-icon" src="../../assets/images/powerpoint.svg">
+                            <img *ngIf=" file?.fileType == 'pdf'" class="file-icon" src="../../assets/images/pdf.svg">
+                            {{file?.name?.split('.').slice(0, -1).join('.')}} 
                             <a class="uploaded-file-close" (click)="removeSelectedFiles($event, file)">X</a></span>
                         <div class="drop-box">
-                            <input type="file" multiple style="display:none;" (change)="fileEvent($event)" #file/>
+                            <input type="file" accept= ".doc, .docx, .ppt, .pptx,.pdf " style="display:none;" (change)="fileEvent($event)" #file/>
                             <input type="image" class= "form-control upload-btn" src="../../assets/images/upload-btn.svg" (click)="file.click()" formControlName="fileUpload"
                             [ngClass]="{ 'is-invalid': submitted && f.fileUpload.errors }"/>
                               <div class="drag-drop text-center">

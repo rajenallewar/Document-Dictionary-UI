@@ -46,7 +46,13 @@ export class HeaderComponent implements OnInit {
     }, 0);
   }
   onNewProposal() {
-    this.router.navigate([{outlets:{dialogs:'newproposal'}}], {relativeTo:this.acr});
+    this.appSharedService.setRouteData({
+      "openType":"newFromHeader"
+    });
+    setTimeout(() => {
+      this.router.navigate([{outlets:{dialogs:'newproposal'}}], {relativeTo:this.acr});
+    }, 0);
+ 
   }
 
 }

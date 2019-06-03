@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators, FormControl, ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { NewCollateralService } from './newcollateral.service';
 import { AppSharedService } from '../shared/services/shared.service';
 
@@ -60,8 +60,8 @@ export class NewcollateralComponent implements OnInit, OnDestroy {
     console.log(form.value);
 
     this.checkFileError();
-    if (this.collateralForm.valid) {
-      this.collateralService.saveCollateral(this.collateralService.buildSaveRequest(this.collateralObj, this.openType)).subscribe(data => {
+    if (this.collateralForm.valid) {      
+      this.collateralService.saveCollateral(this.collateralService.buildSaveRequest(this.collateralObj, this.openType, this.uploadedFiles)).subscribe(data => {
         this.close();
 
         console.log('this.router :', this.router.url);
@@ -87,6 +87,7 @@ export class NewcollateralComponent implements OnInit, OnDestroy {
   }
   fileEvent(fileInput: Event) {
     if (fileInput.target["files"]) {
+      this.uploadedFiles=[];
       for (let index = 0; index < fileInput.target["files"].length; index++) {
         this.uploadedFiles.push(fileInput.target["files"][index])
       }

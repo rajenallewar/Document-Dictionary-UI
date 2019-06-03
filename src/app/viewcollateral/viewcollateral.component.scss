@@ -68,3 +68,19 @@ color: white;
     margin: 0 3.5em;
     padding-bottom: 1em;
 }
+.tag-panel{
+    width: 18em;
+    background-color:#ebebeb !important;
+    height: 100%;
+    float: right;
+    padding: 1em;
+}
+.add-tag-btn{
+    float:left;
+}
+.document-panel{
+    height: 100%;
+    float: left;
+    width: calc(100% - 18em);
+    background-color: #18191b;
+}

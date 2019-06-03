@@ -97,27 +97,8 @@ body .ui-paginator {
     >.ui-dialog-content {
         height: calc(100% - 3.5em) !important;
         padding: 0 !important;
-    }
-
-    
+    }  
  }
- .tag-panel{
-    width: 18em;
-    background-color:#ebebeb !important;
-    height: 100%;
-    float: right;
-    padding: 1em;
-}
-.add-tag-btn{
-    float:left;
-}
-.document-panel{
-    height: 100%;
-    float: left;
-    width: calc(100% - 18em);
-  
-}
-
 .ui-autocomplete {
     display: block !important;
     > .ui-autocomplete-input{
@@ -165,4 +146,10 @@ body .ui-paginator {
     background-color: #d3d3d3;
     border-color: #d3d3d3;
 }
-
+.region-drop{
+    width:100% !important;
+}
+.proposal-cal{
+    display: block !important;
+    padding: 0;
+}
