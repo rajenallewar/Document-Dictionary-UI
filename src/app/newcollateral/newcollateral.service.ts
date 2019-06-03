@@ -11,7 +11,7 @@ export class NewCollateralService {
       return this.http.get('allCollateralTypes');
       // return this.http.get('/assets/mockdata/allCollateralTypes.json');
     }
-    public buildSaveRequest(collateral:any, openType, file) {
+    public buildSaveRequest(collateral:any, openType, file, proposalId) {
       let request: any = {}
       if(typeof collateral.collateralTypeUIModel == 'string') {
         request["collateralTypeUIModel"] = {
@@ -26,6 +26,8 @@ export class NewCollateralService {
 
       if (openType == 'edit') {
         request["collateralId"] = collateral.collateralId;
+      } else if (openType == 'newFromPraposal' && proposalId) {
+        request["proposalId"] = proposalId;
       }
       
       request["docName"] = collateral.docName;

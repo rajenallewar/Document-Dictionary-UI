@@ -25,12 +25,39 @@
     </div>
 
 </div>
+
 <div class="right-panel">
-    <input class="search-box" type="text" placeholder="Search by Tag/Cloud / Big Data / Migration etc." />
-    <div class="card-container">
-        <app-collateral-card *ngFor="let card of displayCollateralList;index as i;" [cardIndex]="i" [card]="card"
-            (delete)="onDelete($event)" (edit)="onEdit($event)" (view)="onView($event)"></app-collateral-card>
+<div class="filter-data row mr-0">
+    <div class="col-md-1 apply-ft pd-l-0">Apply Filter</div>
+    <div class="col-md-2 pd-0 mr-r-1">
+        <span class="ft-label">Client</span>
+        <p-dropdown [options]="clientListOptions" [(ngModel)]="searchCriteria.clientName"></p-dropdown>
     </div>
-    <p-paginator #paginator [rows]="displayRecordSize" [totalRecords]="totalRecords" (onPageChange)="paginate($event)">
-    </p-paginator>
+    <div class="col-md-2 pd-0 mr-r-1">
+        <span class="ft-label">Region</span>
+        <p-dropdown [options]="regionListOptions" [(ngModel)]="searchCriteria.region"></p-dropdown>
+    </div>
+    <div class="col-md-2 pd-0 mr-r-1">
+        <span class="ft-label">Status</span>
+        <p-dropdown [options]="statusListOptions" [(ngModel)]="searchCriteria.status"></p-dropdown>
+    </div>
+    <div class="col-md-2 pd-0 mr-r-1">
+        <span class="ft-label">Date Range (Start - End Date)</span>
+        <p-calendar [(ngModel)]="searchCriteria.rangeDates" selectionMode="range" [readonlyInput]="true"></p-calendar>
+    </div>
+    <div class="col-md-2 pd-0 mr-r-1">
+        <button class="btn btn-primary search-btn" (click) ="onSearch($event)">Search</button>
+    </div>
+
+</div>
+<div class="card-container">
+    <app-proposal-card *ngFor="let card of displayProposalList;index as i;" 
+    [cardIndex]="i" 
+    [card]="card"
+    (edit)="onEdit($event)"
+    (add)="onAdd($event)"
+    (viewCollaterals)="onViewCollaterals($event)"
+    ></app-proposal-card>
+</div>
+<p-paginator #paginator [rows]="displayRecordSize" [totalRecords]="totalRecords" (onPageChange)="paginate($event)"></p-paginator>
 </div>

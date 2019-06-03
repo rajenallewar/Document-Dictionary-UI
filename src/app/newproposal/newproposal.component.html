@@ -3,14 +3,13 @@
 
     <p-header>
         <div class="header">
-            <ng-container *ngIf="openType !='edit'">
-                <img src="../../assets/images/new-proposal.svg" class="img-icon">
-
-            </ng-container>
             <a role="button" tabindex="0" (click)="goBack()" class="close-btn pull-right">
                 <img src="../../assets/images/close.svg">
             </a>
-            <span class="title"> New Proposal Form</span>
+            <ng-container *ngIf="openType !='edit'">
+                <img src="../../assets/images/new-proposal.svg" class="img-icon">
+                <span class="title"> New Proposal Form</span>
+            </ng-container>
             <div *ngIf="openType=='edit'" class="">
                 <div class="">Edit Proposal Form</div>
             </div>

@@ -34,6 +34,8 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
 import {DropdownModule} from 'primeng/dropdown';
 import {CalendarModule} from 'primeng/calendar';
 import { TagCloudModule } from 'angular-tag-cloud-module';
+import { ProposalCardComponent } from './proposallist/proposal-card/proposal-card.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import { TagCloudModule } from 'angular-tag-cloud-module';
     QaComponent,
     SearchPipe,
     CollateralCardComponent,
+    ProposalCardComponent,
     ViewcollateralComponent
   ],
   imports: [
@@ -77,7 +80,8 @@ import { TagCloudModule } from 'angular-tag-cloud-module';
     
   ],
   providers: [
-    { provide: UrlSerializer, useClass: CustomUrlSerializer }
+    { provide: UrlSerializer, useClass: CustomUrlSerializer },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

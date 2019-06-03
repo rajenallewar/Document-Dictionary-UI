@@ -20,6 +20,8 @@ export class NewcollateralComponent implements OnInit, OnDestroy {
   collateralObj: any = {collateralTypeUIModel:'', docName:''};
   suggestedCollateralTypes = [];
   collateralTypes = [];
+  proposalName:any;
+  proposalId: any;
 
   constructor(private router: Router,
     private acr: ActivatedRoute,
@@ -33,6 +35,9 @@ export class NewcollateralComponent implements OnInit, OnDestroy {
     if(this.openType == 'edit') {
       this.collateralId = this.routeData.index;
       this.collateralObj = this.routeData.collateralObj;
+    } else if (this.openType == 'newFromPraposal') {
+      this.proposalName = this.routeData.proposalName;
+      this.proposalId = this.routeData.proposalId;
     }
     
     this.collateralForm = this.formBuilder.group({
@@ -68,7 +73,7 @@ export class NewcollateralComponent implements OnInit, OnDestroy {
 
     this.checkFileError();
     if (this.collateralForm.valid) {      
-      this.collateralService.saveCollateral(this.collateralService.buildSaveRequest(this.collateralObj, this.openType, this.uploadedFiles)).subscribe(data => {
+      this.collateralService.saveCollateral(this.collateralService.buildSaveRequest(this.collateralObj, this.openType, this.uploadedFiles, this.proposalId)).subscribe(data => {
         this.close();
 
         console.log('this.router :', this.router.url);

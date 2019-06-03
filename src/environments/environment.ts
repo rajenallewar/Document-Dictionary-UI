@@ -11,10 +11,6 @@ export const AppSettings = {
       name: 'authLogin',
       url: '/auth/authLogin '
     },
-    'getProposals': {
-      name: 'getProposals',
-      url: '/getAllProposals'
-    },
     'getSmeList': {
       name: 'getSmeList',
       url: '/smedata/domainSMEDetail'
@@ -83,6 +79,10 @@ export const AppSettings = {
     'getTrendingTags': {
       name: 'getTrendingTags',
       url: '/tag/mostTrendingsTags'
+    },
+    'getProposals':{
+      name: 'getProposals',
+      url: '/proposal/getProposals'
     }
 
   },

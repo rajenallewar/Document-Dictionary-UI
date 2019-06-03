@@ -28,9 +28,17 @@ body {
 .mr-l-0 {
     margin-left: 0!important;
 }
-
+.mr-r-0 {
+    margin-right: 0!important;
+}
+.mr-r-1 {
+    margin-right: 1em!important;
+}
 .pd-r-0{
     padding-right: 0!important;
+}
+.pd-l-0{
+    padding-left: 0!important;
 }
 .side-panel{
     width: 12em;
@@ -171,3 +179,20 @@ body .ui-paginator {
     display: block !important;
     padding: 0;
 }
+
+.dot {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 15px;
+    width: 15px;
+    background-color: #64B3FF;
+    border-radius: 50%;    
+    display: grid;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+    font-size:0.625rem;
+    font-family: 'Carnas-ExtraLight';
+    font-weight: 200;
+  }

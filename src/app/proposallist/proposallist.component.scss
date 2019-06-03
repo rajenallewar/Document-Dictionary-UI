@@ -53,3 +53,34 @@ hr {
     font-weight: 500;
     color: #a1aed1;
 }
+.ft-label{
+    font-family: 'Carnas-Light';
+    font-size:0.625rem;
+    font-weight: 300;
+    color: #4a4a4a;
+}
+.apply-ft{
+  font-family: 'Carnas-Regular';
+  font-size: 0.9375rem;
+  color: #515e6b;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.search-btn{
+    text-align: center;
+    font-size: 1rem;
+    font-family: 'Carnas-Regular';
+    border-radius: 3px;
+    background-color: #4a90e2;
+    vertical-align: middle;
+    margin-top: 1.15em;
+    width: 100%;
+    color: #ffffff;
+}
+
+.search-btn:hover{
+    background-color: #4574bd;
+    
+}
