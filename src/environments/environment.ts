@@ -75,6 +75,10 @@ export const AppSettings = {
     'saveProposal':{
       name: 'saveProposal',
       url: ''
+    },
+    'searchemail': {
+      name: 'searchemail',
+      url: '/email/searchemail'
     }
 
   },

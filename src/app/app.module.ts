@@ -28,6 +28,9 @@ import {PaginatorModule} from 'primeng/paginator';
 import { CollateralCardComponent } from './collaterallist/collateral-card/collateral-card.component';
 import { ViewcollateralComponent } from './viewcollateral/viewcollateral.component';
 import {AutoCompleteModule} from 'primeng/autocomplete';
+import { QaComponent } from './qa/qa.component';
+import { SearchPipe } from './qa/search.pipe';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 import {DropdownModule} from 'primeng/dropdown';
 import {CalendarModule} from 'primeng/calendar';
 
@@ -44,6 +47,8 @@ import {CalendarModule} from 'primeng/calendar';
     NewcollateralComponent,
     RfpContainerComponent,
     SmelistComponent,
+    QaComponent,
+    SearchPipe,
     CollateralCardComponent,
     ViewcollateralComponent
   ],
@@ -60,6 +65,8 @@ import {CalendarModule} from 'primeng/calendar';
     ChartModule,
     OverlayPanelModule,
     AngularFontAwesomeModule,
+    FormsModule,
+    DeviceDetectorModule.forRoot(),
     PaginatorModule,
     AutoCompleteModule,
     DropdownModule,
