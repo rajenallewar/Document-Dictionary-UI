@@ -9,13 +9,15 @@ import { OverlayPanel } from 'primeng/overlaypanel';
   providers: [SmeService]
 })
 export class SmelistComponent implements OnInit {
-  SmeList: any;
+  smeList: any;
   data: any;
   options: any;
   doughtnutData: any = {};
   selectedUser: any = {};
   BUSme: any;
   smeArchData: any;
+  keyword:string;
+  totalRecords= 100;
   constructor(private smelistservice: SmeService) {
 
   }
@@ -26,13 +28,29 @@ export class SmelistComponent implements OnInit {
       "labels": [],
       "bgColors": []
     }
-    this.getSMEList();
     this.getTotalSmeCount();
   }
 
   getSMEList() {
-    this.smelistservice.getSmeList().subscribe((data) => {
-      this.SmeList = data;
+    let req = {
+      "offset":1,
+      "limit":10
+    }
+    this.smelistservice.getSmeList(req).subscribe((data) => {
+      this.smeList = data;
+    })
+  }
+  loadSmeListLazy(event){
+    console.log("loadSmeListLazy :", event);   
+    let req = {
+      "offset":event.first+1,
+      "limit":event.rows
+    }
+    this.smelistservice.getSmeList(req).subscribe((data: any) => {
+      this.smeList = data;
+      console.log("this.smeList ", this.smeList);
+      
+      // this.smeList = data.slice(event.first, (event.first + event.rows));
     })
   }
   onSmeNameClickHandler(event: Event, smeInfo: any, region: string, overlaypanel: OverlayPanel) {
@@ -41,6 +59,18 @@ export class SmelistComponent implements OnInit {
     this.selectedUser["region"] = region;
     overlaypanel.toggle(event);
   }
+  searchDomain(event){
+    let keyword= this.keyword;
+    if(keyword != "") {
+      this.smelistservice.getDomainByUserkeyword(keyword).subscribe((data)=>{
+        this.smeList=data;
+      })
+    } else  {
+      this.loadSmeListLazy({first: 0, rows: 10});
+    }
+ 
+     
+   }
   getTotalSmeCount() {
     this.smelistservice.getTotalSmeCount().subscribe((data: any) => {
 

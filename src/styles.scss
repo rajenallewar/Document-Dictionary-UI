@@ -16,11 +16,17 @@ body {
 .pd-0{
     padding: 0!important;
 }
+.pd-1{
+    padding: 1em !important;
+}
 .mr-0{
     margin: 0!important;
 }
 .mt-0{
     margin-top: 0.5em;
+}
+.mr-l-0 {
+    margin-left: 0!important;
 }
 
 .pd-r-0{
@@ -31,6 +37,12 @@ body {
     background-color: #494e5e;
     height: 100%;
     float: left;
+}
+.right-panel{
+    height: 100%;
+    float: left;
+    width: calc(100% - 12.75em);
+    padding: 1em 2em;
 }
 body .ui-table .ui-table-thead > tr > th {
     padding: 0.800em 0.857em;
@@ -61,7 +73,6 @@ body .ui-paginator {
 .pt-0 {
     padding-top: 0px !important;
 }
-
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -76,5 +87,97 @@ body .ui-paginator {
     border-radius: 6px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
     box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+.mt-2{
+    margin-top: 2em !important;
+}
+.mt-1{
+    margin-top: 1em;
+}
+
+.view-collateral{
+    left: 0 !important;
+    top: 0 !important;
+    width: 100%;
+    height: 100% !important;;
+    padding: 0 !important;
+
+    >.ui-dialog-titlebar {
+        opacity: 0.82;
+        padding: 0.8em !important;
+    }.ui-dialog-titlebar, .ui-dialog-content {
+        background-color: rgba(24,25,27,0.82) !important;
+        border-color: transparent !important;
+    }
+    >.ui-dialog-content {
+        height: calc(100% - 3.5em) !important;
+        padding: 0 !important;
+    }
+
+    
+ }
+ .tag-panel{
+    width: 18em;
+    background-color:#ebebeb !important;
+    height: 100%;
+    float: right;
+    padding: 1em;
+}
+.add-tag-btn{
+    float:left;
+}
+.document-panel{
+    height: 100%;
+    float: left;
+    width: calc(100% - 18em);
+  
+}
+
+.ui-autocomplete {
+    display: block !important;
+    > .ui-autocomplete-input{
+        width: 100%;
+        height: 100%;
+        padding: 0.5em !important;
+        border-radius: 3px;
+        font-family: Carnas-Regular !important;
+        font-size: 12px !important;
+        color: #404040;
+    }
+}
+.is-invalid .ui-autocomplete .ui-autocomplete-input{
+    border-color: #dc3545;
+}
+
+.ui-autocomplete-panel .ui-autocomplete-items .ui-autocomplete-list-item {
+    font-family: Carnas-Regular !important;
+    font-size: 12px !important;
+    color: #404040;
+}
+.card-container{
+    padding-top: 1em;
+    min-height: 585px;
+}
+.img-icon{
+    vertical-align: inherit;
+}
+.header {
+    padding: 0 0.75em;
+}
+.close-btn{
+    margin-top: 0.5em;
+    cursor: pointer;
+}
+.c-btn {
+    width: 7em;
+    padding: 0.61em;
+    border-radius: 0;
+    font-size: 0.75rem;
+    font-display: Carnas-Medium;
+   }
+.cancle-btn
+{
+    background-color: #d3d3d3;
+    border-color: #d3d3d3;
 }
 

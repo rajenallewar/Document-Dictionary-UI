@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { AppSharedService } from '../shared/services/shared.service';
 
 @Component({
   selector: 'app-header',
@@ -8,23 +9,25 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   headerText:string = '';
-  constructor(private router:Router) {}
+  constructor(private router:Router,
+    private acr:ActivatedRoute,
+    private appSharedService:AppSharedService) {}
 
   ngOnInit() {
     this.router.events.subscribe((event) => {
       if(event instanceof NavigationEnd) {
         console.log(this.router.url);
         switch (this.router.url) {
-          case '/dashboard':
+          case '/dms/dashboard':
             this.headerText = "Dashboard";
             break;
-          case '/proposals':
+          case '/dms/proposals':
             this.headerText = "Proposal Listings";
             break;
-          case '/collaterals':
+          case '/dms/collaterals':
             this.headerText = "Collateral Listings";
             break;
-            case '/sme':
+            case '/dms/sme':
             this.headerText = "SMEs/Architects Listings";
             break;
           case '/dms/qa':
@@ -36,6 +39,18 @@ export class HeaderComponent implements OnInit {
         }
       }
     });
+  }
+
+  onNewCollateral() {
+    this.appSharedService.setRouteData({
+      "openType":"newFromHeader"
+    });
+    setTimeout(() => {
+      this.router.navigate([{outlets:{dialogs:'uploadcollateral'}}], {relativeTo:this.acr});
+    }, 0);
+  }
+  onNewProposal() {
+    this.router.navigate([{outlets:{dialogs:'newproposal'}}], {relativeTo:this.acr});
   }
 
 }

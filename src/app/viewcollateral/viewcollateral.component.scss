@@ -1,0 +1,70 @@
+.tag-list > li {
+       border-radius: 12px;
+       margin: 5px;
+       padding: 3px 7px;
+       font-size: 0.75rem;
+       font-weight: 300;
+       color: #464953;
+       font-family: Carnas-Light;
+   }
+.add-new-tag{
+    font-family: Carnas-Medium;
+    font-size: 1 rem;
+    font-weight: 500;
+    color: #464953;
+}
+.tx-box{
+    width: 100%;
+    height: 0%;
+    margin-top: 0.5em;
+    font-size: 0.625rem;
+    font-weight: 300;
+     color: #a4a4a4 !important;
+    font-family: Carnas-Light;
+    border-radius: 3px;
+    border: solid 1px #d7d7d7;
+    background-color: #ffffff;
+}
+.save-btn{
+    border-radius: 3px;
+    background-color: #4a90e2;
+    font-family: Carnas-Medium;
+    text-align: center;
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+.tags{
+    margin-top: 2em;
+    font-family: Carnas-Medium;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #464953;
+}
+.tag-c{
+    margin-top: 1.5em;
+}
+.doc-header{
+    width: 100%;
+    height: 3.5em;
+    padding: 1em 2em;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+    background-color: #323639;
+}
+.doc-icon{
+margin: 0 1em;
+float: right;
+color: white;
+}
+.doc-panel{
+    background-color: white;
+    margin: 1.2em 17em;
+    padding: 2em;
+    height: calc(100% - 4.7em) !important;
+}
+
+.doc-container {
+    height: 100%;
+    margin: 0 3.5em;
+    padding-bottom: 1em;
+}

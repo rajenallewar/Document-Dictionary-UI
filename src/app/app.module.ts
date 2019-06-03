@@ -24,6 +24,10 @@ import {TableModule} from 'primeng/table';
 import {ChartModule} from 'primeng/chart';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import {PaginatorModule} from 'primeng/paginator';
+import { CollateralCardComponent } from './collaterallist/collateral-card/collateral-card.component';
+import { ViewcollateralComponent } from './viewcollateral/viewcollateral.component';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 import { QaComponent } from './qa/qa.component';
 import { SearchPipe } from './qa/search.pipe';
 import { DeviceDetectorModule } from 'ngx-device-detector';
@@ -42,7 +46,9 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
     RfpContainerComponent,
     SmelistComponent,
     QaComponent,
-     SearchPipe
+    SearchPipe,
+    CollateralCardComponent,
+    ViewcollateralComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +64,9 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
     OverlayPanelModule,
     AngularFontAwesomeModule,
     FormsModule,
-    DeviceDetectorModule.forRoot()
+    DeviceDetectorModule.forRoot(),
+    PaginatorModule,
+    AutoCompleteModule
   ],
   providers: [
     { provide: UrlSerializer, useClass: CustomUrlSerializer }

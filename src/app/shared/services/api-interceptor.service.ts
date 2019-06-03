@@ -19,7 +19,7 @@ export class APIInterceptor implements HttpInterceptor {
             requestClone = req.clone({ url: `${AppSettings.BASE_URL}${reqUrl}`});
         } else {
             reqUrl = `${reqUrl}`;
-            requestClone = req.clone({ url: `${reqUrl}` });
+            requestClone = req.clone({ url: `${reqUrl}`});
         }
         return next.handle(requestClone);
     }
