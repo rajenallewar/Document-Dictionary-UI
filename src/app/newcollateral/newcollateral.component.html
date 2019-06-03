@@ -51,9 +51,9 @@
                     <div class="form-group mt-1"> 
                         <label>Upload Document :</label>
                         <span class="uploaded-file-ic" *ngFor="let file of uploadedFiles">
-                            <img *ngIf=" file?.fileType == 'doc || docx'" class="file-icon" src="../../assets/images/word.svg">
-                            <img *ngIf=" file?.fileType == 'ppt || pptx'" class="file-icon" src="../../assets/images/powerpoint.svg">
-                            <img *ngIf=" file?.fileType == 'pdf'" class="file-icon" src="../../assets/images/pdf.svg">
+                            <img *ngIf="(file?.name.split('.').pop().toLowerCase() == 'doc') || (file?.name.split('.').pop().toLowerCase() == 'docx')" class="file-icon" src="../../assets/images/word.svg">
+                            <img *ngIf="(file?.name.split('.').pop().toLowerCase() == 'ppt') || (file?.name.split('.').pop().toLowerCase() == 'pptx')"class="file-icon" src="../../assets/images/powerpoint.svg">
+                            <img *ngIf="file?.name.split('.').pop().toLowerCase() == 'pdf'" class="file-icon" src="../../assets/images/pdf.svg">
                             {{file?.name?.split('.').slice(0, -1).join('.')}} 
                             <a class="uploaded-file-close" (click)="removeSelectedFiles($event, file)">X</a></span>
                         <div class="drop-box">

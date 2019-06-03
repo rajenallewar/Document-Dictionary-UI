@@ -44,6 +44,13 @@ export class NewcollateralComponent implements OnInit, OnDestroy {
     this.collateralService.getAllCollateralTypes().subscribe((response: any)=>{
       this.collateralTypes = response;
     });
+    if (this.collateralObj.fileName) {
+      this.uploadedFiles=[];
+      let file: any = {};
+      file.name = this.collateralObj.fileName;
+      this.uploadedFiles.push(file);
+    }
+
 
   }
   get f() { return this.collateralForm.controls; }

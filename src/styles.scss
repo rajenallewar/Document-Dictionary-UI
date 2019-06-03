@@ -68,7 +68,10 @@ body .ui-paginator {
     padding: 0;
 }
 .pt-1{
-    padding-top: 1em;
+    padding-top: 1em !important;
+}
+.ml-chart{
+    margin-left: 1.5em;
 }
 .pt-0 {
     padding-top: 0px !important;

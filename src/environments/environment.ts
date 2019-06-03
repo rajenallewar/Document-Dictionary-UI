@@ -79,6 +79,10 @@ export const AppSettings = {
     'searchemail': {
       name: 'searchemail',
       url: '/email/searchemail'
+    },
+    'getTrendingTags': {
+      name: 'getTrendingTags',
+      url: '/tag/mostTrendingsTags'
     }
 
   },

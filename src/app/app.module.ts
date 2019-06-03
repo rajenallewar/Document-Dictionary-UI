@@ -33,6 +33,7 @@ import { SearchPipe } from './qa/search.pipe';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import {DropdownModule} from 'primeng/dropdown';
 import {CalendarModule} from 'primeng/calendar';
+import { TagCloudModule } from 'angular-tag-cloud-module';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import {CalendarModule} from 'primeng/calendar';
     PaginatorModule,
     AutoCompleteModule,
     DropdownModule,
-    CalendarModule
+    CalendarModule,
+    TagCloudModule
     
     
   ],
