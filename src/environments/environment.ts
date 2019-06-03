@@ -68,7 +68,10 @@ export const AppSettings = {
       name: 'countOfProposalStatus',
       url: '/proposal/countOfProposalStatus'
     },
-
+    'searchemail': {
+      name: 'searchemail',
+      url: '/email/searchemail'
+    }
   },
   BASE_URL: 'http://172.20.201.170:8080/docketManagement'
   //  BASE_URL: ''

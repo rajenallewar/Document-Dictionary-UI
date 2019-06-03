@@ -28,6 +28,9 @@ import {PaginatorModule} from 'primeng/paginator';
 import { CollateralCardComponent } from './collaterallist/collateral-card/collateral-card.component';
 import { ViewcollateralComponent } from './viewcollateral/viewcollateral.component';
 import {AutoCompleteModule} from 'primeng/autocomplete';
+import { QaComponent } from './qa/qa.component';
+import { SearchPipe } from './qa/search.pipe';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,8 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     NewcollateralComponent,
     RfpContainerComponent,
     SmelistComponent,
+    QaComponent,
+    SearchPipe,
     CollateralCardComponent,
     ViewcollateralComponent
   ],
@@ -58,9 +63,10 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     ChartModule,
     OverlayPanelModule,
     AngularFontAwesomeModule,
+    FormsModule,
+    DeviceDetectorModule.forRoot(),
     PaginatorModule,
     AutoCompleteModule
-    
   ],
   providers: [
     { provide: UrlSerializer, useClass: CustomUrlSerializer }
