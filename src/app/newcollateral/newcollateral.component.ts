@@ -34,7 +34,7 @@ export class NewcollateralComponent implements OnInit, OnDestroy {
     this.openType = this.routeData.openType;
     if(this.openType == 'edit') {
       this.collateralId = this.routeData.index;
-      this.collateralObj = this.routeData.collateralObj;
+      this.collateralObj = {...this.routeData.collateralObj};
     } else if (this.openType == 'newFromPraposal') {
       this.proposalName = this.routeData.proposalName;
       this.proposalId = this.routeData.proposalId;

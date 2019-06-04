@@ -41,12 +41,7 @@
             </h1>
             <div class="login-cont">
                 <form [formGroup]="loginForm">
-                    <!-- <pre>{{loginForm.get('userName')|json}}</pre> -->
-                    <input type="text" formControlName="userName" class="tx-box" placeholder="User Name"
-                        [ngClass]="{ 'is-invalid': loginForm.userName?.errors }" />
-                    <div *ngIf="loginForm.get('userName')?.errors" class="invalid-feedback">
-                        <!-- <div *ngIf="loginForm.get('userName')?.errors.required">Username is required</div> -->
-                    </div>
+                    <input type="text" formControlName="userName" class="tx-box" placeholder="User Name"/>
 
                     <input type="password" formControlName="password" class="tx-box" placeholder="Password"
                         style="margin-top: 1em" />
