@@ -11,7 +11,7 @@ export class HeaderComponent implements OnInit {
   headerText:string = '';
   constructor(private router:Router,
     private acr:ActivatedRoute,
-    private appSharedService:AppSharedService) {}
+    public appSharedService:AppSharedService) {}
 
   ngOnInit() {
     this.router.events.subscribe((event) => {
@@ -58,5 +58,9 @@ export class HeaderComponent implements OnInit {
     }, 0);
  
   }
+  onDateSelect(event){
+    this.appSharedService.setDashboardDateSubject(event);
+  }
+
 
 }

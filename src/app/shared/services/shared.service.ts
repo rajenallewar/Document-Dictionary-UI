@@ -10,8 +10,13 @@ export class AppSharedService {
   public _routeData:any;
   private newCollateralCloseSubject: Subject<boolean> = new Subject<boolean>();
 
-  constructor() { }
+  private dashboardDateSubject: Subject<any> = new Subject<any>();
+  dateRange:any;
 
+  constructor() { }
+  startDate: string;
+  endDate: string;
+  
   setUserLoggedIn (flag) {
     this.isUserLoggedIn = flag;
   }
@@ -38,6 +43,14 @@ export class AppSharedService {
 
   setNewCollateralCloseEvent(flag){
     this.newCollateralCloseSubject.next(flag);
+  }
+
+  getDashboardDateSubject(){
+    return this.dashboardDateSubject.asObservable();
+  }
+
+  setDashboardDateSubject(obj){
+    this.dashboardDateSubject.next(obj);
   }
 
 

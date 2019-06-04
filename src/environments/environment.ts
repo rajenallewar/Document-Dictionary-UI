@@ -83,6 +83,10 @@ export const AppSettings = {
     'getProposals':{
       name: 'getProposals',
       url: '/proposal/getProposals'
+    },
+    'getSummaryofProposalsByAccount':{
+      name : 'getSummaryofProposalsByAccount',
+      url : '/proposal/getSummryOfProposalByAccount'
     }
 
   },
