@@ -26,6 +26,7 @@
                     <label>Proposal Name </label><br>
                     <input type="text" class="form-control tx-box" placeholder="Enter Proposal Name here…."
                         formControlName="proposalName"
+                        [(ngModel)]="proposalObj.proposalName" 
                         [ngClass]="{ 'is-invalid': submitted && f.proposalName.errors }" />
                     <div *ngIf="submitted && f.proposalName.errors" class="invalid-feedback">
                         <div *ngIf="f.proposalName.errors.required">Proposal Name is required</div>
@@ -33,7 +34,7 @@
                 </div>
                 <div class="form-group mt-1">
                     <label>Client Name </label><br>
-                    <input type="text" class="form-control tx-box" placeholder="Enter Client Name here…."
+                    <input type="text" [(ngModel)]="proposalObj.clientName" class="form-control tx-box" placeholder="Enter Client Name here…."
                         formControlName="clientName" [ngClass]="{ 'is-invalid': submitted && f.clientName.errors }" />
                     <div *ngIf="submitted && f.clientName.errors" class="invalid-feedback">
                         <div *ngIf="f.clientName.errors.required">Client Name is required</div>
@@ -44,7 +45,7 @@
                         <div class="form-group mt-1">
 
                             <label>Start Date </label><br>
-                            <p-calendar styleClass="proposal-cal" [(ngModel)]="startDate" class="form-control drop-down" formControlName="startDate"
+                            <p-calendar styleClass="proposal-cal" [(ngModel)]="proposalObj.startDate" class="form-control drop-down" formControlName="startDate"
                              [ngClass]="{ 'is-invalid': submitted && f.startDate.errors }"></p-calendar>
             
                             <div *ngIf="submitted && f.startDate.errors" class="invalid-feedback">
@@ -57,7 +58,7 @@
                         <div class="form-group mt-1">
 
                             <label>End Date </label><br>
-                            <p-calendar styleClass="proposal-cal" [(ngModel)]="endDate" class="form-control drop-down tx-box " formControlName="endDate"
+                            <p-calendar styleClass="proposal-cal" [(ngModel)]="proposalObj.endDate" class="form-control drop-down " formControlName="endDate"
                             [ngClass]="{ 'is-invalid': submitted && f.endDate.errors }"></p-calendar>
                             <div *ngIf="submitted && f.endDate.errors" class="invalid-feedback">
                                 <div *ngIf="f.endDate.errors.required">End Date is required</div>
@@ -73,7 +74,7 @@
 
                     <label>Requirement </label><br>
                     <input type="text" class="form-control tx-box" placeholder="Enter Requirement here…."
-                        formControlName="requirement" [ngClass]="{ 'is-invalid': submitted && f.requirement.errors }" />
+                        formControlName="requirement" [(ngModel)]="proposalObj.requirement" [ngClass]="{ 'is-invalid': submitted && f.requirement.errors }" />
                     <div *ngIf="submitted && f.requirement.errors" class="invalid-feedback">
                         <div *ngIf="f.requirement.errors.required">Requirement is required</div>
                     </div>
@@ -81,10 +82,9 @@
                 </div>
 
                 <div class="form-group mt-1">
-                  
                     <label>Region / BU</label>
-                    <p-dropdown class="form-control drop-down tx-box" styleClass="region-drop" [options]="regionData" [(ngModel)]="selectedregion" placeholder="Select Region / BU"
-                     [showClear]="true" formControlName="region" [ngClass]="{ 'is-invalid': submitted && f.region.errors }"></p-dropdown>
+                    <p-dropdown class="form-control drop-down tx-box" styleClass="region-drop" [options]="regionData" placeholder="Select Region / BU"
+                     formControlName="region" [(ngModel)]="proposalObj.region" [ngClass]="{ 'is-invalid': submitted && f.region.errors }"></p-dropdown>
                      <div *ngIf="submitted && f.region.errors" class="invalid-feedback">
                             <div *ngIf="f.region.errors.required"> Region / BU is required</div>
                         </div> 

@@ -1,26 +1,35 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 @Injectable()
 export class NewProposalService {
-    constructor(private http:HttpClient) {}
-    public getRegionData() {
-      return this.http.get('getRegionData');
+  constructor(
+    private http: HttpClient,
+    public datePipe: DatePipe, ) { }
+  public getRegionData() {
+    return this.http.get('getAllRegions');
+  }
+  public saveProposal(proposal: any) {
+    return this.http.post('saveProposal', proposal);
+  }
+  public buildSaveRequest(openType: any, proposal: any) {
+    let request: any = {}
+    if (openType == 'edit') {
+      request["proposalId"] = proposal.proposalId;
+      request["status"] = proposal.status;
+    } else {
+      request["status"] = 'New';
     }
-    public saveProposal(proposal:any) {
-      return this.http.post('saveProposal', proposal);
-    }
-     public buildSaveRequest(proposal:any, openType) {
-      let request: any = {}
-      if (openType == 'edit') {
-        request["proposalId"] = proposal.proposalId;
-      }
-      request["proposalName"] = proposal.proposalName;
-      request["clientName"] = proposal.clientName;
-      request["startDate"] = proposal.proposalName;
-      request["endDate"] = proposal.proposalName;
-      request["requirement"] = proposal.proposalName;
-      request["region"] = proposal.proposalName;
-     }
-  
+    request["proposalName"] = proposal.proposalName;
+    request["clientName"] = proposal.clientName;
+    request["startDate"] = this.datePipe.transform(proposal.startDate, 'yyyy-MM-dd');
+    request["endDate"] = this.datePipe.transform(proposal.endDate, 'yyyy-MM-dd');
+    request["requirement"] = proposal.requirement;
+    request["region"] = proposal.region;
+    
+
+    return request;
+  }
+
 }

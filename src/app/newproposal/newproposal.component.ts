@@ -17,10 +17,9 @@ export class NewproposalComponent implements OnInit {
   selectedregion:any;
   routeData: any;
   openType: string = '';
-  proposalId: string = '';
   startDate:Date;
   endDate:Date;
-  proposalObj: any = {  proposalName :'', clientName:'',startDate:'',endDate:'',requirement:'',region:''}
+  proposalObj: any = {  proposalName :null, clientName:null,startDate:null,endDate:null,requirement:null,region:null}
   
  
   constructor(private router: Router, private acr:ActivatedRoute, private formBuilder: FormBuilder,
@@ -29,10 +28,7 @@ export class NewproposalComponent implements OnInit {
   ngOnInit() {
     this.routeData = {...this.appSharedService.getRouteData()};
     this.openType = this.routeData.openType;
-    if(this.openType == 'edit') {
-      this.proposalId = this.routeData.index;
-      this.proposalObj = this.routeData.proposalObj;
-    }
+    
     this.proposalForm = this.formBuilder.group({
       proposalName: new FormControl("", Validators.required),
       clientName: new FormControl("", Validators.required),
@@ -43,6 +39,15 @@ export class NewproposalComponent implements OnInit {
       
     });
     this.getRegionData();
+
+    if(this.openType == 'edit') {
+      setTimeout(() => {
+        this.proposalObj = {...this.routeData.proposal};
+        this.proposalObj.startDate = new Date(this.proposalObj.startDate);
+        this.proposalObj.endDate = new Date(this.proposalObj.endDate);
+      }, 300);
+      
+    }
   }
   get f() { return this.proposalForm.controls; }
 
@@ -52,8 +57,8 @@ export class NewproposalComponent implements OnInit {
       if(data && data.length) {
         for (let i = 0; i < data.length; i++) {
           let item: any = {};
-          item.label = data[i] ;
-          item.value = i;
+          item.label = data[i];
+          item.value = data[i];
           this.regionData.push(item);
         }
       }
@@ -63,7 +68,7 @@ export class NewproposalComponent implements OnInit {
     this.submitted = true;
     console.log(form.value);
     if (this.proposalForm.valid) {      
-      this.proposalService.saveProposal(this.proposalService.buildSaveRequest(this.proposalId, this.openType)).subscribe(data => {
+      this.proposalService.saveProposal(this.proposalService.buildSaveRequest(this.openType, this.proposalObj)).subscribe(data => {
         this.close();
 
         console.log('this.router :', this.router.url);

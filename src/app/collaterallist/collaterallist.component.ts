@@ -20,7 +20,8 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
   displayRecordSize = 10;
   totalRecords = 10;
   searchTimer;
-  tagSearch: string = '';
+  tagSearch = null;
+  proposalId = null;
 
   @ViewChild('paginator') paginator: any;
 
@@ -31,6 +32,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.routeData = { ...this.appSharedService.getRouteData() };
+
     this.data = {
       labels: [],
       datasets: []
@@ -61,8 +63,26 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
         }]
       }
     };
-
-    this.getCollateralList();
+    // console.log("this.routeData :",this.routeData);
+    let req;
+    if(this.routeData && this.routeData.proposalId) {
+      this.proposalId = this.routeData.proposalId;
+      req = {
+        "limit": 10,
+        "offset": 1,
+        "mapOfSearchKeyVsValue": {
+          "proposalId":this.proposalId
+        }
+      }
+    } else {
+      req = {
+        "limit": 10,
+        "offset": 1,
+        "mapOfSearchKeyVsValue": null
+      }
+    }
+    
+    this.getCollateralList(req);
     this.getCollateralsCount();
 
     this.appSharedService.getNewCollateralCloseEvent().subscribe((flag) => {
@@ -128,12 +148,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
       this.displayLineChart = true;
     });
   }
-  getCollateralList() {
-    let req = {
-      "limit": 10,
-      "offset": 1,
-      "searchCriteria": ""
-    }
+  getCollateralList(req) {
     this.collateralListService.getCollaterals(req).subscribe((response: any) => {
       this.totalRecords = response.totalCount || 10;
       this.collateralList = response.listOfCollateralUIModel;
@@ -144,7 +159,12 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
   resetCollateralListing() {
     console.log("this.paginator", this.paginator);
     this.paginator && this.paginator.changePageToFirst();
-    this.getCollateralList();
+    let req = {
+      "limit": 10,
+      "offset": 1,
+      "mapOfSearchKeyVsValue": null
+    }
+    this.getCollateralList(req);
     this.getCollateralsCount();
   }
 
@@ -154,13 +174,11 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
       let req = {
         "limit": 10,
         "offset": 1,
-        "searchCriteria": value
+        "mapOfSearchKeyVsValue": {
+          "tags": value
+        }
       }
-      this.collateralListService.getCollaterals(req).subscribe((response: any) => {
-        this.totalRecords = response.totalCount || 10;
-        this.collateralList = response.listOfCollateralUIModel;
-        this.displayCollateralList = this.collateralList.slice(0, this.displayRecordSize);
-      });
+      this.getCollateralList(req);
     }
   }
 
@@ -168,14 +186,12 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
     let req = {
       "offset": event.first + 1,
       "limit": event.rows,
-      "searchCriteria": this.tagSearch
+      "mapOfSearchKeyVsValue": {
+        "tags": this.tagSearch,
+        "proposalId":this.proposalId
+      }
     }
-    this.collateralListService.getCollaterals(req).subscribe((response: any) => {
-      this.totalRecords = response.totalCount || 10;
-      this.collateralList = response.listOfCollateralUIModel;
-      this.displayCollateralList = this.collateralList.slice(0, this.displayRecordSize);
-    });
-
+    this.getCollateralList(req);
   }
 
   onDelete(event: any) {

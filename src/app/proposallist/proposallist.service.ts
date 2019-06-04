@@ -12,4 +12,13 @@ export class ProposalListService {
     return this.http.get('countOfProposalStatus');
     // return this.http.get('/assets/mockdata/countOfProposalStatus.json');
   }
+  public getAllRegions() {
+    return this.http.get('getAllRegions');
+  }
+  public getAllClients() {
+    return this.http.get('getAllClients');
+  }
+  public getAllStatuses() {
+    return this.http.get('getAllStatuses');
+  }
 }

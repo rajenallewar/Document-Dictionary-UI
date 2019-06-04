@@ -48,7 +48,7 @@ export class ProposallistComponent implements OnInit {
     private appSharedService: AppSharedService) { }
 
   ngOnInit() {
-    this.routeData = { ...this.appSharedService.getRouteData() };
+    // this.routeData = { ...this.appSharedService.getRouteData() };
     this.lineChartData = {
       labels: [],
       datasets: []
@@ -345,8 +345,18 @@ export class ProposallistComponent implements OnInit {
   }
   onViewCollaterals(event){
     console.log("onViewCollaterals :", event);
+    let proposalId = this.displayProposalList[event.index].proposalId.toString();
+    let proposalName = this.displayProposalList[event.index].proposalName;
+    this.appSharedService.setRouteData({
+      "openType":"getCollatealsFromPraposal",
+      "proposalId":proposalId,
+      "proposalName":proposalName,
+    });
+    setTimeout(() => {
+      this.router.navigate(['/dms/collaterals']);
+    }, 0);
   }
   ngOnDestroy() {
-    this.appSharedService.clearRouteData();
+    // this.appSharedService.clearRouteData();
   }
 }
