@@ -36,6 +36,10 @@ import {CalendarModule} from 'primeng/calendar';
 import { TagCloudModule } from 'angular-tag-cloud-module';
 import { ProposalCardComponent } from './proposallist/proposal-card/proposal-card.component';
 import { DatePipe } from '@angular/common';
+import {BlockUIModule} from 'primeng/blockui';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { CommonModule } from '@angular/common'; 
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -54,7 +58,9 @@ import { DatePipe } from '@angular/common';
     SearchPipe,
     CollateralCardComponent,
     ProposalCardComponent,
-    ViewcollateralComponent
+    ViewcollateralComponent,
+    SpinnerComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -75,8 +81,10 @@ import { DatePipe } from '@angular/common';
     AutoCompleteModule,
     DropdownModule,
     CalendarModule,
-    TagCloudModule
-    
+    TagCloudModule,
+    BlockUIModule,
+    CommonModule,
+    ToastrModule.forRoot()
     
   ],
   providers: [

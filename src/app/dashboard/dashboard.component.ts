@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AppSharedService } from '../shared/services/shared.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CloudData, CloudOptions } from 'angular-tag-cloud-module';
 import { DashboardService } from './dashboard.service';
+import { map, tap, takeUntil} from 'rxjs/operators';
+import { Subscription, Subject } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { CollateralListService } from '../collaterallist/collaterallist.service';
 @Component({
@@ -11,7 +13,9 @@ import { CollateralListService } from '../collaterallist/collaterallist.service'
   styleUrls: ['./dashboard.component.scss'],
   providers: [DashboardService,CollateralListService]
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
+
+  private ngUnsubscribe$ = new Subject<void>();
   trendingTags: CloudData[] = [];
   barChartOptions: any;
   data: any;
@@ -154,7 +158,7 @@ export class DashboardComponent implements OnInit {
       "startDate": this.datePipe.transform(startDate, 'yyyy-MM-dd'),
       "endDate": this.datePipe.transform(endDate, 'yyyy-MM-dd')
     }
-    this.dashboardservice.getSummaryofProposalsByAccount(requestParams).subscribe((data: any) => {
+    this.dashboardservice.getSummaryofProposalsByAccount(requestParams).pipe(takeUntil(this.ngUnsubscribe$)).subscribe((data: any) => {
       this.barChartData["dataInProgrss"] = [];
       this.barChartData["dataWon"] = [];
       this.barChartData["dataReview"] = [];
@@ -216,6 +220,12 @@ export class DashboardComponent implements OnInit {
     }
     }
 
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe$.next();
+    this.ngUnsubscribe$.complete();
+    this.ngUnsubscribe$.unsubscribe();
   }
 
 }

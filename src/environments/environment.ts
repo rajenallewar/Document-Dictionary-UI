@@ -64,13 +64,21 @@ export const AppSettings = {
       name: 'countOfProposalStatus',
       url: '/proposal/countOfProposalStatus'
     },
-    'getRegionData':{
-      name: 'getRegionData',
-      url: '/dms/getRegionData'
+    'getAllRegions':{
+      name: 'getAllRegions',
+      url: '/dms/getAllRegions'
+    },
+    'getAllClients':{
+      name: 'getAllClients',
+      url: '/dms/getAllClients'
+    },
+    'getAllStatuses':{
+      name: 'getAllStatuses',
+      url: '/dms/getAllStatuses'
     },
     'saveProposal':{
       name: 'saveProposal',
-      url: ''
+      url: '/proposal/saveProposal'
     },
     'searchemail': {
       name: 'searchemail',

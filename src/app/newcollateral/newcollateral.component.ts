@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { NewCollateralService } from './newcollateral.service';
 import { AppSharedService } from '../shared/services/shared.service';
+import { SpinnerService } from '../shared/spinner/spinner.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-newcollateral',
@@ -26,6 +28,8 @@ export class NewcollateralComponent implements OnInit, OnDestroy {
   constructor(private router: Router,
     private acr: ActivatedRoute,
     private formBuilder: FormBuilder,
+    private spinnerService: SpinnerService,
+    private toastr: ToastrService,
     private collateralService: NewCollateralService,
     private appSharedService: AppSharedService) { }
 
@@ -51,9 +55,10 @@ export class NewcollateralComponent implements OnInit, OnDestroy {
     });
     if (this.collateralObj.fileName) {
       this.uploadedFiles=[];
-      let file: any = {};
-      file.name = this.collateralObj.fileName;
-      this.uploadedFiles.push(file);
+      let fileItem: any = {};
+      fileItem.fileName = this.collateralObj.fileName;
+      fileItem.file = null;
+      this.uploadedFiles.push(fileItem);
     }
 
 
@@ -72,10 +77,11 @@ export class NewcollateralComponent implements OnInit, OnDestroy {
     console.log(form.value);
 
     this.checkFileError();
-    if (this.collateralForm.valid) {      
+    if (this.collateralForm.valid) {
+      this.spinnerService.spinner(true);
       this.collateralService.saveCollateral(this.collateralService.buildSaveRequest(this.collateralObj, this.openType, this.uploadedFiles, this.proposalId)).subscribe(data => {
         this.close();
-
+        
         console.log('this.router :', this.router.url);
         if (this.router.url.indexOf('collaterals') != -1) {
           this.appSharedService.setNewCollateralCloseEvent(true);
@@ -84,15 +90,17 @@ export class NewcollateralComponent implements OnInit, OnDestroy {
             this.router.navigate(['/dms/collaterals']);
           }, 10);
         }
-      });
+        setTimeout(() => {
+          this.toastr.success('Collateral Added', '', this.appSharedService.toastrOption);
+        }, 100);
+      },((err)=>{}),(()=>{this.spinnerService.spinner(false);}));
     }
   }
   close() {
     this.router.navigate([{ outlets: { dialogs: null } }], { relativeTo: this.acr.parent });
   }
   removeSelectedFiles(e: Event, file: any) {
-    console.log(file);
-    let fileIndex = this.uploadedFiles.findIndex(p => p.name == file.name);
+    let fileIndex = this.uploadedFiles.findIndex(p => p.fileName == file.fileName);
     if (fileIndex != -1) {
       this.uploadedFiles.splice(fileIndex, 1);
     }
@@ -101,7 +109,10 @@ export class NewcollateralComponent implements OnInit, OnDestroy {
     if (fileInput.target["files"]) {
       this.uploadedFiles=[];
       for (let index = 0; index < fileInput.target["files"].length; index++) {
-        this.uploadedFiles.push(fileInput.target["files"][index])
+        let fileItem: any = {};
+        fileItem.fileName = fileInput.target["files"][index].name;
+        fileItem.file = fileInput.target["files"][index];
+        this.uploadedFiles.push(fileItem);
       }
     }
     if (this.uploadedFiles && this.uploadedFiles.length) {

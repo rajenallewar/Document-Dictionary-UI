@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class DashboardService {
@@ -7,7 +8,7 @@ export class DashboardService {
     public getTrendingTags() {
       return this.http.get('getTrendingTags');
     }
-    public getSummaryofProposalsByAccount(requestParams:any){
+    public getSummaryofProposalsByAccount(requestParams:any): Observable<any> {
       return this.http.post('getSummaryofProposalsByAccount',requestParams);
     }
   

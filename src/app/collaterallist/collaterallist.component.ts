@@ -2,6 +2,10 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { CollateralListService } from './collaterallist.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppSharedService } from '../shared/services/shared.service';
+import { SpinnerService } from '../shared/spinner/spinner.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-collaterallist',
@@ -22,11 +26,14 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
   searchTimer;
   tagSearch = null;
   proposalId = null;
+  private ngUnsubscribe$ = new Subject<void>();
 
   @ViewChild('paginator') paginator: any;
 
   constructor(private collateralListService: CollateralListService,
     private router: Router,
+    private spinnerService: SpinnerService,
+    private toastr: ToastrService,
     private acr: ActivatedRoute,
     private appSharedService: AppSharedService) { }
 
@@ -85,7 +92,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
     this.getCollateralList(req);
     this.getCollateralsCount();
 
-    this.appSharedService.getNewCollateralCloseEvent().subscribe((flag) => {
+    this.appSharedService.getNewCollateralCloseEvent().pipe(takeUntil(this.ngUnsubscribe$)).subscribe((flag) => {
       if (flag) {
         this.resetCollateralListing();
       }
@@ -94,6 +101,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
 
   }
   getCollateralsCount() {
+    this.spinnerService.spinner(true);
     this.collateralListService.collateralTypeCount().subscribe((response: any) => {
       if (response) {
         // this.collateralData = response;
@@ -146,19 +154,23 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
       }
       console.log(this.data);
       this.displayLineChart = true;
-    });
+    },((err)=>{}),(()=>{this.spinnerService.spinner(false);}));
   }
   getCollateralList(req) {
+    this.spinnerService.spinner(true);
     this.collateralListService.getCollaterals(req).subscribe((response: any) => {
-      this.totalRecords = response.totalCount || 10;
-      this.collateralList = response.listOfCollateralUIModel;
-      this.displayCollateralList = this.collateralList.slice(0, this.displayRecordSize);
-    });
+      if (response) {
+        this.totalRecords = response.totalCount || 10;
+        this.collateralList = response.listOfCollateralUIModel;
+        this.displayCollateralList = this.collateralList.slice(0, this.displayRecordSize);
+      }
+    },((err)=>{}),(()=>{this.spinnerService.spinner(false);}));
   }
 
   resetCollateralListing() {
     console.log("this.paginator", this.paginator);
-    this.paginator && this.paginator.changePageToFirst();
+    var event = new Event('reset');
+    this.paginator && this.paginator.changePageToFirst(event);
     let req = {
       "limit": 10,
       "offset": 1,
@@ -169,37 +181,40 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
   }
 
   onTagSearch(event) {
+    let req = {
+      "limit": 10,
+      "offset": 1,
+      "mapOfSearchKeyVsValue": null
+    }
     if (event.target.value) {
       let value = event.target.value.trim();
-      let req = {
-        "limit": 10,
-        "offset": 1,
-        "mapOfSearchKeyVsValue": {
-          "tags": value
-        }
-      }
-      this.getCollateralList(req);
-    }
+      req['mapOfSearchKeyVsValue']={"tags":value};
+    } 
+    this.getCollateralList(req);
   }
 
   paginate(event) {
     let req = {
       "offset": event.first + 1,
       "limit": event.rows,
-      "mapOfSearchKeyVsValue": {
-        "tags": this.tagSearch,
-        "proposalId":this.proposalId
-      }
+      "mapOfSearchKeyVsValue": null
+    }
+
+    if(this.proposalId) {
+      req['mapOfSearchKeyVsValue']={"proposalId":this.proposalId};
+    } else if(this.tagSearch){
+      req['mapOfSearchKeyVsValue']={"tags":this.tagSearch};
     }
     this.getCollateralList(req);
   }
 
   onDelete(event: any) {
     let collateralId = this.collateralList[event.index].collateralId;
+    this.spinnerService.spinner(true);
     this.collateralListService.deleteCollateral(collateralId).subscribe(() => {
-      console.log("collateral deleted");
+      this.toastr.error('Colateral Deleted', '', this.appSharedService.toastrOption);
       this.resetCollateralListing();
-    });
+    },((err)=>{}),(()=>{this.spinnerService.spinner(false);}));
   }
   onEdit(event) {
     console.log("onEdit", event);
@@ -224,6 +239,9 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     this.appSharedService.clearRouteData();
+    this.ngUnsubscribe$.next();
+    this.ngUnsubscribe$.complete();
+    this.ngUnsubscribe$.unsubscribe();
   }
 
 }

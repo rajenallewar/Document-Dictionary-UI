@@ -3,6 +3,7 @@ import { ProposalListService } from './proposallist.service';
 import { AppSharedService } from '../shared/services/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { SpinnerService } from '../shared/spinner/spinner.service';
 
 @Component({
   selector: 'app-proposallist',
@@ -45,6 +46,7 @@ export class ProposallistComponent implements OnInit {
     private router: Router,
     private acr: ActivatedRoute,
     public datePipe: DatePipe,
+    private spinnerService: SpinnerService,
     private appSharedService: AppSharedService) { }
 
   ngOnInit() {
@@ -176,23 +178,28 @@ export class ProposallistComponent implements OnInit {
   getDefaultDates() {
     let currentDate = new Date();
     
-    // //Set end date as of yesterday
-    // currentDate.setDate(currentDate.getDate() - 1);
-    // this.endDate = this.datePipe.transform(currentDate, 'yyyy-MM-dd');
+    //Set end date as of yesterday
+    currentDate.setDate(currentDate.getDate() - 1);
+    this.endDate = this.datePipe.transform(currentDate, 'yyyy-MM-dd');
   
-    // //Set start date as 1 month before
-    // currentDate.setMonth(currentDate.getMonth() - 1);
-    // this.startDate = this.datePipe.transform(currentDate, 'yyyy-MM-dd');
+    //Set start date as 1 month before
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    this.startDate = this.datePipe.transform(currentDate, 'yyyy-MM-dd');
 
-    this.startDate = "2019-01-01";
-    this.endDate = "2019-12-12";
+    // this.startDate = "2019-01-01";
+    // this.endDate = "2019-12-12";
 
     this.searchCriteria.rangeDates=[new Date(this.startDate), new Date(this.endDate)];
     
   }
   onSearch(event) {
-    let startDate = this.datePipe.transform(this.startDate, 'yyyy-MM-dd');
-    let endDate =  this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
+
+    let startDate;
+    let endDate;
+    if (this.searchCriteria.rangeDates && this.searchCriteria.rangeDates[0] && this.searchCriteria.rangeDates[1]) {
+      startDate = this.datePipe.transform(this.searchCriteria.rangeDates[0], 'yyyy-MM-dd');
+      endDate = this.datePipe.transform(this.searchCriteria.rangeDates[1], 'yyyy-MM-dd');
+    }
     let obj: any = {
       "startDate": startDate,
       "endDate": endDate,
@@ -210,22 +217,28 @@ export class ProposallistComponent implements OnInit {
   }
 
   getProposalList(obj) {
+    this.spinnerService.spinner(true);
     this.proposalListService.getProposalList(obj).subscribe((response: any) => {
       this.totalRecords = response.totalCountOfProposals || 10;
       this.proposalList = response.listOfProposalUIModel;
       this.displayProposalList = this.proposalList.slice(0, this.displayRecordSize);
-    });
+    },((err)=>{}),(()=>{this.spinnerService.spinner(false);}));
   }
 
   paginate(event) {
-    let startDate = this.datePipe.transform(this.startDate, 'yyyy-MM-dd');
-    let endDate =  this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
+    let startDate;
+    let endDate;
+    if (this.searchCriteria.rangeDates && this.searchCriteria.rangeDates[0] && this.searchCriteria.rangeDates[1]) {
+      startDate = this.datePipe.transform(this.searchCriteria.rangeDates[0], 'yyyy-MM-dd');
+      endDate = this.datePipe.transform(this.searchCriteria.rangeDates[1], 'yyyy-MM-dd');
+    }
+
     let obj: any = {
       "startDate": startDate,
       "endDate": endDate,
       "pageSearch": {
-        "limit": event.first + 1,
-        "offset": event.rows,
+        "offset": event.first + 1,
+        "limit": event.rows,
         "mapOfSearchKeyVsValue": {
           "clientName": this.searchCriteria.clientName,
           "status": this.searchCriteria.status,
@@ -265,6 +278,7 @@ export class ProposallistComponent implements OnInit {
   }
 
   getProposalCount() {
+    this.spinnerService.spinner(true);
     this.proposalListService.countOfProposalStatus().subscribe((response: any) => {
       console.log(response);
       this.proposalData.totalAvailableProposals = response.totalAvailableProposals;
@@ -318,7 +332,7 @@ export class ProposallistComponent implements OnInit {
       }
       console.log(this.barChartData);
       this.displayLineChart = true;
-    });
+    },((err)=>{}),(()=>{this.spinnerService.spinner(false);}));
   }
 
   onEdit(event) {

@@ -1,14 +1,9 @@
 <ng-container *ngIf="card">
-    <!-- <pre>{{card|json}}</pre> -->
-    <!-- <pre>{{cardIndex}}</pre> -->
     <div [style.borderTopColor]="card.topColor?card.topColor:'#f00'" class="col-card" [ngClass]="{'mr-l-0': marginLeftFlag}">
-        <!-- <pre>marginLeftFlag :{{marginLeftFlag|json}}</pre> -->
         <div class="col-type-img-con card-row">
-            <!-- <pre>{{card.filename?.split('.').pop()|json}}</pre> -->
-            <!-- <img src="./../../assets/images/word.svg" alt=""> -->
-            <img *ngIf="card?.fileType.toLowerCase() == 'doc'" src="./../../assets/images/word.svg" alt="">
-            <img *ngIf="card?.fileType.toLowerCase() == 'pdf'" src="./../../assets/images/pdf.svg" alt="">
-            <img *ngIf="card?.fileType.toLowerCase() == 'ppt'" src="./../../assets/images/powerpoint.svg" alt="">
+            <img *ngIf="card.fileName?.split('.').pop().toLowerCase() == 'doc'" src="./../../assets/images/word.svg" alt="">
+            <img *ngIf="card.fileName?.split('.').pop().toLowerCase() == 'pdf'" src="./../../assets/images/pdf.svg" alt="">
+            <img *ngIf="card.fileName?.split('.').pop().toLowerCase() == 'ppt'" src="./../../assets/images/powerpoint.svg" alt="">
         </div>
         <div class="card-row">
             <div class="card-label">{{"Collateral Type : "}}</div>
@@ -32,7 +27,7 @@
             <div class="card-label">{{"Tags : "}}</div>
             <div class="card-label-value2 tag-value">
                 <span *ngFor="let tag of card?.setOfTagsUIModel; last as isLast"
-                    class="tag">{{tag.tagsDescription}}<span *ngIf="!isLast" class="separater"> | </span></span>
+                    class="tag">{{tag.tagName}}<span *ngIf="!isLast" class="separater"> | </span></span>
                 <!-- {{"Debit | Webservices | Amazon Web Services (AWS) |….."}} -->
             </div>
         </div>

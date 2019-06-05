@@ -38,10 +38,14 @@ export class NewCollateralService {
       let formData=new FormData();
 
       if (file && file[0]) {
-        request["fileName"] = file[0].name;
-        // request["file"] = file[0];
-        // formData.append('fileName', file[0].name);
-        formData.append('file', file[0]);
+        request["fileName"] = file[0].fileName;
+        if(file[0].file){
+          formData.append('file', file[0].file);
+        } else {
+          var f = new File([""], "EMPTY");
+          formData.append('file', f);
+        }
+        
       }
 
       formData.append('collateral', new Blob([JSON.stringify(request)], {type: 'application/json'}));

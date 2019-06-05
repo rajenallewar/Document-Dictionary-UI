@@ -16,6 +16,10 @@ export class AppSharedService {
   constructor() { }
   startDate: string;
   endDate: string;
+  toastrOption = {
+    timeOut: 1500, 
+    positionClass: 'toast-bottom-right'
+  }
   
   setUserLoggedIn (flag) {
     this.isUserLoggedIn = flag;
@@ -52,4 +56,8 @@ export class AppSharedService {
   setDashboardDateSubject(obj){
     this.dashboardDateSubject.next(obj);
   }
+
+
+
+
 }
