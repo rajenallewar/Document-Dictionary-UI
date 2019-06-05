@@ -8,7 +8,7 @@
         <div class="ui-g pt-1">
                 <div class="ui-g-2 won-loss"><span class="label">RFP Won & Lost</span></div>
                 <div class="ui-g-10 proposal-by-account ml-chart"><span class="label">Proposals by Account</span>
-                   <p-chart type="bar" [data]="barChartData" [options]="barChartOptions" width="70vw" height="25vh"></p-chart>
+                   <p-chart *ngIf="barChartData && barChartData.length" type="bar" [data]="barChartData" [options]="barChartOptions" width="70vw" height="25vh"></p-chart>
                 </div>
         </div>
         <div class="ui-g pt-1">

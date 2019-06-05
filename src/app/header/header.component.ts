@@ -8,7 +8,7 @@ import { AppSharedService } from '../shared/services/shared.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  headerText:string = '';
+  headerText = "Dashboard";
   constructor(private router:Router,
     private acr:ActivatedRoute,
     public appSharedService:AppSharedService) {}
