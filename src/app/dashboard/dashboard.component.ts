@@ -4,15 +4,20 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CloudData, CloudOptions } from 'angular-tag-cloud-module';
 import { DashboardService } from './dashboard.service';
 import { DatePipe } from '@angular/common';
+import { CollateralListService } from '../collaterallist/collaterallist.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  providers: [DashboardService]
+  providers: [DashboardService,CollateralListService]
 })
 export class DashboardComponent implements OnInit {
   trendingTags: CloudData[] = [];
   barChartOptions: any;
+  data: any;
+  doughnutOptions:any;
+  doughtnutData: any = {};
+  collateralData: any = {};
   totalProposals: number = 0;
   dateRange: any;
   barChartData: any = {};
@@ -21,7 +26,8 @@ export class DashboardComponent implements OnInit {
     height: 180,
     overflow: false,
   };
-  constructor(private router: Router, private acr: ActivatedRoute, private appSharedService: AppSharedService, private dashboardservice: DashboardService, public datePipe: DatePipe) {
+  constructor(private router: Router, private acr: ActivatedRoute, private appSharedService: AppSharedService, private dashboardservice: DashboardService,
+     public datePipe: DatePipe,private collateralListService: CollateralListService) {
   }
   ngOnInit() {
 
@@ -38,6 +44,12 @@ export class DashboardComponent implements OnInit {
     } else {
       this.appSharedService.dateRange = [new Date(this.appSharedService.startDate), new Date(this.appSharedService.endDate)];
     }
+    this.doughtnutData = {
+      "data": [],
+      "labels": [],
+      "bgColors": []
+    }
+    this.getCollateralsCount();
     this.getTrendingTags();
   }
 
@@ -69,6 +81,73 @@ export class DashboardComponent implements OnInit {
   getRandomColor() {
     var color = Math.floor(0x1000000 * Math.random()).toString(16);
     return '#' + ('000000' + color).slice(-6);
+  }
+  getCollateralsCount(){
+    this.collateralListService.collateralTypeCount().subscribe((data:any)=>{
+      this.collateralData= data;
+      for (const key in this.collateralData.mapOfCollateralTypeVsCount) {
+        if (this.collateralData.mapOfCollateralTypeVsCount.hasOwnProperty(key)) {
+          this.doughtnutData.data.push(this.collateralData.mapOfCollateralTypeVsCount[key]);
+          this.doughtnutData.labels.push(key);
+          switch (key) {
+            case "Brand Stories":
+            this.doughtnutData.bgColors.push("#FF8533");
+            break;
+            case "Capabilities":
+            this.doughtnutData.bgColors.push("#9562fb");
+              break;
+            case "Case Studies":
+            this.doughtnutData.bgColors.push("#7bc5f1");
+              break;
+            case "Corporate Overview":
+            this.doughtnutData.bgColors.push("#7bf19b");
+              break;
+            case "Newsletters":
+             this.doughtnutData.bgColors.push("#cafb62");
+             break;
+            case "Proposals & Presentation":
+            this.doughtnutData.bgColors.push("#f1a87b");
+              break;
+            case "White Papers":
+            this.doughtnutData.bgColors.push("#fb6262");
+              break;
+            default:
+              break;
+          }
+        }
+      }
+      this.data = {
+        labels: this.doughtnutData.labels,
+        datasets: [
+          {
+            data: this.doughtnutData.data,
+            backgroundColor: this.doughtnutData.bgColors
+          }]
+      };
+      this.doughnutOptions = {
+        rotation: 1 * Math.PI,
+        circumference: 1 * Math.PI,
+        legend: {
+          display: false
+        },
+        cutoutPercentage: 90,
+        elements: {
+          arc: {
+            borderWidth: 0
+          }
+        },
+        layout: {
+          padding: {
+            left: 15,
+            right: 15,
+            top: 15,
+            bottom: 15
+          }
+        }
+      }
+
+    })
+
   }
   getSummaryofProposalsByAccount(startDate: any, endDate: any) {
     let requestParams = {
@@ -127,9 +206,9 @@ export class DashboardComponent implements OnInit {
       scales: {
         xAxes: [{
             barPercentage: 0.5,
-            barThickness: 6,
-            maxBarThickness: 6,
-            minBarLength: 6,
+            barThickness: 8,
+            maxBarThickness: 8,
+            minBarLength: 8,
             gridLines: {
                 offsetGridLines: true
             }

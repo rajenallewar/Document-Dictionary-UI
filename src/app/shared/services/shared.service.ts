@@ -52,8 +52,4 @@ export class AppSharedService {
   setDashboardDateSubject(obj){
     this.dashboardDateSubject.next(obj);
   }
-
-
-
-
 }
