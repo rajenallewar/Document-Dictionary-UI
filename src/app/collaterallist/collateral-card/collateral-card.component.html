@@ -1,5 +1,5 @@
 <ng-container *ngIf="card">
-    <div [style.borderTopColor]="card.topColor?card.topColor:'#f00'" class="col-card" [ngClass]="{'mr-l-0': marginLeftFlag}">
+    <div [style.borderTopColor]="card?.collateralTypeUIModel?.color?card?.collateralTypeUIModel?.color:'#f00'" class="col-card" [ngClass]="{'mr-l-0': marginLeftFlag}">
         <div class="col-type-img-con card-row">
             <img *ngIf="card.fileName?.split('.').pop().toLowerCase() == 'doc'" src="./../../assets/images/word.svg" alt="">
             <img *ngIf="card.fileName?.split('.').pop().toLowerCase() == 'pdf'" src="./../../assets/images/pdf.svg" alt="">

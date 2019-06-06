@@ -76,7 +76,7 @@ export class NewproposalComponent implements OnInit {
         this.close();
         
         if (this.router.url.indexOf('proposals') != -1) {
-          this.appSharedService.setNewCollateralCloseEvent(true);
+          this.appSharedService.setNewProposalCloseEvent(true);
         } else {
           setTimeout(() => {
             this.router.navigate(['/dms/proposals']);

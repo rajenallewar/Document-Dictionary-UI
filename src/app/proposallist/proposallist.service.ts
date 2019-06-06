@@ -8,8 +8,8 @@ export class ProposalListService {
     return this.http.post('getProposals', reqObj);
     // return this.http.get('/assets/mockdata/getProposals.json');
   }
-  public countOfProposalStatus() {
-    return this.http.get('countOfProposalStatus');
+  public countOfProposalStatus(reqObj) {
+    return this.http.post('countOfProposalStatus', reqObj);
     // return this.http.get('/assets/mockdata/countOfProposalStatus.json');
   }
   public getAllRegions() {

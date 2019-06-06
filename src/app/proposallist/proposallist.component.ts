@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ProposalListService } from './proposallist.service';
 import { AppSharedService } from '../shared/services/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { SpinnerService } from '../shared/spinner/spinner.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-proposallist',
@@ -12,7 +14,7 @@ import { SpinnerService } from '../shared/spinner/spinner.service';
   providers: [ProposalListService]
 
 })
-export class ProposallistComponent implements OnInit {
+export class ProposallistComponent implements OnInit, OnDestroy {
   public routeData: any = null;
   public lineChartData: any;
   public lineChartOptions: any;
@@ -29,16 +31,17 @@ export class ProposallistComponent implements OnInit {
   proposalList: any;
   displayProposalList: any;
   @ViewChild('paginator') paginator: any;
+  private ngUnsubscribe$ = new Subject<void>();
 
   searchCriteria: any = {
-    rangeDates:null,
-    clientName:null,
-    status:null,
-    region:null,
+    rangeDates: null,
+    clientName: null,
+    status: null,
+    region: null,
   }
-  clientListOptions:any[];
-  regionListOptions:any[];
-  statusListOptions:any[];
+  clientListOptions: any[];
+  regionListOptions: any[];
+  statusListOptions: any[];
   endDate: string;
   startDate: string;
 
@@ -57,6 +60,16 @@ export class ProposallistComponent implements OnInit {
     };
 
     this.lineChartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: {
+        duration: 0
+      },
+      hover: {
+        mode: null,
+        animationDuration: 0
+      },
+      responsiveAnimationDuration: 0,
       legend: {
         display: false
       },
@@ -87,14 +100,21 @@ export class ProposallistComponent implements OnInit {
 
 
     this.barChartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: {
+        duration: 0
+      },
+      hover: {
+        mode: null,
+        animationDuration: 0
+      },
+      responsiveAnimationDuration: 0,
       legend: {
         display: false
       },
       tooltips: {
         enabled: false
-      },
-      hover: {
-        mode: null
       },
       title: {
         display: false,
@@ -122,37 +142,37 @@ export class ProposallistComponent implements OnInit {
 
 
     this.clientListOptions = [
-      {label:"All",value:null},
-      {label:"HSBC",value:"HSBC"},
-      {label:"Wells Fargo",value:"Wells Fargo"},
-      {label:"Asurian",value:"Asurian"},
-      {label:"Citi",value:"Citi"},
+      { label: "All", value: null },
+      { label: "HSBC", value: "HSBC" },
+      { label: "Wells Fargo", value: "Wells Fargo" },
+      { label: "Asurian", value: "Asurian" },
+      { label: "Citi", value: "Citi" },
     ];
 
     this.regionListOptions = [
-      {label:"All",value:null},
-      {label:"New York",value:"New York"},
-      {label:"Charlotte",value:"Charlotte"},
-      {label:"Singapore",value:"Singapore"},
-      {label:"US Central",value:"US Central"},
-      {label:"Amsterdam",value:"Amsterdam"},
-      {label:"UAE",value:"UAE"},
-      {label:"Paris",value:"Paris"},
+      { label: "All", value: null },
+      { label: "New York", value: "New York" },
+      { label: "Charlotte", value: "Charlotte" },
+      { label: "Singapore", value: "Singapore" },
+      { label: "US Central", value: "US Central" },
+      { label: "Amsterdam", value: "Amsterdam" },
+      { label: "UAE", value: "UAE" },
+      { label: "Paris", value: "Paris" },
     ];
 
     this.statusListOptions = [
-      {label:"All",value:null},
-      {label:"Lost",value:"Lost"},
-      {label:"New",value:"New"},
-      {label:"Won",value:"Won"},
-      {label:"In-Progress",value:"In-Progress"},
-      {label:"Review",value:"Review"}
+      { label: "All", value: null },
+      { label: "Lost", value: "Lost" },
+      { label: "New", value: "New" },
+      { label: "Won", value: "Won" },
+      { label: "In-Progress", value: "In-Progress" },
+      { label: "Review", value: "Review" }
     ];
 
 
     this.getDefaultDates();
     let startDate = this.datePipe.transform(this.startDate, 'yyyy-MM-dd');
-    let endDate =  this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
+    let endDate = this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
 
     this.searchCriteria.clientName = null;
     this.searchCriteria.status = null;
@@ -173,15 +193,21 @@ export class ProposallistComponent implements OnInit {
     }
     this.getProposalList(obj);
     this.getProposalCount();
+
+    this.appSharedService.getNewProposalCloseEvent().pipe(takeUntil(this.ngUnsubscribe$)).subscribe((flag) => {
+      if (flag) {
+        this.resetProposalListing();
+      }
+    });
   }
 
   getDefaultDates() {
     let currentDate = new Date();
-    
+
     //Set end date as of yesterday
     currentDate.setDate(currentDate.getDate() - 1);
     this.endDate = this.datePipe.transform(currentDate, 'yyyy-MM-dd');
-  
+
     //Set start date as 1 month before
     currentDate.setMonth(currentDate.getMonth() - 1);
     this.startDate = this.datePipe.transform(currentDate, 'yyyy-MM-dd');
@@ -189,8 +215,8 @@ export class ProposallistComponent implements OnInit {
     // this.startDate = "2019-01-01";
     // this.endDate = "2019-12-12";
 
-    this.searchCriteria.rangeDates=[new Date(this.startDate), new Date(this.endDate)];
-    
+    this.searchCriteria.rangeDates = [new Date(this.startDate), new Date(this.endDate)];
+
   }
   onSearch(event) {
 
@@ -222,7 +248,7 @@ export class ProposallistComponent implements OnInit {
       this.totalRecords = response.totalCountOfProposals || 10;
       this.proposalList = response.listOfProposalUIModel;
       this.displayProposalList = this.proposalList.slice(0, this.displayRecordSize);
-    },((err)=>{}),(()=>{this.spinnerService.spinner(false);}));
+    }, ((err) => { }), (() => { this.spinnerService.spinner(false); }));
   }
 
   paginate(event) {
@@ -249,17 +275,16 @@ export class ProposallistComponent implements OnInit {
     this.getProposalList(obj);
   }
 
-  resetCollateralListing() {
-
+  resetProposalListing() {
     this.getDefaultDates();
     let startDate = this.datePipe.transform(this.startDate, 'yyyy-MM-dd');
-    let endDate =  this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
+    let endDate = this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
 
     this.searchCriteria.clientName = null;
     this.searchCriteria.status = null;
     this.searchCriteria.region = null;
-   
-    this.paginator && this.paginator.changePageToFirst();
+    var event = new Event('reset');
+    this.paginator && this.paginator.changePageToFirst(event);
     let obj: any = {
       "startDate": startDate,
       "endDate": endDate,
@@ -279,7 +304,13 @@ export class ProposallistComponent implements OnInit {
 
   getProposalCount() {
     this.spinnerService.spinner(true);
-    this.proposalListService.countOfProposalStatus().subscribe((response: any) => {
+    let req = {
+      "dateRangeUIModel": {
+        "startDate": null,
+        "endDate": null
+      }
+    }
+    this.proposalListService.countOfProposalStatus(req).subscribe((response: any) => {
       console.log(response);
       this.proposalData.totalAvailableProposals = response.totalAvailableProposals;
       if (response.mapofStatus) {
@@ -332,39 +363,39 @@ export class ProposallistComponent implements OnInit {
       }
       console.log(this.barChartData);
       this.displayLineChart = true;
-    },((err)=>{}),(()=>{this.spinnerService.spinner(false);}));
+    }, ((err) => { }), (() => { this.spinnerService.spinner(false); }));
   }
 
   onEdit(event) {
-    console.log("onEdit :",event);
+    console.log("onEdit :", event);
     this.appSharedService.setRouteData({
-      "openType":"edit",
-      "proposal":this.displayProposalList[event.index]
+      "openType": "edit",
+      "proposal": this.displayProposalList[event.index]
     });
     setTimeout(() => {
-      this.router.navigate([{outlets:{dialogs:'newproposal'}}], {relativeTo:this.acr.parent});
+      this.router.navigate([{ outlets: { dialogs: 'newproposal' } }], { relativeTo: this.acr.parent });
     }, 0);
   }
   onAdd(event) {
     let proposalId = this.displayProposalList[event.index].proposalId;
     let proposalName = this.displayProposalList[event.index].proposalName;
     this.appSharedService.setRouteData({
-      "openType":"newFromPraposal",
-      "proposalId":proposalId,
-      "proposalName":proposalName,
+      "openType": "newFromPraposal",
+      "proposalId": proposalId,
+      "proposalName": proposalName,
     });
     setTimeout(() => {
-      this.router.navigate([{outlets:{dialogs:'uploadcollateral'}}], {relativeTo:this.acr.parent});
+      this.router.navigate([{ outlets: { dialogs: 'uploadcollateral' } }], { relativeTo: this.acr.parent });
     }, 0);
   }
-  onViewCollaterals(event){
+  onViewCollaterals(event) {
     console.log("onViewCollaterals :", event);
     let proposalId = this.displayProposalList[event.index].proposalId.toString();
     let proposalName = this.displayProposalList[event.index].proposalName;
     this.appSharedService.setRouteData({
-      "openType":"getCollatealsFromPraposal",
-      "proposalId":proposalId,
-      "proposalName":proposalName,
+      "openType": "getCollatealsFromPraposal",
+      "proposalId": proposalId,
+      "proposalName": proposalName,
     });
     setTimeout(() => {
       this.router.navigate(['/dms/collaterals']);
@@ -372,5 +403,8 @@ export class ProposallistComponent implements OnInit {
   }
   ngOnDestroy() {
     // this.appSharedService.clearRouteData();
+    this.ngUnsubscribe$.next();
+    this.ngUnsubscribe$.complete();
+    this.ngUnsubscribe$.unsubscribe();
   }
 }

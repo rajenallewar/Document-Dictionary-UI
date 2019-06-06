@@ -9,6 +9,7 @@ export class AppSharedService {
   isUserLoggedIn: boolean = false;
   public _routeData:any;
   private newCollateralCloseSubject: Subject<boolean> = new Subject<boolean>();
+  private newProposalCloseSubject: Subject<boolean> = new Subject<boolean>();
 
   private dashboardDateSubject: Subject<any> = new Subject<any>();
   dateRange:any;
@@ -47,6 +48,14 @@ export class AppSharedService {
 
   setNewCollateralCloseEvent(flag){
     this.newCollateralCloseSubject.next(flag);
+  }
+
+  getNewProposalCloseEvent(){
+    return this.newProposalCloseSubject.asObservable();
+  }
+
+  setNewProposalCloseEvent(flag){
+    this.newProposalCloseSubject.next(flag);
   }
 
   getDashboardDateSubject(){
