@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { AppSharedService } from '../shared/services/shared.service';
 
@@ -7,13 +7,18 @@ import { AppSharedService } from '../shared/services/shared.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   headerText = "Dashboard";
+  showCalender = false;
   constructor(private router:Router,
     private acr:ActivatedRoute,
     public appSharedService:AppSharedService) {}
 
   ngOnInit() {
+    this.showCalender = false;
+  }
+
+  ngAfterViewInit(){
     this.router.events.subscribe((event) => {
       if(event instanceof NavigationEnd) {
         console.log(this.router.url);
@@ -39,6 +44,10 @@ export class HeaderComponent implements OnInit {
         }
       }
     });
+
+    setTimeout(() => {
+      this.showCalender = true;
+    }, 100);
   }
 
   onNewCollateral() {
@@ -60,6 +69,10 @@ export class HeaderComponent implements OnInit {
   }
   onDateSelect(event){
     this.appSharedService.setDashboardDateSubject(event);
+  }
+
+  ngOnDestroy(){
+
   }
 
 
