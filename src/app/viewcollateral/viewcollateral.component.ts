@@ -5,6 +5,7 @@ import { AppSharedService } from '../shared/services/shared.service';
 import { ViewCollateralService } from './viewcollateral.service';
 import { downloadFile } from '../shared/utils/app.utils';
 import * as _ from 'lodash';
+import { SpinnerService } from '../shared/spinner/spinner.service';
 
 class TagsUIModel {
   tagId: number = null;
@@ -34,6 +35,7 @@ export class ViewcollateralComponent implements OnInit, OnDestroy {
   constructor(private acr: ActivatedRoute,
     private router: Router,
     private domSan: DomSanitizer,
+    private spinnerService:SpinnerService,
     private viewCollateralService: ViewCollateralService,
     private appSharedService: AppSharedService) { }
   ngOnInit() {
@@ -96,9 +98,23 @@ export class ViewcollateralComponent implements OnInit, OnDestroy {
     this.router.navigate([{ outlets: { dialogs: null } }], { relativeTo: this.acr.parent });
   }
   public getConvertedHtmlFile(id: number) {
-    this.viewCollateralService.readHtmlConvertedFile(id).subscribe((data: any) => {
-      this.htmlCode = this.domSan.bypassSecurityTrustHtml(data.docContent.toString());
-    })
+    // this.viewCollateralService.readHtmlConvertedFile(id).subscribe((data: any) => {
+    //   this.htmlCode = this.domSan.bypassSecurityTrustHtml(data.docContent.toString());
+    // })
+
+    this.spinnerService.spinner(true);
+    let downloadObj = {
+      "fileName": this.fileName,
+    }
+    this.viewCollateralService.downloadFile(downloadObj).subscribe((data: any) => {
+      this.spinnerService.spinner(false);
+      const blob = new Blob([data], {type:'application/pdf'});
+      // this.htmlCode = this.domSan.bypassSecurityTrustResourceUrl(URL.createObjectURL(blob));
+      // this.htmlCode = this.domSan.bypassSecurityTrustResourceUrl(URL.createObjectURL(blob));
+      this.htmlCode = URL.createObjectURL(blob);
+      
+
+    },((err)=>{this.spinnerService.spinner(false);}),(()=>{this.spinnerService.spinner(false);}))
   }
   downloadCollateral() {
     let downloadObj = {

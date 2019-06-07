@@ -9,9 +9,9 @@ export class CollateralListService {
       // return this.http.get('/assets/mockdata/getCollaterals.json');
   }
 
-  async collateralTypeCount(): Promise<any> {
+  async collateralTypeCount(reqObj): Promise<any> {
     try {
-      let res = await this.http.get('collateralTypeCount').toPromise();
+      let res = await this.http.post('collateralTypeCount',reqObj).toPromise();
       return res;
     } catch (error) {
       // await this.handleError(error);
