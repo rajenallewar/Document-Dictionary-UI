@@ -287,13 +287,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.barChartData["dataWon"] = [];
       this.barChartData["dataLost"] = [];
       this.barChartData["labels"] = [];
-      data.forEach((proposal) => {
-        this.barChartData.dataInProgrss.push(proposal["inProgress"])
-        this.barChartData.dataReview.push(proposal["review"])
-        this.barChartData.dataWon.push(proposal["won"])
-        this.barChartData.dataLost.push(proposal["lost"])
-        this.barChartData.labels.push(proposal["clientName"])
-      })
+      if(data) {
+        data.forEach((proposal) => {
+          this.barChartData.dataInProgrss.push(proposal["inProgress"])
+          this.barChartData.dataReview.push(proposal["review"])
+          this.barChartData.dataWon.push(proposal["won"])
+          this.barChartData.dataLost.push(proposal["lost"])
+          this.barChartData.labels.push(proposal["clientName"])
+        })
+      }
       this.generateProposalBarChart();
     })
   }
