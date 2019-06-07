@@ -1,6 +1,6 @@
 
 export const environment = {
-  production: false
+  production: true
 };
 export const AppSettings = {
   hasResource(url: string): boolean {
