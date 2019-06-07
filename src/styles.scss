@@ -65,15 +65,11 @@ body .ui-table .ui-table-tbody > tr > td {
 }
 body .ui-paginator {
     background-color: #f4f4f4;
-    border: 1px solid #c8c8c8;
-    padding: 0; 
-    text-align: right;
-    
-}
-body .ui-paginator {
     background-color: #f4f4f4;
     border: none !important;
-    padding: 0;
+    padding:0.5em 0;
+    text-align: right;
+    
 }
 .pt-1{
     padding-top: 1em !important;
@@ -148,7 +144,7 @@ body .ui-paginator {
 }
 .card-container{
     padding-top: 1em;
-    min-height: 585px;
+    min-height: 490px;
 }
 .img-icon{
     vertical-align: inherit;
@@ -195,4 +191,13 @@ body .ui-paginator {
     font-size:0.625rem;
     font-family: 'Carnas-ExtraLight';
     font-weight: 200;
-  }
+}
+angular-tag-cloud.custom-css {
+    font-family: 'Carnas-Regular';
+    width: 100% !important;
+}
+
+.ui-tooltip-text{
+    font-family: 'Carnas-Regular';
+    color: #f8e52d !important;
+}

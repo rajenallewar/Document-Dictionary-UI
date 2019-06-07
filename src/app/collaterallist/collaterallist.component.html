@@ -16,14 +16,17 @@
 </div>
 <div class="right-panel">
   <input [(ngModel)]="tagSearch" (change)="onTagSearch($event)" (keyup.enter)="onTagSearch($event)" class="search-box" type="text" placeholder="Search by Tag/Cloud / Big Data / Migration etc." />
-  <div class="card-container">
-      <app-collateral-card *ngFor="let card of displayCollateralList;index as i;" 
-      [cardIndex]="i" 
-      [card]="card"
-      (delete)="onDelete($event)"
-      (edit)="onEdit($event)"
-      (view)="onView($event)"
-      ></app-collateral-card>
+  <div class="scroll-container">
+      <div class="card-container clearfix">
+          <app-collateral-card *ngFor="let card of displayCollateralList;index as i;" 
+          [cardIndex]="i" 
+          [card]="card"
+          (delete)="onDelete($event)"
+          (edit)="onEdit($event)"
+          (view)="onView($event)"
+          ></app-collateral-card>
+      </div>
+      <p-paginator *ngIf="totalRecords > displayRecordSize"  #paginator [rows]="displayRecordSize" [totalRecords]="totalRecords" (onPageChange)="paginate($event)"></p-paginator>
   </div>
-  <p-paginator #paginator [rows]="displayRecordSize" [totalRecords]="totalRecords" (onPageChange)="paginate($event)"></p-paginator>
+  
 </div>

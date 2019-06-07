@@ -6,7 +6,7 @@ import { SpinnerService } from '../shared/spinner/spinner.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import randomColor from 'randomColor';
+import randomcolor from 'randomcolor';
 
 @Component({
   selector: 'app-collaterallist',
@@ -146,7 +146,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
             let perCount = 100 * count / totalCount;
             item.data = [perCount];
             item.count = +response.mapOfCollateralTypeVsCount[key];
-            let rColor = randomColor();
+            let rColor = randomcolor();
             item.backgroundColor = rColor;
             this.collateralColorMap[key] = rColor;
             this.data.datasets.push(item);

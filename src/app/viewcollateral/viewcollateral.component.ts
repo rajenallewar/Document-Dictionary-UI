@@ -111,7 +111,10 @@ export class ViewcollateralComponent implements OnInit, OnDestroy {
       const blob = new Blob([data], {type:'application/pdf'});
       // this.htmlCode = this.domSan.bypassSecurityTrustResourceUrl(URL.createObjectURL(blob));
       // this.htmlCode = this.domSan.bypassSecurityTrustResourceUrl(URL.createObjectURL(blob));
-      this.htmlCode = URL.createObjectURL(blob);
+      setTimeout(() => {
+        this.htmlCode = URL.createObjectURL(blob);  
+      }, 100);
+      
       
 
     },((err)=>{this.spinnerService.spinner(false);}),(()=>{this.spinnerService.spinner(false);}))

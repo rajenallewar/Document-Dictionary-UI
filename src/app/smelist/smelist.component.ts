@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SmeService } from './smelist.service';
 import { OverlayPanel } from 'primeng/overlaypanel';
+import { SpinnerService } from '../shared/spinner/spinner.service';
 
 @Component({
   selector: 'app-smelist',
@@ -17,8 +18,9 @@ export class SmelistComponent implements OnInit {
   BUSme: any;
   smeArchData: any;
   keyword:string;
-  totalRecords= 100;
-  constructor(private smelistservice: SmeService) {
+  totalRecords= 16;
+  displayRows= 16;
+  constructor(private smelistservice: SmeService,private spinnerService: SpinnerService,) {
 
   }
 
@@ -31,27 +33,26 @@ export class SmelistComponent implements OnInit {
     this.getTotalSmeCount();
   }
 
-  getSMEList() {
-    let req = {
-      "offset":1,
-      "limit":10
-    }
-    this.smelistservice.getSmeList(req).subscribe((data) => {
-      this.smeList = data;
-    })
+  getSMEList(req) {
+    this.spinnerService.spinner(true);
+    this.smelistservice.getSmeList(req).subscribe((data: any) => {
+      this.spinnerService.spinner(false);
+      if (data) {
+        this.totalRecords = data.countOFSmeDomainKeyword;
+        this.smeList = data.listOFSMEUIModel;
+      }
+    },((err)=>{this.spinnerService.spinner(false);}),(()=>{this.spinnerService.spinner(false);}));
   }
   loadSmeListLazy(event){
-    console.log("loadSmeListLazy :", event);   
     let req = {
-      "offset":event.first+1,
-      "limit":event.rows
+      "offset": event.first + 1,
+      "limit": event.rows,
+      "mapOfSearchKeyVsValue": null
     }
-    this.smelistservice.getSmeList(req).subscribe((data: any) => {
-      this.smeList = data;
-      console.log("this.smeList ", this.smeList);
-      
-      // this.smeList = data.slice(event.first, (event.first + event.rows));
-    })
+    if (this.keyword) {
+      req['mapOfSearchKeyVsValue'] = { "domain": this.keyword };
+    } 
+    this.getSMEList(req);
   }
   onSmeNameClickHandler(event: Event, smeInfo: any, region: string, overlaypanel: OverlayPanel) {
     event.preventDefault();
@@ -60,20 +61,22 @@ export class SmelistComponent implements OnInit {
     overlaypanel.toggle(event);
   }
   searchDomain(event){
-    let keyword= this.keyword;
-    if(keyword != "") {
-      this.smelistservice.getDomainByUserkeyword(keyword).subscribe((data)=>{
-        this.smeList=data;
-      })
-    } else  {
-      this.loadSmeListLazy({first: 0, rows: 10});
+
+    let req = {
+      "limit": this.displayRows,
+      "offset": 1,
+      "mapOfSearchKeyVsValue": null
     }
- 
-     
+    if (event.target.value) {
+      let value = event.target.value.trim();
+      req['mapOfSearchKeyVsValue'] = { "domain": value };
+    }
+    this.getSMEList(req);
    }
   getTotalSmeCount() {
+    this.spinnerService.spinner(true);
     this.smelistservice.getTotalSmeCount().subscribe((data: any) => {
-
+      this.spinnerService.spinner(false);
       this.smeArchData = data;
       for (const key in this.smeArchData.mapOfBuVsCount) {
         if (this.smeArchData.mapOfBuVsCount.hasOwnProperty(key)) {
@@ -136,7 +139,7 @@ export class SmelistComponent implements OnInit {
           }
         }
       }
-    });
+    },((err)=>{this.spinnerService.spinner(false);}),(()=>{this.spinnerService.spinner(false);}));
 
   }
 }

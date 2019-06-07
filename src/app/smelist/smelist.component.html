@@ -73,11 +73,11 @@
     </div>
     <div class="sme-txt">
         <input [(ngModel)]="keyword" class="search-box" type="text" placeholder="Search by Tag/Cloud / Big Data / Migration etc."
-         (focusout)="searchDomain($event)"/>
+         (change)="searchDomain($event)" (keyup.enter)="searchDomain($event)"/>
     </div>
   <div class="sme-tb">
-    <p-table [value]="smeList" [lazy]="true" (onLazyLoad)="loadSmeListLazy($event)" [paginator]="true" 
-      [rows]="10" [totalRecords]="totalRecords">
+    <p-table [value]="smeList" [lazy]="true" (onLazyLoad)="loadSmeListLazy($event)" [paginator]="totalRecords>displayRows" 
+      [rows]="displayRows" [totalRecords]="totalRecords">
         <ng-template pTemplate="header">
             <tr>
               <th>Domain </th>
@@ -99,7 +99,7 @@
     <p-overlayPanel #op>
       <div *ngIf="selectedUser" >
         <div>
-            <img src="../../assets/images/user.png"  class="user-img" width="100" height="70">
+            <img src="../../assets/images/user.png"  class="user-img" width="70" height="70">
         </div>
         <div>
             <span *ngIf="selectedUser" class="fs-14">{{selectedUser.name}} </span>

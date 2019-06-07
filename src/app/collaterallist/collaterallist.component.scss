@@ -40,6 +40,10 @@ hr {
     background-color: #ffffff;
     font-size: 14px;
     font-weight: 200;
-    color: #b3b6ba;
+    color: #515e6b;
     padding: 1em;
+}
+.scroll-container{
+    height: calc(100% - 2em);
+    overflow-y: auto;
 }

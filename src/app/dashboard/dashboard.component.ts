@@ -12,32 +12,32 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./dashboard.component.scss'],
   providers: [DashboardService]
 })
-export class DashboardComponent implements OnInit,OnDestroy {
+export class DashboardComponent implements OnInit, OnDestroy {
   private ngUnsubscribe$ = new Subject<void>();
   trendingTags: CloudData[] = [];
   barChartOptions: any;
   data: any;
-  doughnutOptions:any;
+  doughnutOptions: any;
   doughtnutData: any = {};
   collateralData: any = {};
   totalProposals: number = 0;
-  totalProposalCountData:any;
-  totalProposalbarChartData:any;
-  totalProposalbarChartOptions:any;
+  totalProposalCountData: any;
+  totalProposalbarChartData: any;
+  totalProposalbarChartOptions: any;
   dateRange: any;
   collateralTypes: string[] = [];
   displayProposalBarChart: boolean = false;
   barChartData: any = {};
   options: CloudOptions = {
-    width: 350,
+    width: 400,
     height: 180,
     overflow: false,
   };
   constructor(private router: Router, private acr: ActivatedRoute, private appSharedService: AppSharedService, private dashboardservice: DashboardService,
-     public datePipe: DatePipe) {
+    public datePipe: DatePipe) {
   }
   ngOnInit() {
-      this.appSharedService.getDashboardDateSubject().pipe(takeUntil(this.ngUnsubscribe$)).subscribe((event: any) => {
+    this.appSharedService.getDashboardDateSubject().pipe(takeUntil(this.ngUnsubscribe$)).subscribe((event: any) => {
       if (this.appSharedService.dateRange && this.appSharedService.dateRange[0] && this.appSharedService.dateRange[1]) {
         this.resetDashboard();
       }
@@ -48,31 +48,26 @@ export class DashboardComponent implements OnInit,OnDestroy {
     }
 
     this.barChartOptions = {
-
-      legend:{
+      legend: {
+        display: true,
         labels: {
           boxWidth: 6
-          },
-          xAxes: [{
-            display: true,
-            barPercentage: 0.5,
-            barThickness: 8,
-            maxBarThickness: 8,
-            minBarLength: 8,
-            gridLines: { display: true }
-        }],
-        
-        yAxes: [{
-          ticks: {
-              min: 0,
-              // max: 100,
-              // stepSize: 20
+        },
+      },
+      scales: {
+        xAxes: [{
+          barPercentage: 0.5,
+          barThickness: 8,
+          maxBarThickness: 8,
+          minBarLength: 8,
+          gridLines: {
+            offsetGridLines: false
           }
-      }]
-    
+        }]
       }
     }
-    
+
+
     this.doughtnutData = {
       "data": [],
       "labels": [],
@@ -123,10 +118,10 @@ export class DashboardComponent implements OnInit,OnDestroy {
     this.gettotalProposalCount(this.appSharedService.startDate, this.appSharedService.endDate);
     this.getCollateralsCount(this.appSharedService.startDate, this.appSharedService.endDate);
     this.getTrendingTags();
-   
+
   }
 
-  resetDashboard(){
+  resetDashboard() {
     this.trendingTags = [];
     this.collateralTypes = [];
     this.barChartData = {
@@ -176,7 +171,7 @@ export class DashboardComponent implements OnInit,OnDestroy {
       this.trendingTags = this.trendingTags.slice();
     })
   }
-  tagClicked(event){
+  tagClicked(event) {
     let tagName = event.text;
     this.appSharedService.setRouteData({
       "openType": "getCollatealsFromTag",
@@ -191,13 +186,13 @@ export class DashboardComponent implements OnInit,OnDestroy {
     return '#' + ('000000' + color).slice(-6);
   }
   // To call Total Proposal By Status
-  gettotalProposalCount(startDate: any, endDate: any){
+  gettotalProposalCount(startDate: any, endDate: any) {
     let requestParams = {
       "startDate": this.datePipe.transform(startDate, 'yyyy-MM-dd'),
       "endDate": this.datePipe.transform(endDate, 'yyyy-MM-dd')
     }
-    this.dashboardservice.gettotalProposalCount(requestParams).subscribe((data:any)=>{
-      this.totalProposalCountData=data;
+    this.dashboardservice.gettotalProposalCount(requestParams).subscribe((data: any) => {
+      this.totalProposalCountData = data;
       if (data.mapofStatus) {
         for (const key in data.mapofStatus) {
           if (data.mapofStatus.hasOwnProperty(key)) {
@@ -210,18 +205,18 @@ export class DashboardComponent implements OnInit,OnDestroy {
                 this.totalProposalbarChartData.datasets[0].backgroundColor.push("#fb6262");
                 break;
               case "New":
-                  this.totalProposalbarChartData.datasets[0].backgroundColor.push("#69ffbd");
+                this.totalProposalbarChartData.datasets[0].backgroundColor.push("#69ffbd");
                 break;
               case "Review":
-                  this.totalProposalbarChartData.datasets[0].backgroundColor.push("#62affb");
+                this.totalProposalbarChartData.datasets[0].backgroundColor.push("#62affb");
                 break;
               case "Won":
-                  this.totalProposalbarChartData.datasets[0].backgroundColor.push("#f8e52d");
+                this.totalProposalbarChartData.datasets[0].backgroundColor.push("#f8e52d");
                 break;
               default:
                 break;
             }
-            this.totalProposalbarChartData.datasets[0].label= key;
+            // this.totalProposalbarChartData.datasets[0].label = key;
             this.totalProposalbarChartData.datasets[0].data.push(data.mapofStatus[key]);
           }
         }
@@ -232,14 +227,14 @@ export class DashboardComponent implements OnInit,OnDestroy {
     })
 
   }
-    // To call Collateral data
-  getCollateralsCount(startDate: any, endDate: any){
+  // To call Collateral data
+  getCollateralsCount(startDate: any, endDate: any) {
     let requestParams = {
       "startDate": this.datePipe.transform(startDate, 'yyyy-MM-dd'),
       "endDate": this.datePipe.transform(endDate, 'yyyy-MM-dd')
     }
-    this.dashboardservice.collateralTypeCount(requestParams).subscribe((data:any)=>{
-      this.collateralData= data;
+    this.dashboardservice.collateralTypeCount(requestParams).subscribe((data: any) => {
+      this.collateralData = data;
       for (const key in this.collateralData.mapOfCollateralTypeVsCount) {
         if (this.collateralData.mapOfCollateralTypeVsCount.hasOwnProperty(key)) {
           this.doughtnutData.data.push(this.collateralData.mapOfCollateralTypeVsCount[key]);
@@ -292,14 +287,14 @@ export class DashboardComponent implements OnInit,OnDestroy {
       this.barChartData["dataWon"] = [];
       this.barChartData["dataLost"] = [];
       this.barChartData["labels"] = [];
-     data.forEach((proposal)=>{
-       this.barChartData.dataInProgrss.push(proposal["inProgress"])
-       this.barChartData.dataReview.push(proposal["review"])
-       this.barChartData.dataWon.push(proposal["won"])
-       this.barChartData.dataLost.push(proposal["lost"])
-       this.barChartData.labels.push(proposal["clientName"])
-     })  
-     this.generateProposalBarChart();
+      data.forEach((proposal) => {
+        this.barChartData.dataInProgrss.push(proposal["inProgress"])
+        this.barChartData.dataReview.push(proposal["review"])
+        this.barChartData.dataWon.push(proposal["won"])
+        this.barChartData.dataLost.push(proposal["lost"])
+        this.barChartData.labels.push(proposal["clientName"])
+      })
+      this.generateProposalBarChart();
     })
   }
 
@@ -308,37 +303,37 @@ export class DashboardComponent implements OnInit,OnDestroy {
       labels: this.barChartData.labels,
 
       datasets: [
-         {
-              label: 'Review',
-              backgroundColor: '#62affb',
-              borderColor: '#62affb',
-              data: this.barChartData.dataReview
-          },
-          {
-              label: 'Won',
-              backgroundColor: '#f8e52d',
-              borderColor: '#f8e52d',
-              data: this.barChartData.dataWon
-          },
-          {
-            label: 'In Progress',
-            backgroundColor: '#ffad66',
-            borderColor: '#ffad66',
-            data: this.barChartData.dataInProgrss
+        {
+          label: 'Review',
+          backgroundColor: '#62affb',
+          borderColor: '#62affb',
+          data: this.barChartData.dataReview
+        },
+        {
+          label: 'Won',
+          backgroundColor: '#f8e52d',
+          borderColor: '#f8e52d',
+          data: this.barChartData.dataWon
+        },
+        {
+          label: 'In Progress',
+          backgroundColor: '#ffad66',
+          borderColor: '#ffad66',
+          data: this.barChartData.dataInProgrss
         },
         {
           label: 'Lost',
           backgroundColor: '#fb6262',
           borderColor: ' #fb6262',
           data: this.barChartData.dataLost
-      }
+        }
       ]
+    }
+
+    console.log("this.barChartData.dataInProgrss ", this.barChartData.dataInProgrss);
   }
 
-  console.log("this.barChartData.dataInProgrss ",this.barChartData.dataInProgrss);
-  }
-   
-   ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.ngUnsubscribe$.next();
     this.ngUnsubscribe$.complete();
     this.ngUnsubscribe$.unsubscribe();

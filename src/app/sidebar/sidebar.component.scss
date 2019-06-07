@@ -64,3 +64,24 @@
     border-right: 4px solid #f8e52d;
     margin-left: 0.3em;
 }
+.side-container{
+    
+}
+.logout-container{
+    position: fixed;
+    bottom: 1em;
+    width: 3.2em;
+    text-align: center;
+}
+
+.sign-out{
+    text-align: center;
+    font-size: 7px;
+    font-family: 'Carnas-Medium';
+    padding: 3px 6px;
+    border-radius: 8px;
+    background-color: #fd8469;
+    font-weight: 500;
+    color: #fbfbfb;
+    cursor: pointer;
+}

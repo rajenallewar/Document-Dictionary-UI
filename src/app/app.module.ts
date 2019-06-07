@@ -40,6 +40,7 @@ import {BlockUIModule} from 'primeng/blockui';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { CommonModule } from '@angular/common'; 
 import { ToastrModule } from 'ngx-toastr';
+import {TooltipModule} from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { ToastrModule } from 'ngx-toastr';
     TagCloudModule,
     BlockUIModule,
     CommonModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    TooltipModule
     
   ],
   providers: [
