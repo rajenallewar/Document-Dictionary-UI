@@ -2,12 +2,8 @@
     padding: 1em;
 }
 .line-chart{
-    //  width: 879px;
-    //  height: 220px;
-    // width: calc(100% - 54.938em);
     border-radius: 4px;
     box-shadow: 0 0 5px 0 #eee9e9;
-    // background-color: #ffffff;
     padding: 0 1em 0 0;
 }
 .line-chart-cnt{
@@ -15,9 +11,6 @@
     background-color: #ffffff;
 }
 .trending-tags{
-    //  width: 100%;
-    // width: calc(100% - 23.188em);
-    // height: 220px;
     border-radius: 4px;
     box-shadow: 0 0 5px 0 #eee9e9;  
     background-color: #ffffff;
@@ -45,8 +38,6 @@
     background-color: #ffffff;
 }
 .collateral-status{
-    // width: 175px;
-    // height: 180px;
     background-color: #494e5e;
     width: 21%;
     height: 100%;
@@ -57,6 +48,8 @@
     font-weight: 500;
     color: #dae2e9;
     font-family:Carnas-Medium;
+    padding-top: 2em;
+    padding-left: 1em;
 }
 .doughnut-comtainer{
     float: left;
@@ -67,8 +60,6 @@
     background-color: #ffffff;
 }
 .tags-addition{
-    // width: 406px;
-    // height: 180px;
     border-radius: 6px;
     box-shadow: 0 0 5px 0 #eee9e9;
     background-color: #ffffff;
@@ -79,9 +70,9 @@
     font-size: 15px;
     font-weight: normal;
     font-style: Carnas-Regular;
-    text-align: center;
     color: #6c7883;
-    padding-left: 1em;
+    padding-left: 2em;
+    padding-top: 1.5em;
 }
 
 .c-status{
@@ -89,9 +80,6 @@
     width: 175px;
     height: 120px;
     padding: 1em !important;
-}
-.doughnut-label-container{
-   
 }
 .col-count{
     font-size: 22px;

@@ -37,42 +37,41 @@ export class DashboardComponent implements OnInit,OnDestroy {
      public datePipe: DatePipe) {
   }
   ngOnInit() {
-
-    this.barChartData = {
-      labels: ["HSBC", "Wells Fargo", "Citi", "Asurion", "RBC", "AQR"],
-      datasets: [
-         {
-              label: 'Total',
-              backgroundColor: '#33B5FF',
-              borderColor: '#33B5FF',
-              data: [5,5,3,5,6,7]
-          },
-          {
-              label: 'Won',
-              backgroundColor: '#2543ea',
-              borderColor: '#2543ea',
-              data: [5,3,3,5,6,7]
-          },
-          {
-            label: 'In Progress',
-            backgroundColor: '#FFC733',
-            borderColor: '#FFC733',
-            data: [5,5,3,5,6,7]
-        },
-        {
-          label: 'Lost',
-          backgroundColor: '#FF3333',
-          borderColor: '#FF3333',
-          data: [4,9,3,5,6,7]
-      }
-      ]
-    }
-    
-    this.appSharedService.getDashboardDateSubject().pipe(takeUntil(this.ngUnsubscribe$)).subscribe((event: any) => {
+      this.appSharedService.getDashboardDateSubject().pipe(takeUntil(this.ngUnsubscribe$)).subscribe((event: any) => {
       if (this.appSharedService.dateRange && this.appSharedService.dateRange[0] && this.appSharedService.dateRange[1]) {
         this.resetDashboard();
       }
     });
+    this.barChartData = {
+      labels: [],
+      datasets: []
+    }
+
+    this.barChartOptions = {
+
+      legend:{
+        labels: {
+          boxWidth: 6
+          },
+          xAxes: [{
+            display: true,
+            barPercentage: 0.5,
+            barThickness: 8,
+            maxBarThickness: 8,
+            minBarLength: 8,
+            gridLines: { display: true }
+        }],
+        
+        yAxes: [{
+          ticks: {
+              min: 0,
+              // max: 100,
+              // stepSize: 20
+          }
+      }]
+    
+      }
+    }
     
     this.doughtnutData = {
       "data": [],
@@ -120,7 +119,7 @@ export class DashboardComponent implements OnInit,OnDestroy {
     } else {
       this.appSharedService.dateRange = [new Date(this.appSharedService.startDate), new Date(this.appSharedService.endDate)];
     }
-    // this.getSummaryofProposalsByAccount(this.appSharedService.startDate, this.appSharedService.endDate);
+    this.getSummaryofProposalsByAccount(this.appSharedService.startDate, this.appSharedService.endDate);
     this.gettotalProposalCount(this.appSharedService.startDate, this.appSharedService.endDate);
     this.getCollateralsCount(this.appSharedService.startDate, this.appSharedService.endDate);
     this.getTrendingTags();
@@ -146,7 +145,7 @@ export class DashboardComponent implements OnInit,OnDestroy {
     this.displayProposalBarChart = false;
     this.appSharedService.startDate = this.datePipe.transform(this.appSharedService.dateRange[0], 'yyyy-MM-dd');
     this.appSharedService.endDate = this.datePipe.transform(this.appSharedService.dateRange[1], 'yyyy-MM-dd');
-    // this.getSummaryofProposalsByAccount(this.appSharedService.startDate, this.appSharedService.endDate);
+    this.getSummaryofProposalsByAccount(this.appSharedService.startDate, this.appSharedService.endDate);
     this.gettotalProposalCount(this.appSharedService.startDate, this.appSharedService.endDate);
     this.getCollateralsCount(this.appSharedService.startDate, this.appSharedService.endDate);
     this.getTrendingTags();
@@ -178,7 +177,6 @@ export class DashboardComponent implements OnInit,OnDestroy {
     })
   }
   tagClicked(event){
-    // console.log(event);
     let tagName = event.text;
     this.appSharedService.setRouteData({
       "openType": "getCollatealsFromTag",
@@ -290,125 +288,57 @@ export class DashboardComponent implements OnInit,OnDestroy {
     }
     this.dashboardservice.getSummaryofProposalsByAccount(requestParams).subscribe((data: any) => {
       this.barChartData["dataInProgrss"] = [];
-      this.barChartData["dataWon"] = [];
       this.barChartData["dataReview"] = [];
+      this.barChartData["dataWon"] = [];
       this.barChartData["dataLost"] = [];
       this.barChartData["labels"] = [];
-      if (data) {
-     
-        for (let index = 0; index < data.length; index++) {
-          const element = data[index];
-          for (const key in element) {
-            if (data.hasOwnProperty(key)) {
-              // const element = data[key];
-              let item: any = {};
-              switch (key) {
-                case 'clientName':
-                    this.barChartData.labels.push(element[key])
-                  break;
-                case 'inProgress':
-                    item.label = 'In Progress';
-                    item.backgroundColor = '#ffad66';
-                    item.borderColor = '#ffad66';
-                    item.data.push(element[key]);
-                  break;
-                case 'review':
-                    item.label = 'Review';
-                    item.backgroundColor = '#62affb';
-                    item.borderColor = '#62affb';
-                    item.data.push(element[key]);
-                  break;
-                case 'won':
-                    item.label = 'Won';
-                    item.backgroundColor = '#f8e52d';
-                    item.borderColor = '#f8e52d';
-                    item.data.push(element[key]);
-                  break;
-                case 'lost':
-                    item.label = 'Lost';
-                    item.backgroundColor = '#fb6262';
-                    item.borderColor = '#fb6262';
-                    item.data.push(data[key]);
-                  break;
-              
-                default:
-                  break;
-              }
-  
-              this.barChartData.datasets.push(item);
-              
-              
-            }
-          }
-          
-        }
-        
-        // data.forEach((proposal) => {
-          
-        //   let item: any = {};
-        //   item.label = 
-
-        //   datasets: [
-        //     {
-        //       label: 'In Progress',
-        //       backgroundColor: '#ffad66',
-        //       borderColor: '#ffad66',
-        //       data: this.barChartData.dataInProgrss
-        //     },
-        //     {
-        //       label: 'Review',
-        //       backgroundColor: '#62affb',
-        //       borderColor: '#62affb',
-        //       data: this.barChartData.dataInProgrss
-        //     },
-        //     {
-        //       label: 'Win',
-        //       backgroundColor: '#f8e52d',
-        //       borderColor: '#f8e52d',
-        //       data: this.barChartData.dataInProgrss
-        //     },
-        //     {
-        //       label: 'Lost',
-        //       backgroundColor: ' #fb6262',
-        //       borderColor: ' #fb6262',
-        //       data: this.barChartData.dataLost
-        //     }
-        //   ]
-
-
-        //   this.barChartData.dataInProgrss.push(proposal["inProgress"]);
-        //   this.barChartData.dataWon.push(proposal["won"]);
-        //   this.barChartData.dataReview.push(proposal["review"]);
-        //   this.barChartData.dataLost.push(proposal["lost"]);
-        //   this.barChartData.labels.push(proposal["clientName"]);
-        // });
-        // this.totalProposals = data.length;
-      }
+     data.forEach((proposal)=>{
+       this.barChartData.dataInProgrss.push(proposal["inProgress"])
+       this.barChartData.dataReview.push(proposal["review"])
+       this.barChartData.dataWon.push(proposal["won"])
+       this.barChartData.dataLost.push(proposal["lost"])
+       this.barChartData.labels.push(proposal["clientName"])
+     })  
+     this.generateProposalBarChart();
     })
-
-
-    this.barChartData = {
-      labels: [],
-      datasets: []
-    }
-    this.barChartOptions = {
-     
-      scales: {
-        xAxes: [{
-            barPercentage: 0.5,
-            barThickness: 8,
-            maxBarThickness: 8,
-            minBarLength: 8,
-            gridLines: {
-                offsetGridLines: true
-            }
-        }]
-    }
-    }
-
   }
 
-  ngOnDestroy(): void {
+  generateProposalBarChart() {
+    this.barChartData = {
+      labels: this.barChartData.labels,
+
+      datasets: [
+         {
+              label: 'Review',
+              backgroundColor: '#62affb',
+              borderColor: '#62affb',
+              data: this.barChartData.dataReview
+          },
+          {
+              label: 'Won',
+              backgroundColor: '#f8e52d',
+              borderColor: '#f8e52d',
+              data: this.barChartData.dataWon
+          },
+          {
+            label: 'In Progress',
+            backgroundColor: '#ffad66',
+            borderColor: '#ffad66',
+            data: this.barChartData.dataInProgrss
+        },
+        {
+          label: 'Lost',
+          backgroundColor: '#fb6262',
+          borderColor: ' #fb6262',
+          data: this.barChartData.dataLost
+      }
+      ]
+  }
+
+  console.log("this.barChartData.dataInProgrss ",this.barChartData.dataInProgrss);
+  }
+   
+   ngOnDestroy(): void {
     this.ngUnsubscribe$.next();
     this.ngUnsubscribe$.complete();
     this.ngUnsubscribe$.unsubscribe();
