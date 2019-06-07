@@ -122,7 +122,7 @@ export class DashboardComponent implements OnInit,OnDestroy {
     }
     // this.getSummaryofProposalsByAccount(this.appSharedService.startDate, this.appSharedService.endDate);
     this.gettotalProposalCount(this.appSharedService.startDate, this.appSharedService.endDate);
-    this.getCollateralsCount();
+    this.getCollateralsCount(this.appSharedService.startDate, this.appSharedService.endDate);
     this.getTrendingTags();
    
   }
@@ -148,7 +148,7 @@ export class DashboardComponent implements OnInit,OnDestroy {
     this.appSharedService.endDate = this.datePipe.transform(this.appSharedService.dateRange[1], 'yyyy-MM-dd');
     // this.getSummaryofProposalsByAccount(this.appSharedService.startDate, this.appSharedService.endDate);
     this.gettotalProposalCount(this.appSharedService.startDate, this.appSharedService.endDate);
-    this.getCollateralsCount();
+    this.getCollateralsCount(this.appSharedService.startDate, this.appSharedService.endDate);
     this.getTrendingTags();
   }
 
@@ -224,8 +224,12 @@ export class DashboardComponent implements OnInit,OnDestroy {
 
   }
     // To call Collateral data
-  getCollateralsCount(){
-    this.dashboardservice.collateralTypeCount().subscribe((data:any)=>{
+  getCollateralsCount(startDate: any, endDate: any){
+    let requestParams = {
+      "startDate": this.datePipe.transform(startDate, 'yyyy-MM-dd'),
+      "endDate": this.datePipe.transform(endDate, 'yyyy-MM-dd')
+    }
+    this.dashboardservice.collateralTypeCount(requestParams).subscribe((data:any)=>{
       this.collateralData= data;
       for (const key in this.collateralData.mapOfCollateralTypeVsCount) {
         if (this.collateralData.mapOfCollateralTypeVsCount.hasOwnProperty(key)) {

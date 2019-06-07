@@ -14,7 +14,7 @@ export class DashboardService {
     public gettotalProposalCount(requestParams:any): Observable<any> {
       return this.http.post('countOfProposalStatus',requestParams);
     }
-    public collateralTypeCount() {
-      return this.http.get('collateralTypeCount');
+    public collateralTypeCount(requestParams:any): Observable<any> {
+      return this.http.post('collateralTypeCount',requestParams);
    }
 }
