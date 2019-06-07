@@ -8,7 +8,7 @@ import * as _ from 'lodash';
 
 class TagsUIModel {
   tagId: number = null;
-  tagsDescription: string;
+  tagName: string;
   tagCount: number = null;
   bgColor: string;
 }
@@ -64,7 +64,7 @@ export class ViewcollateralComponent implements OnInit, OnDestroy {
   addAnnotation(newAnnotation: string) {
     if (newAnnotation) {
       const tagsModel = new TagsUIModel();
-      tagsModel.tagsDescription = newAnnotation;
+      tagsModel.tagName = newAnnotation;
       tagsModel.bgColor = this.getRandomColor();
       this.tags.push(tagsModel);
     }
@@ -84,8 +84,8 @@ export class ViewcollateralComponent implements OnInit, OnDestroy {
       listOfTags: this.tags
     };
     this.viewCollateralService.saveTag(requestData).subscribe((data:any) => {
-      if(data && data.setOfTagsUIModel) {
-        this.displayAllTags(data.setOfTagsUIModel);
+      if(data) {
+        this.displayAllTags(data);
       }
     }, (error) => {
       console.log('saveTags error', error);

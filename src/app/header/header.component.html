@@ -2,7 +2,7 @@
   <div class="col-md-12 pd-0">
       <div class="col-md-3 inline-block">
           <span class="h-text">{{headerText}}</span>
-          <span class="calendar" *ngIf="headerText == 'Dashboard'">
+          <span class="calendar" *ngIf="headerText =='Dashboard'">
               <p-calendar [(ngModel)]="appSharedService.dateRange" (onSelect)="onDateSelect($event)" [showIcon]="true" selectionMode="range" dateFormat="dd M yy"></p-calendar>
           </span>
       </div>

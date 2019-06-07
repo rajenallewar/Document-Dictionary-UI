@@ -11,5 +11,10 @@ export class DashboardService {
     public getSummaryofProposalsByAccount(requestParams:any): Observable<any> {
       return this.http.post('getSummaryofProposalsByAccount',requestParams);
     }
-  
+    public gettotalProposalCount(requestParams:any): Observable<any> {
+      return this.http.post('countOfProposalStatus',requestParams);
+    }
+    public collateralTypeCount() {
+      return this.http.get('collateralTypeCount');
+   }
 }

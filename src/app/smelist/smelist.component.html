@@ -4,9 +4,11 @@
       <div class="doughnut-container">
         <p-chart type="doughnut" width="100%" height="22vh" [data]="data"  [options]="options" [responsive]="true"></p-chart>
         <div class="doughnut-info">
-          <img class="sme-d-ic" src="../../assets/images/sme-icon.svg" alt="">
-          <div class="sme-arch">Total SMEs/Architects</div>
-          <div class="sme-count">{{smeArchData?.totalSmeArchitects|number: '2.'}}</div>
+          <div class="d-inf-cnt">
+              <img class="sme-d-ic" src="../../assets/images/sme-icon.svg" alt="">
+              <div class="sme-arch">Total SMEs/Architects</div>
+              <div class="sme-count">{{smeArchData?.totalSmeArchitects|number: '2.'}}</div>
+          </div>
         </div>
       </div>
       <div class="legends-container">
