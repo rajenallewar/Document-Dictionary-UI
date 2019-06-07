@@ -56,13 +56,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
       },
       scales: {
         xAxes: [{
+          ticks: {
+            fontColor: '#a3afb9',
+            fontFamily: 'Carnas-Regular',
+            fontSize: 10
+          },
           barPercentage: 0.5,
           barThickness: 8,
           maxBarThickness: 8,
           minBarLength: 8,
           gridLines: {
-            offsetGridLines: false
-          }
+            offsetGridLines: false}
+        
         }]
       }
     }
