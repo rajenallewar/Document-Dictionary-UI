@@ -21,7 +21,7 @@
                 <div class="ui-g-4 trending-tags">
                         <div>
                                 <span class="label">Top Trending RFP Tags</span>
-                                <angular-tag-cloud [config]="options" [data]="trendingTags"></angular-tag-cloud>
+                                <angular-tag-cloud [config]="options" [data]="trendingTags" (clicked)="tagClicked($event)"></angular-tag-cloud>
                         </div>
 
                 </div>

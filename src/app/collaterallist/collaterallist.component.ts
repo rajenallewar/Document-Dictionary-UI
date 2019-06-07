@@ -83,13 +83,31 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
 
     await this.getCollateralsCount();
     let req;
-    if (this.routeData && this.routeData.proposalId) {
-      this.proposalId = this.routeData.proposalId;
-      req = {
-        "limit": 10,
-        "offset": 1,
-        "mapOfSearchKeyVsValue": {
-          "proposalId": this.proposalId
+
+    if (this.routeData) {
+      if(this.routeData.proposalId) {
+        this.proposalId = this.routeData.proposalId;
+        req = {
+          "limit": 10,
+          "offset": 1,
+          "mapOfSearchKeyVsValue": {
+            "proposalId": this.proposalId
+          }
+        }
+      } else if(this.routeData.tagName) {
+        this.tagSearch = this.routeData.tagName;
+        req = {
+          "limit": 10,
+          "offset": 1,
+          "mapOfSearchKeyVsValue": {
+            "tags": this.tagSearch
+          }
+        }
+      } else {
+        req = {
+          "limit": 10,
+          "offset": 1,
+          "mapOfSearchKeyVsValue": null
         }
       }
     } else {
