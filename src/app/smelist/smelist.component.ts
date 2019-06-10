@@ -33,6 +33,13 @@ export class SmelistComponent implements OnInit {
     this.getTotalSmeCount();
   }
 
+  getSMEShortName(){
+    if(this.selectedUser.hasOwnProperty('name')) {
+      let matches = this.selectedUser.name.match(/\b(\w)/g); 
+      return matches.join('').toUpperCase();
+    }
+    return "";
+  }
   getSMEList(req) {
     this.spinnerService.spinner(true);
     this.smelistservice.getSmeList(req).subscribe((data: any) => {

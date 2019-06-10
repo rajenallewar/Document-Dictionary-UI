@@ -44,9 +44,6 @@
     text-align: center;
     color: #a1aed1;
 }
-.l-con {
-    // background-color: red;
-}
 .sme-d-ic {
     width: 18px;
     height: 18px;
@@ -93,19 +90,12 @@ hr {
     color: #a1aed1;
 }
 .legend-box-left{
-    // padding-left: 1.5em;
-    // padding-top: 1em;
     margin-left: 1em;
     padding: 0.5em ;
-    // padding: 0px 0px 0.5em 0px;
 }
 .legend-box-right{
-    // padding-left: 1em;
-    // padding-top: 1em;
     margin-right: 1em;
     padding: 0.5em ;
-    // padding-left: 0.5em;
-    // padding: 0px 0px 0.5em 0px;
 }
 
 .legend-box-border{
@@ -114,7 +104,6 @@ hr {
 }
 .total-count{
     padding-left: 1.5em;
-    // padding-top: 1em !important;
 }
 .total-count-name{
     font-size: 0.75rem;
@@ -152,4 +141,15 @@ hr {
 }
 .d-inf-cnt{
     margin: auto;
+}
+.userShortName{
+    background-color: #6599e8;
+    border-radius: 50px;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    padding: 15px 0 0 0px;
+    font-size: 32px;
+    color: #ffffff;
+    font-family: Carnas-Light;
 }

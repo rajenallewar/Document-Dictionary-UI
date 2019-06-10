@@ -98,8 +98,8 @@
     </p-table>
     <p-overlayPanel #op>
       <div *ngIf="selectedUser" >
-        <div>
-            <img src="../../assets/images/user.png"  class="user-img" width="70" height="70">
+        <div class="userShortName">
+           {{getSMEShortName()}}
         </div>
         <div>
             <span *ngIf="selectedUser" class="fs-14">{{selectedUser.name}} </span>

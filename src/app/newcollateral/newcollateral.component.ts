@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { NewCollateralService } from './newcollateral.service';
@@ -32,6 +32,11 @@ export class NewcollateralComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private collateralService: NewCollateralService,
     private appSharedService: AppSharedService) { }
+
+
+    @HostListener('document:keyup.escape', ['$event']) onKeyupHandler(event: KeyboardEvent) {
+      this.close();
+  }
 
   ngOnInit() {
     this.routeData = {...this.appSharedService.getRouteData()};

@@ -61,7 +61,7 @@
                             <input type="image" class= "form-control upload-btn" src="../../assets/images/upload-btn.svg" (click)="file.click()" formControlName="fileUpload"
                             [ngClass]="{ 'is-invalid': submitted && f.fileUpload.errors }"/>
                               <div class="drag-drop text-center">
-                                    Drag & Drop / Click to Browse
+                                    Click to Browse
                             <div class="text-center doc-ppt">Upload only Doc, PPT &amp; PDF</div>
                             </div>
                             <div *ngIf="submitted && f.fileUpload.errors" class="invalid-feedback">

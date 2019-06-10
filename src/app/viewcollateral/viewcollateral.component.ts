@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { AppSharedService } from '../shared/services/shared.service';
@@ -38,6 +38,11 @@ export class ViewcollateralComponent implements OnInit, OnDestroy {
     private spinnerService:SpinnerService,
     private viewCollateralService: ViewCollateralService,
     private appSharedService: AppSharedService) { }
+    
+    @HostListener('document:keyup.escape', ['$event']) onKeyupHandler(event: KeyboardEvent) {
+      this.goBack()
+  }
+
   ngOnInit() {
     this.routeData = this.appSharedService.getRouteData();
     this.collateralId = this.routeData.collateralObj.collateralId;

@@ -49,7 +49,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     this.barChartOptions = {
-      cornerRadius: 20,
       legend: {
         display: true,
         labels: {
@@ -87,7 +86,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 
     this.totalProposalbarChartOptions = {
-      cornerRadius: 20,
       legend: {
         display: false
       },

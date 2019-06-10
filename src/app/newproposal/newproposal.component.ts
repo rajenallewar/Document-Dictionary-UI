@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { NewProposalService } from './newproposal.service';
@@ -27,6 +27,10 @@ export class NewproposalComponent implements OnInit {
   constructor(private router: Router, private acr: ActivatedRoute, private formBuilder: FormBuilder,
     private spinnerService:SpinnerService, private toastr: ToastrService,
     private proposalService: NewProposalService, private appSharedService: AppSharedService) { }
+    @HostListener('document:keyup.escape', ['$event']) onKeyupHandler(event: KeyboardEvent) {
+      this.close();
+  }
+
 
   ngOnInit() {
     this.routeData = { ...this.appSharedService.getRouteData() };
