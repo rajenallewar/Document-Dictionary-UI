@@ -11,7 +11,7 @@ class TagsUIModel {
   tagId: number = null;
   tagName: string;
   tagCount: number = null;
-  bgColor: string;
+  tagColor: string;
 }
 
 @Component({
@@ -57,7 +57,11 @@ export class ViewcollateralComponent implements OnInit, OnDestroy {
     let tags: TagsUIModel[] = [];
     tags = _.map(data, (model) => {
       const tagsModel: TagsUIModel = _.omit(model, 'collateralId');
-      if (!tagsModel.bgColor) { tagsModel.bgColor = '#f8e52d'; }
+      if (tagsModel.tagColor) {
+        tagsModel.tagColor = tagsModel.tagColor;
+      } else {
+        tagsModel.tagColor = '#f8e52d';
+      }
       return tagsModel;
     });
     this.tags = tags;
@@ -67,7 +71,7 @@ export class ViewcollateralComponent implements OnInit, OnDestroy {
     if (newAnnotation) {
       const tagsModel = new TagsUIModel();
       tagsModel.tagName = newAnnotation;
-      tagsModel.bgColor = this.getRandomColor();
+      tagsModel.tagColor = this.getRandomColor();
       this.tags.push(tagsModel);
     }
   }

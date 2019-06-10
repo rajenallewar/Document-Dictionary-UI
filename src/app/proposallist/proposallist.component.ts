@@ -60,6 +60,7 @@ export class ProposallistComponent implements OnInit, OnDestroy {
     };
 
     this.lineChartOptions = {
+      cornerRadius: 20,
       responsive: true,
       maintainAspectRatio: false,
       animation: {
@@ -100,6 +101,7 @@ export class ProposallistComponent implements OnInit, OnDestroy {
 
 
     this.barChartOptions = {
+      cornerRadius: 20,
       responsive: true,
       maintainAspectRatio: false,
       animation: {

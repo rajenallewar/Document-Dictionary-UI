@@ -49,6 +49,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
     };
 
     this.options = {
+      cornerRadius: 20,
       responsive: true,
       maintainAspectRatio: false,
       animation: {
@@ -133,6 +134,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
     let response: any = await this.collateralListService.collateralTypeCount(req);
     this.spinnerService.spinner(true);
     if (response) {
+      console.log("In collateralTypeCount");
       this.collateralData.totalCollateralsCount = response.totalCollateralsCount;
       if (response.mapOfCollateralTypeVsCount) {
         this.collateralData.collateralCounts = [];
