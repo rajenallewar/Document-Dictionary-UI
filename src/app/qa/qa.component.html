@@ -44,7 +44,7 @@
           <section class="w-100 font-weight-bold" style="font-size: small;"> {{ email?.from }}</section>
           <section class="w-100 text-secondary" style="font-size: smaller;"> {{ email?.date | date:'EEE dd/M, H:mm a' }}
           </section>
-          <section class="w-100" style="font-size: smaller;"> {{ email?.to.join(' ; ') }}</section>
+          <section class="w-100 text-truncate" title="{{ email?.to.join(' ; ') }}"  style="font-size: smaller;"> {{ email?.to.join(' ; ') }}</section>
         </span>
       </section>
       <section class="attachment d-flex mt-4 pl-5 pr-5 w-100" style="font-size: x-small; overflow-x: auto">
