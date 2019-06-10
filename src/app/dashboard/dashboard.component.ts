@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   totalProposalbarChartData: any;
   totalProposalbarChartOptions: any;
   dateRange: any;
+  annotatedCollaterals;any;
   collateralTypes: string[] = [];
   displayProposalBarChart: boolean = false;
   barChartData: any = {};
@@ -124,6 +125,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.getSummaryofProposalsByAccount(this.appSharedService.startDate, this.appSharedService.endDate);
     this.gettotalProposalCount(this.appSharedService.startDate, this.appSharedService.endDate);
     this.getCollateralsCount(this.appSharedService.startDate, this.appSharedService.endDate);
+    this.totalAnnotatedCollaterals(this.appSharedService.startDate, this.appSharedService.endDate);
     this.getTrendingTags();
 
   }
@@ -150,6 +152,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.getSummaryofProposalsByAccount(this.appSharedService.startDate, this.appSharedService.endDate);
     this.gettotalProposalCount(this.appSharedService.startDate, this.appSharedService.endDate);
     this.getCollateralsCount(this.appSharedService.startDate, this.appSharedService.endDate);
+    this.totalAnnotatedCollaterals(this.appSharedService.startDate, this.appSharedService.endDate);
     this.getTrendingTags();
   }
 
@@ -176,6 +179,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.trendingTags.push(item);
       }
       this.trendingTags = this.trendingTags.slice();
+    })
+  }
+  totalAnnotatedCollaterals(startDate: any, endDate: any){
+    let requestParams = {
+      "startDate": this.datePipe.transform(startDate, 'yyyy-MM-dd'),
+      "endDate": this.datePipe.transform(endDate, 'yyyy-MM-dd')
+    }
+    this.dashboardservice.totalAnnotatedCollaterals(requestParams).subscribe((data:any)=>{
+      this.annotatedCollaterals=data;
+
     })
   }
   tagClicked(event) {
@@ -291,12 +304,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.dashboardservice.getSummaryofProposalsByAccount(requestParams).subscribe((data: any) => {
       this.barChartData["dataInProgrss"] = [];
       this.barChartData["dataReview"] = [];
+      this.barChartData["dataNew"] = [];
       this.barChartData["dataWon"] = [];
       this.barChartData["dataLost"] = [];
       this.barChartData["labels"] = [];
       if(data) {
         data.forEach((proposal) => {
           this.barChartData.dataInProgrss.push(proposal["inProgress"])
+          this.barChartData.dataNew.push(proposal["newProposal"])
           this.barChartData.dataReview.push(proposal["review"])
           this.barChartData.dataWon.push(proposal["won"])
           this.barChartData.dataLost.push(proposal["lost"])
@@ -319,13 +334,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
           data: this.barChartData.dataReview
         },
         {
+          label: 'New',
+          backgroundColor: '#69ffbd',
+          borderColor: '#69ffbd',
+          data: this.barChartData.dataNew
+        },
+        {
           label: 'Won',
           backgroundColor: '#f8e52d',
           borderColor: '#f8e52d',
           data: this.barChartData.dataWon
         },
         {
-          label: 'In Progress',
+          label: 'In-Progress',
           backgroundColor: '#ffad66',
           borderColor: '#ffad66',
           data: this.barChartData.dataInProgrss

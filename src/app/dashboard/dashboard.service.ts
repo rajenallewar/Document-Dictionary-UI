@@ -17,4 +17,7 @@ export class DashboardService {
     public collateralTypeCount(requestParams:any): Observable<any> {
       return this.http.post('collateralTypeCount',requestParams);
    }
+   public totalAnnotatedCollaterals(requestParams:any): Observable<any> {
+    return this.http.post('getTotalAnnotatedCollaterals',requestParams);
+ }
 }

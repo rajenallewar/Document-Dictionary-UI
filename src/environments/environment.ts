@@ -95,6 +95,10 @@ export const AppSettings = {
     'getSummaryofProposalsByAccount':{
       name : 'getSummaryofProposalsByAccount',
       url : '/proposal/getSummryOfProposalByAccount'
+    },
+    'getTotalAnnotatedCollaterals':{
+      name : 'getTotalAnnotatedCollaterals',
+      url : '/collateral/collateralTagsCount'
     }
 
   },
