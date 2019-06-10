@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { NewProposalService } from './newproposal.service';
@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./newproposal.component.scss'],
   providers: [NewProposalService]
 })
-export class NewproposalComponent implements OnInit {
+export class NewproposalComponent implements OnInit, AfterViewInit, OnDestroy {
   proposalForm: FormGroup;
   regionData: any;
   submitted = false;
@@ -22,6 +22,7 @@ export class NewproposalComponent implements OnInit {
   startDate: Date;
   endDate: Date;
   proposalObj: any = { proposalName: null, clientName: null, startDate: null, endDate: null, requirement: null, region: null }
+  @ViewChild('proposalNameRef') proposalNameRef: any;
 
 
   constructor(private router: Router, private acr: ActivatedRoute, private formBuilder: FormBuilder,
@@ -55,6 +56,14 @@ export class NewproposalComponent implements OnInit {
       }, 300);
 
     }
+  }
+  ngAfterViewInit(){
+    setTimeout(() => {
+      if( this.proposalNameRef &&  this.proposalNameRef
+        &&  this.proposalNameRef.nativeElement){
+          this.proposalNameRef.nativeElement.focus();
+        }
+    }, 100);
   }
   get f() { return this.proposalForm.controls; }
 

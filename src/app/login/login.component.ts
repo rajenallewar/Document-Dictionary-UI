@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppSharedService } from '../shared/services/shared.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
@@ -14,10 +14,14 @@ import { LoginService } from './login.service';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private router: Router,private activatedRoute: ActivatedRoute,
+  constructor(private router: Router, private activatedRoute: ActivatedRoute,
     private appSharedService: AppSharedService,
     private formBuilder: FormBuilder,
     private loginService: LoginService) { }
+
+  @HostListener('document:keyup.enter', ['$event']) onKeyupHandler(event: KeyboardEvent) {
+    this.onLogin();
+  }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -35,10 +39,10 @@ export class LoginComponent implements OnInit {
     //       this.appSharedService.setUserLoggedIn(true);
     //       this.router.navigate(['/dms/dashboard']);
     //     }
-        
+
     //   }, (err) => {
     //     console.log(err);
-        
+
     //   });
     // }
     this.appSharedService.setUserLoggedIn(true);

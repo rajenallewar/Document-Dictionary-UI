@@ -29,7 +29,7 @@
             <div class="collateral-container">
                 <div class="form-group">
                     <label> Collateral Type </label><br>
-                    <p-autoComplete class="form-control coll-type" [(ngModel)]="collateralObj.collateralTypeUIModel" [suggestions]="suggestedCollateralTypes" (completeMethod)="search($event)"
+                    <p-autoComplete class="form-control coll-type" #collateralTypeRef [(ngModel)]="collateralObj.collateralTypeUIModel" [suggestions]="suggestedCollateralTypes" (completeMethod)="search($event)"
                         placeholder="Enter Collateral Type here…."
                         formControlName="collateralTypeUIModel" 
                         field="collateralType"
@@ -70,8 +70,8 @@
                         </div>
                       
                     </div>
-                    <button type="button" class="btn btn-primary mt-2 c-btn cancle-btn"(click)="close()">CANCEL</button>
-                    <button type="button" class="btn btn-primary mt-2 ml-1 c-btn" (click)="onSubmit(collateralForm)">SUBMIT</button>
+                    <button type="button" class="btn btn-primary mt-2 mr-1 c-btn cancle-btn pr-btn"(click)="close()">CANCEL</button>
+                    <button type="button" class="btn btn-primary mt-2 ml-1 c-btn pr-btn" (click)="onSubmit(collateralForm)">SUBMIT</button>
                   
             </div>
       </form>

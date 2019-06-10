@@ -46,7 +46,7 @@
                     <input type="password" formControlName="password" class="tx-box" placeholder="Password"
                         style="margin-top: 1em" />
                     <input type="checkbox" name="signIn" class="ch-box"> <span class="keep-sign-in"> keep me signed in</span>
-                    <button type="button" class="btn btn-primary sign-btn" (click)="onLogin()">SIGN IN</button>
+                    <button type="button" class="btn btn-primary sign-btn" (click)="onLogin()" (keyup.enter)="onLogin()">SIGN IN</button>
                     <a href="https://synepwd.synechron.com/"><span class="forget-pwd"> Forget your Password? </span></a>
                 </form>
 

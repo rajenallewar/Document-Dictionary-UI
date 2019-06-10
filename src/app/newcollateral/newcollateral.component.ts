@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { NewCollateralService } from './newcollateral.service';
@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./newcollateral.component.scss'],
   providers: [NewCollateralService]
 })
-export class NewcollateralComponent implements OnInit, OnDestroy {
+export class NewcollateralComponent implements OnInit, OnDestroy, AfterViewInit {
   collateralForm: FormGroup;
   submitted = false;
   uploadedFiles: any = [];
@@ -24,6 +24,7 @@ export class NewcollateralComponent implements OnInit, OnDestroy {
   collateralTypes = [];
   proposalName:any;
   proposalId: any;
+  @ViewChild('collateralTypeRef') collateralTypeRef: any;
 
   constructor(private router: Router,
     private acr: ActivatedRoute,
@@ -67,6 +68,14 @@ export class NewcollateralComponent implements OnInit, OnDestroy {
     }
 
 
+  }
+  ngAfterViewInit(){
+    setTimeout(() => {
+      if( this.collateralTypeRef &&  this.collateralTypeRef.inputEL
+        &&  this.collateralTypeRef.inputEL.nativeElement){
+          this.collateralTypeRef.inputEL.nativeElement.focus();
+        }
+    }, 100);
   }
   get f() { return this.collateralForm.controls; }
 

@@ -19,7 +19,7 @@ export class SmelistComponent implements OnInit {
   smeArchData: any;
   keyword:string;
   totalRecords= 16;
-  displayRows= 16;
+  displayRows= 8;
   constructor(private smelistservice: SmeService,private spinnerService: SpinnerService,) {
 
   }

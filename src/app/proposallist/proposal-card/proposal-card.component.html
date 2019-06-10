@@ -41,9 +41,11 @@
         </div>
         <div class="row card-row reg-up-con">
             <div class="pd-0 col-md-5">
-                <div class="card-label">{{"View Collateral : "}}</div>
+                <a (click)="onViewCollaterals($event)" class="view-coll">
+                    <div class="card-label"><u>{{"View Collateral"}}</u></div>
+                </a>
             </div>
-            <div class="pd-0 col-md-7" (click)="onViewCollaterals($event)">
+            <!-- <div class="pd-0 col-md-7" (click)="onViewCollaterals($event)">
                 <span class="file-holder">
                     <img class="file-icon" src="../../assets/images/word.svg">
                     <span class="dot">9</span>
@@ -56,7 +58,7 @@
                     <img class="file-icon" src="../../assets/images/pdf.svg">
                     <span class="dot">99</span>
                 </span>
-            </div>
+            </div> -->
         </div>
         <div class="card-row">
             <button class="card-btn edit-btn" (click)="onEdit($event)">EDIT</button>

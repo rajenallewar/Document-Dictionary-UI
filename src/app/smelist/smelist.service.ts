@@ -5,8 +5,8 @@ import { HttpClient } from '@angular/common/http';
 export class SmeService {
     constructor(private http:HttpClient) {}
     public getSmeList(req){
-        // return this.http.post('getSmeList', req);
-        return this.http.get('/assets/mockdata/domainSMED.json');
+        return this.http.post('getSmeList', req);
+        // return this.http.get('/assets/mockdata/domainSMED.json');
         
       }
      public getTotalSmeCount(){

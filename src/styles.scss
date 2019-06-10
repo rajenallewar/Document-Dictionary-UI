@@ -171,10 +171,10 @@ body .ui-paginator {
 .region-drop{
     width:100% !important;
 }
-.proposal-cal{
-    display: block !important;
-    padding: 0;
-}
+// .proposal-cal{
+//     display: block !important;
+//     padding: 0;
+// }
 
 .dot {
     position: absolute;
@@ -200,4 +200,16 @@ angular-tag-cloud.custom-css {
 .ui-tooltip-text{
     font-family: 'Carnas-Regular';
     color: #f8e52d !important;
+}
+
+p-calendar.calender{
+    padding: 0;
+}
+
+.calender .ui-inputtext{
+    width:100%;
+    padding: 0.25em;
+}
+.calender .ui-calendar{
+    width:100%;
 }

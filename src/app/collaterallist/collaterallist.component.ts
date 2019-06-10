@@ -132,7 +132,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
       "dateRangeUIModel": null
     }
     this.collateralListService.collateralTypeCount(req).subscribe((response: any) => {
-      this.spinnerService.spinner(true);
+      this.spinnerService.spinner(false);
       if (response) {
         console.log("In collateralTypeCount");
         this.collateralData.totalCollateralsCount = response.totalCollateralsCount;

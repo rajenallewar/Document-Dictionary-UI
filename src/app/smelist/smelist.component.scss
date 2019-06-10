@@ -32,6 +32,8 @@
     width: 100%;
     height: 22vh;
     top: 0;
+    align-items: center;
+    justify-content: center;
 }
 .doughnut-container{
     position: relative;
@@ -140,7 +142,7 @@ hr {
     padding: 6px 0px;
 }
 .d-inf-cnt{
-    margin: auto;
+    // margin: auto;
 }
 .userShortName{
     background-color: #6599e8;

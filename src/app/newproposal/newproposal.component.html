@@ -21,11 +21,12 @@
     <div class="newproposal-container">
 
         <form [formGroup]="proposalForm">
-            <div class="newproposal-container">
+            <div>
                 <div class="form-group">
                     <label>Proposal Name </label><br>
                     <input type="text" class="form-control tx-box" placeholder="Enter Proposal Name here…."
                         formControlName="proposalName"
+                        #proposalNameRef
                         [(ngModel)]="proposalObj.proposalName" 
                         [ngClass]="{ 'is-invalid': submitted && f.proposalName.errors }" />
                     <div *ngIf="submitted && f.proposalName.errors" class="invalid-feedback">
@@ -45,7 +46,7 @@
                         <div class="form-group mt-1">
 
                             <label>Start Date </label><br>
-                            <p-calendar styleClass="proposal-cal" [(ngModel)]="proposalObj.startDate" class="form-control drop-down" formControlName="startDate"
+                            <p-calendar [(ngModel)]="proposalObj.startDate" class="form-control drop-down calender" formControlName="startDate"
                              [ngClass]="{ 'is-invalid': submitted && f.startDate.errors }"></p-calendar>
             
                             <div *ngIf="submitted && f.startDate.errors" class="invalid-feedback">
@@ -58,7 +59,7 @@
                         <div class="form-group mt-1">
 
                             <label>End Date </label><br>
-                            <p-calendar styleClass="proposal-cal" [(ngModel)]="proposalObj.endDate" class="form-control drop-down " formControlName="endDate"
+                            <p-calendar [(ngModel)]="proposalObj.endDate" class="form-control drop-down calender" formControlName="endDate"
                             [ngClass]="{ 'is-invalid': submitted && f.endDate.errors }"></p-calendar>
                             <div *ngIf="submitted && f.endDate.errors" class="invalid-feedback">
                                 <div *ngIf="f.endDate.errors.required">End Date is required</div>
@@ -83,15 +84,15 @@
 
                 <div class="form-group mt-1">
                     <label>Region / BU</label>
-                    <p-dropdown class="form-control drop-down tx-box" styleClass="region-drop" [options]="regionData" placeholder="Select Region / BU"
+                    <p-dropdown class="form-control drop-down tx-box bu-drop" styleClass="region-drop" [options]="regionData" placeholder="Select Region / BU"
                      formControlName="region" [(ngModel)]="proposalObj.region" [ngClass]="{ 'is-invalid': submitted && f.region.errors }"></p-dropdown>
                      <div *ngIf="submitted && f.region.errors" class="invalid-feedback">
                             <div *ngIf="f.region.errors.required"> Region / BU is required</div>
                         </div> 
                   
                   </div>
-                <button type="button" class="btn btn-primary mt-2 c-btn cancle-btn" (click)="goBack()">CANCEL</button>
-                <button type="button" class="btn btn-primary mt-2 ml-1 c-btn"
+                <button type="button" class="btn btn-primary mr-1 c-btn cancle-btn pr-btn" (click)="goBack()">CANCEL</button>
+                <button type="button" class="btn btn-primary ml-1 c-btn pr-btn"
                     (click)="onSubmit(proposalForm)">SUBMIT</button>
 
             </div>
