@@ -6,7 +6,7 @@ import { SpinnerService } from '../shared/spinner/spinner.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import randomcolor from 'randomcolor';
+import CollateralColorMap from './../shared/utils/collateral.color.map';
 
 @Component({
   selector: 'app-collaterallist',
@@ -28,7 +28,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
   tagSearch = null;
   proposalId = null;
   private ngUnsubscribe$ = new Subject<void>();
-  collateralColorMap = {};
+  collateralColorMapObj: any = new CollateralColorMap();
 
   @ViewChild('paginator') paginator: any;
 
@@ -39,7 +39,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
     private acr: ActivatedRoute,
     private appSharedService: AppSharedService) { }
 
-  async ngOnInit() {
+  ngOnInit() {
 
     this.routeData = { ...this.appSharedService.getRouteData() };
 
@@ -82,11 +82,11 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
       }
     };
 
-    await this.getCollateralsCount();
+    this.getCollateralsCount();
     let req;
 
     if (this.routeData) {
-      if(this.routeData.proposalId) {
+      if (this.routeData.proposalId) {
         this.proposalId = this.routeData.proposalId;
         req = {
           "limit": 10,
@@ -95,7 +95,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
             "proposalId": this.proposalId
           }
         }
-      } else if(this.routeData.tagName) {
+      } else if (this.routeData.tagName) {
         this.tagSearch = this.routeData.tagName;
         req = {
           "limit": 10,
@@ -126,39 +126,40 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
       }
     });
   }
-  async getCollateralsCount() {
+  getCollateralsCount() {
     this.spinnerService.spinner(true);
     let req = {
       "dateRangeUIModel": null
     }
-    let response: any = await this.collateralListService.collateralTypeCount(req);
-    this.spinnerService.spinner(true);
-    if (response) {
-      console.log("In collateralTypeCount");
-      this.collateralData.totalCollateralsCount = response.totalCollateralsCount;
-      if (response.mapOfCollateralTypeVsCount) {
-        this.collateralData.collateralCounts = [];
-        for (const key in response.mapOfCollateralTypeVsCount) {
-          if (response.mapOfCollateralTypeVsCount.hasOwnProperty(key)) {
-            let item: any = {};
-            item.label = key;
-            let totalCount = +response.totalCollateralsCount;
-            let count = +response.mapOfCollateralTypeVsCount[key];
-            let perCount = 100 * count / totalCount;
-            item.data = [perCount];
-            item.count = +response.mapOfCollateralTypeVsCount[key];
-            let rColor = randomcolor();
-            item.backgroundColor = rColor;
-            this.collateralColorMap[key] = rColor;
-            this.data.datasets.push(item);
-            this.collateralData.collateralCounts.push(item);
+    this.collateralListService.collateralTypeCount(req).subscribe((response: any) => {
+      this.spinnerService.spinner(true);
+      if (response) {
+        console.log("In collateralTypeCount");
+        this.collateralData.totalCollateralsCount = response.totalCollateralsCount;
+        if (response.mapOfCollateralTypeVsCount) {
+          this.collateralData.collateralCounts = [];
+          for (const key in response.mapOfCollateralTypeVsCount) {
+            if (response.mapOfCollateralTypeVsCount.hasOwnProperty(key)) {
+              let item: any = {};
+              item.label = key;
+              let totalCount = +response.totalCollateralsCount;
+              let count = +response.mapOfCollateralTypeVsCount[key];
+              let perCount = 100 * count / totalCount;
+              item.data = [perCount];
+              item.count = +response.mapOfCollateralTypeVsCount[key];
+              let rColor = this.collateralColorMapObj.getColor(this.collateralColorMapObj.collateralCMap, key);
+              item.backgroundColor = rColor;
+              // this.collateralColorMap[key] = rColor;
+              this.data.datasets.push(item);
+              this.collateralData.collateralCounts.push(item);
+            }
           }
-        }
 
-        this.data.datasets = this.data.datasets.slice();
+          this.data.datasets = this.data.datasets.slice();
+        }
+        this.displayLineChart = true;
       }
-      this.displayLineChart = true;
-    }
+    }, ((err) => { }), (() => { this.spinnerService.spinner(false); }));
   }
   getCollateralList(req) {
     console.log("In getCollateralList");
@@ -171,7 +172,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
 
           let collateralTypeName = element.collateralTypeUIModel ? element.collateralTypeUIModel.collateralType : '';
           if (collateralTypeName) {
-            element.collateralTypeUIModel.color = this.collateralColorMap[collateralTypeName];
+            element.collateralTypeUIModel.color = this.collateralColorMapObj.getColor(this.collateralColorMapObj.collateralCMap, collateralTypeName);
           }
         });
         this.displayCollateralList = this.collateralList.slice(0, this.displayRecordSize);
@@ -179,7 +180,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
     }, ((err) => { }), (() => { this.spinnerService.spinner(false); }));
   }
 
-  async resetCollateralListing() {
+  resetCollateralListing() {
     var event = new Event('reset');
     this.paginator && this.paginator.changePageToFirst(event);
     let req = {
@@ -187,7 +188,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
       "offset": 1,
       "mapOfSearchKeyVsValue": null
     }
-    await this.getCollateralsCount();
+    this.getCollateralsCount();
     this.getCollateralList(req);
   }
 

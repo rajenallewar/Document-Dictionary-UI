@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { QaService, Attachment, EmailChain, Email } from './qa.service';
 import { SearchPipe } from './search.pipe';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { SpinnerService } from '../shared/spinner/spinner.service';
 
 @Component({
   selector: 'app-qa',
@@ -11,7 +12,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 })
 export class QaComponent implements OnInit {
 
-  constructor(private qaservice: QaService, private deviceService: DeviceDetectorService) {
+  constructor(private qaservice: QaService, private deviceService: DeviceDetectorService, private spinnerService:SpinnerService) {
     this.setScreenSize();
   }
   emailList: EmailChain[];
@@ -48,12 +49,15 @@ export class QaComponent implements OnInit {
   onInput(e){
     console.log("input");
     if(e.target.value){
+      this.spinnerService.spinner(true);
       this.qaservice.searchEmails(e.target.value).subscribe(res => { 
+        this.spinnerService.spinner(false);
         this.emailList = res;
         console.log(this.emailList);
         this.selectedEmailChain = this.emailList[this.defaultSelIndex];
       }, err => {
         console.error(err);
+        this.spinnerService.spinner(false);
       });
     }
   }

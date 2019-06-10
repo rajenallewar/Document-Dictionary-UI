@@ -6,7 +6,7 @@
           <i class="fa fa-search"></i>
         </span>
       </div>
-      <input type="text" [(ngModel)]="searchQuery" (input)="onInput($event)" class="form-control form-control-sm" placeholder="Search by Tags"
+      <input type="text" [(ngModel)]="searchQuery" (change)="onInput($event)" (keyup.enter)="onInput($event)" class="form-control form-control-sm" placeholder="Search by Tags"
         aria-label="Username" aria-describedby="basic-addon1">
     </div>
     <div class="list-group w-100" style="overflow-y: auto; height: calc(100% - 4.6em);font-size: smaller;">

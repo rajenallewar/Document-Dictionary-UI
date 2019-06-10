@@ -39,8 +39,9 @@
       <div class="tag-c">
         <span class="tags">TAGS</span>
         <ul class="tag-list list-inline" style="list-style-type:none;">
-          <li *ngFor="let tag of tags" [ngStyle]="{'background-color': tag.tagColor}" class="list-inline-item">
+          <li *ngFor="let tag of tags" [ngStyle]="{'background-color': tag.tagColor}" class="tag-item list-inline-item">
             {{tag.tagName}}
+            <a class="del-tag">X</a>
           </li>
 
         </ul>
