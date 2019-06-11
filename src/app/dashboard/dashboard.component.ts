@@ -271,7 +271,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.doughtnutData.bgColors.push(rColor);
         }
       }
-      this.collateralTypes = this.collateralTypes.slice(0, 9);
+      this.collateralTypes = this.collateralTypes.slice(0, 6);
       this.data = {
         labels: this.doughtnutData.labels,
         datasets: [

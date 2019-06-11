@@ -35,8 +35,7 @@
                     <label>Client Name </label><br>
                     <p-autoComplete class="form-control coll-type" [(ngModel)]="proposalObj.clientName"
                         [suggestions]="suggestedClientName" (completeMethod)="search($event)"
-                        placeholder="Enter Client Name here…." formControlName="clientName" field="clientName"
-                        dataKey="clientId" [ngClass]="{ 'is-invalid': submitted && f.clientName.errors }">
+                        placeholder="Enter Client Name here…." formControlName="clientName" [ngClass]="{ 'is-invalid': submitted && f.clientName.errors }">
                     </p-autoComplete>
                     <!-- <label>Client Name </label><br>
                     <input type="text" [(ngModel)]="proposalObj.clientName" class="form-control tx-box" placeholder="Enter Client Name here…."
