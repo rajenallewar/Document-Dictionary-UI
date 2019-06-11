@@ -41,6 +41,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { CommonModule } from '@angular/common'; 
 import { ToastrModule } from 'ngx-toastr';
 import {TooltipModule} from 'primeng/tooltip';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,9 @@ import {TooltipModule} from 'primeng/tooltip';
     BlockUIModule,
     CommonModule,
     ToastrModule.forRoot(),
-    TooltipModule
+    TooltipModule,
+    ConfirmDialogModule
+
     
   ],
   providers: [

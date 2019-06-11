@@ -7,12 +7,14 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import CollateralColorMap from './../shared/utils/collateral.color.map';
+import { ConfirmationService } from 'primeng/api';
+
 
 @Component({
   selector: 'app-collaterallist',
   templateUrl: './collaterallist.component.html',
   styleUrls: ['./collaterallist.component.scss'],
-  providers: [CollateralListService]
+  providers: [CollateralListService, ConfirmationService]
 })
 export class CollaterallistComponent implements OnInit, OnDestroy {
   public data: any;
@@ -27,6 +29,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
   searchTimer;
   tagSearch = null;
   proposalId = null;
+  msgs: any;
   private ngUnsubscribe$ = new Subject<void>();
   collateralColorMapObj: any = new CollateralColorMap();
 
@@ -37,7 +40,8 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
     private spinnerService: SpinnerService,
     private toastr: ToastrService,
     private acr: ActivatedRoute,
-    private appSharedService: AppSharedService) { }
+    private appSharedService: AppSharedService,
+    private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
 
@@ -221,12 +225,25 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
   }
 
   onDelete(event: any) {
-    let collateralId = this.collateralList[event.index].collateralId;
-    this.spinnerService.spinner(true);
-    this.collateralListService.deleteCollateral(collateralId).subscribe(() => {
-      this.toastr.error('Colateral Deleted', '', this.appSharedService.toastrOption);
-      this.resetCollateralListing();
-    }, ((err) => { }), (() => { this.spinnerService.spinner(false); }));
+    this.confirmationService.confirm({
+      message: 'Do you want to delete this Collateral?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-info-circle',
+      
+      reject: () => {
+        this.msgs = [{ severity: 'info', summary: 'Rejected', detail: 'You have rejected' }];
+      },
+      accept: () => {
+        let collateralId = this.collateralList[event.index].collateralId;
+        this.spinnerService.spinner(true);
+        this.collateralListService.deleteCollateral(collateralId).subscribe(() => {
+          this.toastr.error('Colateral Deleted', '', this.appSharedService.toastrOption);
+          this.resetCollateralListing();
+        }, ((err) => { }), (() => { this.spinnerService.spinner(false); }));
+
+        this.msgs = [{ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' }];
+      }
+    });
   }
   onEdit(event) {
     console.log("onEdit", event);

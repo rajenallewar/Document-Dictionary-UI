@@ -213,3 +213,22 @@ p-calendar.calender{
 .calender .ui-calendar{
     width:100%;
 }
+.delete-popup{
+   >.ui-dialog-titlebar {
+        background-color: #fb6262!important;
+        color: white!important;
+        font-size: 16px!important;
+        font-family: 'Carnas-Regular'!important;
+        font-weight: 100!important;
+       
+    }
+    >.ui-dialog-footer{
+        text-align: left!important;
+    }
+    >.ui-dialog-content.ui-confirmdialog-icon{
+        color: #fb6262!important;
+    }
+    >.ui-dialog-content{
+        font-family: 'Carnas-Regular'!important;
+    }
+}
