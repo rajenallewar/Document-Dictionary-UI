@@ -21,7 +21,9 @@ export class NewproposalComponent implements OnInit, AfterViewInit, OnDestroy {
   openType: string = '';
   startDate: Date;
   endDate: Date;
-  proposalObj: any = { proposalName: null, clientName: null, startDate: null, endDate: null, requirement: null, region: null }
+  clientList:[];
+  suggestedClientName:any;
+  proposalObj: any = { proposalName: null, client: null, startDate: null, endDate: null, requirement: null, region: null }
   @ViewChild('proposalNameRef') proposalNameRef: any;
 
 
@@ -39,7 +41,7 @@ export class NewproposalComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.proposalForm = this.formBuilder.group({
       proposalName: new FormControl("", Validators.required),
-      clientName: new FormControl("", Validators.required),
+      client: new FormControl("", Validators.required),
       startDate: new FormControl("", Validators.required),
       endDate: new FormControl("", Validators.required),
       requirement: new FormControl("", Validators.required),
@@ -47,6 +49,9 @@ export class NewproposalComponent implements OnInit, AfterViewInit, OnDestroy {
 
     });
     this.getRegionData();
+    this.proposalService.getAllClient().subscribe((data:any)=>{
+      this.clientList=data;
+    })
 
     if (this.openType == 'edit') {
       setTimeout(() => {
@@ -64,6 +69,13 @@ export class NewproposalComponent implements OnInit, AfterViewInit, OnDestroy {
           this.proposalNameRef.nativeElement.focus();
         }
     }, 100);
+  }
+  search(event) {
+    this.suggestedClientName = this.clientList.filter((c:any) => {
+       let clientName: string = c.clientName ? c.clientName.toString().toLowerCase() : '';
+      let query: string = event.query.toLowerCase();
+       return clientName.startsWith(query)
+    });
   }
   get f() { return this.proposalForm.controls; }
 

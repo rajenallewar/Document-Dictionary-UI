@@ -10,6 +10,9 @@ export class NewProposalService {
   public getRegionData() {
     return this.http.get('getAllRegions');
   }
+  public getAllClient() {
+    return this.http.get('getAllClient');
+  }
   public saveProposal(proposal: any) {
     return this.http.post('saveProposal', proposal);
   }
