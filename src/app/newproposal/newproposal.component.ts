@@ -42,12 +42,12 @@ export class NewproposalComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.proposalForm = this.formBuilder.group({
       proposalName: new FormControl("", Validators.required),
-      clientName: new FormControl("", Validators.required),
       startDate: new FormControl("", Validators.required),
       endDate: new FormControl("", Validators.required),
       requirement: new FormControl("", Validators.required),
       region: new FormControl("", Validators.required),
-      status: new FormControl("", Validators.required)
+      status: new FormControl("", Validators.required),
+      client:new FormControl("", Validators.required)
 
     });
     this.getRegionData();
