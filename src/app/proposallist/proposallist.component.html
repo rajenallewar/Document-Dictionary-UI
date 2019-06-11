@@ -27,31 +27,33 @@
 </div>
 
 <div class="right-panel">
-    <div class="filter-data row mr-0">
-        <div class="col-md-1 apply-ft pd-l-0">Apply Filter</div>
-        <div class="col-md-2 pd-0 mr-r-1">
+    <div class="filter-data mr-0 clearfix">
+        <div class="filter-item apply-ft pd-l-0">Apply<br>Filter</div>
+        <div class="filter-item pd-0 mr-r-1">
             <span class="ft-label">Client</span>
-            <p-dropdown [options]="clientListOptions" [(ngModel)]="searchCriteria.clientName"></p-dropdown>
+            <p-dropdown class="proposal-dropdown" [options]="clientListOptions" [(ngModel)]="searchCriteria.clientName"></p-dropdown>
         </div>
-        <div class="col-md-2 pd-0 mr-r-1">
+        <div class="filter-item pd-0 mr-r-1">
             <span class="ft-label">Region</span>
-            <p-dropdown [options]="regionListOptions" [(ngModel)]="searchCriteria.region"></p-dropdown>
+            <p-dropdown class="proposal-dropdown" [options]="regionListOptions" [(ngModel)]="searchCriteria.region"></p-dropdown>
         </div>
-        <div class="col-md-2 pd-0 mr-r-1">
+        <div class="filter-item pd-0 mr-r-1">
             <span class="ft-label">Status</span>
-            <p-dropdown [options]="statusListOptions" [(ngModel)]="searchCriteria.status"></p-dropdown>
+            <p-dropdown class="proposal-dropdown" [options]="statusListOptions" [(ngModel)]="searchCriteria.status"></p-dropdown>
         </div>
-        <div class="col-md-2 pd-0 mr-r-1">
+        <div class="filter-item pd-0 mr-r-1 wid-18">
             <span class="ft-label">Date Range (Start - End Date)</span>
-            <p-calendar class="calender" [(ngModel)]="searchCriteria.rangeDates" selectionMode="range" [readonlyInput]="true">
-            </p-calendar>
+            <div class="cal-container">
+                <p-calendar class="calender" #cal [(ngModel)]="searchCriteria.rangeDates" (onSelect)="onProposalDateRangeSelect(cal)"selectionMode="range" [readonlyInput]="true"></p-calendar>
+                <i *ngIf="searchCriteria?.rangeDates" class="calender-clear ui-dropdown-clear-icon pi pi-times" (click)="onClearClick(cal)"></i>
+            </div>
         </div>
-        <div class="col-md-2 pd-0 mr-r-1">
+        <div class="filter-item wid-15 pd-0 mr-r-1">
             <button class="btn btn-primary search-btn" (click)="onSearch($event)">Search</button>
         </div>
 
     </div>
-    <div class="scroll-container">
+    <div class="scroll-container clearfix">
         <div class="card-container clearfix">
             <app-proposal-card *ngFor="let card of displayProposalList;index as i;" [cardIndex]="i" [card]="card"
                 (edit)="onEdit($event)" (add)="onAdd($event)" (viewCollaterals)="onViewCollaterals($event)">

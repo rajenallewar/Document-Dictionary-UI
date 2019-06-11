@@ -88,9 +88,22 @@ color: white;
     padding: 0.35em;
     cursor: pointer;
     font-weight: bolder;
-    display: none;
+    visibility: hidden;
 }
 
-.tag-item{
-    
+.tag-item:hover{
+    background-color: #fff !important;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+    border: solid 1px #18191b;
+}
+
+.tag-item:hover .del-tag{
+    visibility: visible;
+}
+
+.tag-err{
+    color: red;
+    font-size: 10px;
+    font-family: Carnas-Light;
+    padding: 0.25em;
 }

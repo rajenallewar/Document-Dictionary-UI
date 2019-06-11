@@ -1,6 +1,6 @@
 
 export const environment = {
-  production: true
+  production: false
 };
 export const AppSettings = {
   hasResource(url: string): boolean {
@@ -95,6 +95,10 @@ export const AppSettings = {
     'getSummaryofProposalsByAccount':{
       name : 'getSummaryofProposalsByAccount',
       url : '/proposal/getSummryOfProposalByAccount'
+    },
+    'getTotalAnnotatedCollaterals':{
+      name : 'getTotalAnnotatedCollaterals',
+      url : '/collateral/collateralTagsCount'
     }
 
   },

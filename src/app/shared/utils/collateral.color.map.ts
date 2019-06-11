@@ -12,7 +12,7 @@ class CollateralColorMap {
         "Newsletters": "#cafb62",
         "White Papers": "#fb6262",
         "Case Studies": "#7bc5f1",
-        // "Brand Stories": "#f17bf0",
+        "Brand Stories": "#f17bf0",
         "Capabilities":"#9562fb"
     };
     public getColor(obj, key): string {

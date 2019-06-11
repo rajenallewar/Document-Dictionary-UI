@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { AppSharedService } from '../shared/services/shared.service';
@@ -20,7 +20,7 @@ class TagsUIModel {
   styleUrls: ['./viewcollateral.component.scss'],
   providers: [ViewCollateralService]
 })
-export class ViewcollateralComponent implements OnInit, OnDestroy {
+export class ViewcollateralComponent implements OnInit, OnDestroy, AfterViewInit {
 
   tags: TagsUIModel[] = [];
   texts: string[];
@@ -31,6 +31,8 @@ export class ViewcollateralComponent implements OnInit, OnDestroy {
   file: any;
   fileName: string = "";
   fileUrl;
+  showTagError = false;
+  newTag:string = '';
 
   constructor(private acr: ActivatedRoute,
     private router: Router,
@@ -50,6 +52,17 @@ export class ViewcollateralComponent implements OnInit, OnDestroy {
     this.getConvertedHtmlFile(this.collateralId);
     this.getTagsByCollateral();
 
+  }
+
+  ngAfterViewInit() {
+        
+  }
+  
+  onDeleteTag(tag) {
+    let tagIndex = this.tags.findIndex(t=>t.tagId==tag.tagId);
+    if(tagIndex!== null && tagIndex !== undefined && tagIndex>=0){
+      this.tags.splice(tagIndex,1);
+    }
   }
   // To get all tags saved against that file
   getTagsByCollateral() {
@@ -74,10 +87,17 @@ export class ViewcollateralComponent implements OnInit, OnDestroy {
   //  To add tags related with that file
   addAnnotation(newAnnotation: string) {
     if (newAnnotation) {
-      const tagsModel = new TagsUIModel();
-      tagsModel.tagName = newAnnotation;
-      tagsModel.tagColor = this.getRandomColor();
-      this.tags.push(tagsModel);
+      let tagIndex = this.tags.findIndex(t=>t.tagName.toLowerCase()==newAnnotation.toLowerCase());
+      if(tagIndex!== null && tagIndex !== undefined && tagIndex>=0){
+        console.log("this tag is already exist.");
+        this.showTagError = true;
+      } else {
+        this.newTag = '';
+        const tagsModel = new TagsUIModel();
+        tagsModel.tagName = newAnnotation;
+        tagsModel.tagColor = this.getRandomColor();
+        this.tags.push(tagsModel);
+      }
     }
   }
   // To give random color to each tag

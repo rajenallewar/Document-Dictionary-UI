@@ -172,7 +172,7 @@ export class ProposallistComponent implements OnInit, OnDestroy {
     ];
 
 
-    this.getDefaultDates();
+    // this.getDefaultDates();
     let startDate = this.datePipe.transform(this.startDate, 'yyyy-MM-dd');
     let endDate = this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
 
@@ -227,6 +227,9 @@ export class ProposallistComponent implements OnInit, OnDestroy {
     if (this.searchCriteria.rangeDates && this.searchCriteria.rangeDates[0] && this.searchCriteria.rangeDates[1]) {
       startDate = this.datePipe.transform(this.searchCriteria.rangeDates[0], 'yyyy-MM-dd');
       endDate = this.datePipe.transform(this.searchCriteria.rangeDates[1], 'yyyy-MM-dd');
+    } else {
+      startDate = '';
+      endDate = '';
     }
     let obj: any = {
       "startDate": startDate,
@@ -278,7 +281,7 @@ export class ProposallistComponent implements OnInit, OnDestroy {
   }
 
   resetProposalListing() {
-    this.getDefaultDates();
+    // this.getDefaultDates();
     let startDate = this.datePipe.transform(this.startDate, 'yyyy-MM-dd');
     let endDate = this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
 
@@ -402,6 +405,21 @@ export class ProposallistComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.router.navigate(['/dms/collaterals']);
     }, 0);
+  }
+  onClearClick(calendar){
+    this.searchCriteria.rangeDates = null;
+    if(calendar) {
+      calendar.value = null;
+      calendar.updateInputfield();
+    }
+  }
+  onProposalDateRangeSelect(calendar){
+    if (this.searchCriteria.rangeDates && this.searchCriteria.rangeDates[0] && this.searchCriteria.rangeDates[1]) {
+      if(calendar) {
+        calendar.hideOverlay();
+      }
+    }
+    
   }
   ngOnDestroy() {
     // this.appSharedService.clearRouteData();

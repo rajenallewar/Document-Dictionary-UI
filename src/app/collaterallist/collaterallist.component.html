@@ -5,7 +5,7 @@
     <p-chart type="horizontalBar" width="100%" height="20" [data]="data" [options]="options" [responsive]="true">
     </p-chart>
   </div>
-  <div>
+  <div class="count-container">
     <div *ngFor="let colItem of collateralData?.collateralCounts;index as i;" class="coll-count-box">
       <hr [style.backgroundColor]="colItem?.backgroundColor" align="left">
       <div class="coll-count">{{colItem?.count}}</div>
