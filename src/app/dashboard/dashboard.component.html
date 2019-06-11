@@ -50,11 +50,11 @@
                                 <div class="ui-g-7 doughnut-label-container">
                                         <div class="vl" *ngFor="let collateral of collateralTypes">
                                                 <div>
-                                                        <hr style="border-color: #67e7f1; width:15px" align="left">
+                                                        <hr [style.backgroundColor]="collateral?.color" align="left">
                                                         <div class="col-count">
-                                                                {{collateralData['mapOfCollateralTypeVsCount'][collateral]}}
+                                                                {{collateral.data}}
                                                         </div>
-                                                        <div class="col-type">{{collateral}}</div>
+                                                        <div class="col-type">{{collateral.name}}</div>
                                                 </div>
                                         </div>
                                 </div>

@@ -124,6 +124,7 @@ export class ViewcollateralComponent implements OnInit, OnDestroy, AfterViewInit
 
   }
   goBack() {
+    this.appSharedService.setViewCollateralCloseEvent(true);
     this.router.navigate([{ outlets: { dialogs: null } }], { relativeTo: this.acr.parent });
   }
   public getConvertedHtmlFile(id: number) {

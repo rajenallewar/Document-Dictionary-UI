@@ -6,6 +6,7 @@ import { DashboardService } from './dashboard.service';
 import { DatePipe } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import CollateralColorMap from '../shared/utils/collateral.color.map';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -26,9 +27,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
   totalProposalbarChartOptions: any;
   dateRange: any;
   annotatedCollaterals;any;
-  collateralTypes: string[] = [];
+  collateralTypes = [];
   displayProposalBarChart: boolean = false;
   barChartData: any = {};
+
+  collateralColorMapObj: any = new CollateralColorMap();
+
+
   options: CloudOptions = {
     width: 400,
     height: 180,
@@ -257,8 +262,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
         if (this.collateralData.mapOfCollateralTypeVsCount.hasOwnProperty(key)) {
           this.doughtnutData.data.push(this.collateralData.mapOfCollateralTypeVsCount[key]);
           this.doughtnutData.labels.push(key);
-          this.collateralTypes.push(key);
-          this.doughtnutData.bgColors.push(this.getRandomColor());
+          let itm:any = {};
+          itm.name = key;
+          let rColor = this.collateralColorMapObj.getColor(this.collateralColorMapObj.collateralCMap, key);
+          itm.color = rColor;
+          itm.data = this.collateralData.mapOfCollateralTypeVsCount[key];
+          this.collateralTypes.push(itm);
+          this.doughtnutData.bgColors.push(rColor);
         }
       }
       this.data = {

@@ -10,6 +10,7 @@ export class AppSharedService {
   public _routeData:any;
   private newCollateralCloseSubject: Subject<boolean> = new Subject<boolean>();
   private newProposalCloseSubject: Subject<boolean> = new Subject<boolean>();
+  private viewCollateralCloseSubject: Subject<boolean> = new Subject<boolean>();
 
   private dashboardDateSubject: Subject<any> = new Subject<any>();
   dateRange:any;
@@ -66,6 +67,13 @@ export class AppSharedService {
     this.dashboardDateSubject.next(obj);
   }
 
+  getViewCollateralCloseEvent(){
+    return this.viewCollateralCloseSubject.asObservable();
+  }
+
+  setViewCollateralCloseEvent(flag){
+    this.viewCollateralCloseSubject.next(flag);
+  }
 
 
 

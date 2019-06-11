@@ -100,8 +100,8 @@ export const AppSettings = {
       name : 'getTotalAnnotatedCollaterals',
       url : '/collateral/collateralTagsCount'
     }
-
-  },
+    
+ },
   BASE_URL: 'http://172.20.201.170:8080/docketManagement'
   //  BASE_URL: ''
 };

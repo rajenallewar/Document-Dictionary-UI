@@ -22,8 +22,9 @@ export class NewproposalComponent implements OnInit, AfterViewInit, OnDestroy {
   startDate: Date;
   endDate: Date;
   clientList:[];
+  statusList:any;
   suggestedClientName:any;
-  proposalObj: any = { proposalName: null, client: null, startDate: null, endDate: null, requirement: null, region: null }
+  proposalObj: any = { proposalName: null, client: null, startDate: null, endDate: null, requirement: null, region: null, status:null }
   @ViewChild('proposalNameRef') proposalNameRef: any;
 
 
@@ -45,11 +46,23 @@ export class NewproposalComponent implements OnInit, AfterViewInit, OnDestroy {
       startDate: new FormControl("", Validators.required),
       endDate: new FormControl("", Validators.required),
       requirement: new FormControl("", Validators.required),
-      region: new FormControl("", Validators.required)
+      region: new FormControl("", Validators.required),
+      status: new FormControl("", Validators.required)
 
     });
     this.getRegionData();
-    this.proposalService.getAllClient().subscribe((data:any)=>{
+    this.statusList = [];
+    this.proposalService.getAllStatuses().subscribe((data:any)=>{
+      if (data && data.length) {
+        for (let i = 0; i < data.length; i++) {
+          let item: any = {};
+          item.label = data[i];
+          item.value = data[i];
+          this.statusList.push(item);
+        }
+      }
+    })
+    this.proposalService.getAllClients().subscribe((data:any)=>{
       this.clientList=data;
     })
 

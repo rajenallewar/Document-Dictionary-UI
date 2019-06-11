@@ -10,8 +10,11 @@ export class NewProposalService {
   public getRegionData() {
     return this.http.get('getAllRegions');
   }
-  public getAllClient() {
-    return this.http.get('getAllClient');
+  public getAllClients() {
+    return this.http.get('getAllClients');
+  }
+  public getAllStatuses() {
+    return this.http.get('getAllStatuses');
   }
   public saveProposal(proposal: any) {
     return this.http.post('saveProposal', proposal);
@@ -20,12 +23,23 @@ export class NewProposalService {
     let request: any = {}
     if (openType == 'edit') {
       request["proposalId"] = proposal.proposalId;
-      request["status"] = proposal.status;
-    } else {
-      request["status"] = 'New';
     }
+
+
+    if(typeof proposal.client == 'string') {
+      request["client"] = {
+        "clientName":proposal.client,
+      };
+    } else {
+      request["client"] = {
+        "clientId":proposal.client.clientId,
+        "clientName":proposal.client.clientName,
+      };
+    }
+
+    request["status"] = proposal.status;
     request["proposalName"] = proposal.proposalName;
-    request["clientName"] = proposal.clientName;
+    
     request["startDate"] = this.datePipe.transform(proposal.startDate, 'yyyy-MM-dd');
     request["endDate"] = this.datePipe.transform(proposal.endDate, 'yyyy-MM-dd');
     request["requirement"] = proposal.requirement;

@@ -124,6 +124,12 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
     }
     this.getCollateralList(req);
 
+    this.appSharedService.getViewCollateralCloseEvent().pipe(takeUntil(this.ngUnsubscribe$)).subscribe((flag) => {
+      if (flag) {
+        this.resetCollateralListing();
+      }
+    });
+
     this.appSharedService.getNewCollateralCloseEvent().pipe(takeUntil(this.ngUnsubscribe$)).subscribe((flag) => {
       if (flag) {
         this.resetCollateralListing();
