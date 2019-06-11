@@ -27,16 +27,11 @@ export class NewProposalService {
 
 
     if(typeof proposal.client == 'string') {
-      request["client"] = {
-        "clientName":proposal.client,
-      };
+      request["clientName"] = proposal.client;
     } else {
-      request["client"] = {
-        "clientId":proposal.client.clientId,
-        "clientName":proposal.client.clientName,
-      };
+      request["clientId"] = proposal.client.clientId;
+      request["clientName"] = proposal.client.clientNames;
     }
-
     request["status"] = proposal.status;
     request["proposalName"] = proposal.proposalName;
     

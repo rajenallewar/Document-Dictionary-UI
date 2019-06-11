@@ -76,7 +76,7 @@
          (change)="searchDomain($event)" (keyup.enter)="searchDomain($event)"/>
     </div>
   <div class="sme-tb">
-    <p-table [value]="smeList" [lazy]="true" (onLazyLoad)="loadSmeListLazy($event)" [paginator]="totalRecords>displayRows" 
+    <p-table [value]="smeList" [lazy]="true" [scrollable]="true" scrollHeight="70vh" (onLazyLoad)="loadSmeListLazy($event)" [paginator]="totalRecords>displayRows" 
       [rows]="displayRows" [totalRecords]="totalRecords">
         <ng-template pTemplate="header">
             <tr>
