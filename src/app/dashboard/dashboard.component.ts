@@ -106,7 +106,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       },
       scales: {
         xAxes: [{
-          display: false
+          display: false,
+          ticks: {
+            min: 0
+          }
         }],
         yAxes: [{
           ticks: {
@@ -274,6 +277,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.doughtnutData.bgColors.push(rColor);
         }
       }
+
+      console.log(this.collateralColorMapObj.collateralCMap);
+      
       this.collateralTypes = this.collateralTypes.slice(0, 8);
       this.data = {
         labels: this.doughtnutData.labels,

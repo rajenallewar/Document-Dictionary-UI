@@ -1,9 +1,5 @@
 <div class="container">
-    <!-- <img src="../../assets/images/synechron-logo.svg" class="logo">
-  
-   <img src="../../assets/images/login.svg"  class="Image"> -->
-
-    <div class="row">
+      <div class="row">
         <div class="col-md-6 offset-md-3 logo">
             <img src="../../assets/images/synechron-logo.svg">
         </div>
@@ -39,12 +35,20 @@
             <h1 class="sign-in">
                 SIGN IN TO YOUR ACCOUNT
             </h1>
+            <p class="text-danger text-center" *ngIf="invalid_auth"> Invalid Username or Password...!</p>
             <div class="login-cont">
                 <form [formGroup]="loginForm">
-                    <input type="text" formControlName="userName" class="tx-box" placeholder="User Name"/>
+                    <input type="text" formControlName="userName" class="form-control tx-box" placeholder="User Name"
+                    [ngClass]="{ 'is-invalid': submitted && f.userName.errors }" [(ngModel)]="loginObj.userName" />
+                    <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+                        <div *ngIf="f.userName.errors.required">User Name is required</div>
+                    </div>
 
-                    <input type="password" formControlName="password" class="tx-box" placeholder="Password"
-                        style="margin-top: 1em" />
+                    <input type="password" formControlName="password" class="form-control tx-box" placeholder="Password"
+                        style="margin-top: 1em"  [ngClass]="{ 'is-invalid': submitted && f.password.errors }" [(ngModel)]="loginObj.password" />
+                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                            <div *ngIf="f.password.errors.required">Password is required</div>
+                        </div>
                     <input type="checkbox" name="signIn" class="ch-box"> <span class="keep-sign-in"> keep me signed in</span>
                     <button type="button" class="btn btn-primary sign-btn" (click)="onLogin()" (keyup.enter)="onLogin()">SIGN IN</button>
                     <a href="https://synepwd.synechron.com/"><span class="forget-pwd"> Forget your Password? </span></a>

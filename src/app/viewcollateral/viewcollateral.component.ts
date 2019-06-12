@@ -26,6 +26,7 @@ export class ViewcollateralComponent implements OnInit, OnDestroy, AfterViewInit
   texts: string[];
   results: string[];
   collateralId: number;
+  tagColor:any;
   routeData: any;
   htmlCode: SafeHtml = '';
   file: any;
@@ -112,7 +113,8 @@ export class ViewcollateralComponent implements OnInit, OnDestroy, AfterViewInit
   saveTags() {
     let requestData = {
       collateralId: this.collateralId,
-      listOfTags: this.tags
+      listOfTags: this.tags,
+      tagColor:this.tagColor
     };
     this.viewCollateralService.saveTag(requestData).subscribe((data:any) => {
       if(data) {

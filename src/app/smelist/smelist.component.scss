@@ -141,9 +141,7 @@ hr {
     background-color: #3b4357;
     padding: 6px 0px;
 }
-.d-inf-cnt{
-    // margin: auto;
-}
+
 .userShortName{
     background-color: #6599e8;
     border-radius: 50px;
@@ -154,4 +152,33 @@ hr {
     font-size: 32px;
     color: #ffffff;
     font-family: Carnas-Light;
+}
+.loc-count{
+    font-size: 1.625rem;
+    color: #ffffff;
+    font-family: Carnas-ExtraLight;
+    font-weight: 200;
+}
+.loc-count-box:nth-child(odd) {
+    border-right: 1px solid #f2f2f24f;
+}
+.loc-lebal{
+    font-size: 0.625rem;
+    color: #a3acc6;
+    font-family: Carnas-Regular;
+}
+.locaion-c{
+    height: 285px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+.loc-count-box {
+    padding: 0.5em 1em;
+    border-bottom: 1px solid #f2f2f24f;
+    float: left;
+    width: 49%;
+    min-height: 81px;
+}
+.pd-10{
+    padding: 10px;
 }
