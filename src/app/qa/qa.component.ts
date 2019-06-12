@@ -54,11 +54,22 @@ export class QaComponent implements OnInit {
         this.spinnerService.spinner(false);
         this.emailList = res;
         console.log(this.emailList);
+        this.emailList.sort(this.compare);
         this.selectedEmailChain = this.emailList[this.defaultSelIndex];
       }, err => {
         console.error(err);
         this.spinnerService.spinner(false);
       });
     }
+  }
+
+  compare( a: EmailChain, b: EmailChain ) {
+    if ( a[0].subject < b[0].subject ) {
+      return -1;
+    }
+    if ( a[0].subject > b[0].subject ) {
+      return 1;
+    }
+    return 0;
   }
 }
