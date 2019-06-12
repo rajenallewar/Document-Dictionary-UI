@@ -57,7 +57,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       legend: {
         display: true,
         labels: {
-          boxWidth: 6
+          boxWidth: 6,
+          fontColor: 'color: #565757',
+          fontSize: 10,
+          fontFamily:'Carnas-Regular'
         },
       },
       scales: {
@@ -221,7 +224,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           if (data.mapofStatus.hasOwnProperty(key)) {
             this.totalProposalbarChartData.labels.push(key);
             switch (key) {
-              case "In Progress":
+              case "In-Progress":
                 this.totalProposalbarChartData.datasets[0].backgroundColor.push("#ffad66");
                 break;
               case "Lost":
@@ -271,7 +274,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.doughtnutData.bgColors.push(rColor);
         }
       }
-      this.collateralTypes = this.collateralTypes.slice(0, 6);
+      this.collateralTypes = this.collateralTypes.slice(0, 8);
       this.data = {
         labels: this.doughtnutData.labels,
         datasets: [

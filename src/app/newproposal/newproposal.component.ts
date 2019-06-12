@@ -47,7 +47,7 @@ export class NewproposalComponent implements OnInit, AfterViewInit, OnDestroy {
       requirement: new FormControl("", Validators.required),
       region: new FormControl("", Validators.required),
       status: new FormControl("", Validators.required),
-      client:new FormControl("", Validators.required)
+      clientUIModel:new FormControl("", Validators.required)
 
     });
     this.getRegionData();
