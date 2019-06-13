@@ -13,9 +13,6 @@ import { LoginService } from './login.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  submitted = false;
-  invalid_auth = false;
-  loginObj: any = { userName: null, password: null }
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute,
     private appSharedService: AppSharedService,
@@ -32,30 +29,24 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
   }
-  get f() { return this.loginForm.controls; }
+
   onLogin() {
-    
-    
-    this.submitted = true;
      if (this.loginForm.valid) {
-      const obj = this.loginForm.value;
-      this.loginService.login(obj).subscribe((res) => {
-        console.log(res);
-        if(res) {
-          this.appSharedService.setUserLoggedIn(true);
-          this.router.navigate(['/dms/dashboard']);
-        } else {
-          this.invalid_auth = true;
-        }
+       const obj = this.loginForm.value;
+       this.loginService.login(obj).subscribe((res) => {
+         console.log(res);
+         if(res) {
+           this.appSharedService.setUserLoggedIn(true);
+           this.router.navigate(['/dms/dashboard']);
+         }
 
-      }, (err) => {
-        this.invalid_auth = true;
-        console.log(err);
+       }, (err) => {
+         console.log(err);
 
-      });
-    }
-    // this.appSharedService.setUserLoggedIn(true);
-    // this.router.navigate(['/dms/dashboard']);
+       });
+     }
+    //this.appSharedService.setUserLoggedIn(true);
+    //this.router.navigate(['/dms/dashboard']);
   }
 
 }
