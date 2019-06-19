@@ -24,7 +24,7 @@ export class NewproposalComponent implements OnInit, AfterViewInit, OnDestroy {
   clientList:[];
   statusList:any;
   suggestedClientName:any;
-  proposalObj: any = { proposalName: null, client: null, startDate: null, endDate: null, requirement: null, region: null, status:null }
+  proposalObj: any = { proposalName: null, clientName: null, startDate: null, endDate: null, requirement: null, region: null, status:null }
   @ViewChild('proposalNameRef') proposalNameRef: any;
 
 
@@ -42,12 +42,12 @@ export class NewproposalComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.proposalForm = this.formBuilder.group({
       proposalName: new FormControl("", Validators.required),
-      client: new FormControl("", Validators.required),
       startDate: new FormControl("", Validators.required),
       endDate: new FormControl("", Validators.required),
       requirement: new FormControl("", Validators.required),
       region: new FormControl("", Validators.required),
-      status: new FormControl("", Validators.required)
+      status: new FormControl("", Validators.required),
+      clientUIModel:new FormControl("", Validators.required)
 
     });
     this.getRegionData();

@@ -23,7 +23,7 @@ export class ProposallistComponent implements OnInit, OnDestroy {
 
   public barChartData: any;
   public barChartOptions: any;
-
+  clientData:any;
   defaultLimit = 10;
   defaultOffset = 1;
   displayRecordSize = 10;
@@ -54,6 +54,7 @@ export class ProposallistComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // this.routeData = { ...this.appSharedService.getRouteData() };
+    this.getClientData();
     this.lineChartData = {
       labels: [],
       datasets: []
@@ -143,13 +144,13 @@ export class ProposallistComponent implements OnInit, OnDestroy {
     }
 
 
-    this.clientListOptions = [
-      { label: "All", value: null },
-      { label: "HSBC", value: "HSBC" },
-      { label: "Wells Fargo", value: "Wells Fargo" },
-      { label: "Asurian", value: "Asurian" },
-      { label: "Citi", value: "Citi" },
-    ];
+    // this.clientListOptions = [
+    //   { label: "All", value: null },
+    //   { label: "HSBC", value: "HSBC" },
+    //   { label: "Wells Fargo", value: "Wells Fargo" },
+    //   { label: "Asurian", value: "Asurian" },
+    //   { label: "Citi", value: "Citi" },
+    // ];
 
     this.regionListOptions = [
       { label: "All", value: null },
@@ -201,6 +202,22 @@ export class ProposallistComponent implements OnInit, OnDestroy {
         this.resetProposalListing();
       }
     });
+  }
+  getClientData() {
+    this.clientData = [];
+    this.proposalListService.getAllClients().subscribe((data: any) => {
+      if (data && data.length) {
+
+        for (let i = 0; i < data.length; i++) {
+          let item: any = {};
+          item.label = data[i]["clientName"];
+          item.value = data[i]["clientName"];
+          this.clientData.push(item);
+
+        }
+      
+      }
+    })
   }
 
   getDefaultDates() {

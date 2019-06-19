@@ -24,22 +24,23 @@ export class NewProposalService {
     if (openType == 'edit') {
       request["proposalId"] = proposal.proposalId;
     }
-    if(typeof proposal.client == 'string') {
-      request["client"] = {
-        "clientName":proposal.client,
+    if(typeof proposal.clientUIModel == 'string') {
+      request["clientUIModel"] = {
+        "clientName":proposal.clientUIModel,
       };
     } else {
-      request["client"] = {
-        "clientId":proposal.client.clientId,
-        "clientName":proposal.client.clientName,
+      request["clientUIModel"] = {
+        "clientId":proposal.clientUIModel.clientId,
+        "clientName":proposal.clientUIModel.clientName,
       };
     }
-  //  if(typeof proposal.client == 'string') {
-  //     request["clientName"] = proposal.client;
-  //   } else {
-  //     request["clientId"] = proposal.client.clientId;
-  //     request["clientName"] = proposal.client.clientName;
-  //   }
+
+    // if(typeof proposal.client == 'string') {
+    //   request["clientName"] = proposal.client;
+    // } else {
+    //   request["clientId"] = proposal.client.clientId;
+    //   request["clientName"] = proposal.client.clientNames;
+    // }
     request["status"] = proposal.status;
     request["proposalName"] = proposal.proposalName;
     

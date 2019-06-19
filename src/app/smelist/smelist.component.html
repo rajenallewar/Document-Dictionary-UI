@@ -1,5 +1,4 @@
-
-    <div class="side-panel">
+ <div class="side-panel pd-10">
       <h6 class="title"># SMEs / Architects</h6>
       <div class="doughnut-container">
         <p-chart type="doughnut" width="100%" height="22vh" [data]="data"  [options]="options" [responsive]="true"></p-chart>
@@ -11,56 +10,18 @@
           </div>
         </div>
       </div>
-      <div class="legends-container">
-          <div class="legends-title">BU wise SMEs/Architects</div>
-          <div class="l-con">
-              <div class="left-legend">
-                  <div class="legend-box-left hl v1 pt-0">
-                    <hr style="border-color: #f17f7b;" align="left">
-                    <div class="ch-bu-count">{{smeArchData?.mapOfBuVsCount.Charlotte}}</div>
-                    <div class="ch-bu-text">Charlotte BU</div>
-                  </div>
-                  <div class="legend-box-left hl v1">
-                    <hr style="border-color:#71ecb3;" align="left">
-                    <div class="ch-bu-count">{{smeArchData?.mapOfBuVsCount["New York"]}}</div>
-                    <div class="ch-bu-text">New York</div>
-                  </div>
-                  <div class="legend-box-left hl v1">
-                    <hr style="border-color:#ebcd84;" align="left">
-                    <div class="ch-bu-count">{{smeArchData?.mapOfBuVsCount.Paris}}</div>
-                    <div class="ch-bu-text">Paris</div>
-                  </div>
-                  <div class="legend-box-left v1">
-                    <hr style="border-color: #e15079;" align="left">
-                    <div class="ch-bu-count">{{smeArchData?.mapOfBuVsCount.Amsterdam}}</div>
-                    <div class="ch-bu-text">Amsterdam</div>
-                  </div>
-              </div>
-              <div class="right-legend">
-                  <div class="legend-box-right hl pt-0">
-                    <hr style="border-color: #67e7f1;" align="left">
-                    <div class="ch-bu-count">{{smeArchData?.mapOfBuVsCount.USCentral}}</div>
-                    <div class="ch-bu-text">US Central</div>
-                  </div>
-                  <div class="legend-box-right hl">
-                    <hr style="border-color: #d478bc;" align="left">
-                    <div class="ch-bu-count">{{smeArchData?.mapOfBuVsCount.Singapore}}</div>
-                    <div class="ch-bu-text">Singapore</div>
-                  </div>
-                  <div class="legend-box-right hl">
-                    <hr style="border-color: #9e74f7;" align="left">
-                    <div class="ch-bu-count">{{smeArchData?.mapOfBuVsCount.UK}}</div>
-                    <div class="ch-bu-text">UK</div>
-                  </div>
-                  <div class="legend-box-right ">
-                    <hr style="border-color: #5ce35b;" align="left">
-                    <div class="ch-bu-count">{{smeArchData?.mapOfBuVsCount.UAE}}</div>
-                    <div class="ch-bu-text">UAE</div>
-                  </div>
-              </div>
-          </div>
+      <div class="locaion-c">
+        <div *ngFor="let location of locations" class="loc-count-box">
+        
+            <hr [style.backgroundColor]="location?.color" align="left">
+                  <div class="loc-count">
+                   {{location.data}}
+                 </div>
+                 <div class="loc-lebal">{{location.name}}</div>
+                     </div>
       </div>
-      <div class="sme-stats">
+    
+     <div class="sme-stats">
         <div class="total-count">
             <div class="total-count-name">Total Domains</div>
             <div class="sme-count">{{smeArchData?.totalDomains}}</div>
@@ -76,14 +37,14 @@
          (change)="searchDomain($event)" (keyup.enter)="searchDomain($event)"/>
     </div>
   <div class="sme-tb">
-    <p-table [value]="smeList" [lazy]="true" [scrollable]="true" scrollHeight="70vh" (onLazyLoad)="loadSmeListLazy($event)" [paginator]="totalRecords>displayRows" 
+    <p-table [value]="smeList" [lazy]="true" [scrollable]="true" scrollHeight="70vh" (onLazyLoad)="loadSmeListLazy($event)" [paginator]="isPaginator" 
       [rows]="displayRows" [totalRecords]="totalRecords">
         <ng-template pTemplate="header">
             <tr>
               <th>Domain </th>
               <th>Sub Domain</th>
               <th>SMEs/Architects</th>
-              <th>BU</th>
+              <th>Location</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-sme>
@@ -92,7 +53,7 @@
               <td>{{sme.subDomain}}</td>
               <td> <a class="sme-name" href="#" *ngFor="let smeInfo of sme?.listOfSMEUIModel; last as isLast" 
                 (click)="onSmeNameClickHandler($event,smeInfo, sme.region, op)">{{smeInfo?.name}}{{!isLast?", ":""}}</a></td>
-              <td>{{sme.region}}</td>
+              <td>{{sme.location}}</td>
                </tr>
         </ng-template>
     </p-table>
@@ -114,7 +75,7 @@
             <i class="fa fa-envelope icon-color"></i>  :  <span class="fs-10"> {{selectedUser.email}} </span>
         </div>
          <div>
-            <i class="fa fa-map-marker icon-color"></i>  : <span class="fs-10"> {{selectedUser.region}} </span>
+            <i class="fa fa-map-marker icon-color"></i>  : <span class="fs-10"> {{selectedUser.smeLocation}} </span>
         </div>
       </div>
 

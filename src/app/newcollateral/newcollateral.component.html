@@ -28,7 +28,7 @@
         <form [formGroup]="collateralForm">
             <div class="collateral-container">
                 <div class="form-group">
-                    <label> Collateral Type </label><br>
+                    <!-- <label> Collateral Type </label><br>
                     <p-autoComplete class="form-control coll-type" #collateralTypeRef [(ngModel)]="collateralObj.collateralTypeUIModel" [suggestions]="suggestedCollateralTypes" (completeMethod)="search($event)"
                         placeholder="Enter Collateral Type here…."
                         formControlName="collateralTypeUIModel" 
@@ -38,14 +38,31 @@
                     </p-autoComplete>
                     <div *ngIf="submitted && f.collateralTypeUIModel.errors" class="invalid-feedback">
                         <div *ngIf="f.collateralTypeUIModel.errors.required">Collateral Type is required</div>
-                    </div>
+                    </div> -->
+                       <label>Document Name </label><br>
+                    <input type="text" #documentNameRef [(ngModel)]="collateralObj.docName" class="form-control tx-box" placeholder="Enter Document Name here…." formControlName="docName"
+                    [ngClass]="{ 'is-invalid': submitted && f.docName.errors }" />
+                    <div *ngIf="submitted && f.docName.errors" class="invalid-feedback">
+                     <div *ngIf="f.docName.errors.required"> Document Name is required</div>
+                     </div> 
                 </div>
                 <div class="form-group mt-1">
-                    <label>Document Name </label><br>
+                    <!-- <label>Document Name </label><br>
                     <input type="text" [(ngModel)]="collateralObj.docName" class="form-control tx-box" placeholder="Enter Document Name here…." formControlName="docName"
                     [ngClass]="{ 'is-invalid': submitted && f.docName.errors }" />
                     <div *ngIf="submitted && f.docName.errors" class="invalid-feedback">
                      <div *ngIf="f.docName.errors.required"> Document Name is required</div>
+                     </div> -->
+                     <label> Collateral Type </label><br>
+                     <p-autoComplete class="form-control coll-type"  [(ngModel)]="collateralObj.collateralTypeUIModel" [suggestions]="suggestedCollateralTypes" (completeMethod)="search($event)"
+                         placeholder="Enter Collateral Type here…."
+                         formControlName="collateralTypeUIModel" 
+                         field="collateralType"
+                         dataKey="collateralTypeId"
+                         [ngClass]="{ 'is-invalid': submitted && f.collateralTypeUIModel.errors }">
+                     </p-autoComplete>
+                     <div *ngIf="submitted && f.collateralTypeUIModel.errors" class="invalid-feedback">
+                         <div *ngIf="f.collateralTypeUIModel.errors.required">Collateral Type is required</div>
                      </div>
                 </div>
                     <div class="form-group mt-1"> 

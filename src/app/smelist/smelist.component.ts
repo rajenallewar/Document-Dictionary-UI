@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SmeService } from './smelist.service';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { SpinnerService } from '../shared/spinner/spinner.service';
+import SmeColorMap from '../shared/utils/sme.color.map';
+
 
 @Component({
   selector: 'app-smelist',
@@ -16,10 +18,14 @@ export class SmelistComponent implements OnInit {
   doughtnutData: any = {};
   selectedUser: any = {};
   BUSme: any;
-  smeArchData: any;
+  smeArchData: any={};
   keyword:string;
-  totalRecords= 16;
-  displayRows= 8;
+  totalRecords :number;
+  displayRows= 10;
+  locations = [];
+  isPaginator: boolean = false;
+
+  smeColorMapObj: any = new SmeColorMap();
   constructor(private smelistservice: SmeService,private spinnerService: SpinnerService,) {
 
   }
@@ -45,8 +51,15 @@ export class SmelistComponent implements OnInit {
     this.smelistservice.getSmeList(req).subscribe((data: any) => {
       this.spinnerService.spinner(false);
       if (data) {
-        this.totalRecords = data.countOFSmeDomainKeyword;
+        // this.totalRecords = data.countOFSmeDomainKeyword;
         this.smeList = data.listOFSMEUIModel;
+        if (data.recordsCount > 10) {
+          this.isPaginator = true;
+          this.totalRecords=data.recordsCount;
+        } else {
+          this.isPaginator=false;
+        }
+       
       }
     },((err)=>{this.spinnerService.spinner(false);}),(()=>{this.spinnerService.spinner(false);}));
   }
@@ -80,45 +93,27 @@ export class SmelistComponent implements OnInit {
     }
     this.getSMEList(req);
    }
+  
   getTotalSmeCount() {
     this.spinnerService.spinner(true);
     this.smelistservice.getTotalSmeCount().subscribe((data: any) => {
       this.spinnerService.spinner(false);
       this.smeArchData = data;
-      for (const key in this.smeArchData.mapOfBuVsCount) {
-        if (this.smeArchData.mapOfBuVsCount.hasOwnProperty(key)) {
-          this.doughtnutData.data.push(this.smeArchData.mapOfBuVsCount[key]);
+
+      for (const key in this.smeArchData.mapOfLocationVsCount) {
+        if (this.smeArchData.mapOfLocationVsCount.hasOwnProperty(key)) {
+          this.doughtnutData.data.push(this.smeArchData.mapOfLocationVsCount[key]);
           this.doughtnutData.labels.push(key);
-          switch (key) {
-            case "UAE":
-              this.doughtnutData.bgColors.push("#FFC733");
-              break;
-            case "Charlotte":
-              this.doughtnutData.bgColors.push("#f17f7b");
-              break;
-            case "USCentral":
-              this.doughtnutData.bgColors.push("#67e7f1");
-              break;
-            case "New York":
-              this.doughtnutData.bgColors.push("#71ecb3");
-              break;
-            case "Paris":
-              this.doughtnutData.bgColors.push("#ebcd84");
-              break;
-            case "Singapore":
-              this.doughtnutData.bgColors.push("#d478bc");
-              break;
-            case "UK":
-              this.doughtnutData.bgColors.push("#5ce35b");
-              break;
-            case "Amsterdam":
-              this.doughtnutData.bgColors.push("#e15079");
-              break;
-            default:
-              break;
-          }
+          let itm:any={};
+          itm.name=key;
+          let rColor = this.smeColorMapObj.getColor(this.smeColorMapObj.smeCMap, key);
+          itm.color = rColor;
+          itm.data = this.smeArchData.mapOfLocationVsCount[key];
+          this.locations.push(itm);
+          this.doughtnutData.bgColors.push(rColor);
         }
       }
+
       this.data = {
         labels: this.doughtnutData.labels,
         datasets: [

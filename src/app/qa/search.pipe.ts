@@ -12,7 +12,7 @@ export class SearchPipe implements PipeTransform {
         }
         return echains.filter(emails => {
             for (const email of emails) {
-                if (email.subj.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1 || email.body.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1) {
+                if (email.subject.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1 || email.body.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1) {
                     return true;
                 }
             }

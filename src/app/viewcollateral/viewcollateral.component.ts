@@ -26,6 +26,7 @@ export class ViewcollateralComponent implements OnInit, OnDestroy, AfterViewInit
   texts: string[];
   results: string[];
   collateralId: number;
+  tagColor:any;
   routeData: any;
   htmlCode: SafeHtml = '';
   file: any;
@@ -80,6 +81,8 @@ export class ViewcollateralComponent implements OnInit, OnDestroy, AfterViewInit
       } else {
         tagsModel.tagColor = '#f8e52d';
       }
+      console.log("tagsModel after save call ", tagsModel);
+      
       return tagsModel;
     });
     this.tags = tags;
@@ -110,16 +113,19 @@ export class ViewcollateralComponent implements OnInit, OnDestroy, AfterViewInit
   }
   // For saving all added tags
   saveTags() {
+  
     let requestData = {
       collateralId: this.collateralId,
-      listOfTags: this.tags
+      listOfTags: this.tags,
+      tagColor:this.tagColor
     };
     this.viewCollateralService.saveTag(requestData).subscribe((data:any) => {
+     
       if(data) {
         this.displayAllTags(data);
-      }
+        this.getTagsByCollateral();
+    }
     }, (error) => {
-      console.log('saveTags error', error);
     });
 
   }

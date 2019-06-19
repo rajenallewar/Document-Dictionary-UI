@@ -13,7 +13,7 @@ export interface Email {
     id: string;
     from: string;
     to: string[];
-    subj: string;
+    subject: string;
     attachment: Attachment[];
     date: Date;
     body: string;

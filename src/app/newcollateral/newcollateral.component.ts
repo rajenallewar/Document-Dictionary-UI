@@ -24,7 +24,7 @@ export class NewcollateralComponent implements OnInit, OnDestroy, AfterViewInit 
   collateralTypes = [];
   proposalName:any;
   proposalId: any;
-  @ViewChild('collateralTypeRef') collateralTypeRef: any;
+  @ViewChild('documentNameRef') documentNameRef: any;
 
   constructor(private router: Router,
     private acr: ActivatedRoute,
@@ -71,9 +71,9 @@ export class NewcollateralComponent implements OnInit, OnDestroy, AfterViewInit 
   }
   ngAfterViewInit(){
     setTimeout(() => {
-      if( this.collateralTypeRef &&  this.collateralTypeRef.inputEL
-        &&  this.collateralTypeRef.inputEL.nativeElement){
-          this.collateralTypeRef.inputEL.nativeElement.focus();
+      if( this.documentNameRef &&  this.documentNameRef.inputEL
+        &&  this.documentNameRef.inputEL.nativeElement){
+          this.documentNameRef.inputEL.nativeElement.focus();
         }
     }, 100);
   }
