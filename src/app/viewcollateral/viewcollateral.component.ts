@@ -123,7 +123,7 @@ export class ViewcollateralComponent implements OnInit, OnDestroy, AfterViewInit
      
       if(data) {
         this.displayAllTags(data);
-        this.getTagsByCollateral();
+        // this.getTagsByCollateral();
     }
     }, (error) => {
     });

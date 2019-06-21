@@ -140,6 +140,10 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
     });
   }
   getCollateralsCount() {
+    this.data = {
+      labels: [],
+      datasets: []
+    };
     this.spinnerService.spinner(true);
     let req = {
       "dateRangeUIModel": null

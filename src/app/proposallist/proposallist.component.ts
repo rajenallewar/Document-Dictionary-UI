@@ -367,6 +367,10 @@ export class ProposallistComponent implements OnInit, OnDestroy {
   }
 
   getProposalCount() {
+    this.barChartData = {
+      labels: [],
+      datasets: [{ backgroundColor: [], data: [] }]
+    }
     this.spinnerService.spinner(true);
     let req = {
       "dateRangeUIModel": {
