@@ -9,9 +9,9 @@ export class SmeService {
         // return this.http.get('/assets/mockdata/domainSMED.json');
         
       }
-     public getTotalSmeCount(){
-       return this.http.get('getTotalSmeCount');
-        // return this.http.get('/assets/mockdata/getTotalSmeCount.json');
+     public getCountOfSmeAndDomain(){
+       return this.http.get('getCountOfSmeAndDomain');
+        // return this.http.get('/assets/mockdata/countOfSmeAndDomain.json');
       }
       public getDomainByUserkeyword(keyword: string){
         return this.http.get('getDomainByUserKeyword',{params: {"domainKeyWord": keyword}});

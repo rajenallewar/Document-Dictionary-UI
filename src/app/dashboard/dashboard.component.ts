@@ -7,6 +7,7 @@ import { DatePipe } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import CollateralColorMap from '../shared/utils/collateral.color.map';
+import { SpinnerService } from '../shared/spinner/spinner.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -26,7 +27,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   totalProposalbarChartData: any;
   totalProposalbarChartOptions: any;
   dateRange: any;
-  annotatedCollaterals;any;
+  annotatedCollaterals; any;
   collateralTypes = [];
   displayProposalBarChart: boolean = false;
   barChartData: any = {};
@@ -39,7 +40,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     height: 180,
     overflow: false,
   };
-  constructor(private router: Router, private acr: ActivatedRoute, private appSharedService: AppSharedService, private dashboardservice: DashboardService,
+  constructor(private router: Router,
+    private acr: ActivatedRoute,
+    private appSharedService: AppSharedService,
+    private dashboardservice: DashboardService,
+    private spinnerService: SpinnerService,
     public datePipe: DatePipe) {
   }
   ngOnInit() {
@@ -60,10 +65,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
           boxWidth: 6,
           fontColor: 'color: #565757',
           fontSize: 10,
-          fontFamily:'Carnas-Regular'
+          fontFamily: 'Carnas-Regular'
         },
       },
       scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            min: 0, // it is for ignoring negative step.
+            callback: function (value, index, values) {
+              if (Math.floor(value) === value) {
+                return value;
+              }
+            }
+          }
+        }],
         xAxes: [{
           ticks: {
             fontColor: '#a3afb9',
@@ -75,8 +91,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
           maxBarThickness: 8,
           minBarLength: 8,
           gridLines: {
-            offsetGridLines: false}
-        
+            offsetGridLines: false
+          }
+
         }]
       }
     }
@@ -179,6 +196,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     console.log("this.dateRange ", this.appSharedService.dateRange);
   }
   getTrendingTags() {
+    this.spinnerService.spinner(true);
     this.dashboardservice.getTrendingTags().subscribe((data: any) => {
       for (let index = 0; index < data.length; index++) {
         let item: any = {};
@@ -188,17 +206,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.trendingTags.push(item);
       }
       this.trendingTags = this.trendingTags.slice();
-    })
+    }, ((err) => { this.spinnerService.spinner(false); }), (() => { this.spinnerService.spinner(false); }))
   }
-  totalAnnotatedCollaterals(startDate: any, endDate: any){
+  totalAnnotatedCollaterals(startDate: any, endDate: any) {
     let requestParams = {
       "startDate": this.datePipe.transform(startDate, 'yyyy-MM-dd'),
       "endDate": this.datePipe.transform(endDate, 'yyyy-MM-dd')
     }
-    this.dashboardservice.totalAnnotatedCollaterals(requestParams).subscribe((data:any)=>{
-      this.annotatedCollaterals=data;
+    this.spinnerService.spinner(true);
+    this.dashboardservice.totalAnnotatedCollaterals(requestParams).subscribe((data: any) => {
+      this.annotatedCollaterals = data;
 
-    })
+    }, ((err) => { this.spinnerService.spinner(false); }), (() => { this.spinnerService.spinner(false); }))
   }
   tagClicked(event) {
     let tagName = event.text;
@@ -220,6 +239,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       "startDate": this.datePipe.transform(startDate, 'yyyy-MM-dd'),
       "endDate": this.datePipe.transform(endDate, 'yyyy-MM-dd')
     }
+    this.spinnerService.spinner(true);
     this.dashboardservice.gettotalProposalCount(requestParams).subscribe((data: any) => {
       this.totalProposalCountData = data;
       if (data.mapofStatus) {
@@ -253,7 +273,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.displayProposalBarChart = true;
       }
 
-    })
+    }, ((err) => { this.spinnerService.spinner(false); }), (() => { this.spinnerService.spinner(false); }))
 
   }
   // To call Collateral data
@@ -262,13 +282,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
       "startDate": this.datePipe.transform(startDate, 'yyyy-MM-dd'),
       "endDate": this.datePipe.transform(endDate, 'yyyy-MM-dd')
     }
+    this.spinnerService.spinner(true);
     this.dashboardservice.collateralTypeCount(requestParams).subscribe((data: any) => {
       this.collateralData = data;
       for (const key in this.collateralData.mapOfCollateralTypeVsCount) {
         if (this.collateralData.mapOfCollateralTypeVsCount.hasOwnProperty(key)) {
           this.doughtnutData.data.push(this.collateralData.mapOfCollateralTypeVsCount[key]);
           this.doughtnutData.labels.push(key);
-          let itm:any = {};
+          let itm: any = {};
           itm.name = key;
           let rColor = this.collateralColorMapObj.getColor(this.collateralColorMapObj.collateralCMap, key);
           itm.color = rColor;
@@ -279,7 +300,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
 
       console.log(this.collateralColorMapObj.collateralCMap);
-      
+
       this.collateralTypes = this.collateralTypes.slice(0, 8);
       this.data = {
         labels: this.doughtnutData.labels,
@@ -311,7 +332,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
       }
 
-    })
+    }, ((err) => { this.spinnerService.spinner(false); }), (() => { this.spinnerService.spinner(false); }))
 
   }
   getSummaryofProposalsByAccount(startDate: any, endDate: any) {
@@ -319,6 +340,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       "startDate": startDate,
       "endDate": endDate
     }
+    this.spinnerService.spinner(true);
     this.dashboardservice.getSummaryofProposalsByAccount(requestParams).subscribe((data: any) => {
       this.barChartData["dataInProgrss"] = [];
       this.barChartData["dataReview"] = [];
@@ -326,7 +348,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.barChartData["dataWon"] = [];
       this.barChartData["dataLost"] = [];
       this.barChartData["labels"] = [];
-      if(data) {
+      if (data) {
         data.forEach((proposal) => {
           this.barChartData.dataInProgrss.push(proposal["inProgress"])
           this.barChartData.dataNew.push(proposal["newProposal"])
@@ -337,7 +359,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         })
       }
       this.generateProposalBarChart();
-    })
+    }, ((err) => { this.spinnerService.spinner(false); }), (() => { this.spinnerService.spinner(false); }))
   }
 
   generateProposalBarChart() {

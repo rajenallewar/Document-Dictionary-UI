@@ -54,7 +54,6 @@ export class ProposallistComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // this.routeData = { ...this.appSharedService.getRouteData() };
-    this.getClientData();
     this.lineChartData = {
       labels: [],
       datasets: []
@@ -152,31 +151,34 @@ export class ProposallistComponent implements OnInit, OnDestroy {
     //   { label: "Citi", value: "Citi" },
     // ];
 
-    this.regionListOptions = [
-      { label: "All", value: null },
-      { label: "New York", value: "New York" },
-      { label: "Charlotte", value: "Charlotte" },
-      { label: "Singapore", value: "Singapore" },
-      { label: "US Central", value: "US Central" },
-      { label: "Amsterdam", value: "Amsterdam" },
-      { label: "UAE", value: "UAE" },
-      { label: "Paris", value: "Paris" },
-    ];
+    // this.regionListOptions = [
+    //   { label: "All", value: null },
+    //   { label: "New York", value: "New York" },
+    //   { label: "Charlotte", value: "Charlotte" },
+    //   { label: "Singapore", value: "Singapore" },
+    //   { label: "US Central", value: "US Central" },
+    //   { label: "Amsterdam", value: "Amsterdam" },
+    //   { label: "UAE", value: "UAE" },
+    //   { label: "Paris", value: "Paris" },
+    // ];
 
-    this.statusListOptions = [
-      { label: "All", value: null },
-      { label: "Lost", value: "Lost" },
-      { label: "New", value: "New" },
-      { label: "Won", value: "Won" },
-      { label: "In-Progress", value: "In-Progress" },
-      { label: "Review", value: "Review" }
-    ];
+    // this.statusListOptions = [
+    //   { label: "All", value: null },
+    //   { label: "Lost", value: "Lost" },
+    //   { label: "New", value: "New" },
+    //   { label: "Won", value: "Won" },
+    //   { label: "In-Progress", value: "In-Progress" },
+    //   { label: "Review", value: "Review" }
+    // ];
 
 
     // this.getDefaultDates();
     let startDate = this.datePipe.transform(this.startDate, 'yyyy-MM-dd');
     let endDate = this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
 
+    this.getClientData();
+    this.getRegionData();
+    this.getStatusData();
     this.searchCriteria.clientName = null;
     this.searchCriteria.status = null;
     this.searchCriteria.region = null;
@@ -194,6 +196,7 @@ export class ProposallistComponent implements OnInit, OnDestroy {
         }
       }
     }
+
     this.getProposalList(obj);
     this.getProposalCount();
 
@@ -203,20 +206,49 @@ export class ProposallistComponent implements OnInit, OnDestroy {
       }
     });
   }
+  getStatusData() {
+    this.statusListOptions = [];
+    this.proposalListService.getAllStatuses().subscribe((data: any) => {
+      if (data && data.length) {
+        this.statusListOptions.push({ "label": "All", "value": null });
+        for (let i = 0; i < data.length; i++) {
+          let item: any = {};
+          item.label = data[i].trim();
+          item.value = data[i].trim();
+          this.statusListOptions.push(item);
+        }
+      }
+      this.searchCriteria.status = this.statusListOptions[0];
+    })
+  }
+  getRegionData() {
+    this.regionListOptions = [];
+    this.proposalListService.getAllRegions().subscribe((data: any) => {
+      if (data && data.length) {
+        this.regionListOptions.push({ "label": "All", "value": null });
+        for (let i = 0; i < data.length; i++) {
+          let item: any = {};
+          item.label = data[i].trim();
+          item.value = data[i].trim();
+          this.regionListOptions.push(item);
+        }
+      }
+      this.searchCriteria.region = this.regionListOptions[0];
+    })
+  }
   getClientData() {
     this.clientData = [];
     this.proposalListService.getAllClients().subscribe((data: any) => {
       if (data && data.length) {
-
+        this.clientData.push({ "label": "All", "value": null });
         for (let i = 0; i < data.length; i++) {
           let item: any = {};
-          item.label = data[i]["clientName"];
-          item.value = data[i]["clientName"];
+          item.label = data[i]["clientName"].trim();
+          item.value = data[i]["clientName"].trim();
           this.clientData.push(item);
-
         }
-      
       }
+      this.searchCriteria.clientName = this.clientData[0];
     })
   }
 
@@ -248,6 +280,16 @@ export class ProposallistComponent implements OnInit, OnDestroy {
       startDate = '';
       endDate = '';
     }
+    if(this.searchCriteria.clientName && typeof this.searchCriteria.clientName !== 'string'){
+      this.searchCriteria.clientName = this.searchCriteria.clientName.value;
+    }
+    if(this.searchCriteria.status && typeof this.searchCriteria.status !== 'string'){
+      this.searchCriteria.status = this.searchCriteria.status.value;
+    }
+    if(this.searchCriteria.region && typeof this.searchCriteria.region !== 'string'){
+      this.searchCriteria.region = this.searchCriteria.region.value;
+    }
+    
     let obj: any = {
       "startDate": startDate,
       "endDate": endDate,

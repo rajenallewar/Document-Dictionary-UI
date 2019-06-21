@@ -45,7 +45,7 @@
         <div class="filter-item pd-0 mr-r-1 wid-18">
             <span class="ft-label">Date Range (Start - End Date)</span>
             <div class="cal-container">
-                <p-calendar class="calender" #cal [(ngModel)]="searchCriteria.rangeDates" (onSelect)="onProposalDateRangeSelect(cal)"selectionMode="range" [readonlyInput]="true"></p-calendar>
+                <p-calendar class="calender" #cal [(ngModel)]="searchCriteria.rangeDates" (onSelect)="onProposalDateRangeSelect(cal)" selectionMode="range" [readonlyInput]="true"></p-calendar>
                 <i *ngIf="searchCriteria?.rangeDates" class="calender-clear ui-dropdown-clear-icon pi pi-times" (click)="onClearClick(cal)"></i>
             </div>
         </div>

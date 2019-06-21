@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { QaService, Attachment, EmailChain, Email } from './qa.service';
 import { SearchPipe } from './search.pipe';
 import { DeviceDetectorService } from 'ngx-device-detector';
@@ -10,7 +10,7 @@ import { SpinnerService } from '../shared/spinner/spinner.service';
   styleUrls: ['./qa.component.scss'],
   providers: [QaService],
 })
-export class QaComponent implements OnInit {
+export class QaComponent implements OnInit, OnDestroy {
 
   constructor(private qaservice: QaService, private deviceService: DeviceDetectorService, private spinnerService:SpinnerService) {
     this.setScreenSize();
@@ -45,17 +45,29 @@ export class QaComponent implements OnInit {
     this.isMobile = this.deviceService.isMobile() || (document.body.clientWidth < 700);
     console.log(this.deviceService.isMobile(), document.body.clientWidth, deviceInfo);
   }
+  updateEmailList(emailList){
+    this.emailList = emailList.map(obj =>{
+      if (obj && obj.length) {
+        obj.forEach(element => {
+          if (element && element.to) {
+            element.toDisplay = element.to.join(" ; ");
+          }
+        });
+      }
+      return obj;
+    });
 
+    console.log(this.emailList);
+    this.emailList.sort(this.compare);
+    this.selectedEmailChain = this.emailList[this.defaultSelIndex];
+  }
   onInput(e){
     console.log("input");
     if(e.target.value){
       this.spinnerService.spinner(true);
-      this.qaservice.searchEmails(e.target.value).subscribe(res => { 
+      this.qaservice.searchEmails(e.target.value).subscribe(res => {
+        this.updateEmailList(res);
         this.spinnerService.spinner(false);
-        this.emailList = res;
-        console.log(this.emailList);
-        this.emailList.sort(this.compare);
-        this.selectedEmailChain = this.emailList[this.defaultSelIndex];
       }, err => {
         console.error(err);
         this.spinnerService.spinner(false);
@@ -71,5 +83,12 @@ export class QaComponent implements OnInit {
       return 1;
     }
     return 0;
+  }
+  getTitle(htmlString){
+    return "";//htmlString.match(/<title[^>]*>([^<]+)<\/title>/)[1];
+  }
+
+  ngOnDestroy() {
+    this.emailList = [];
   }
 }

@@ -6,7 +6,7 @@
           <i class="fa fa-search"></i>
         </span>
       </div>
-      <input type="text" [(ngModel)]="searchQuery" (change)="onInput($event)" (keyup.enter)="onInput($event)" class="form-control form-control-sm" placeholder="Search by Tags"
+      <input type="text" [(ngModel)]="searchQuery" (change)="onInput($event)" class="form-control form-control-sm" placeholder="Search by Tags"
         aria-label="Username" aria-describedby="basic-addon1">
     </div>
     <div class="list-group w-100" style="overflow-y: auto; height: calc(100% - 4.6em);font-size: smaller;">
@@ -20,8 +20,8 @@
           </div>
           <div class="d-flex w-100 justify-content-between">
             <span class="mb-1 font-weight-bold text-truncate" style="font-size: smaller; width: 90%;">
-              {{ echain[defaultSelIndex]?.to.join(" ; ") }}</span>
-            <span *ngIf="qaservice.hasAttachment(echain)"><i class="fa fa-paperclip" aria-hidden="true"></i></span>
+              {{ echain[defaultSelIndex]?.from }}</span>
+            <span *ngIf="echain[defaultSelIndex]?.attachment && echain[defaultSelIndex]?.attachment.length"><i class="fa fa-paperclip" aria-hidden="true"></i></span>
           </div>
           <p class="mb-1 text-truncate text-secondary" style="font-size: smaller;height: 1em;"
             [innerHTML]="echain[defaultSelIndex]?.body">
@@ -44,7 +44,7 @@
           <section class="w-100 font-weight-bold" style="font-size: small;"> {{ email?.from }}</section>
           <section class="w-100 text-secondary" style="font-size: smaller;"> {{ email?.date | date:'EEE dd/M, H:mm a' }}
           </section>
-          <section class="w-100 text-truncate" title="{{ email?.to.join(' ; ') }}"  style="font-size: smaller;"> {{ email?.to.join(' ; ') }}</section>
+          <section class="w-100 text-truncate" title="{{ email?.toDisplay }}"  style="font-size: smaller;"> {{ email?.toDisplay }}</section>
         </span>
       </section>
       <section class="attachment d-flex mt-4 pl-5 pr-5 w-100" style="font-size: x-small; overflow-x: auto">
@@ -59,7 +59,7 @@
     </div>
   </section>
 </div>
-<div *ngIf="isMobile">
+<div *ngIf="false">
   <section class="w-100 border-lighter bg-white" style="height: calc(100vh - 3.3em);overflow-y: auto;">
     <div class="input-group p-3 border-lighter-bottom" style="height: 4em;">
       <div class="input-group-prepend">

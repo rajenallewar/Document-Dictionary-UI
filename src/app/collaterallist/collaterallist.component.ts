@@ -29,10 +29,11 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
   searchTimer;
   tagSearch = null;
   proposalId = null;
+  proposalName = null;
   msgs: any;
   private ngUnsubscribe$ = new Subject<void>();
   collateralColorMapObj: any = new CollateralColorMap();
-
+  showSearchBar:boolean =true;
   @ViewChild('paginator') paginator: any;
 
   constructor(private collateralListService: CollateralListService,
@@ -91,7 +92,9 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
 
     if (this.routeData) {
       if (this.routeData.proposalId) {
+        this.showSearchBar = false;
         this.proposalId = this.routeData.proposalId;
+        this.proposalName = this.routeData.proposalName;
         req = {
           "limit": 10,
           "offset": 1,
@@ -271,6 +274,15 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.router.navigate([{ outlets: { dialogs: 'viewcollateral' } }], { relativeTo: this.acr.parent });
     }, 0);
+  }
+  onReset(event) {
+    this.showSearchBar = true;
+    this.resetCollateralListing();
+  }
+  onProposalGoback(event) {
+    setTimeout(() => {
+      this.router.navigate(['/dms/proposals']);
+    }, 10);
   }
   ngOnDestroy() {
     this.appSharedService.clearRouteData();

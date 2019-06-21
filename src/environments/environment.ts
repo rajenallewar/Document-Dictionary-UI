@@ -15,8 +15,8 @@ export const AppSettings = {
       name: 'getSmeList',
       url: '/smedata/domainSMEDetail'
     },
-    'getTotalSmeCount': {
-      name: 'getTotalSmeCount',
+    'getCountOfSmeAndDomain': {
+      name: 'getCountOfSmeAndDomain',
       url: '/smedata/countOfSmeAndDomain'
     },
     'getCollaterals': {
@@ -102,7 +102,8 @@ export const AppSettings = {
     }
     
  },
-  BASE_URL: 'http://172.20.201.170:8080/docketManagement'
+  // BASE_URL: 'http://172.20.201.170:8080/docketManagement'
+  BASE_URL: 'http://172.20.201.94:8080/docketManagement'
   //  BASE_URL: ''
 };
 

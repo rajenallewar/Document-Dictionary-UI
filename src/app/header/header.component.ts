@@ -67,8 +67,13 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     }, 0);
  
   }
-  onDateSelect(event){
+  onDateSelect(event, calendar){
     this.appSharedService.setDashboardDateSubject(event);
+    if (this.appSharedService.dateRange && this.appSharedService.dateRange[0] && this.appSharedService.dateRange[1]) {
+      if(calendar) {
+        calendar.hideOverlay();
+      }
+    }
   }
 
   ngOnDestroy(){

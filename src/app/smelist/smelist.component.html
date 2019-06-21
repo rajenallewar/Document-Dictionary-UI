@@ -11,7 +11,9 @@
         </div>
       </div>
       <div class="locaion-c">
-        <div *ngFor="let location of locations" class="loc-count-box">
+        <div *ngFor="let location of locations; index as i;" class="loc-count-box" 
+        [ngClass]="{'last-two': locations.length%2==0 && ((i==(locations.length-1))||(i==(locations.length-2))),
+        'last-one': locations.length%2!=0 && (i==(locations.length-1))}">
         
             <hr [style.backgroundColor]="location?.color" align="left">
                   <div class="loc-count">
@@ -34,7 +36,7 @@
     </div>
     <div class="sme-txt">
         <input [(ngModel)]="keyword" class="search-box" type="text" placeholder="Search by Tag/Cloud / Big Data / Migration etc."
-         (change)="searchDomain($event)" (keyup.enter)="searchDomain($event)"/>
+         (change)="searchDomain($event)"/>
     </div>
   <div class="sme-tb">
     <p-table [value]="smeList" [lazy]="true" [scrollable]="true" scrollHeight="70vh" (onLazyLoad)="loadSmeListLazy($event)" [paginator]="isPaginator" 

@@ -36,7 +36,7 @@ export class SmelistComponent implements OnInit {
       "labels": [],
       "bgColors": []
     }
-    this.getTotalSmeCount();
+    this.getCountOfSmeAndDomain();
   }
 
   getSMEShortName(){
@@ -94,9 +94,9 @@ export class SmelistComponent implements OnInit {
     this.getSMEList(req);
    }
   
-  getTotalSmeCount() {
+   getCountOfSmeAndDomain() {
     this.spinnerService.spinner(true);
-    this.smelistservice.getTotalSmeCount().subscribe((data: any) => {
+    this.smelistservice.getCountOfSmeAndDomain().subscribe((data: any) => {
       this.spinnerService.spinner(false);
       this.smeArchData = data;
 

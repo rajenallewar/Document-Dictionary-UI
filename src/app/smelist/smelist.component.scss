@@ -164,6 +164,15 @@ hr {
 .loc-count-box:nth-child(odd) {
     border-right: 1px solid #f2f2f24f;
 }
+.loc-count-box:nth-child(odd) {
+    border-right: 1px solid #f2f2f24f;
+}
+.last-two.loc-count-box {
+    border-bottom:none;
+}
+.last-one.loc-count-box {
+    border-bottom:none;
+}
 .loc-lebal{
     font-size: 0.625rem;
     color: #a3acc6;
