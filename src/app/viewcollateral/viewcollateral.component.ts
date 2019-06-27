@@ -26,24 +26,24 @@ export class ViewcollateralComponent implements OnInit, OnDestroy, AfterViewInit
   texts: string[];
   results: string[];
   collateralId: number;
-  tagColor:any;
+  tagColor: any;
   routeData: any;
   htmlCode: SafeHtml = '';
   file: any;
   fileName: string = "";
   fileUrl;
   showTagError = false;
-  newTag:string = '';
+  newTag: string = '';
 
   constructor(private acr: ActivatedRoute,
     private router: Router,
     private domSan: DomSanitizer,
-    private spinnerService:SpinnerService,
+    private spinnerService: SpinnerService,
     private viewCollateralService: ViewCollateralService,
     private appSharedService: AppSharedService) { }
-    
-    @HostListener('document:keyup.escape', ['$event']) onKeyupHandler(event: KeyboardEvent) {
-      this.goBack()
+
+  @HostListener('document:keyup.escape', ['$event']) onKeyupHandler(event: KeyboardEvent) {
+    this.goBack()
   }
 
   ngOnInit() {
@@ -56,13 +56,13 @@ export class ViewcollateralComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   ngAfterViewInit() {
-        
+
   }
-  
+
   onDeleteTag(tag) {
-    let tagIndex = this.tags.findIndex(t=>t.tagId==tag.tagId);
-    if(tagIndex!== null && tagIndex !== undefined && tagIndex>=0){
-      this.tags.splice(tagIndex,1);
+    let tagIndex = this.tags.findIndex(t => t.tagId == tag.tagId);
+    if (tagIndex !== null && tagIndex !== undefined && tagIndex >= 0) {
+      this.tags.splice(tagIndex, 1);
     }
   }
   // To get all tags saved against that file
@@ -82,7 +82,7 @@ export class ViewcollateralComponent implements OnInit, OnDestroy, AfterViewInit
         tagsModel.tagColor = '#f8e52d';
       }
       console.log("tagsModel after save call ", tagsModel);
-      
+
       return tagsModel;
     });
     this.tags = tags;
@@ -90,8 +90,8 @@ export class ViewcollateralComponent implements OnInit, OnDestroy, AfterViewInit
   //  To add tags related with that file
   addAnnotation(newAnnotation: string) {
     if (newAnnotation) {
-      let tagIndex = this.tags.findIndex(t=>t.tagName.toLowerCase()==newAnnotation.toLowerCase());
-      if(tagIndex!== null && tagIndex !== undefined && tagIndex>=0){
+      let tagIndex = this.tags.findIndex(t => t.tagName.toLowerCase() == newAnnotation.toLowerCase());
+      if (tagIndex !== null && tagIndex !== undefined && tagIndex >= 0) {
         console.log("this tag is already exist.");
         this.showTagError = true;
       } else {
@@ -113,18 +113,18 @@ export class ViewcollateralComponent implements OnInit, OnDestroy, AfterViewInit
   }
   // For saving all added tags
   saveTags() {
-  
+
     let requestData = {
       collateralId: this.collateralId,
       listOfTags: this.tags,
-      tagColor:this.tagColor
+      tagColor: this.tagColor
     };
-    this.viewCollateralService.saveTag(requestData).subscribe((data:any) => {
-     
-      if(data) {
+    this.viewCollateralService.saveTag(requestData).subscribe((data: any) => {
+
+      if (data) {
         this.displayAllTags(data);
         // this.getTagsByCollateral();
-    }
+      }
     }, (error) => {
     });
 
@@ -143,17 +143,13 @@ export class ViewcollateralComponent implements OnInit, OnDestroy, AfterViewInit
       "fileName": this.fileName,
     }
     this.viewCollateralService.downloadFile(downloadObj).subscribe((data: any) => {
-      this.spinnerService.spinner(false);
-      const blob = new Blob([data], {type:'application/pdf'});
+      const blob = new Blob([data], { type: 'application/pdf' });
       // this.htmlCode = this.domSan.bypassSecurityTrustResourceUrl(URL.createObjectURL(blob));
       // this.htmlCode = this.domSan.bypassSecurityTrustResourceUrl(URL.createObjectURL(blob));
       setTimeout(() => {
-        this.htmlCode = URL.createObjectURL(blob);  
+        this.htmlCode = URL.createObjectURL(blob);
       }, 100);
-      
-      
-
-    },((err)=>{this.spinnerService.spinner(false);}),(()=>{this.spinnerService.spinner(false);}))
+    });
   }
   downloadCollateral() {
     let downloadObj = {
@@ -164,6 +160,19 @@ export class ViewcollateralComponent implements OnInit, OnDestroy, AfterViewInit
       downloadFile(data, this.fileName, 'application/octet-stream');
 
     })
+  }
+  onPdfLoad(event) {
+    console.log("onPdfLoad");
+    let ifr: any = document.getElementById("iFrameRef");
+    if (ifr && ifr.contentDocument && ifr.contentDocument.readyState === 'complete' && ifr.contentDocument.embeds && ifr.contentDocument.embeds.length > 0) {      
+      setTimeout(() => {
+        this.spinnerService.spinner(false);
+      }, 500);
+      // for printing
+      // ifr.focus();
+      // ifr.contentWindow.print();
+      return;
+    }
   }
   ngOnDestroy() {
     this.appSharedService.clearRouteData();

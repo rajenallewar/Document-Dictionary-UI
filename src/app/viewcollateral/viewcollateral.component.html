@@ -22,7 +22,7 @@
           </div> -->
       <div class="doc-panel">
         <!-- <embed [src]="htmlCode | safe" width="100%" height="100%"  frameborder="0"/> -->
-        <iframe name="title" id="iFrameRef" [src]="htmlCode | safe" width="100%" height="100%" frameborder="0"></iframe>
+        <iframe name="title" (load)="onPdfLoad($event)" id="iFrameRef" [src]="htmlCode | safe" width="100%" height="100%" frameborder="0"></iframe>
       </div>
 
     </div>

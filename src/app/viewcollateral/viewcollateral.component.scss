@@ -58,7 +58,8 @@ float: right;
 color: white;
 }
 .doc-panel{
-    background-color: white;
+    // background-color: white;
+    background-color: rgb(82, 86, 89);
     // margin: 1.2em 2em;
     // padding: 2em;
     height: calc(100%) !important;
@@ -83,7 +84,7 @@ color: white;
     height: 100%;
     float: left;
     width: calc(100% - 18em);
-    background-color: #18191b;
+    background-color: rgb(82, 86, 89);
 }
 .del-tag{
     padding: 0.35em;

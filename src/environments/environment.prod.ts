@@ -4,9 +4,9 @@ export const environment = {
 };
 export const AppSettings = {
   hasResource(url: string): boolean {
-      return !!this.resources[url];
+    return !!this.resources[url];
   },
-  resources : {
+  resources: {
     'authLogin': {
       name: 'authLogin',
       url: '/auth/authLogin '
@@ -39,7 +39,7 @@ export const AppSettings = {
       name: 'viewCollateral',
       url: '/collateral/viewCollateral'
     },
-    'deleteCollateral':{
+    'deleteCollateral': {
       name: 'deleteCollateral',
       url: '/collateral/delete'
     },
@@ -57,26 +57,26 @@ export const AppSettings = {
     },
     'getDomainByUserKeyword': {
       name: 'getDomainByUserKeyword',
-      url:'/smedata/getDomainByUserKeyword'
-     },
-    
-    'countOfProposalStatus':{
+      url: '/smedata/getDomainByUserKeyword'
+    },
+
+    'countOfProposalStatus': {
       name: 'countOfProposalStatus',
       url: '/proposal/countOfProposalStatus'
     },
-    'getAllRegions':{
+    'getAllRegions': {
       name: 'getAllRegions',
       url: '/dms/getAllRegions'
     },
-    'getAllClients':{
+    'getAllClients': {
       name: 'getAllClients',
       url: '/dms/getAllClients'
     },
-    'getAllStatuses':{
+    'getAllStatuses': {
       name: 'getAllStatuses',
       url: '/dms/getAllStatuses'
     },
-    'saveProposal':{
+    'saveProposal': {
       name: 'saveProposal',
       url: '/proposal/saveProposal'
     },
@@ -88,21 +88,21 @@ export const AppSettings = {
       name: 'getTrendingTags',
       url: '/tag/mostTrendingsTags'
     },
-    'getProposals':{
+    'getProposals': {
       name: 'getProposals',
       url: '/proposal/getProposals'
     },
-    'getSummaryofProposalsByAccount':{
-      name : 'getSummaryofProposalsByAccount',
-      url : '/proposal/getSummryOfProposalByAccount'
+    'getSummaryofProposalsByAccount': {
+      name: 'getSummaryofProposalsByAccount',
+      url: '/proposal/getSummryOfProposalByAccount'
     },
-    'getTotalAnnotatedCollaterals':{
-      name : 'getTotalAnnotatedCollaterals',
-      url : '/collateral/collateralTagsCount'
+    'getTotalAnnotatedCollaterals': {
+      name: 'getTotalAnnotatedCollaterals',
+      url: '/collateral/collateralTagsCount'
     }
-    
- },
-  BASE_URL: 'http://172.20.201.170:8080/docketManagement'
+
+  },
+  BASE_URL: 'http://13.58.252.233:8080/docketManagement'
   //  BASE_URL: ''
 };
 

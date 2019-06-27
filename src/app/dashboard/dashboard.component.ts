@@ -241,6 +241,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
     this.spinnerService.spinner(true);
     this.dashboardservice.gettotalProposalCount(requestParams).subscribe((data: any) => {
+      this.totalProposalbarChartData = {
+        labels: [],
+        datasets: [{ backgroundColor: [], data: [] }]
+      }
       this.totalProposalCountData = data;
       if (data.mapofStatus) {
         for (const key in data.mapofStatus) {
@@ -284,6 +288,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
     this.spinnerService.spinner(true);
     this.dashboardservice.collateralTypeCount(requestParams).subscribe((data: any) => {
+      this.doughtnutData = {
+        "data": [],
+        "labels": [],
+        "bgColors": []
+      }
       this.collateralData = data;
       for (const key in this.collateralData.mapOfCollateralTypeVsCount) {
         if (this.collateralData.mapOfCollateralTypeVsCount.hasOwnProperty(key)) {
@@ -342,6 +351,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
     this.spinnerService.spinner(true);
     this.dashboardservice.getSummaryofProposalsByAccount(requestParams).subscribe((data: any) => {
+      this.barChartData = {
+        labels: [],
+        datasets: []
+      }
+
       this.barChartData["dataInProgrss"] = [];
       this.barChartData["dataReview"] = [];
       this.barChartData["dataNew"] = [];
