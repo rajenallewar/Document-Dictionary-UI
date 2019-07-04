@@ -3,7 +3,7 @@
     padding: 0.8rem 1.6rem;
     margin: 0.56rem;
     background-color: #fff;
-    box-shadow: 0.2rem 0.2rem 1rem #DADADA;
+    box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0,0.2);
     border-radius: 0.5rem;
     transition: .3s linear all;
     border-top: 0.5rem solid #000;
@@ -13,8 +13,8 @@
 }
 
 .col-card:hover{
-    box-shadow: 0.4rem 0.4rem 2rem #DADADA;
-    transition: .3s linear all;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0,0.2);
+    transform: translateY(-.5rem)
 }
 .card-row {
     padding: 0.3rem 0;
