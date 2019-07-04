@@ -3,7 +3,7 @@
                 <div class="ui-g-8 line-chart">
                         <div class="line-chart-cnt">
                                 <div class="ui-g-3">
-                                        <span class="label">Status of Proposals</span>
+                                        <div class="label">Status of Proposals</div>
                                         <div class="total-proposals">Total Proposals</div>
                                         <div class="total-proposal-count">
                                                 {{totalProposalCountData?.totalAvailableProposals}}</div>
@@ -26,16 +26,16 @@
         </div>
         <div class="ui-g pt-1">
                 <div class="ui-g-12 proposal-by-account"><span class="label">Proposals by Account</span>
-                        <p-chart type="bar" *ngIf="barChartData && barChartData.labels && barChartData.labels.length" [data]="barChartData" [options]="barChartOptions" width="100%"
-                                height="auto"></p-chart>
+                        <p-chart type="bar" *ngIf="barChartData && barChartData.labels && barChartData.labels.length"
+                                [data]="barChartData" [options]="barChartOptions" width="100%" height="auto"></p-chart>
                 </div>
         </div>
         <div class="ui-g pt-1">
                 <div class="ui-g-8 pro-cont">
                         <div class="ui-g-2 collateral-status"><span class="col-status">Collaterals Status</span>
-                        <div class="col-per">12.3%</div>
-                        <div class="col-in">Increase from the last month</div>
-                        
+                                <div class="col-per">12.3%</div>
+                                <div class="col-in">Increase from the last month</div>
+
                         </div>
                         <div class="ui-g-6 doughnut-comtainer">
                                 <div class="ui-g-5 d-container">
@@ -66,11 +66,34 @@
                 </div>
                 <div class="ui-g-4 tag-cont">
                         <div class="tags-addition">
-                                <div class="tags-addition-label"># Tags Addition</div>
-                                <span class="total-annotated-collaterals-count"><span><i class="fa fa-arrow-up arrow-icon" aria-hidden="true"></i></span>{{annotatedCollaterals?.TOTAL_COLATERAL_COUNT}}</span>
-                                <span class="annotad-collaterals-count">{{annotatedCollaterals?.TOTAL_TAGGED_COLATERAL_COUNT}}</span>
-                                <span class="annotad-collaterals-label">Total Annotated Collaterals</span>
-                               <div class="tag-increase">15% Tags Increase from last month</div>
+                                <div class="row  mr-0 pd-0">
+                                        <div class="col-md-5  mr-0 pd-0">
+                                                <div class="tags-addition-label"># Tags Addition</div>
+                                                <div class="tags-label-cntr">
+                                                        <div class="total-annotated-collaterals-count">
+                                                                <div class="text-center">
+                                                                        <span>
+                                                                                <i class="fa fa-arrow-up arrow-icon"
+                                                                                        aria-hidden="true"></i>
+                                                                        </span>
+                                                                        <span>{{annotatedCollaterals?.TOTAL_COLATERAL_COUNT}}</span>
+                                                                </div>
+                                                                <div class="to-date">{{displaySelectedDate}}</div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        <div class="col-md-7  mr-0 pd-0">
+                                                <div class="annotad-collaterals-count">
+                                                        {{annotatedCollaterals?.TOTAL_TAGGED_COLATERAL_COUNT}}
+                                                </div>
+                                                <div class="annotad-collaterals-label">
+                                                        Total Annotated Collaterals
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="row  mr-0 pd-0">
+                                        <div class="tag-increase">15% Tags Increase from last month</div>
+                                </div>
                         </div>
                 </div>
         </div>

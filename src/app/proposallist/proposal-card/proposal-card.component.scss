@@ -1,35 +1,36 @@
 .col-card{
     float: left;
-    padding: 0.5em 1em;
-    width: 19%;
-    margin: 0.35em;
+    padding: 0.8rem 1.6rem;
+    margin: 0.56rem;
     background-color: #fff;
-    box-shadow: 2px 2px 10px #DADADA;
-    border-radius: 5px;
+    box-shadow: 0.2rem 0.2rem 1rem #DADADA;
+    border-radius: 0.5rem;
     transition: .3s linear all;
-    border-top: 5px solid #000;
-    min-height: 275px;
+    border-top: 0.5rem solid #000;
+    width: 19%;
+    min-height: 27.6rem;
+    height: 27.6rem;
 }
 
 .col-card:hover{
-    box-shadow: 4px 4px 20px #DADADA;
+    box-shadow: 0.4rem 0.4rem 2rem #DADADA;
     transition: .3s linear all;
 }
 .card-row {
-    padding: 0.35em 0;
-    min-height: 2em;
+    padding: 0.3rem 0;
+    min-height: 3.2rem;
 }
 .card-label {
     color: #a7b0ba;
-    font-size:0.625rem;
+    font-size:1rem;
     font-family: 'Carnas-ExtraLight';
     font-weight: 200;
-    margin: 0.1em 0;
+    margin: 0.16rem 0;
 
 }
 .card-label-value1 {
     color: #515e6b;
-    font-size:0.75rem;
+    font-size:1.2rem;
     font-weight: normal;
     font-family:'Carnas-Regular';
     text-overflow: ellipsis;
@@ -38,7 +39,7 @@
 }
 .card-label-value2 {
     color: #515e6b;
-    font-size:0.75rem;
+    font-size:1.2rem;
     font-weight: 500;
     font-family: 'Carnas-Regular';
     text-overflow: ellipsis;
@@ -46,8 +47,8 @@
     white-space: nowrap
 }
 .tag-value {
-    min-height: 30px;
-    max-height: 30px;
+    min-height: 3rem;
+    max-height: 3rem;
     white-space: normal;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -60,17 +61,17 @@
     float: left;
 }
 .dc-cn{
-    margin-bottom: 0.5em;
+    margin-bottom: 0.8rem;
 }
 .ann-up-con{
     border-top: 1px solid #e8e6e6;
     border-bottom: 1px solid #e8e6e6;
-    padding: 0.3em 0;
+    padding: 0.48rem 0;
     margin: 0;
 }
 
 .reg-up-con{
-    padding: 0.3em 0;
+    padding: 0.48rem 0;
     margin: 0;
 }
 .ann-vl{
@@ -80,19 +81,19 @@
 }
 .upd-vl{
     font-weight: 500;
-    font-size:0.625rem;
+    font-size:1rem;
     color: #515e6b;
     font-family: 'Carnas-Medium';
     text-overflow: ellipsis;
 }
 .card-btn{
     text-align: center;
-    font-size: 0.625rem;
+    font-size: 1rem;
     font-family: 'Carnas-Regular';
     border-radius: 3px;
     background-color: #ffffff;
-    padding: 3px 6px;
-    margin-right: 0.5em;
+    padding: 0.3rem 0.6rem;
+    margin-right: 0.8rem;
 }
 .del-btn{
     color: #f07c7c;
@@ -130,14 +131,14 @@
     border-bottom: 1px solid #e8e6e6;
 }
 .client-name{
-    font-size:0.625rem;
+    font-size:1rem;
     font-family: 'Carnas-Medium';
     font-weight: 500;
     color: #515e6b;
 }
 .file-icon {
     vertical-align: text-top;
-    padding: 0 0.35em;
+    padding: 0 0.56rem;
 }
 .file-holder {
     position: relative;

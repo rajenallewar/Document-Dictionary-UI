@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   collateralTypes = [];
   displayProposalBarChart: boolean = false;
   barChartData: any = {};
+  displaySelectedDate = "";
 
   collateralColorMapObj: any = new CollateralColorMap();
 
@@ -148,6 +149,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     } else {
       this.appSharedService.dateRange = [new Date(this.appSharedService.startDate), new Date(this.appSharedService.endDate)];
     }
+    this.displaySelectedDate = `${this.datePipe.transform(this.appSharedService.startDate, 'MM/dd/yyyy')} to ${this.datePipe.transform(this.appSharedService.endDate, 'MM/dd/yyyy')}`;
     this.getSummaryofProposalsByAccount(this.appSharedService.startDate, this.appSharedService.endDate);
     this.gettotalProposalCount(this.appSharedService.startDate, this.appSharedService.endDate);
     this.getCollateralsCount(this.appSharedService.startDate, this.appSharedService.endDate);
@@ -175,6 +177,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.displayProposalBarChart = false;
     this.appSharedService.startDate = this.datePipe.transform(this.appSharedService.dateRange[0], 'yyyy-MM-dd');
     this.appSharedService.endDate = this.datePipe.transform(this.appSharedService.dateRange[1], 'yyyy-MM-dd');
+    this.displaySelectedDate = `${this.datePipe.transform(this.appSharedService.startDate, 'MM/dd/yyyy')} to ${this.datePipe.transform(this.appSharedService.endDate, 'MM/dd/yyyy')}`;
     this.getSummaryofProposalsByAccount(this.appSharedService.startDate, this.appSharedService.endDate);
     this.gettotalProposalCount(this.appSharedService.startDate, this.appSharedService.endDate);
     this.getCollateralsCount(this.appSharedService.startDate, this.appSharedService.endDate);

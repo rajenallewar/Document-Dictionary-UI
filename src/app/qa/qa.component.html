@@ -1,6 +1,6 @@
 <div class="d-inline-flex w-100  h-100" *ngIf="!isMobile">
   <section class="w-25 border-lighter bg-white">
-    <div class="input-group p-3 border-lighter-bottom" style="height: 4em;">
+    <div class="input-group p-3 border-lighter-bottom" style="height: 6.4rem;">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">
           <i class="fa fa-search"></i>
@@ -9,7 +9,7 @@
       <input type="text" [(ngModel)]="searchQuery" (change)="onInput($event)" class="form-control form-control-sm" placeholder="Search by Tags"
         aria-label="Username" aria-describedby="basic-addon1">
     </div>
-    <div class="list-group w-100" style="overflow-y: auto; height: calc(100% - 4.6em);font-size: smaller;">
+    <div class="list-group w-100" style="overflow-y: auto; height: calc(100% - 7.36rem);font-size: smaller;">
       <div *ngFor="let echain of emailList" (click)="selectedEmailChain = echain">
         <span class="list-group-item list-group-item-action flex-column align-items-start border-0"
           [ngClass]="{active: selectedEmailChain === echain}">
@@ -23,7 +23,7 @@
               {{ echain[defaultSelIndex]?.from }}</span>
             <span *ngIf="echain[defaultSelIndex]?.attachment && echain[defaultSelIndex]?.attachment.length"><i class="fa fa-paperclip" aria-hidden="true"></i></span>
           </div>
-          <p class="mb-1 text-truncate text-secondary" style="font-size: smaller;height: 1em;"
+          <p class="mb-1 text-truncate text-secondary" style="font-size: smaller;height: 1.6rem;"
             [innerHTML]="echain[defaultSelIndex]?.body">
           </p>
         </span>
@@ -36,9 +36,9 @@
     </div>
     <div class="email-section mt-4 border-bottom pb-4" *ngFor="let email of selectedEmailChain">
       <section class="email-header d-inline-flex w-100">
-        <span class="d-flex" style="width: 3em;    align-items: center;">
+        <span class="d-flex" style="width: 3rem;    align-items: center;">
           <!-- <i class="fa fa-user-circle fa-2x"></i> -->
-          <img src="../../assets/images/user.png" style="width: 2em;" alt="" srcset="">
+          <img src="../../assets/images/user.png" style="width: 3.2rem;" alt="" srcset="">
         </span>
         <span class="" style="width: 95%;">
           <section class="w-100 font-weight-bold" style="font-size: small;"> {{ email?.from }}</section>
@@ -60,8 +60,8 @@
   </section>
 </div>
 <div *ngIf="false">
-  <section class="w-100 border-lighter bg-white" style="height: calc(100vh - 3.3em);overflow-y: auto;">
-    <div class="input-group p-3 border-lighter-bottom" style="height: 4em;">
+  <section class="w-100 border-lighter bg-white" style="height: calc(100vh - 5.28rem);overflow-y: auto;">
+    <div class="input-group p-3 border-lighter-bottom" style="height: 6.4rem;">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">
           <i class="fa fa-search"></i>
@@ -93,9 +93,9 @@
               </div>
               <div class="email-section mt-4 border-bottom pb-4" *ngFor="let email of selectedEmailChain">
                 <section class="email-header d-inline-flex w-100">
-                  <span class="d-flex" style="width: 3em;    align-items: center;">
+                  <span class="d-flex" style="width: 4.8rem;    align-items: center;">
                     <!-- <i class="fa fa-user-circle fa-2x"></i> -->
-                    <img src="../../assets/images/user.png" style="width: 2em;" alt="" srcset="">
+                    <img src="../../assets/images/user.png" style="width: 3.2rem;" alt="" srcset="">
                   </span>
                   <span class="" style="width: 95%;">
                     <section class="w-100 font-weight-bold" style="font-size: small;"> {{ email?.from }}</section>

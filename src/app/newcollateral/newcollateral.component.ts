@@ -71,9 +71,8 @@ export class NewcollateralComponent implements OnInit, OnDestroy, AfterViewInit 
   }
   ngAfterViewInit(){
     setTimeout(() => {
-      if( this.documentNameRef &&  this.documentNameRef.inputEL
-        &&  this.documentNameRef.inputEL.nativeElement){
-          this.documentNameRef.inputEL.nativeElement.focus();
+      if( this.documentNameRef &&  this.documentNameRef.nativeElement){
+          this.documentNameRef.nativeElement.focus();
         }
     }, 100);
   }

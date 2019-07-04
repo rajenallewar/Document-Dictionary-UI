@@ -1,24 +1,27 @@
-<div class="row">
+<div class="row mr-0">
   <div class="col-md-12 pd-0">
-      <div class="col-md-4 inline-block">
-          <span class="h-text">{{headerText}}</span>
-          <span class="calendar" *ngIf="showCalender && headerText =='Dashboard'">
-              <p-calendar #cal [(ngModel)]="appSharedService.dateRange" (onSelect)="onDateSelect($event, cal)" [showIcon]="true" selectionMode="range" dateFormat="dd M yy"></p-calendar>
-          </span>
-      </div>
-      <div class="col-md-8 inline-block text-right pd-r-0">
-          <button class="btn btn-primary h-btn n-p-btn" (click)="onNewCollateral()">
-            <img class="n-c-img" src="./../../assets/images/data.svg">
-            <span>
-              Upload New<br>COLLATERAL
+    <div class="row mr-0">
+        <div class="col-md-4">
+            <span class="h-text">{{headerText}}</span>
+            <span class="calendar" *ngIf="showCalender && headerText =='Dashboard'">
+                <p-calendar #cal [(ngModel)]="appSharedService.dateRange" (onSelect)="onDateSelect($event, cal)" [showIcon]="true" selectionMode="range" dateFormat="dd M yy"></p-calendar>
             </span>
-          </button>
-          <button class="btn btn-primary h-btn n-c-btn" (click)="onNewProposal()">
-            <img class="n-c-img" src="./../../assets/images/plus.svg">
-            <span>
-              Create New<br>PROPOSAL
-            </span>
-          </button>
-      </div>
+        </div>
+        <div class="col-md-8 text-right pd-r-0">
+            <button class="btn btn-primary h-btn n-p-btn" (click)="onNewCollateral()">
+              <img class="n-c-img" src="./../../assets/images/data.svg">
+              <span>
+                Upload New<br>COLLATERAL
+              </span>
+            </button>
+            <button class="btn btn-primary h-btn n-c-btn" (click)="onNewProposal()">
+              <img class="n-c-img" src="./../../assets/images/plus.svg">
+              <span>
+                Create New<br>PROPOSAL
+              </span>
+            </button>
+        </div>
+    </div>
+      
   </div>
 </div>

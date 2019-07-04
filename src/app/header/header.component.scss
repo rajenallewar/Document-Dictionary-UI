@@ -1,14 +1,18 @@
 .h-btn {
-    width: 12em;
-    padding: 0.61em;
+    width: 14.5rem;
+    padding: 0.7rem;
     border-radius: 0;
-    font-size: 0.75rem;
+    font-size: 1.2rem;
+    font-family: 'Carnas-Medium';
+    font-weight: 300;
 }
 .h-text {
     color: #333742;
-    font-size: 1.125rem;
+    font-size: 1.8rem;
     font-family: 'Carnas-Medium';
     font-weight: 500;
+    display: inline-block;
+    margin-top: 1.3rem;
 }
 .n-p-btn {
     background-color: #5991e7;
@@ -21,8 +25,8 @@
 .n-c-img {
     float: left;
     padding-top: 10px;
-    margin-left: 0.5em;
+    margin-left: 0.5rem;
 }
 .calendar{
-    margin-left: 0.5em !important;
+    margin-left: 1.5rem !important;
 }

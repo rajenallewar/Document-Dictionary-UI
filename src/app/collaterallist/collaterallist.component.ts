@@ -205,6 +205,8 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
       "offset": 1,
       "mapOfSearchKeyVsValue": null
     }
+    this.tagSearch = "";
+    this.displayLineChart = false;
     this.getCollateralsCount();
     this.getCollateralList(req);
   }

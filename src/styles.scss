@@ -1,7 +1,20 @@
-@import './scss/_fonts';
-html { height: 100%; }
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+html {
+    // This defines what 1rem is
+    font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
+}
+
 body {
-    height: 100%; 
+    box-sizing: border-box;
+}
+@import './scss/_fonts';
+body {
     font-family: 'Carnas-Regular';
     font-weight: normal;
     font-style: normal;
@@ -17,19 +30,19 @@ body {
     padding: 0!important;
 }
 .pd-1{
-    padding: 1em !important;
+    padding: 1rem !important;
 }
 .pd-lr-1{
-    padding: 0 1em !important;
+    padding: 0 1rem !important;
 }
 .pd-bt-1{
-    padding: 1em 0 !important;
+    padding: 1rem 0 !important;
 }
 .mr-0{
     margin: 0!important;
 }
 .mt-0{
-    margin-top: 0.5em;
+    margin-top: 0.5rem;
 }
 .mr-l-0 {
     margin-left: 0!important;
@@ -38,7 +51,7 @@ body {
     margin-right: 0!important;
 }
 .mr-r-1 {
-    margin-right: 1em!important;
+    margin-right: 1rem!important;
 }
 .pd-r-0{
     padding-right: 0!important;
@@ -47,7 +60,7 @@ body {
     padding-left: 0!important;
 }
 .side-panel{
-    width: 12em;
+    width: 19.3rem;
     background-color: #494e5e;
     height: 100%;
     float: left;
@@ -55,11 +68,11 @@ body {
 .right-panel{
     height: 100%;
     float: left;
-    width: calc(100% - 12.75em);
-    padding: 1em 2em;
+    width: calc(100% - 19.3rem);
+    padding: 1rem 2rem;
 }
 body .ui-table .ui-table-thead > tr > th {
-    padding: 0.800em 0.857em;
+    padding: 0.800rem 0.857rem;
     font-weight: 700;
     color: white !important;
     border: none !important;
@@ -73,15 +86,15 @@ body .ui-paginator {
     background-color: #f4f4f4;
     background-color: #f4f4f4;
     border: none !important;
-    padding:0.5em 0;
+    padding:0.5rem 0;
     text-align: right;
     
 }
 .pt-1{
-    padding-top: 1em !important;
+    padding-top: 1rem !important;
 }
 .ml-chart{
-    margin-left: 1.5em;
+    margin-left: 1.5rem;
 }
 .pt-0 {
     padding-top: 0px !important;
@@ -102,10 +115,10 @@ body .ui-paginator {
     box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
 .mt-2{
-    margin-top: 2em !important;
+    margin-top: 2rem !important;
 }
 .mt-1{
-    margin-top: 1em;
+    margin-top: 1rem;
 }
 
 .view-collateral{
@@ -117,13 +130,13 @@ body .ui-paginator {
 
     >.ui-dialog-titlebar {
         opacity: 0.82;
-        padding: 0.8em !important;
+        padding: 1.28rem !important;
     }.ui-dialog-titlebar, .ui-dialog-content {
         background-color: rgba(24,25,27,0.82) !important;
         border-color: transparent !important;
     }
     >.ui-dialog-content {
-        height: calc(100% - 3.5em) !important;
+        height: calc(100% - 5.6rem) !important;
         padding: 0 !important;
     }  
  }
@@ -132,10 +145,10 @@ body .ui-paginator {
     > .ui-autocomplete-input{
         width: 100%;
         height: 100%;
-        padding: 0.5em !important;
-        border-radius: 3px;
-        font-family: Carnas-Regular !important;
-        font-size: 12px !important;
+        padding: 0.8rem !important;
+        border-radius: .3rem;
+        font-family: 'Carnas-Regular' !important;
+        font-size: 1.2rem !important;
         color: #404040;
     }
 }
@@ -144,30 +157,30 @@ body .ui-paginator {
 }
 
 .ui-autocomplete-panel .ui-autocomplete-items .ui-autocomplete-list-item {
-    font-family: Carnas-Regular !important;
-    font-size: 12px !important;
+    font-family: 'Carnas-Regular' !important;
+    font-size: 1.2rem !important;
     color: #404040;
 }
 .card-container{
-    padding-top: 1em;
-    min-height: 490px;
+    padding-top: 1.6rem;
+    min-height: 49rem;
 }
 .img-icon{
     vertical-align: inherit;
 }
-.header {
-    padding: 0 0.75em;
+.dialog-header {
+    padding: 0 1.2rem;
 }
 .close-btn{
-    margin-top: 0.5em;
+    margin-top: 0.8rem;
     cursor: pointer;
 }
 .c-btn {
-    width: 7em;
-    padding: 0.61em;
+    width: 11.2rem;
+    padding: 0.976rem;
     border-radius: 0;
-    font-size: 0.75rem;
-    font-display: Carnas-Medium;
+    font-size: 1.2rem;
+    font-display: 'Carnas-Medium';
    }
 .cancle-btn
 {
@@ -177,24 +190,20 @@ body .ui-paginator {
 .region-drop{
     width:100% !important;
 }
-// .proposal-cal{
-//     display: block !important;
-//     padding: 0;
-// }
 
 .dot {
     position: absolute;
     bottom: 0;
     right: 0;
-    height: 15px;
-    width: 15px;
+    height: 1.5rem;
+    width: 1.5rem;
     background-color: #64B3FF;
     border-radius: 50%;    
     display: grid;
     align-items: center;
     text-align: center;
     color: #ffffff;
-    font-size:0.625rem;
+    font-size:1rem;
     font-family: 'Carnas-ExtraLight';
     font-weight: 200;
 }
@@ -214,7 +223,7 @@ p-calendar.calender{
 
 .calender .ui-inputtext{
     width:100%;
-    padding: 0.25em;
+    padding: 0.4rem;
 }
 .calender .ui-calendar{
     width:100%;
@@ -223,9 +232,9 @@ p-calendar.calender{
    >.ui-dialog-titlebar {
         background-color: #fb6262!important;
         color: white!important;
-        font-size: 16px!important;
+        font-size: 1.6rem !important;
         font-family: 'Carnas-Regular'!important;
-        font-weight: 100!important;
+        font-weight: 100 !important;
        
     }
     >.ui-dialog-footer{
@@ -239,5 +248,17 @@ p-calendar.calender{
     }
 }
 .proposal-dropdown .ui-dropdown-label{
-    padding: 0.3em !important;
+    padding: 0.48rem !important;
+}
+
+#toolbar #title{
+    display: none
+}
+
+#title{
+    display: none;
+}
+
+.ui-blockui.ui-widget-overlay.ui-blockui-document{
+    z-index: 999999 !important;
 }

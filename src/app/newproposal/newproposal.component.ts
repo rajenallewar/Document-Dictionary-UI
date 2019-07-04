@@ -77,8 +77,7 @@ export class NewproposalComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngAfterViewInit(){
     setTimeout(() => {
-      if( this.proposalNameRef &&  this.proposalNameRef
-        &&  this.proposalNameRef.nativeElement){
+      if( this.proposalNameRef &&  this.proposalNameRef.nativeElement){
           this.proposalNameRef.nativeElement.focus();
         }
     }, 100);
