@@ -6,7 +6,7 @@
     background-color: #fff;
     box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0,0.2);
     border-radius: .5rem;
-    transition: .3s linear all;
+    transition: .2s linear all;
     border-top: .5rem solid #000;
     min-height: 27.5rem;
 }
@@ -85,6 +85,7 @@
     background-color: #ffffff;
     padding: .3rem .6rem;
     margin-right: 0.8em;
+    cursor: pointer;
 }
 .del-btn{
     color: #f07c7c;
