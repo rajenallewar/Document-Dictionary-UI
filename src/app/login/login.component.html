@@ -41,12 +41,26 @@
                         SIGN IN TO YOUR ACCOUNT
                     </h1>
                     <form [formGroup]="loginForm">
-                        <input type="text" formControlName="userName" class="tx-box" placeholder="User Name" />
-
-                        <input type="password" formControlName="password" class="tx-box" placeholder="Password"
-                            style="margin-top: 1rem" />
-                        <input type="checkbox" name="signIn" class="ch-box"> <span class="keep-sign-in"> keep me signed
-                            in</span>
+                        <div class="form-group">
+                            <input type="text" class="form-control tx-box" placeholder="User Name"
+                                formControlName="userName"
+                                [ngClass]="{ 'is-invalid': submitted && f.userName.errors }" />
+                            <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+                                <div *ngIf="f.userName.errors.required"> User Name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control tx-box" placeholder="Password"
+                                formControlName="password"
+                                [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                <div *ngIf="f.password.errors.required"> Password is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="signIn" class="ch-box" /> <span class="keep-sign-in"> keep me
+                                signed in</span>
+                        </div>
                         <button type="button" class="btn btn-primary sign-btn" (click)="onLogin()"
                             (keyup.enter)="onLogin()">SIGN IN</button>
                         <a class="forget-pwd" href="https://synepwd.synechron.com/"><span> Forget your Password?
