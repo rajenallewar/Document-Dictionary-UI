@@ -102,7 +102,8 @@ export const AppSettings = {
     }
 
   },
-  BASE_URL: 'http://13.58.252.233:8080/docketManagement'
+  // BASE_URL: 'http://13.58.252.233:8080/docketManagement'
+  BASE_URL: 'http://172.17.56.24:8080/docketManagement'
   //  BASE_URL: ''
 };
 

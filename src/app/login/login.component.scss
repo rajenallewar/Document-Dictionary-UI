@@ -6,9 +6,7 @@
   }
   .Image {
     object-fit: contain;
-    text-align: left;
-    // margin-left: 6.5rem;
-    // margin-top: 5.2rem;
+    text-align: right;
     height: 16.5rem;
     width: auto;
   }
@@ -44,15 +42,12 @@
     opacity: 0.5;
     }
    .login-box {
-    // height: 26rem;
     background-color: white;
-    // margin-left: 6.6rem;
-    // margin-right: 9rem;
-    // margin-top: 3.7rem;
     border: 3px solid white;
     border-radius: 5.5px;
     padding: 4rem;
     width: 42rem;
+    float: right;
   }
   .sign-in{
     padding-bottom: 2rem;

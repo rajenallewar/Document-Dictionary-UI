@@ -262,3 +262,13 @@ p-calendar.calender{
 .ui-blockui.ui-widget-overlay.ui-blockui-document{
     z-index: 999999 !important;
 }
+.ng2-pdf-viewer-container{
+    overflow: auto !important;
+    -webkit-overflow-scrolling: touch;
+    position: absolute;
+    top: 5rem;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    outline: none;
+}

@@ -43,6 +43,10 @@ import { ToastrModule } from 'ngx-toastr';
 import {TooltipModule} from 'primeng/tooltip';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
+import { CustomPdfViewerComponent } from './custom-pdf-viewer/custom-pdf-viewer.component';
+
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +66,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     ProposalCardComponent,
     ViewcollateralComponent,
     SpinnerComponent,
+    CustomPdfViewerComponent
 
   ],
   imports: [
@@ -88,7 +93,8 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     CommonModule,
     ToastrModule.forRoot(),
     TooltipModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    PdfViewerModule
 
     
   ],

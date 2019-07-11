@@ -28,12 +28,14 @@ export class ViewcollateralComponent implements OnInit, OnDestroy, AfterViewInit
   collateralId: number;
   tagColor: any;
   routeData: any;
-  htmlCode: SafeHtml = '';
+  htmlCode:any = '';
   file: any;
   fileName: string = "";
   fileUrl;
   showTagError = false;
   newTag: string = '';
+  iframeRef=null;
+  blobData=null;
 
   constructor(private acr: ActivatedRoute,
     private router: Router,
@@ -143,6 +145,7 @@ export class ViewcollateralComponent implements OnInit, OnDestroy, AfterViewInit
       "fileName": this.fileName,
     }
     this.viewCollateralService.downloadFile(downloadObj).subscribe((data: any) => {
+      this.blobData = data;
       const blob = new Blob([data], { type: 'application/pdf' });
       // this.htmlCode = this.domSan.bypassSecurityTrustResourceUrl(URL.createObjectURL(blob));
       // this.htmlCode = this.domSan.bypassSecurityTrustResourceUrl(URL.createObjectURL(blob));
@@ -161,6 +164,11 @@ export class ViewcollateralComponent implements OnInit, OnDestroy, AfterViewInit
 
     })
   }
+  onAfterLoadComplete(event){
+    setTimeout(() => {
+      this.spinnerService.spinner(false);
+    }, 500);
+  }
   onPdfLoad(event) {
     console.log("onPdfLoad");
     let ifr: any = document.getElementById("iFrameRef");
@@ -168,14 +176,30 @@ export class ViewcollateralComponent implements OnInit, OnDestroy, AfterViewInit
       setTimeout(() => {
         this.spinnerService.spinner(false);
       }, 500);
+      this.iframeRef = ifr;
+      ifr.contentDocument.addEventListener('click', (e)=>{
+        console.log("inside Iframe", e);
+      });
+      ifr.contentDocument.addEventListener('mouseup', (e)=>{
+        console.log("inside Iframe", e);
+      });
+      ifr.contentDocument.addEventListener('mousedown', (e)=>{
+        console.log("inside Iframe", e);
+      });
       // for printing
       // ifr.focus();
       // ifr.contentWindow.print();
       return;
     }
   }
+  onIframeFocus(){
+    let ifr: any = document.getElementById("iFrameRef");
+    console.log(ifr.contentDocument);
+    document.getElementById('foo').focus();     
+  }
   ngOnDestroy() {
     this.appSharedService.clearRouteData();
+    this.blobData = null;
   }
 
 }
