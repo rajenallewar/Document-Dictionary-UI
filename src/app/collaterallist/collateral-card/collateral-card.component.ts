@@ -24,6 +24,7 @@ export class CollateralCardComponent implements OnInit {
   @Output() public delete = new EventEmitter<any>();
   @Output() public edit = new EventEmitter<any>();
   @Output() public view = new EventEmitter<any>();
+  @Output() public download = new EventEmitter<any>();
 
 
   constructor() { }
@@ -38,5 +39,8 @@ export class CollateralCardComponent implements OnInit {
   }
   onView(event) {
     this.view.emit({ "index": this.cardIndex });
+  }
+  onDownload(event) {
+    this.download.emit({ "index": this.cardIndex });
   }
 }

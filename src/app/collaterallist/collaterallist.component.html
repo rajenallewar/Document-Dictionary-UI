@@ -31,7 +31,7 @@
 
     <div class="card-container clearfix">
       <app-collateral-card *ngFor="let card of displayCollateralList;index as i;" [cardIndex]="i" [card]="card"
-        (delete)="onDelete($event)" (edit)="onEdit($event)" (view)="onView($event)"></app-collateral-card>
+        (delete)="onDelete($event)" (edit)="onEdit($event)" (view)="onView($event)" (download)="onDownload($event)"></app-collateral-card>
     </div>
     <p-paginator *ngIf="totalRecords > displayRecordSize" #paginator [rows]="displayRecordSize"
       [totalRecords]="totalRecords" (onPageChange)="paginate($event)"></p-paginator>

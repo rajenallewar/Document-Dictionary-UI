@@ -79,12 +79,12 @@
 }
 .card-btn{
     text-align: center;
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-family: 'Carnas-Regular';
     border-radius: .3rem;
     background-color: #ffffff;
-    padding: .3rem .6rem;
-    margin-right: 0.8em;
+    padding: .3rem .3rem;
+    margin-right: 0.4em;
     cursor: pointer;
 }
 .del-btn{
@@ -114,6 +114,16 @@
     background-color: #4a90e2;
     color: #ffffff;
 }
+
+.download-btn{
+    color: #157a3c;
+    border: solid 1px #157a3c;
+}
+.download-btn:hover{
+    background-color: #157a3c;
+    color: #ffffff;
+}
+
 .separater{
     font-family: Carnas-ExtraLight;
     color: #b7cad2;

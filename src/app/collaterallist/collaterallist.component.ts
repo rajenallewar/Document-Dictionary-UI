@@ -8,13 +8,15 @@ import { Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import CollateralColorMap from './../shared/utils/collateral.color.map';
 import { ConfirmationService } from 'primeng/api';
+import { ViewCollateralService } from '../viewcollateral/viewcollateral.service';
+import { downloadFile } from '../shared/utils/app.utils';
 
 
 @Component({
   selector: 'app-collaterallist',
   templateUrl: './collaterallist.component.html',
   styleUrls: ['./collaterallist.component.scss'],
-  providers: [CollateralListService, ConfirmationService]
+  providers: [CollateralListService, ConfirmationService, ViewCollateralService]
 })
 export class CollaterallistComponent implements OnInit, OnDestroy {
   public data: any;
@@ -42,7 +44,8 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private acr: ActivatedRoute,
     private appSharedService: AppSharedService,
-    private confirmationService: ConfirmationService) { }
+    private confirmationService: ConfirmationService,
+    private viewCollateralService: ViewCollateralService) { }
 
   ngOnInit() {
 
@@ -280,6 +283,19 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.router.navigate([{ outlets: { dialogs: 'viewcollateral' } }], { relativeTo: this.acr.parent });
     }, 0);
+  }
+  onDownload(event) {
+    console.log('onDownload', event);
+    this.spinnerService.spinner(true);
+    const downloadObj = {
+      fileName: this.collateralList[event.index].fileName,
+    };
+
+    this.viewCollateralService.downloadFile(downloadObj).subscribe((data: any) => {
+
+      downloadFile(data, downloadObj.fileName, 'application/octet-stream');
+      this.spinnerService.spinner(false);
+    });
   }
   onReset(event) {
     this.showSearchBar = true;
