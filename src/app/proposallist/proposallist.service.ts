@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AppSettings } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable()
@@ -20,5 +21,8 @@ export class ProposalListService {
   }
   public getAllStatuses() {
     return this.http.get('getAllStatuses');
+  }
+  public deleteProposal(id: string) {
+    return this.http.delete(AppSettings.BASE_URL + '/proposal/' + id);
   }
 }

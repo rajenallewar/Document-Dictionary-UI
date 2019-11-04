@@ -456,6 +456,15 @@ export class ProposallistComponent implements OnInit, OnDestroy {
       this.router.navigate([{ outlets: { dialogs: 'uploadcollateral' } }], { relativeTo: this.acr.parent });
     }, 0);
   }
+  onDelete(event) {
+    console.log('To delete proposal');
+    this.spinnerService.spinner(true);
+    const proposalId = this.displayProposalList[event.index].proposalId;
+    this.proposalListService.deleteProposal(proposalId).subscribe((data: any) => {
+      this.spinnerService.spinner(false);
+    });
+    this.spinnerService.spinner(false); // to be removed
+  }
   onViewCollaterals(event) {
     console.log("onViewCollaterals :", event);
     let proposalId = this.displayProposalList[event.index].proposalId.toString();

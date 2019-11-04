@@ -22,6 +22,7 @@ export class ProposalCardComponent implements OnInit {
   @Output() public edit = new EventEmitter<any>();
   @Output() public add = new EventEmitter<any>();
   @Output() public viewCollaterals = new EventEmitter<any>();
+  @Output() public delete = new EventEmitter<any>();
 
 
   constructor() { }
@@ -54,5 +55,8 @@ export class ProposalCardComponent implements OnInit {
   }
   onViewCollaterals(event) {
     this.viewCollaterals.emit({ "index": this.cardIndex });
+  }
+  onDelete(event) {
+    this.delete.emit({ index: this.cardIndex });
   }
 }
