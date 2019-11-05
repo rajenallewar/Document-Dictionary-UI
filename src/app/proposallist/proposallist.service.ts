@@ -23,6 +23,6 @@ export class ProposalListService {
     return this.http.get('getAllStatuses');
   }
   public deleteProposal(id: string) {
-    return this.http.delete(AppSettings.BASE_URL + '/proposal/' + id);
+    return this.http.delete(AppSettings.BASE_URL + '/proposal/proposal/' + id);
   }
 }
