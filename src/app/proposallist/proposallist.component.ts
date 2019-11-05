@@ -6,12 +6,14 @@ import { DatePipe } from '@angular/common';
 import { SpinnerService } from '../shared/spinner/spinner.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-proposallist',
   templateUrl: './proposallist.component.html',
   styleUrls: ['./proposallist.component.scss'],
-  providers: [ProposalListService]
+  providers: [ProposalListService, ConfirmationService]
 
 })
 export class ProposallistComponent implements OnInit, OnDestroy {
@@ -23,7 +25,7 @@ export class ProposallistComponent implements OnInit, OnDestroy {
 
   public barChartData: any;
   public barChartOptions: any;
-  clientData:any;
+  clientData: any;
   defaultLimit = 10;
   defaultOffset = 1;
   displayRecordSize = 10;
@@ -44,13 +46,17 @@ export class ProposallistComponent implements OnInit, OnDestroy {
   statusListOptions: any[];
   endDate: string;
   startDate: string;
+  msgs: any;
 
   constructor(private proposalListService: ProposalListService,
-    private router: Router,
-    private acr: ActivatedRoute,
-    public datePipe: DatePipe,
-    private spinnerService: SpinnerService,
-    private appSharedService: AppSharedService) { }
+              private router: Router,
+              private acr: ActivatedRoute,
+              public datePipe: DatePipe,
+              private spinnerService: SpinnerService,
+              private appSharedService: AppSharedService,
+              private confirmationService: ConfirmationService,
+              private toastr: ToastrService
+  ) { }
 
   ngOnInit() {
     // this.routeData = { ...this.appSharedService.getRouteData() };
@@ -280,16 +286,16 @@ export class ProposallistComponent implements OnInit, OnDestroy {
       startDate = '';
       endDate = '';
     }
-    if(this.searchCriteria.clientName && typeof this.searchCriteria.clientName !== 'string'){
+    if (this.searchCriteria.clientName && typeof this.searchCriteria.clientName !== 'string') {
       this.searchCriteria.clientName = this.searchCriteria.clientName.value;
     }
-    if(this.searchCriteria.status && typeof this.searchCriteria.status !== 'string'){
+    if (this.searchCriteria.status && typeof this.searchCriteria.status !== 'string') {
       this.searchCriteria.status = this.searchCriteria.status.value;
     }
-    if(this.searchCriteria.region && typeof this.searchCriteria.region !== 'string'){
+    if (this.searchCriteria.region && typeof this.searchCriteria.region !== 'string') {
       this.searchCriteria.region = this.searchCriteria.region.value;
     }
-    
+
     let obj: any = {
       "startDate": startDate,
       "endDate": endDate,
@@ -457,13 +463,31 @@ export class ProposallistComponent implements OnInit, OnDestroy {
     }, 0);
   }
   onDelete(event) {
-    console.log('To delete proposal');
-    this.spinnerService.spinner(true);
-    const proposalId = this.displayProposalList[event.index].proposalId;
-    this.proposalListService.deleteProposal(proposalId).subscribe((data: any) => {
-      this.spinnerService.spinner(false);
+    this.confirmationService.confirm({
+      message: 'Do you want to delete this Proposal?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-info-circle',
+
+      reject: () => {
+        this.msgs = [{ severity: 'info', summary: 'Rejected', detail: 'You have rejected' }];
+      },
+      accept: () => {
+        console.log('To delete proposal');
+        this.spinnerService.spinner(true);
+        const proposalId = this.displayProposalList[event.index].proposalId;
+        this.proposalListService.deleteProposal(proposalId).subscribe((data: any) => {
+          this.spinnerService.spinner(false);
+          this.toastr.error('Colateral Deleted', '', this.appSharedService.toastrOption);
+          this.resetProposalListing();
+        }, err => {
+          this.spinnerService.spinner(false);
+        }, () => {
+          this.spinnerService.spinner(false);
+        });
+
+        this.msgs = [{ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' }];
+      }
     });
-    this.spinnerService.spinner(false); // to be removed
   }
   onViewCollaterals(event) {
     console.log("onViewCollaterals :", event);
@@ -478,20 +502,20 @@ export class ProposallistComponent implements OnInit, OnDestroy {
       this.router.navigate(['/dms/collaterals']);
     }, 0);
   }
-  onClearClick(calendar){
+  onClearClick(calendar) {
     this.searchCriteria.rangeDates = null;
-    if(calendar) {
+    if (calendar) {
       calendar.value = null;
       calendar.updateInputfield();
     }
   }
-  onProposalDateRangeSelect(calendar){
+  onProposalDateRangeSelect(calendar) {
     if (this.searchCriteria.rangeDates && this.searchCriteria.rangeDates[0] && this.searchCriteria.rangeDates[1]) {
-      if(calendar) {
+      if (calendar) {
         calendar.hideOverlay();
       }
     }
-    
+
   }
   ngOnDestroy() {
     // this.appSharedService.clearRouteData();
