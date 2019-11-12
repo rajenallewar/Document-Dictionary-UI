@@ -36,7 +36,7 @@
 <div class="right-panel">
   <div class="sme-txt">
     <input [(ngModel)]="keyword" class="search-box" type="text"
-      placeholder="Search by Tag/Cloud / Big Data / Migration etc." (change)="searchDomain($event)" />
+      placeholder="Search by Tag/Cloud / Big Data / Migration etc." (keyup.enter)="searchDomain($event)" />
   </div>
   <div class="sme-tb">
     <p-table [value]="smeList" [lazy]="true" [scrollable]="true" scrollHeight="70vh"
