@@ -5,6 +5,7 @@ import { Entitlement } from '../shared/utils/entitlement';
 
 @Component({
   selector: 'app-header',
+  providers: [Entitlement],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
