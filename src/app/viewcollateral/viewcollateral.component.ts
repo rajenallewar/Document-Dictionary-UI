@@ -6,6 +6,7 @@ import { ViewCollateralService } from './viewcollateral.service';
 import { downloadFile } from '../shared/utils/app.utils';
 import * as _ from 'lodash';
 import { SpinnerService } from '../shared/spinner/spinner.service';
+import { Entitlement } from '../shared/utils/entitlement';
 
 class TagsUIModel {
   tagId: number = null;
@@ -18,7 +19,7 @@ class TagsUIModel {
   selector: 'app-viewcollateral',
   templateUrl: './viewcollateral.component.html',
   styleUrls: ['./viewcollateral.component.scss'],
-  providers: [ViewCollateralService]
+  providers: [ViewCollateralService,Entitlement]
 })
 export class ViewcollateralComponent implements OnInit, OnDestroy, AfterViewInit {
 
@@ -42,7 +43,8 @@ export class ViewcollateralComponent implements OnInit, OnDestroy, AfterViewInit
     private domSan: DomSanitizer,
     private spinnerService: SpinnerService,
     private viewCollateralService: ViewCollateralService,
-    private appSharedService: AppSharedService) { }
+    private appSharedService: AppSharedService,  
+    public entitlement:Entitlement) { }
 
   @HostListener('document:keyup.escape', ['$event']) onKeyupHandler(event: KeyboardEvent) {
     this.goBack()

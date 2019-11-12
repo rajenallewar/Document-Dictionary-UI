@@ -8,13 +8,13 @@
             </span>
         </div>
         <div class="col-md-8 text-right pd-r-0">
-            <button class="btn btn-primary h-btn n-p-btn" (click)="onNewCollateral()">
+            <button [disabled]="entitlement.isEntitled()" class="btn btn-primary h-btn n-p-btn" (click)="onNewCollateral()">
               <img class="n-c-img" src="./../../assets/images/data.svg">
               <span>
                 Upload New<br>COLLATERAL
               </span>
             </button>
-            <button class="btn btn-primary h-btn n-c-btn" (click)="onNewProposal()">
+            <button [disabled]="entitlement.isEntitled()" class="btn btn-primary h-btn n-c-btn" (click)="onNewProposal()">
               <img class="n-c-img" src="./../../assets/images/plus.svg">
               <span>
                 Create New<br>PROPOSAL

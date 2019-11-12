@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { AppSharedService } from '../shared/services/shared.service';
+import { Entitlement } from '../shared/utils/entitlement';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,8 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   showCalender = false;
   constructor(private router:Router,
     private acr:ActivatedRoute,
-    public appSharedService:AppSharedService) {}
+    public appSharedService:AppSharedService,
+    public entitlement:Entitlement) {}
 
   ngOnInit() {
     this.showCalender = false;

@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
        this.loginService.login(obj).subscribe((res) => {
          console.log(res);
          if(res) {
+           localStorage.setItem('currentUser', JSON.stringify(res));
            this.appSharedService.setUserLoggedIn(true);
            this.router.navigate(['/dms/dashboard']);
          } else {

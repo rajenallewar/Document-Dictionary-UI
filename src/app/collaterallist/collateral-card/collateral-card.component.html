@@ -32,8 +32,8 @@
             </div>
         </div>
         <div class="card-row">
-            <button class="card-btn del-btn" (click)="onDelete($event)">DELETE</button>
-            <button class="card-btn edit-btn" (click)="onEdit($event)">EDIT</button>
+            <button [disabled]="entitlement.isEntitled()" class="card-btn del-btn" (click)="onDelete($event)">DELETE</button>
+            <button [disabled]="entitlement.isEntitled()" class="card-btn edit-btn" (click)="onEdit($event)">EDIT</button>
             <button class="card-btn view-btn" (click)="onView($event)">VIEW</button>
             <button class="card-btn download-btn" (click)="onDownload($event)">DOWNLOAD</button>
         </div>

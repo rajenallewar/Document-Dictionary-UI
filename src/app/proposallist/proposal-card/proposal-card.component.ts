@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Entitlement } from '../../shared/utils/entitlement';
 
 @Component({
   selector: 'app-proposal-card',
+  providers: [Entitlement],
   templateUrl: './proposal-card.component.html',
   styleUrls: ['./proposal-card.component.scss']
 })
@@ -25,7 +27,7 @@ export class ProposalCardComponent implements OnInit {
   @Output() public delete = new EventEmitter<any>();
 
 
-  constructor() { }
+  constructor(public entitlement:Entitlement) { }
 
   ngOnInit() {
   }

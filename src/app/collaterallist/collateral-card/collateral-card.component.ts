@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Entitlement } from '../../shared/utils/entitlement';
 
 @Component({
   selector: 'app-collateral-card',
+  providers: [Entitlement],
   templateUrl: './collateral-card.component.html',
   styleUrls: ['./collateral-card.component.scss']
 })
@@ -27,7 +29,7 @@ export class CollateralCardComponent implements OnInit {
   @Output() public download = new EventEmitter<any>();
 
 
-  constructor() { }
+  constructor(public entitlement:Entitlement) { }
 
   ngOnInit() {
   }

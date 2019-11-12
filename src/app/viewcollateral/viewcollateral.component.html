@@ -41,7 +41,7 @@
             placeholder="Type your tag here….">
             <span *ngIf="showTagError" class="pull-right tag-err">Tag already Exist in the list</span>
         </div>
-        <button type="button" class="btn btn-primary save-btn" (click)="saveTags()">SAVE</button>
+        <button [disabled]="entitlement.isEntitled()" type="button" class="btn btn-primary save-btn" (click)="saveTags()">SAVE</button>
       </div>
       <div class="tag-c">
         <span class="tags">TAGS</span>
