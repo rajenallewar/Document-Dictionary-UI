@@ -60,6 +60,8 @@ export class SmelistComponent implements OnInit {
           this.isPaginator=false;
         }
        
+      } else {
+        this.smeList = [];
       }
     },((err)=>{this.spinnerService.spinner(false);}),(()=>{this.spinnerService.spinner(false);}));
   }

@@ -40,12 +40,14 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
      if (this.loginForm.valid) {
        const obj = this.loginForm.value;
-       this.loginService.login(obj).subscribe((res) => {
+       this.loginService.login(obj).subscribe((res : any) => {
          console.log(res);
-         if(res) {
+         if(res.authenticated === true && res.entitlements.length > 0) {
            localStorage.setItem('currentUser', JSON.stringify(res));
            this.appSharedService.setUserLoggedIn(true);
            this.router.navigate(['/dms/dashboard']);
+         } else if(res.authenticated === true && res.entitlements.length == 0){
+          this.toastr.error('User does not have requied access to this application.', '', this.appSharedService.toastrOption);
          } else {
           this.toastr.error('Invalid User Name/Password', '', this.appSharedService.toastrOption);
          }

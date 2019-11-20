@@ -275,6 +275,12 @@ export class ProposallistComponent implements OnInit, OnDestroy {
     this.searchCriteria.rangeDates = [new Date(this.startDate), new Date(this.endDate)];
 
   }
+
+  onStatusClick(value : string) {    
+    this.searchCriteria.status = value.replace(" Proposals", "");
+    this.onSearch(null);
+  }
+
   onSearch(event) {
 
     let startDate;
