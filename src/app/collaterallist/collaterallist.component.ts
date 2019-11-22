@@ -226,6 +226,18 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
     }
     this.getCollateralList(req);
   }
+  onCollateralTypeClick(value : string) {
+    let req = {
+      "limit": 10,
+      "offset": 1,
+      "mapOfSearchKeyVsValue": null
+    }
+    if (value) {
+      let trimmedValue = value.trim();
+      req['mapOfSearchKeyVsValue'] = { "Type": trimmedValue };
+    }
+    this.getCollateralList(req);
+  }
 
   paginate(event) {
     let req = {
