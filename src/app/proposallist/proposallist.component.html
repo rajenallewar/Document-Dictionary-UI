@@ -11,8 +11,8 @@
         <div>
             <div *ngFor="let proItem of proposalData?.statusCounts;index as i;" class="pro-count-box">
                 <hr [style.backgroundColor]="proItem?.backgroundColor" align="left">
-                <div class="pro-count">{{proItem?.count}}</div>
-                <a [routerLink]="" (click)="onStatusClick(proItem?.label)"><div class="pro-name">{{proItem?.label}}</div></a>
+                <a [routerLink]="" (click)="onStatusClick(proItem?.label)"><div class="pro-count">{{proItem?.count}}</div> </a>
+                <div class="pro-name">{{proItem?.label}}</div>
             </div>
         </div>
     </div>

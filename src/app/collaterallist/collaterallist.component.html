@@ -8,15 +8,31 @@
   <div class="count-container">
     <div *ngFor="let colItem of collateralData?.collateralCounts;index as i;" class="coll-count-box">
       <hr [style.backgroundColor]="colItem?.backgroundColor" align="left">
-      <div class="coll-count">{{colItem?.count}}</div>
-      <a [routerLink]="" (click)="onCollateralTypeClick(colItem?.label)"><div class="coll-name">{{colItem?.label}}</div> </a>
+      <a [routerLink]="" (click)="onCollateralTypeClick(colItem?.label)"><div class="coll-count">{{colItem?.count}}</div> </a>
+     <div class="coll-name">{{colItem?.label}}</div>
     </div>
   </div>
 
 </div>
 <div class="right-panel">
-  <input *ngIf="showSearchBar" [(ngModel)]="tagSearch" (keyup.enter)="onTagSearch($event)" 
-    class="search-box" type="text" placeholder="Search by Tag/Cloud / Big Data / Migration etc." />
+  <div *ngIf="showSearchBar" class="search-container pd-1">
+    <div class="row mr-0">
+        <div class="col-md-8 pd-0">
+          <p-autoComplete #searchAuto [(ngModel)]="tagSearch" (completeMethod)="onTagSearch($event)" (keyup.enter)="addToAdvancedList()"
+            emptyMessage="No results" [ngClass]="{ 'is-invalid': isInvalidValue }" field="tagName" dataKey="tagId" placeholder="Search by Tag."  [suggestions]="tagList">
+          </p-autoComplete>
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-primary reset-btn" (click)="addToAdvancedList()">Filter</button>
+          <button class="btn btn-primary reset-btn" (click)="onSearchReset()">Reset</button>
+        </div>
+    </div>
+                
+    <div *ngIf="showSearchBar && advancedSearchList.length>0" class="advanced-search pd-tp-1">
+      <span *ngFor="let val of advancedSearchList;let i = index" class="badge badge-light">{{val?.tagName}}<span (click)="removeSearchItem(i)">  x</span></span>
+    </div>  
+  </div>
+
   <div *ngIf="!showSearchBar" class="row pd-lr-1">
     <div class="col-md-10 pd-0">
       <img class="back-to-pro" (click)="onProposalGoback($event)" width="25" height="25" src="./../../assets/images/back-to-proposal.svg" alt="">

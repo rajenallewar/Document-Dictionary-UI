@@ -43,6 +43,22 @@ hr {
     color: #515e6b;
     padding: 1.6rem;
 }
+
+.search-container{
+    background-color: #ffffff;
+    max-height: 8rem;
+    .pd-tp-1{
+        padding-top: 6px;
+    }
+}
+.advanced-search{
+    max-height: 3rem;
+    overflow-y: auto;
+    font-family: 'Carnas-Regular';
+    font-size: 1.5rem;
+    
+}
+
 .scroll-container{
     height: calc(100% - 3.2rem);
     overflow-y: auto;

@@ -10,6 +10,7 @@ import CollateralColorMap from './../shared/utils/collateral.color.map';
 import { ConfirmationService } from 'primeng/api';
 import { ViewCollateralService } from '../viewcollateral/viewcollateral.service';
 import { downloadFile } from '../shared/utils/app.utils';
+import { AutoComplete } from 'primeng/autocomplete';
 
 
 @Component({
@@ -36,7 +37,12 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
   private ngUnsubscribe$ = new Subject<void>();
   collateralColorMapObj: any = new CollateralColorMap();
   showSearchBar:boolean =true;
+  advancedSearchList = [];
+  allTagsList=[];
+  tagList=[];
+  isInvalidValue:boolean =false;
   @ViewChild('paginator') paginator: any;
+  @ViewChild('searchAuto') searchAuto: AutoComplete;
 
   constructor(private collateralListService: CollateralListService,
     private router: Router,
@@ -129,7 +135,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
       }
     }
     this.getCollateralList(req);
-
+    this.getAllTagsForAutoComplete();
     this.appSharedService.getViewCollateralCloseEvent().pipe(takeUntil(this.ngUnsubscribe$)).subscribe((flag) => {
       if (flag) {
         this.resetCollateralListing();
@@ -215,15 +221,24 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
   }
 
   onTagSearch(event) {
+    this.searchAutoComplete(event.query);  
+  }
+
+  searchAutoComplete(searchValue) {
+    this.tagList = this.allTagsList.filter((c) =>c.tagName.toString().toLowerCase().startsWith(searchValue.toLowerCase()));
+  }
+
+  getTagDetails(searchTags){
     let req = {
       "limit": 10,
       "offset": 1,
       "mapOfSearchKeyVsValue": null
     }
-    if (event.target.value) {
-      let value = event.target.value.trim();
+    if (searchTags.length>0) {
+      let value = searchTags.join();
       req['mapOfSearchKeyVsValue'] = { "tags": value };
     }
+    
     this.getCollateralList(req);
   }
   onCollateralTypeClick(value : string) {
@@ -237,6 +252,53 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
       req['mapOfSearchKeyVsValue'] = { "Type": trimmedValue };
     }
     this.getCollateralList(req);
+  }
+  onSearchReset(){
+    this.tagSearch = "";
+    this.advancedSearchList=[];
+    let req = {
+      "limit": 10,
+      "offset": 1,
+      "mapOfSearchKeyVsValue": null
+    }
+    this.getCollateralList(req);
+  }
+
+  addToAdvancedList(){
+    let value;
+    let searchValue = this.tagSearch; 
+    if(this.tagSearch){
+      if(typeof(this.tagSearch)==="string"){
+        value = (this.allTagsList.filter(c =>(c.tagName.toString().toLowerCase()===searchValue.toLowerCase())))[0];
+        if(!value){
+          this.isInvalidValue = true;
+          return;
+        }else{
+          this.isInvalidValue = false;
+        }
+      }else{
+        value = searchValue;
+      }
+      this.addAndduplicateTagInList(value);
+      let tagValues= this.advancedSearchList.map(tag=>tag.tagName);
+      this.getTagDetails(tagValues);
+    }else{
+      this.toastr.error('Enter valid Tag Name to Filter');
+    }
+    this.tagSearch ='';
+    this.searchAuto.hide();
+  }
+
+  addAndduplicateTagInList(value){
+    if(this.advancedSearchList.filter(ele=> (ele.tagName.toString().toLowerCase() === value.tagName.toString().toLowerCase())).length == 0){
+      this.advancedSearchList=[...this.advancedSearchList,value];
+    }else{
+      this.toastr.error('Already added',value.tagName);
+    } 
+  }
+
+  getAllTagsForAutoComplete(){
+    this.collateralListService.getAllTags().subscribe((res:any)=> this.allTagsList=res);
   }
 
   paginate(event) {
@@ -318,11 +380,22 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
       this.router.navigate(['/dms/proposals']);
     }, 10);
   }
+
+  removeSearchItem(index){
+    this.advancedSearchList.splice(index,1);
+    let tagValues= this.advancedSearchList.map(tag=>tag.tagName);
+    this.getTagDetails(tagValues);
+  }
+
   ngOnDestroy() {
     this.appSharedService.clearRouteData();
     this.ngUnsubscribe$.next();
     this.ngUnsubscribe$.complete();
     this.ngUnsubscribe$.unsubscribe();
+  }
+
+  onResetSearch(){
+      this.advancedSearchList =[];
   }
 
 }

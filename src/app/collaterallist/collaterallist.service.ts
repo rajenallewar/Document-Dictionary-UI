@@ -16,4 +16,9 @@ export class CollateralListService {
   public deleteCollateral(collateralId: any){
     return this.http.delete('deleteCollateral', {params:{"collateralId":collateralId}});
   }
+
+  getAllTags(){
+    return this.http.get('getAllTags');
+  }
+
 }
