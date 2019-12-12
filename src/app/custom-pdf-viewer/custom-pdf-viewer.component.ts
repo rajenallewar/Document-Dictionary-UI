@@ -3,9 +3,11 @@ import { PDFSource, PDFProgressData, PDFDocumentProxy } from 'pdfjs-dist';
 import { PdfViewerComponent } from 'ng2-pdf-viewer';
 import { watchScroll } from './utils';
 import * as printJS from 'print-js';
+import { Entitlement } from '../shared/utils/entitlement';
 
 @Component({
   selector: 'app-custom-pdf-viewer',
+  providers: [Entitlement],
   templateUrl: './custom-pdf-viewer.component.html',
   styleUrls: ['./custom-pdf-viewer.component.scss']
 })
@@ -49,7 +51,7 @@ export class CustomPdfViewerComponent {
   @ViewChild(PdfViewerComponent) private pdfComponent: PdfViewerComponent;
   @ViewChild('pdfViewerRef') pdfViewerRef;
 
-  constructor() { }
+  constructor(public entitlement:Entitlement) { }
   /**
    * Set custom path to pdf worker
    */
