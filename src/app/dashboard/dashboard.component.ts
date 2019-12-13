@@ -254,17 +254,32 @@ export class DashboardComponent implements OnInit, OnDestroy {
           if (data.mapofStatus.hasOwnProperty(key)) {
             this.totalProposalbarChartData.labels.push(key);
             switch (key) {
-              case "In-Progress":
+              case "Analysis In-Progress":
                 this.totalProposalbarChartData.datasets[0].backgroundColor.push("#ffad66");
+                break;
+              case "Collation In-Progress":
+                this.totalProposalbarChartData.datasets[0].backgroundColor.push("#faad66");
+                break;
+              case "Submitted":
+                this.totalProposalbarChartData.datasets[0].backgroundColor.push("#faad00");
                 break;
               case "Lost":
                 this.totalProposalbarChartData.datasets[0].backgroundColor.push("#fb6262");
                 break;
               case "New":
-                this.totalProposalbarChartData.datasets[0].backgroundColor.push("#69ffbd");
+                this.totalProposalbarChartData.datasets[0].backgroundColor.push("#ab6262");
                 break;
               case "Review":
+                this.totalProposalbarChartData.datasets[0].backgroundColor.push("#fb1262");
+                break;
+              case "On-Hold":
+                this.totalProposalbarChartData.datasets[0].backgroundColor.push("#69ffbd");
+                break;
+              case "Pending Decision":
                 this.totalProposalbarChartData.datasets[0].backgroundColor.push("#62affb");
+                break;
+              case "Pending Exec-Presentation":
+                this.totalProposalbarChartData.datasets[0].backgroundColor.push("#a2affb");
                 break;
               case "Won":
                 this.totalProposalbarChartData.datasets[0].backgroundColor.push("#f8e52d");
@@ -359,19 +374,25 @@ export class DashboardComponent implements OnInit, OnDestroy {
         datasets: []
       }
 
-      this.barChartData["dataInProgrss"] = [];
-      this.barChartData["dataReview"] = [];
-      this.barChartData["dataNew"] = [];
+      this.barChartData["dataAnalysisInProgrss"] = [];
+      this.barChartData["dataCollationInProgrss"] = [];
+      this.barChartData["dataOnHold"] = [];
       this.barChartData["dataWon"] = [];
       this.barChartData["dataLost"] = [];
+      this.barChartData["pendDecision"] = [];
+      this.barChartData["pendPresentation"] = [];
+      this.barChartData["dataSubmitted"] = [];
       this.barChartData["labels"] = [];
       if (data) {
         data.forEach((proposal) => {
-          this.barChartData.dataInProgrss.push(proposal["inProgress"])
-          this.barChartData.dataNew.push(proposal["newProposal"])
-          this.barChartData.dataReview.push(proposal["review"])
-          this.barChartData.dataWon.push(proposal["won"])
+          this.barChartData.dataAnalysisInProgrss.push(proposal["analysisInProgress"])
+          this.barChartData.dataCollationInProgrss.push(proposal["collationInProgress"])
+          this.barChartData.dataSubmitted.push(proposal["submitted"])
+          this.barChartData.pendPresentation.push(proposal["pendingExecPresentation"])
+          this.barChartData.pendDecision.push(proposal["pendingDecision"])
           this.barChartData.dataLost.push(proposal["lost"])
+          this.barChartData.dataWon.push(proposal["won"])
+          this.barChartData.dataOnHold.push(proposal["onHold"])
           this.barChartData.labels.push(proposal["clientName"])
         })
       }
@@ -385,16 +406,40 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
       datasets: [
         {
-          label: 'Review',
-          backgroundColor: '#62affb',
-          borderColor: '#62affb',
-          data: this.barChartData.dataReview
+          label: 'Analysis In-Progress',
+          backgroundColor: '#6aaffb',
+          borderColor: '#6aaffb',
+          data: this.barChartData.dataAnalysisInProgrss
         },
         {
-          label: 'New',
+          label: 'Collation In-Progress',
+          backgroundColor: '#a2affb',
+          borderColor: '#a2affb',
+          data: this.barChartData.dataCollationInProgrss
+        },
+        {
+          label: 'Submitted',
+          backgroundColor: '#b224fb',
+          borderColor: '#b224fb',
+          data: this.barChartData.dataSubmitted
+        },
+        {
+          label: 'Pending Exec Presentation',
+          backgroundColor: '#ffba62',
+          borderColor: '#ffba62',
+          data: this.barChartData.pendPresentation
+        },
+        {
+          label: 'Pending Decision',
           backgroundColor: '#69ffbd',
           borderColor: '#69ffbd',
-          data: this.barChartData.dataNew
+          data: this.barChartData.pendDecision
+        },
+        {
+          label: 'Lost',
+          backgroundColor: '#fb6262',
+          borderColor: ' #fb6262',
+          data: this.barChartData.dataLost
         },
         {
           label: 'Won',
@@ -403,21 +448,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
           data: this.barChartData.dataWon
         },
         {
-          label: 'In-Progress',
-          backgroundColor: '#ffad66',
-          borderColor: '#ffad66',
-          data: this.barChartData.dataInProgrss
-        },
-        {
-          label: 'Lost',
-          backgroundColor: '#fb6262',
-          borderColor: ' #fb6262',
-          data: this.barChartData.dataLost
+          label: 'On-Hold',
+          backgroundColor: '#3fae52',
+          borderColor: '#3fae52',
+          data: this.barChartData.dataOnHold
         }
       ]
     }
 
-    console.log("this.barChartData.dataInProgrss ", this.barChartData.dataInProgrss);
   }
 
   ngOnDestroy(): void {
