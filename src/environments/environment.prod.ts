@@ -99,6 +99,10 @@ export const AppSettings = {
     'getTotalAnnotatedCollaterals': {
       name: 'getTotalAnnotatedCollaterals',
       url: '/collateral/collateralTagsCount'
+    }, 
+	'getAllTags':{
+      name:'getAllTags',
+      url:'/tag/allTags'
     }
 
   },
