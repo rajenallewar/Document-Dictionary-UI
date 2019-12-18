@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { AppSharedService } from '../shared/services/shared.service';
 import { Entitlement } from '../shared/utils/entitlement';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -12,13 +13,18 @@ import { Entitlement } from '../shared/utils/entitlement';
 export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   headerText = "Dashboard";
   showCalender = false;
+  mtd = false;
+  wtd = false;
   constructor(private router:Router,
     private acr:ActivatedRoute,
     public appSharedService:AppSharedService,
-    public entitlement:Entitlement) {}
+    public entitlement:Entitlement,
+    public datePipe: DatePipe) {}
 
   ngOnInit() {
     this.showCalender = false;
+    this.mtd = false;
+    this.wtd = false;
   }
 
   ngAfterViewInit(){
@@ -71,12 +77,43 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
  
   }
   onDateSelect(event, calendar){
+    console.log("Event", event);
+    if (event.target && event.target.id === 'mtdate' && event.target.checked) {
+      this.mtd = true;
+      this.wtd = false;
+      event = this.setDates();
+    } else if (event.target && event.target.id === 'wtdate' && event.target.checked) {
+      this.wtd = true;
+      this.mtd = false;
+      event = this.setDates();
+    } else {
+      this.mtd = this. wtd = false;
+    }
     this.appSharedService.setDashboardDateSubject(event);
     if (this.appSharedService.dateRange && this.appSharedService.dateRange[0] && this.appSharedService.dateRange[1]) {
       if(calendar) {
         calendar.hideOverlay();
       }
     }
+  }
+
+  setDates() {
+    let currentDate = new Date();
+    if(this.mtd) {
+      currentDate.setDate(currentDate.getDate() - currentDate.getDate() + 1);
+      this.appSharedService.startDate = this.datePipe.transform(currentDate, 'yyyy-MM-dd');
+    } else if (this.wtd) {
+      currentDate.setDate(currentDate.getDate() - currentDate.getDay());
+      this.appSharedService.startDate = this.datePipe.transform(currentDate, 'yyyy-MM-dd');
+    }
+    currentDate = new Date();
+    //Set end date as of yesterday
+    currentDate.setDate(currentDate.getDate() - 1);
+    this.appSharedService.endDate = this.datePipe.transform(currentDate, 'yyyy-MM-dd');
+
+    this.appSharedService.dateRange = [new Date(this.appSharedService.startDate), new Date(this.appSharedService.endDate)];
+    console.log("this.dateRange ", this.appSharedService);
+    return this.appSharedService.endDate;
   }
 
   ngOnDestroy(){

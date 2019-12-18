@@ -1,13 +1,23 @@
 <div class="row mr-0">
   <div class="col-md-12 pd-0">
     <div class="row mr-0">
-        <div class="col-md-4">
-            <span class="h-text">{{headerText}}</span>
-            <span class="calendar" *ngIf="showCalender && headerText =='Dashboard'">
-                <p-calendar #cal [(ngModel)]="appSharedService.dateRange" (onSelect)="onDateSelect($event, cal)" [showIcon]="true" selectionMode="range" dateFormat="dd M yy"></p-calendar>
-            </span>
+        <div class="col-md-6">
+          <span class="h-text">{{headerText}}</span>
+          <span class="calendar" *ngIf="showCalender && headerText =='Dashboard'">
+            <p-calendar #cal [(ngModel)]="appSharedService.dateRange" (onSelect)="onDateSelect($event, cal)" [showIcon]="true"
+              selectionMode="range" dateFormat="dd M yy"></p-calendar>
+              <div class="form-check form-check-inline pl-2">
+                <input class="form-check-input" [(ngModel)]="wtd" type="checkbox" name="inlineRadioOptions" id="wtdate" [value]="wtd" (change)="onDateSelect($event, cal)">
+                <label class="form-check-label" for="wtdate">This Week</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" [(ngModel)]="mtd" type="checkbox" name="inlineRadioOptions" id="mtdate" [value]="mtd" (change)="onDateSelect($event, cal)">
+                <label class="form-check-label" for="mtdate">This Month</label>
+              </div>
+          </span>
+          
         </div>
-        <div class="col-md-8 text-right pd-r-0">
+        <div class="col-md-6 text-right pd-r-0">
             <button [disabled]="entitlement.isEntitled()" class="btn btn-primary h-btn n-p-btn" (click)="onNewCollateral()">
               <img class="n-c-img" src="./../../assets/images/data.svg">
               <span>
