@@ -1,23 +1,23 @@
 <div class="dashboard-container">
         <div class="ui-g">
-                <div class="ui-g-8 line-chart">
+                <div class="ui-g-6 line-chart">
                         <div class="line-chart-cnt">
-                                <div class="ui-g-3">
+                                <div class="ui-g-4">
                                         <div class="label">Status of Proposals</div>
                                         <div class="total-proposals">Total Proposals</div>
                                         <div class="total-proposal-count">
                                                 {{totalProposalCountData?.totalAvailableProposals}}</div>
                                 </div>
-                                <div class="ui-g-9">
+                                <div class="ui-g-8">
                                         <p-chart *ngIf="totalProposalbarChartData && displayProposalBarChart"
                                                 type="horizontalBar" [data]="totalProposalbarChartData"
                                                 [options]="totalProposalbarChartOptions" [responsive]="true"
-                                                height="180"> </p-chart>
+                                                height="22rem"> </p-chart>
                                 </div>
                         </div>
                 </div>
                 
-                <div class="ui-g-2 tag-cont">
+                <div class="ui-g-4 tag-cont">
                         <div class="tags-addition">
                                 <div class="row  mr-0 pd-0">
                                         <div class="col-md-5  mr-0 pd-0">
@@ -51,7 +51,7 @@
                 </div>
                 <div class="ui-g-2 collateral-status"><span class="col-status">Collaterals Status</span>
                         <div class="col-per">12.3%</div>
-                        <div class="col-in">Increase from the last month</div>
+                        <div class="col-in text-center">Increase from the last month</div>
 
                 </div>
         </div>

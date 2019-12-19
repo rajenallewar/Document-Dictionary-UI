@@ -24,7 +24,7 @@
             <div>
                 <div class="form-group">
                     <label>Proposal Name </label><br>
-                    <input type="text" class="form-control tx-box" placeholder="Enter Proposal Name here…."
+                    <input type="text" class="form-control tx-box" maxlength="150" placeholder="Enter Proposal Name here…."
                         formControlName="proposalName" #proposalNameRef [(ngModel)]="proposalObj.proposalName"
                         [ngClass]="{ 'is-invalid': submitted && f.proposalName.errors }" />
                     <div *ngIf="submitted && f.proposalName.errors" class="invalid-feedback">
@@ -80,7 +80,7 @@
                 <div class="form-group mt-1">
 
                     <label>Requirement </label><br>
-                    <input type="text" class="form-control tx-box" placeholder="Enter Requirement here…."
+                    <input type="text" class="form-control tx-box" maxlength="150" placeholder="Enter Requirement here…."
                         formControlName="requirement" [(ngModel)]="proposalObj.requirement"
                         [ngClass]="{ 'is-invalid': submitted && f.requirement.errors }" />
                     <div *ngIf="submitted && f.requirement.errors" class="invalid-feedback">

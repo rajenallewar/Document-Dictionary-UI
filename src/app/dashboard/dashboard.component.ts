@@ -219,11 +219,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getTrendingBUs() {
     this.spinnerService.spinner(true);
-    this.dashboardservice.getTrendingTags().subscribe((data: any) => {
+    this.dashboardservice.getTrendingBUs().subscribe((data: any) => {
       for (let index = 0; index < data.length; index++) {
         let item: any = {};
-        item.text = data[index].tagName;
-        item.weight = data[index].tagCount;
+        item.text = data[index].name;
+        item.weight = data[index].count;
         item.color = this.getRandomColor();
         this.trendingBUs.push(item);
       }
@@ -233,11 +233,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getTrendingAccounts() {
     this.spinnerService.spinner(true);
-    this.dashboardservice.getTrendingTags().subscribe((data: any) => {
+    this.dashboardservice.getTrendingAccounts().subscribe((data: any) => {
       for (let index = 0; index < data.length; index++) {
         let item: any = {};
-        item.text = data[index].tagName;
-        item.weight = data[index].tagCount;
+        item.text = data[index].name;
+        item.weight = data[index].count;
         item.color = this.getRandomColor();
         this.trendingAccounts.push(item);
       }

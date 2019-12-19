@@ -9,6 +9,14 @@ export class DashboardService {
       return this.http.get('getTrendingTags');
       // return this.http.get('../../assets/mockdata/mostTrendingstags.json');
     }
+    public getTrendingBUs() {
+      return this.http.get('getTrendingBUs');
+      // return this.http.get('../../assets/mockdata/mostTrendingBUs.json');
+    }
+    public getTrendingAccounts() {
+      return this.http.get('getTrendingAccounts');
+      // return this.http.get('../../assets/mockdata/mostTrendingAccounts.json');
+    }
     public getSummaryofProposalsByAccount(requestParams:any): Observable<any> {
       return this.http.post('getSummaryofProposalsByAccount',requestParams);
     // return this.http.get('../../assets/mockdata/getSummryOfProposalByAccount.json');

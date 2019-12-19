@@ -88,6 +88,14 @@ export const AppSettings = {
       name: 'getTrendingTags',
       url: '/tag/mostTrendingsTags'
     },
+    'getTrendingBUs': {
+      name: 'getTrendingBUs',
+      url: '/dms/heatmaps/regions'
+    },
+    'getTrendingAccounts': {
+      name: 'getTrendingAccounts',
+      url: '/dms/heatmaps/clients'
+    },
     'getProposals': {
       name: 'getProposals',
       url: '/proposal/getProposals'
