@@ -17,6 +17,8 @@ import { SpinnerService } from '../shared/spinner/spinner.service';
 export class DashboardComponent implements OnInit, OnDestroy {
   private ngUnsubscribe$ = new Subject<void>();
   trendingTags: CloudData[] = [];
+  trendingBUs: CloudData[] = [];
+  trendingAccounts: CloudData[] = [];
   barChartOptions: any;
   data: any;
   doughnutOptions: any;
@@ -155,11 +157,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.getCollateralsCount(this.appSharedService.startDate, this.appSharedService.endDate);
     this.totalAnnotatedCollaterals(this.appSharedService.startDate, this.appSharedService.endDate);
     this.getTrendingTags();
-
+    this.getTrendingBUs();
+    this.getTrendingAccounts();
   }
 
   resetDashboard() {
     this.trendingTags = [];
+    this.trendingBUs = [];
+    this.trendingAccounts = [];
     this.collateralTypes = [];
     this.barChartData = {
       labels: [],
@@ -211,6 +216,35 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.trendingTags = this.trendingTags.slice();
     }, ((err) => { this.spinnerService.spinner(false); }), (() => { this.spinnerService.spinner(false); }))
   }
+
+  getTrendingBUs() {
+    this.spinnerService.spinner(true);
+    this.dashboardservice.getTrendingBUs().subscribe((data: any) => {
+      for (let index = 0; index < data.length; index++) {
+        let item: any = {};
+        item.text = data[index].name;
+        item.weight = data[index].count;
+        item.color = this.getRandomColor();
+        this.trendingBUs.push(item);
+      }
+      this.trendingBUs = this.trendingBUs.slice();
+    }, ((err) => { this.spinnerService.spinner(false); }), (() => { this.spinnerService.spinner(false); }))
+  }
+
+  getTrendingAccounts() {
+    this.spinnerService.spinner(true);
+    this.dashboardservice.getTrendingAccounts().subscribe((data: any) => {
+      for (let index = 0; index < data.length; index++) {
+        let item: any = {};
+        item.text = data[index].name;
+        item.weight = data[index].count;
+        item.color = this.getRandomColor();
+        this.trendingAccounts.push(item);
+      }
+      this.trendingAccounts = this.trendingAccounts.slice();
+    }, ((err) => { this.spinnerService.spinner(false); }), (() => { this.spinnerService.spinner(false); }))
+  }
+
   totalAnnotatedCollaterals(startDate: any, endDate: any) {
     let requestParams = {
       "startDate": this.datePipe.transform(startDate, 'yyyy-MM-dd'),
