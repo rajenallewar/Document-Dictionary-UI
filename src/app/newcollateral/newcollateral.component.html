@@ -76,6 +76,29 @@
                     </div>
 
                 </div>
+                <div class="form-group mt-1" (keydown.enter)="$event.preventDefault()">
+                    <label>Add New Tag :</label>
+                
+                    <input [(ngModel)]="newTag" #newAnnotation formControlName="newTagInput" (keyup.enter)="addAnnotation(newAnnotation.value)"
+                        (blur)="addAnnotation(newAnnotation.value)" (change)="showTagError = false" class="form-control tx-box"
+                        placeholder="Type your tag here…." [ngClass]="{ 'is-invalid': submitted && tags.length === 0 }">
+                    <span *ngIf="showTagError" class="pull-right tag-err">Tag already Exist in the list</span>
+                    <div *ngIf="submitted && tags.length === 0" class="invalid-feedback">
+                        <div *ngIf="submitted && tags.length === 0">Atleast one tag is required</div>
+                    </div>
+                </div>
+                <div class="tag-c">
+                    <label>TAGS</label>
+                    <ul class="tag-list list-inline" style="list-style-type:none;">
+                        <li *ngFor="let tag of tags" [ngStyle]="{'background-color': tag.tagColor}" [title]="tag.tagName"
+                            class="tag-item list-inline-item text-truncate">
+                            {{tag.tagName}}
+                            <a class="del-tag" (click)="onDeleteTag(tag)">X</a>
+                        </li>
+                
+                    </ul>
+                
+                </div>
                 <button type="button" class="btn btn-primary mt-2 mr-1 c-btn cancle-btn pr-btn"
                     (click)="close()">CANCEL</button>
                 <button type="button" class="btn btn-primary mt-2 ml-1 c-btn pr-btn"

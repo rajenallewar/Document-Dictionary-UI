@@ -8,7 +8,7 @@ const HttpUploadOptions = {
 @Injectable()
 export class NewCollateralService {
     constructor(private http:HttpClient) {}
-    public saveCollateral(collateral:any) {
+    public saveCollateral(collateral:any): any {
       return this.http.post('saveCollateral', collateral, HttpUploadOptions);
     }
     public getAllCollateralTypes() {
