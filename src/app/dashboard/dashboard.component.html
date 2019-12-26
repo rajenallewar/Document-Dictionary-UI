@@ -99,13 +99,15 @@
                 <div class="ui-g-4 trending-tags">
                         <div>
                                 <span class="label">Top Trending BUs</span>
-                                <angular-tag-cloud class="custom-css" [config]="options" [data]="trendingBUs"></angular-tag-cloud>
+                                <angular-tag-cloud class="custom-css" [config]="options" [data]="trendingBUs"
+                                (clicked)="buClicked($event)"></angular-tag-cloud>
                         </div>
                 </div>
                 <div class="ui-g-4 trending-tags border-0">
                         <div>
                                 <span class="label">Top Trending Accounts</span>
-                                <angular-tag-cloud class="custom-css" [config]="options" [data]="trendingAccounts"></angular-tag-cloud>
+                                <angular-tag-cloud class="custom-css" [config]="options" [data]="trendingAccounts"
+                                (clicked)="acctClicked($event)"></angular-tag-cloud>
                         </div>
                 </div>
         </div>

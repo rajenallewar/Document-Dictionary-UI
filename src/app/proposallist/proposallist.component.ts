@@ -59,7 +59,7 @@ export class ProposallistComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    // this.routeData = { ...this.appSharedService.getRouteData() };
+    this.routeData = { ...this.appSharedService.getRouteData() };
     this.lineChartData = {
       labels: [],
       datasets: []
@@ -185,9 +185,9 @@ export class ProposallistComponent implements OnInit, OnDestroy {
     this.getClientData();
     this.getRegionData();
     this.getStatusData();
-    this.searchCriteria.clientName = null;
+    this.routeData.openType && this.routeData.openType === 'getProposalsFromAccount' ?  this.searchCriteria.clientName = this.routeData.clientName : this.searchCriteria.clientName = null;
+    this.routeData.openType && this.routeData.openType === 'getProposalsFromBu' ?  this.searchCriteria.region = this.routeData.region : this.searchCriteria.region = null;
     this.searchCriteria.status = null;
-    this.searchCriteria.region = null;
 
     let obj: any = {
       "startDate": startDate,
@@ -524,7 +524,7 @@ export class ProposallistComponent implements OnInit, OnDestroy {
 
   }
   ngOnDestroy() {
-    // this.appSharedService.clearRouteData();
+    this.appSharedService.clearRouteData();
     this.ngUnsubscribe$.next();
     this.ngUnsubscribe$.complete();
     this.ngUnsubscribe$.unsubscribe();

@@ -266,6 +266,26 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.router.navigate(['/dms/collaterals']);
     }, 0);
   }
+  acctClicked(event) {
+    const acctName = event.text;
+    this.appSharedService.setRouteData({
+      "openType": "getProposalsFromAccount",
+      "clientName": acctName,
+    });
+    setTimeout(() => {
+      this.router.navigate(['/dms/proposals']);
+    }, 0);
+  }
+  buClicked(event) {
+    const buName = event.text;
+    this.appSharedService.setRouteData({
+      "openType": "getProposalsFromBu",
+      "region": buName,
+    });
+    setTimeout(() => {
+      this.router.navigate(['/dms/proposals']);
+    }, 0);
+  }
   getRandomColor() {
     var color = Math.floor(0x1000000 * Math.random()).toString(16);
     return '#' + ('000000' + color).slice(-6);
