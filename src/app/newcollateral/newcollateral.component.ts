@@ -121,7 +121,7 @@ export class NewcollateralComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   onDeleteTag(tag) {
-    const tagIndex = this.tags.findIndex(t => t.tagId == tag.tagId);
+    const tagIndex = this.tags.findIndex(t => t.tagName == tag.tagName);
     if (tagIndex !== null && tagIndex !== undefined && tagIndex >= 0) {
       this.tags.splice(tagIndex, 1);
     }
