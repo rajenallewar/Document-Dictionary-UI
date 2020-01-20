@@ -11,6 +11,7 @@ import { SmelistComponent } from './smelist/smelist.component';
 import { QaComponent } from './qa/qa.component';
 import { NewcollateralComponent } from './newcollateral/newcollateral.component';
 import { ViewcollateralComponent } from './viewcollateral/viewcollateral.component';
+import { GlobalEnagementsComponent } from './global-enagements/global-enagements.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path: 'proposals', component: ProposallistComponent },
       { path: 'collaterals', component: CollaterallistComponent },
       { path: 'sme', component: SmelistComponent},
+      { path: 'globalengagements', component: GlobalEnagementsComponent},
       { path: 'qa', component: QaComponent},
       { path: 'newproposal', component: NewproposalComponent, outlet: 'dialogs' },
       { path: 'uploadcollateral', component: NewcollateralComponent, outlet: 'dialogs' },

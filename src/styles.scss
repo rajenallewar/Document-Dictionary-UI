@@ -272,3 +272,21 @@ p-calendar.calender{
     left: 0;
     outline: none;
 }
+body .ui-table  {
+    tbody.ui-table-tbody td {
+        border: 1px solid rgb(201, 201, 201) !important; 
+    }
+    th.ui-sortable-column {
+        border: 1px solid rgb(201, 201, 201) !important; 
+    }
+    .ui-paginator-bottom {
+        text-align: center;
+        position: absolute;
+        width: 100%;
+        top: calc(100vh - 100px);
+    }
+}
+
+body .ui-widget {
+    font-size: 1em !important;
+}

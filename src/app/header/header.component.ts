@@ -47,7 +47,9 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
           case '/dms/qa':
           this.headerText = "Q&A Forum";
           break;
-        
+          case '/dms/globalengagements':
+          this.headerText = "Global Engagements";
+          break;
           default:
             break;
         }

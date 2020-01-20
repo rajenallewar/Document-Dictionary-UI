@@ -46,6 +46,8 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { CustomPdfViewerComponent } from './custom-pdf-viewer/custom-pdf-viewer.component';
 
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { GlobalEnagementsComponent } from './global-enagements/global-enagements.component';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     ProposalCardComponent,
     ViewcollateralComponent,
     SpinnerComponent,
-    CustomPdfViewerComponent
+    CustomPdfViewerComponent,
+    GlobalEnagementsComponent
 
   ],
   imports: [
@@ -94,8 +97,9 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     ToastrModule.forRoot(),
     TooltipModule,
     ConfirmDialogModule,
-    PdfViewerModule
-
+    PdfViewerModule,
+    InputTextareaModule
+    
     
   ],
   providers: [
