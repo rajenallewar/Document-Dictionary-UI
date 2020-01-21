@@ -500,13 +500,11 @@ export class ProposallistComponent implements OnInit, OnDestroy {
     let proposalId = this.displayProposalList[event.index].proposalId.toString();
     let proposalName = this.displayProposalList[event.index].proposalName;
     this.appSharedService.setRouteData({
-      "openType": "getCollatealsFromPraposal",
+      "openType": "getCollateralsFromProposal",
       "proposalId": proposalId,
       "proposalName": proposalName,
     });
-    setTimeout(() => {
-      this.router.navigate(['/dms/collaterals']);
-    }, 0);
+    this.router.navigate(['/dms/collaterals']);
   }
   onClearClick(calendar) {
     this.searchCriteria.rangeDates = null;
@@ -524,7 +522,7 @@ export class ProposallistComponent implements OnInit, OnDestroy {
 
   }
   ngOnDestroy() {
-    this.appSharedService.clearRouteData();
+    // this.appSharedService.clearRouteData();
     this.ngUnsubscribe$.next();
     this.ngUnsubscribe$.complete();
     this.ngUnsubscribe$.unsubscribe();
