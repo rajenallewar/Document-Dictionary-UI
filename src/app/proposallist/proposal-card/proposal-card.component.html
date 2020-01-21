@@ -43,7 +43,7 @@
         <div class="row card-row reg-up-con">
             <div class="pd-0 col-md-5">
                 <a (click)="onViewCollaterals($event)" class="view-coll">
-                    <div class="card-label"><u>{{"View Collateral"}}</u></div>
+                    <div class="card-label"><u>{{card?.collateralAvail ? "View Collateral" : "&nbsp;"}}</u></div>
                 </a>
             </div>
             <!-- <div class="pd-0 col-md-7" (click)="onViewCollaterals($event)">
