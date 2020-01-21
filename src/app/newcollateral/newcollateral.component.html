@@ -1,5 +1,5 @@
 <p-dialog [visible]="true" [modal]="true" [resizable]="false" [closable]="false" [draggable]="false" (onHide)="close()"
-    appendTo="body" [style]="{'max-width':'75%', 'min-width':'20%', 'width':'32%'}">
+    appendTo="body" [style]="{'max-width':'75%', 'min-width':'20%', 'width':'32%', 'max-height':'90%' , 'overflow-y':'auto'}">
     <p-header>
         <div class="dialog-header">
             <ng-container *ngIf="openType !='edit'">
@@ -48,6 +48,12 @@
                     <div *ngIf="submitted && f.collateralTypeUIModel.errors" class="invalid-feedback">
                         <div *ngIf="f.collateralTypeUIModel.errors.required">Collateral Type is required</div>
                     </div>
+                </div>
+                <div class="form-group mt-1">
+                    <label>SPOC</label><br>
+                    <input type="text" #documentNameRef [(ngModel)]="collateralObj.spoc" class="form-control tx-box"
+                        placeholder="Enter SPOC..." formControlName="spoc"
+                        [ngClass]="{ 'is-invalid': submitted && f.spoc.errors }" />
                 </div>
                 <div class="form-group mt-1">
                     <label>Upload Document :</label>

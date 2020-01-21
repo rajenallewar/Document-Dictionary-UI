@@ -34,6 +34,7 @@ export class NewCollateralService {
         request["proposalId"] = proposalId;
       }
       request["docName"] = collateral.docName;
+      request["owner"] = collateral.spoc;
 
       let formData=new FormData();
 

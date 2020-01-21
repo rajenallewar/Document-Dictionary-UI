@@ -71,6 +71,7 @@ export class NewcollateralComponent implements OnInit, OnDestroy, AfterViewInit 
     this.collateralForm = this.formBuilder.group({
       collateralTypeUIModel: new FormControl("", Validators.required),
       docName: new FormControl("", Validators.required),
+      spoc: new FormControl(""),
       fileUpload: new FormControl(""),
       newTagInput: new FormControl(""),
     });
