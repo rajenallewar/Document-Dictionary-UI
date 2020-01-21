@@ -31,6 +31,12 @@
                 <!-- {{"Debit | Webservices | Amazon Web Services (AWS) |….."}} -->
             </div>
         </div>
+		<div class="row card-row ann-up-con card-border">
+            <div style="padding: 0;" class="col-md-12">
+                    <div class="card-label ann-lb">{{"SPOC : "}}</div>
+                    <div class="card-label ann-vl">{{card.owner || 'N/A'}}</div>
+            </div>
+        </div>
         <div class="card-row">
             <button [disabled]="entitlement.isEntitled()" class="card-btn del-btn" (click)="onDelete($event)">DELETE</button>
             <button [disabled]="entitlement.isEntitled()" class="card-btn edit-btn" (click)="onEdit($event)">EDIT</button>
