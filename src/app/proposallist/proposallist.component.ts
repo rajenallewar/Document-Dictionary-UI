@@ -224,7 +224,7 @@ export class ProposallistComponent implements OnInit, OnDestroy {
           this.statusListOptions.push(item);
         }
       }
-      this.searchCriteria.status = this.statusListOptions[0];
+      this.searchCriteria.status = this.statusListOptions[0].value;
     })
   }
   getRegionData() {
@@ -239,7 +239,7 @@ export class ProposallistComponent implements OnInit, OnDestroy {
           this.regionListOptions.push(item);
         }
       }
-      this.searchCriteria.region = this.regionListOptions[0];
+      this.searchCriteria.region = this.regionListOptions[0].value;
     })
   }
   getClientData() {
@@ -254,7 +254,7 @@ export class ProposallistComponent implements OnInit, OnDestroy {
           this.clientData.push(item);
         }
       }
-      this.searchCriteria.clientName = this.clientData[0];
+      this.searchCriteria.clientName = this.clientData[0].value;
     })
   }
 
@@ -522,7 +522,7 @@ export class ProposallistComponent implements OnInit, OnDestroy {
 
   }
   ngOnDestroy() {
-    // this.appSharedService.clearRouteData();
+    this.appSharedService.clearRouteData();
     this.ngUnsubscribe$.next();
     this.ngUnsubscribe$.complete();
     this.ngUnsubscribe$.unsubscribe();
