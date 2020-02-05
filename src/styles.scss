@@ -287,6 +287,12 @@ body .ui-table  {
     }
 }
 
-body .ui-widget {
-    font-size: 1em !important;
+body .ui-table-scrollable-view {
+    font-size: x-small;
+    .ui-table-scrollable-body {
+        overflow-x: hidden;
+    }
+}
+body .ui-dialog-content.ui-widget-content {
+    font-size: small;
 }

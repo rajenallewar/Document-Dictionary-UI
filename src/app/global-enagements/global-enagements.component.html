@@ -1,152 +1,401 @@
-<p-table [value]="cars2" [columns]="cols" dataKey="vin" editMode="row" rowStyleClass="lookupRowStyleClass" [paginator]="true" [rows]="12"
-  [scrollable]="true" scrollHeight="calc(100vh - 190px)">
+<p-table #dt [value]="engagements" [columns]="tableCols" dataKey="id" rowStyleClass="lookupRowStyleClass"
+  [paginator]="true" [rows]="12" [scrollable]="true" scrollHeight="calc(100vh - 190px)">
   <ng-template pTemplate="caption" let-rowData>
-    <div style="text-align:right">
-      <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
+    <div class="d-flex justify-content-between">
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon"><i class="fa fa-search"></i></span>
+        <input type="text" pInputText size="50" placeholder="Filter by any field"
+          (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+      </div>
+      <button pButton type="button" class="ui-button-raised" icon="fa fa-plus" (click)="showDialogToAdd()"
+        label="Add"></button>
     </div>
   </ng-template>
   <ng-template pTemplate="header">
-    <tr>
-      <th></th>
-      <th>#</th>
-      <th *ngFor="let col of cols" [pSortableColumn]="col.field">
-        {{col.header}}
-        <p-sortIcon [field]="col.field" ariaLabel="Activate to sort"
+    <tr class="text-center">
+      <th style="width:4em"> </th>
+      <th *ngFor="let col of tableCols" [pSortableColumn]="col.field" [style.width]="col.style" [style.display]="col.display">
+        {{col.header}} {{col.subField}}
+        <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" *ngIf="col.sort"
           ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
         </p-sortIcon>
       </th>
-      <th></th>
+      <th style="width:6em"></th>
     </tr>
 
   </ng-template>
-  <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns" let-editing="editing"
-    let-ri="rowIndex">
+
+  <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+
     <tr [pEditableRow]="rowData">
-      <td>
+      <td style="width:4em">
         <a href="#" [pRowToggler]="rowData">
           <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
         </a>
       </td>
-      <td> {{ ri + 1}}</td>
-      <td>
-        <p-cellEditor>
-          <ng-template pTemplate="input">
-            <input pInputText type="text" [(ngModel)]="rowData.vin" required>
-          </ng-template>
-          <ng-template pTemplate="output">
-            {{rowData.vin}}
-          </ng-template>
-        </p-cellEditor>
+      <td *ngFor="let col of tableCols" [style.width]="col.style"  [style.display]="col.display">
+        {{ rowData[col.field] }}
       </td>
-      <td>
-        <p-cellEditor>
-          <ng-template pTemplate="input">
-            <input pInputText type="text" [(ngModel)]="rowData.year" required>
-          </ng-template>
-          <ng-template pTemplate="output">
-            {{rowData.year}}
-          </ng-template>
-        </p-cellEditor>
-      </td>
-      <td>
-        <p-cellEditor>
-          <ng-template pTemplate="input">
-            <p-dropdown [options]="brands" [(ngModel)]="rowData.brand" [style]="{'width':'100%'}"></p-dropdown>
-          </ng-template>
-          <ng-template pTemplate="output">
-            {{rowData.brand}}
-          </ng-template>
-        </p-cellEditor>
-      </td>
-      <td>
-        <p-cellEditor>
-          <ng-template pTemplate="input">
-            <textarea type="text" pInputTextarea [(ngModel)]="rowData.color"></textarea>
-          </ng-template>
-          <ng-template pTemplate="output">
-            {{rowData.color}}
-          </ng-template>
-        </p-cellEditor>
-      </td>
-      <td style="text-align:center">
-        <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil" class="ui-button-info"
+      <td style="text-align:center; width: 6em;">
+        <button pButton type="button" pInitEditableRow icon="pi pi-pencil" class="ui-button-info"
           (click)="onRowEditInit(rowData)"></button>
-        <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check" class="ui-button-success"
-          style="margin-right: .5em" (click)="onRowEditSave(rowData)"></button>
-        <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times" class="ui-button-danger"
-          (click)="onRowEditCancel(rowData, ri)"></button>
       </td>
     </tr>
   </ng-template>
-  <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns" let-ri="rowIndex">
+
+  <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
     <tr>
-      <td [attr.colspan]="columns.length + 2">
-        <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
-          <div class="ui-g-12 ui-md-3" style="text-align:center">
-            <img [attr.alt]="rowData.brand" src="assets/showcase/images/demo/car/{{rowData.brand}}.png">
-          </div>
-          <div class="ui-g-12 ui-md-9">
+      <td [attr.colspan]="columns.length + 2 -15">
+        <div class="ui-g ui-fluid" style="padding:20px">
+          <div class="ui-g-12 ui-md-6 text-left">
             <div class="ui-g">
               <div class="ui-g-12">
-                <b>Vin:</b> {{rowData.vin}}
+                <b>Engagement Details:</b> <br> {{rowData.engagementDetails}}
               </div>
               <div class="ui-g-12">
-                <b>Year:</b> {{rowData.year}}
+                <b>Description:</b> <br>
+                <p [innerHTML]="rowData.brief"></p>
               </div>
               <div class="ui-g-12">
-                <b>Brand:</b> {{rowData.brand}}
-              </div>
-              <div class="ui-g-12">
-                <b>Color:</b> {{rowData.color}}
+                <b>Technology Stack:</b> <br> {{rowData.technologies}}
               </div>
             </div>
           </div>
+          <div class="ui-g-12 ui-md-6" style="text-align:left">
+            <div class="ui-g text-center">
+              <div class="ui-g-12">
+                <b>Owners</b> <br>
+                <table class="text-center border">
+                  <tr>
+                    <th>
+                      Architect
+                    </th>
+                    <th>
+                      Technical
+                    </th>
+                    <th>
+                      Functional
+                    </th>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{rowData.ownerArchitect}}
+                    </td>
+                    <td>
+                      {{rowData.ownerTechnical}}
+                    </td>
+                    <td>
+                      {{rowData.ownerFunctional}}
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- <b>&emsp;Architect:</b> {{rowData.ownerArchitect}} <br>
+                <b>&emsp;Technical Implemenatation:</b> {{rowData.ownersTechnical}} <br>
+                <b>&emsp;Functional:</b> {{rowData.ownerFunctional}} <br> -->
+              </div>
+              <div class="ui-g-12">
+                <b>Team Size</b> <br>
+                <table class="text-center border">
+                  <tr>
+                    <th>
+                      Onsite
+                    </th>
+                    <th>
+                      Off Shore
+                    </th>
+                    <th>
+                      Near Shore
+                    </th>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{rowData.onsiteTeam}}
+                    </td>
+                    <td>
+                      {{rowData.offShoreTeam}}
+                    </td>
+                    <td>
+                      {{rowData.nearShoreTeam}}
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div class="ui-g-12">
+                <b>Location</b> <br>
+                <table class="text-center border">
+                  <tr>
+                    <th>
+                      Client
+                    </th>
+                    <th>
+                      Off Shore
+                    </th>
+                    <th>
+                      Near Shore
+                    </th>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{rowData.clientLocation}}
+                    </td>
+                    <td>
+                      {{rowData.offShoreLocation}}
+                    </td>
+                    <td>
+                      {{rowData.nearShoreLocation}}
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div class="ui-g-12">
+                <b>Tag</b> <br>
+                <table class="text-center border">
+                  <tr>
+                    <th>
+                      Primary
+                    </th>
+                    <th>
+                      Secondary
+                    </th>
+                    <th>
+                      Tertiary
+                    </th>
+                  </tr>
+                  <tr>
+                    <td>
+                      {{rowData.primaryTag}}
+                    </td>
+                    <td>
+                      {{rowData.secondaryTag}}
+                    </td>
+                    <td>
+                      {{rowData.tertiaryTag}}
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+
         </div>
       </td>
     </tr>
   </ng-template>
 </p-table>
 
-<p-dialog header="Car Details" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade"
-  [modal]="true" [style]="{width: '300px'}">
-  <div class="ui-g ui-fluid" *ngIf="car">
-    <div class="ui-g-12">
+<p-dialog header="Engagement Details" [closable]="false" [(visible)]="displayDialog" [focusOnShow]="false"
+  [responsive]="true" showEffect="fade" [modal]="true" [style]="{width: '80vw'}">
+  <div class="ui-g ui-fluid" *ngIf="engagement">
+    <div class="ui-g-6">
       <div class="ui-g-4">
-        <label for="vin">Vin</label>
+        <label for="clientname">Client Name</label>
       </div>
       <div class="ui-g-8">
-        <input pInputText id="vin" [(ngModel)]="car.vin" autofocus />
+        <input pInputText id="clientname" class="w-100" [(ngModel)]="engagement.clientName" autofocus />
       </div>
     </div>
-    <div class="ui-g-12">
+    <div class="ui-g-6">
       <div class="ui-g-4">
-        <label for="year">Year</label>
+        <label for="pclientname">Client Name (Public)</label>
       </div>
       <div class="ui-g-8">
-        <input pInputText id="year" [(ngModel)]="car.year" />
+        <input pInputText id="pclientname" class="w-100" [(ngModel)]="engagement.clientPublicName" autofocus />
       </div>
     </div>
-    <div class="ui-g-12">
+    
+    <div class="ui-g-6">
       <div class="ui-g-4">
-        <label for="brand">Brand</label>
+        <label for="ename">Engagement Name</label>
       </div>
       <div class="ui-g-8">
-        <input pInputText id="brand" [(ngModel)]="car.brand" />
+        <input pInputText id="ename" class="w-100" [(ngModel)]="engagement.engagementName" />
       </div>
     </div>
-    <div class="ui-g-12">
+    <div class="ui-g-6">
       <div class="ui-g-4">
-        <label for="color">Color</label>
+        <label for="etype">Engagement Type</label>
       </div>
       <div class="ui-g-8">
-        <input pInputText id="color" [(ngModel)]="car.color" />
+        <input pInputText id="etype" class="w-100" [(ngModel)]="engagement.engagementType" />
       </div>
     </div>
+
+    <div class="ui-g-12">
+      <div class="ui-g-2">
+        <label for="details">Engagement Details</label>
+      </div>
+      <div class="ui-g-10">
+        <textarea pInputTextarea id="details" style="font-size: small;" [(ngModel)]="engagement.engagementDetails"></textarea>
+      </div>
+    </div>
+
+    <div class="ui-g-12">
+      <div class="ui-g-2">
+        <label for="bowner">Business Owners</label>
+      </div>
+      <div class="ui-g-10">
+        <input pInputText id="bowner" class="w-100" [(ngModel)]="engagement.businessOwners" />
+      </div>
+    </div> 
+
+    <div class="ui-g-12">
+      <div class="ui-g-2">
+        <label for="technologies">Technologies</label>
+      </div>
+      <div class="ui-g-10">
+        <textarea pInputTextarea id="technologies" style="font-size: small;" [(ngModel)]="engagement.technologies"></textarea>
+      </div>
+    </div>
+
+    
+    <div class="ui-g-12">
+      <div class="ui-g-2">
+        <label for="domain">Description</label>
+      </div>
+      <div class="ui-g-10">
+        <p-editor [(ngModel)]="engagement.brief" [style]="{'height':'200px'}"></p-editor>
+      </div>
+    </div>
+
+
+    <div class="ui-g-4">
+      <div class="ui-g-4">
+        <label for="towner">Technical Owner</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="towner" class="w-100" [(ngModel)]="engagement.ownerTechnical" />
+      </div>
+    </div>
+    <div class="ui-g-4">
+      <div class="ui-g-4">
+        <label for="aowner">Architect Owner</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="aowner" class="w-100" [(ngModel)]="engagement.ownerArchitect" />
+      </div>
+    </div>
+    <div class="ui-g-4">
+      <div class="ui-g-4">
+        <label for="fowner">Functional Owner</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="fowner" class="w-100" [(ngModel)]="engagement.ownerFunctional" />
+      </div>
+    </div>
+
+    <div class="ui-g-4">
+      <div class="ui-g-4">
+        <label for="onteam">Team Size - On Site</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="onteam" class="w-100" [(ngModel)]="engagement.onsiteTeam" />
+      </div>
+    </div>
+    <div class="ui-g-4">
+      <div class="ui-g-4">
+        <label for="ofteam">Team Size - Off Shore</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="ofteam" class="w-100" [(ngModel)]="engagement.offshoreTeam" />
+      </div>
+    </div>
+    <div class="ui-g-4">
+      <div class="ui-g-4">
+        <label for="nteam">Team Size - Near Shore</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="nteam" class="w-100" [(ngModel)]="engagement.nearShoreTeam" />
+      </div>
+    </div>
+
+    <div class="ui-g-4">
+      <div class="ui-g-4">
+        <label for="clocation">Location - Client</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="clocation" class="w-100" [(ngModel)]="engagement.clientLocation" />
+      </div>
+    </div>
+    <div class="ui-g-4">
+      <div class="ui-g-4">
+        <label for="olocation">Location - Off Shore</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="olocation" class="w-100" [(ngModel)]="engagement.offshoreLocation" />
+      </div>
+    </div>
+    <div class="ui-g-4">
+      <div class="ui-g-4">
+        <label for="nlocation">Location - Near Shore</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="nlocation" class="w-100" [(ngModel)]="engagement.nearshoreLocation" />
+      </div>
+    </div>
+
+    <div class="ui-g-4">
+      <div class="ui-g-4">
+        <label for="ptag">Tag - Primary</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="ptag" class="w-100" [(ngModel)]="engagement.primaryTag" />
+      </div>
+    </div>
+    <div class="ui-g-4">
+      <div class="ui-g-4">
+        <label for="stag">Tag - Secondary</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="stag" class="w-100" [(ngModel)]="engagement.secondaryTag" />
+      </div>
+    </div>
+    <div class="ui-g-4">
+      <div class="ui-g-4">
+        <label for="ttag">Tag - Tertiary</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="ttag" class="w-100" [(ngModel)]="engagement.tertiaryTag" />
+      </div>
+    </div>
+
+    <div class="ui-g-4">
+      <div class="ui-g-4">
+        <label for="lob">LOB</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="lob" class="w-100" [(ngModel)]="engagement.lob" />
+      </div>
+    </div>
+    <div class="ui-g-4">
+      <div class="ui-g-4">
+        <label for="domain">Domain</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="domain" class="w-100" [(ngModel)]="engagement.domain" />
+      </div>
+    </div>
+    <div class="ui-g-4">
+      <div class="ui-g-4">
+        <label for="duration">Duration</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="duration" class="w-100" [(ngModel)]="engagement.duration" />
+      </div>
+    </div>
+
+
+
+
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button type="button" pButton icon="fa fa-close" (click)="delete()" label="Delete"></button>
+      <button type="button" pButton icon="fa fa-times" (click)="onRowEditCancel(engagement)" label="Cancel"></button>
+      <button type="button" *ngIf="!newEngagement" pButton icon="fa fa-trash" (click)="deleteEngagement()" label="Delete"></button>
       <button type="button" pButton icon="fa fa-check" (click)="save()" label="Save"></button>
     </div>
   </p-footer>
 </p-dialog>
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<!-- <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+<p-messages [value]="msgs"></p-messages> -->

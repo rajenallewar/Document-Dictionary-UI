@@ -1,125 +1,241 @@
 
 import { Component, OnInit } from '@angular/core';
-import { SelectItem } from 'primeng/api';
-import {MessageService} from 'primeng/api';
+import { SelectItem, ConfirmationService } from 'primeng/api';
+import { Message } from 'primeng//api';
+import { MessageService } from 'primeng/api';
+import { GlobalEngagementsService } from './global-engagements.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+
+export interface GNE {
+    id: string;
+    client: {
+        clientId: string,
+        clientName: string
+    },
+    clientName: string;
+    clientPublicName: string;
+    engagementDetails: string;
+    engagementName: string;
+    engagementType: string;
+    brief: string;
+    businessOwners: string;
+    ownerArchitect: string;
+    ownerTechnical: string;
+    ownerFunctional: string;
+    onsiteTeam: string;
+    offShoreTeam: string;
+    nearShoreTeam: string;
+    clientLocation: string;
+    offshoreLocation: string;
+    nearshoreLocation: string;
+    technologies: string;
+    lob: string;
+    domain: string;
+    duration: any;
+    primaryTag: string;
+    secondaryTag: string;
+    tertiaryTag: string;
+}
 
 @Component({
-  selector: 'app-global-enagements',
-  templateUrl: './global-enagements.component.html',
-  styleUrls: ['./global-enagements.component.scss'],
-  providers: [MessageService]
+    selector: 'app-global-enagements',
+    templateUrl: './global-enagements.component.html',
+    styleUrls: ['./global-enagements.component.scss'],
+    providers: [MessageService, GlobalEngagementsService, ConfirmationService],
+    animations: [
+        trigger('rowExpansionTrigger', [
+            state('void', style({
+                transform: 'translateX(-10%)',
+                opacity: 0
+            })),
+            state('active', style({
+                transform: 'translateX(0)',
+                opacity: 1
+            })),
+            transition('* <=> *', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
+        ])
+    ]
 })
 export class GlobalEnagementsComponent implements OnInit {
 
-    cars1 = [
-      { "brand": "VW", "year": 2012, "color": "Orange", "vin": "dsad231ff", "edit": false },
-      { "brand": "Audi", "year": 2011, "color": "Black", "vin": "gwregre345", "edit": false },
-      { "brand": "Renault", "year": 2005, "color": "Gray", "vin": "h354htr", "edit": false },
-      { "brand": "BMW", "year": 2003, "color": "Blue", "vin": "j6w54qgh", "edit": false },
-      { "brand": "Mercedes", "year": 1995, "color": "Orange", "vin": "hrtwy34", "edit": false },
-      { "brand": "Volvo", "year": 2005, "color": "Black", "vin": "jejtyj", "edit": false },
-      { "brand": "Honda", "year": 2012, "color": "Yellow", "vin": "g43gr", "edit": false },
-      { "brand": "Jaguar", "year": 2013, "color": "Orange", "vin": "greg34", "edit": false },
-      { "brand": "Ford", "year": 2000, "color": "Black", "vin": "h54hw5", "edit": false },
-      { "brand": "Fiat", "year": 2013, "color": "Red", "vin": "245t2s", "edit": false },
-      { "brand": "VW", "year": 2012, "color": "Orange", "vin": "dsad231ff", "edit": false },
-      { "brand": "Audi", "year": 2011, "color": "Black", "vin": "gwregre345", "edit": false },
-      { "brand": "Renault", "year": 2005, "color": "Gray", "vin": "h354htr", "edit": false },
-      { "brand": "BMW", "year": 2003, "color": "Blue", "vin": "j6w54qgh", "edit": false },
-      { "brand": "Mercedes", "year": 1995, "color": "Orange", "vin": "hrtwy34", "edit": false },
-      { "brand": "Volvo", "year": 2005, "color": "Black", "vin": "jejtyj", "edit": false },
-      { "brand": "Honda", "year": 2012, "color": "Yellow", "vin": "g43gr", "edit": false },
-      { "brand": "Jaguar", "year": 2013, "color": "Orange", "vin": "greg34", "edit": false },
-      { "brand": "Ford", "year": 2000, "color": "Black", "vin": "h54hw5", "edit": false },
-      { "brand": "Fiat", "year": 2013, "color": "Red", "vin": "245t2s", "edit": false }
-    ];
-    cars2 = this.cars1;
-    cars = [];
-    brands: SelectItem[];
-    cols = [
-      { field: 'vin', header: 'Vin' },
-      { field: 'year', header: 'Year' },
-      { field: 'brand', header: 'Brand' },
-      { field: 'color', header: 'Color' }
-    ];
-    car = {};
-    clonedCars: { [s: string]: any; } = {};
-    newCar: boolean;
-    displayDialog: boolean;
-    selectedCar = {};
+    tableCols = [
+        { sort: true, field: 'id', header: 'ID', style: '5em', display: 'table-cell' },
+        { sort: true, field: 'clientName', header: 'Internal Client Name', style: '10em', display: 'table-cell' },
+        { sort: true, field: 'clientPublicName', header: 'Public Client Name', style: '20em', display: 'table-cell' },
+        { sort: true, field: 'engagementName', header: 'Engagement Name', style: '', display: 'table-cell' },
+        { sort: true, field: 'engagementType', header: 'Engagement Type', style: '', display: 'table-cell' },
+        { sort: true, field: 'businessOwners', header: 'Business Owners', style: '', display: 'table-cell' },
+        { sort: true, field: 'lob', header: 'LOB Covered', style: '', display: 'table-cell' },
+        { sort: true, field: 'domain', header: 'Domain', style: '', display: 'table-cell' },
+        { sort: true, field: 'duration', header: 'Duration', style: '9em', display: 'table-cell' },
+        { sort: true, field: 'brief', header: 'Description', display: 'none' },
+        { sort: true, field: 'engagementDetails', header: 'Engagement Details', display: 'none' },
+        { sort: true, field: 'technologies', header: 'Technology Stack ', display: 'none' },
+        { sort: true, field: 'ownerArchitect', header: '', display: 'none' },
+        { sort: true, field: 'ownerTechnical', header: '', display: 'none' },
+        { sort: true, field: 'ownerFunctional', header: '', display: 'none' },
+        { sort: true, field: 'onsiteTeam', header: '', display: 'none' },
+        { sort: true, field: 'offshoreTeam', header: '', display: 'none' },
+        { sort: true, field: 'nearShoreTeam', header: '', display: 'none' },
+        { sort: true, field: 'clientLocation', header: '', display: 'none' },
+        { sort: true, field: 'offshoreLocation', header: '', display: 'none' },
+        { sort: true, field: 'nearshoreLocation', header: '', display: 'none' },
+        { sort: true, field: 'primaryTag', header: '', display: 'none' },
+        { sort: true, field: 'secondaryTag', header: '', display: 'none' },
+        { sort: true, field: 'secondaryTag', header: '', display: 'none' },
 
-    constructor(private messageService: MessageService) { }
+    ];
+
+
+    engagement: GNE;
+    engagements: GNE[];
+    clonedEngagements: GNE[] = [];
+    newEngagement: boolean;
+    displayDialog: boolean;
+    selectedEngagement: GNE;
+    currentIndex: number;
+    msgs: Message[] = [];
+
+    constructor(public messageService: MessageService, public globalEngagementsService: GlobalEngagementsService, public confirmationService: ConfirmationService) { }
 
     ngOnInit() {
-        // this.carService.getCarsSmall().then(cars => this.cars1 = cars);
-        // this.carService.getCarsSmall().then(cars => this.cars2 = cars);
+        this.globalEngagementsService.getGlobalEngagementsData().subscribe(
+            (res) => {
+                res = res.
+                    map(e => {
+                        return { ...e, clientName: e.client.clientName };
+                    });
+                this.engagements = res;
+                console.log(this.engagements);
+            },
+            (err) => { }
+        );
 
-        this.brands = [
-            {label: 'Audi', value: 'Audi'},
-            {label: 'BMW', value: 'BMW'},
-            {label: 'Fiat', value: 'Fiat'},
-            {label: 'Ford', value: 'Ford'},
-            {label: 'Honda', value: 'Honda'},
-            {label: 'Jaguar', value: 'Jaguar'},
-            {label: 'Mercedes', value: 'Mercedes'},
-            {label: 'Renault', value: 'Renault'},
-            {label: 'VW', value: 'VW'},
-            {label: 'Volvo', value: 'Volvo'},
-            {label: 'Audi', value: 'Audi'},
-            {label: 'BMW', value: 'BMW'},
-            {label: 'Fiat', value: 'Fiat'},
-            {label: 'Ford', value: 'Ford'},
-            {label: 'Honda', value: 'Honda'},
-            {label: 'Jaguar', value: 'Jaguar'},
-            {label: 'Mercedes', value: 'Mercedes'},
-            {label: 'Renault', value: 'Renault'},
-            {label: 'VW', value: 'VW'},
-            {label: 'Volvo', value: 'Volvo'}
-        ];
     }
 
-    onRowEditInit(car: any) {
-        this.clonedCars[car.vin] = {...car};
+    onRowEditInit(engagement: GNE) {
+        this.clonedEngagements[engagement.id] = { ...engagement };
+        this.displayDialog = true;
+        this.newEngagement = false;
+        this.engagement = engagement;
+        this.currentIndex = this.engagements.indexOf(engagement);
     }
 
-    onRowEditSave(car: any) {
-        if (car.year > 0) {
-            delete this.clonedCars[car.vin];
-            this.messageService.add({severity:'success', summary: 'Success', detail:'Car is updated'});
-        }  
-        else {
-            this.messageService.add({severity:'error', summary: 'Error', detail:'Year is required'});
+    onRowEditCancel(engagement: GNE) {
+        this.engagements[this.currentIndex] = this.clonedEngagements[engagement.id];
+        delete this.clonedEngagements[engagement.id];
+        this.currentIndex = null;
+        this.newEngagement = false;
+        this.displayDialog = false;
+    }
+
+    getNewEngObj(): GNE {
+        return {
+            id: '',
+            client: {
+                clientId: '',
+                clientName: ''
+            },
+            clientName: '',
+            clientPublicName: '',
+            engagementDetails: '',
+            engagementName: '',
+            engagementType: '',
+            brief: '',
+            businessOwners: '',
+            ownerArchitect: '',
+            ownerTechnical: '',
+            ownerFunctional: '',
+            onsiteTeam: '',
+            offShoreTeam: '',
+            nearShoreTeam: '',
+            clientLocation: '',
+            offshoreLocation: '',
+            nearshoreLocation: '',
+            technologies: '',
+            lob: '',
+            domain: '',
+            duration: '',
+            primaryTag: '',
+            secondaryTag: '',
+            tertiaryTag: ''
         }
     }
 
-    onRowEditCancel(car: any, index: number) {
-        this.cars2[index] = this.clonedCars[car.vin];
-        delete this.clonedCars[car.vin];
+    showDialogToAdd() {
+        this.newEngagement = true;
+        this.engagement = this.getNewEngObj();
+        this.displayDialog = true;
     }
 
-    showDialogToAdd() {
-      this.newCar = true;
-      this.car = {};
-      this.displayDialog = true;
-  }
 
-  save() {
-      const cars = [...this.cars];
-      if (this.newCar)
-          cars.push(this.car);
-      else
-          cars[this.cars.indexOf(this.selectedCar)] = this.car;
 
-      this.cars = cars;
-      this.car = null;
-      this.displayDialog = false;
-  }
+    save() {
+        const engagements = [...this.engagements];
+        this.engagement.client.clientName = this.engagement.clientName;
+        if (this.newEngagement) {
+            this.newEngagement = false;
+            delete this.engagement.id;
+            delete this.engagement.clientName;
+            this.globalEngagementsService.updateGlobalEngagementData(this.engagement).subscribe(
+                (res) => {
+                    engagements.push(res);
+                    this.engagements = engagements;
+                    this.engagement = null;
+                    this.displayDialog = false;
+                    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Engagement is successfully added' });
+                },
+                (err) => {
+                    this.engagement = null;
+                    this.displayDialog = false;
+                    this.messageService.add({ severity: 'danger', summary: 'Failure', detail: 'Error in adding engagement. Please try again' });
+                }
+            );
+        } else {
+            engagements[this.engagements.indexOf(this.engagement)] = this.engagement;
+            this.globalEngagementsService.updateGlobalEngagementData(this.engagement).subscribe(
+                (res) => {
+                    this.engagements = engagements;
+                    delete this.clonedEngagements[this.engagement.id];
+                    this.engagement = null;
+                    this.displayDialog = false;
+                    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Engagements are updated' });
+                },
+                (err) => {
+                    this.engagement = null;
+                    this.displayDialog = false;
+                    this.messageService.add({ severity: 'danger', summary: 'Failure', detail: 'Error in updating engagements. Please try again' });
+                }
+            );
+        }
+    }
 
-  delete() {
-      const index = this.cars.indexOf(this.selectedCar);
-      this.cars = this.cars.filter((val, i) => i != index);
-      this.car = null;
-      this.displayDialog = false;
-  }
+    deleteEngagement() {
+        this.displayDialog = false;
+        this.newEngagement = false;
+        this.globalEngagementsService.deleteGlobalEngagementData(this.engagement.id).subscribe(
+            (res) => {
+                this.engagements = this.engagements.filter((val, i) => i !== this.currentIndex);
+                this.engagement = null;
+                this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Engagement has been deleted' });
+            },
+            (err) => {
+                this.engagement = null;
+                this.messageService.add({ severity: 'danger', summary: 'Failure', detail: 'Error in deleting engagement. Please try again' });
+            }
+        );
+    }
+
+    delete() {
+        this.messageService.clear();
+        this.confirmationService.confirm({
+            message: 'Do you want to delete this record?',
+            header: 'Delete Confirmation',
+            icon: 'pi pi-info-circle',
+            accept: () => {
+                this.deleteEngagement();
+            }
+        });
+    }
 
 }

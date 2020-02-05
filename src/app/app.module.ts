@@ -48,6 +48,10 @@ import { CustomPdfViewerComponent } from './custom-pdf-viewer/custom-pdf-viewer.
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { GlobalEnagementsComponent } from './global-enagements/global-enagements.component';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {ToastModule} from 'primeng/toast';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import {EditorModule} from 'primeng/editor';
 
 @NgModule({
   declarations: [
@@ -98,9 +102,11 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
     TooltipModule,
     ConfirmDialogModule,
     PdfViewerModule,
-    InputTextareaModule
-    
-    
+    InputTextareaModule,
+    ToastModule,
+    MessageModule,
+    MessagesModule,
+    EditorModule
   ],
   providers: [
     { provide: UrlSerializer, useClass: CustomUrlSerializer },

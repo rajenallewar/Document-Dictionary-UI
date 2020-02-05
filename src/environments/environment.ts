@@ -109,8 +109,12 @@ export const AppSettings = {
       url: '/collateral/collateralTagsCount'
     },
     'getAllTags':{
-      name:'getAllTags',
-      url:'/tag/allTags'
+      name: 'getAllTags',
+      url: '/tag/allTags'
+    },
+    'globalEngagements':{
+      name: 'globalEngagements',
+      url: '/global-engagements/engagements'
     }
 
   },
