@@ -15,6 +15,6 @@ export class GlobalEngagementsService {
     return this.http.put('globalEngagements', gneData);
   }
   deleteGlobalEngagementData(id: string): Observable<any> {
-    return this.http.delete(AppSettings.BASE_URL + '/global-engagements/engagements/' + id, { responseType: 'text'});
+    return this.http.delete(AppSettings.BASE_URL + '/globalengagements/engagements/' + id, { responseType: 'text'});
   }
 }

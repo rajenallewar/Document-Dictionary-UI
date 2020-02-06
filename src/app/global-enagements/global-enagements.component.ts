@@ -5,13 +5,18 @@ import { Message } from 'primeng//api';
 import { MessageService } from 'primeng/api';
 import { GlobalEngagementsService } from './global-engagements.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { ProposalListService } from '../proposallist/proposallist.service';
 
+export interface ClientData {
+    clientId: string;
+    clientName: string;
+}
 export interface GNE {
     id: string;
-    client: {
-        clientId: string,
-        clientName: string
-    },
+    clientUIModel: {
+        clientId: string;
+        clientName: string;
+    };
     clientName: string;
     clientPublicName: string;
     engagementDetails: string;
@@ -41,7 +46,7 @@ export interface GNE {
     selector: 'app-global-enagements',
     templateUrl: './global-enagements.component.html',
     styleUrls: ['./global-enagements.component.scss'],
-    providers: [MessageService, GlobalEngagementsService, ConfirmationService],
+    providers: [MessageService, GlobalEngagementsService, ConfirmationService, ProposalListService],
     animations: [
         trigger('rowExpansionTrigger', [
             state('void', style({
@@ -85,6 +90,7 @@ export class GlobalEnagementsComponent implements OnInit {
         { sort: true, field: 'secondaryTag', header: '', display: 'none' },
 
     ];
+    hiddenColsCount = this.tableCols.filter(col => col.display === 'none').length;
 
 
     engagement: GNE;
@@ -96,21 +102,48 @@ export class GlobalEnagementsComponent implements OnInit {
     currentIndex: number;
     msgs: Message[] = [];
 
-    constructor(public messageService: MessageService, public globalEngagementsService: GlobalEngagementsService, public confirmationService: ConfirmationService) { }
+    clientData: ClientData[];
+    clientDropDown: SelectItem[];
+    constructor(public messageService: MessageService, public globalEngagementsService: GlobalEngagementsService,
+                public confirmationService: ConfirmationService, public proposalListService: ProposalListService) { }
 
     ngOnInit() {
+        this.getClientData();
+        this.getEngagements();
+    }
+
+    getEngagements() {
         this.globalEngagementsService.getGlobalEngagementsData().subscribe(
             (res) => {
                 res = res.
                     map(e => {
-                        return { ...e, clientName: e.client.clientName };
+                        return { ...e, clientName: e.clientUIModel.clientName };
                     });
                 this.engagements = res;
-                console.log(this.engagements);
             },
-            (err) => { }
+            (err) => { 
+                this.messageService.add({ severity: 'error', summary: 'Failure', detail: 'Error in getting engagements data. Please refresh page' });
+            }
         );
+    }
 
+    getClientData() {
+        this.clientData = [];
+        this.proposalListService.getAllClients().subscribe((data: any) => {
+            this.clientData = data;
+            this.clientData = this.clientData.filter(cd => cd.clientName.trim() !== '');
+            console.log(this.clientData);
+            this.clientDropDown = this.clientData.map((cd) => {
+                return {
+                    label: cd.clientName,
+                    value: cd.clientName
+                };
+            });
+            console.log(this.clientDropDown);
+        },
+        (err) => {
+            this.messageService.add({ severity: 'error', summary: 'Failure', detail: 'Error in getting client data. Please refresh page' });
+        });
     }
 
     onRowEditInit(engagement: GNE) {
@@ -132,11 +165,11 @@ export class GlobalEnagementsComponent implements OnInit {
     getNewEngObj(): GNE {
         return {
             id: '',
-            client: {
-                clientId: '',
-                clientName: ''
+            clientUIModel: {
+                clientId: this.clientData[0].clientId,
+                clientName: this.clientData[0].clientName
             },
-            clientName: '',
+            clientName: this.clientData[0].clientName,
             clientPublicName: '',
             engagementDetails: '',
             engagementName: '',
@@ -165,6 +198,7 @@ export class GlobalEnagementsComponent implements OnInit {
     showDialogToAdd() {
         this.newEngagement = true;
         this.engagement = this.getNewEngObj();
+        console.log(this.engagement);
         this.displayDialog = true;
     }
 
@@ -172,9 +206,9 @@ export class GlobalEnagementsComponent implements OnInit {
 
     save() {
         const engagements = [...this.engagements];
-        this.engagement.client.clientName = this.engagement.clientName;
+        this.engagement.clientUIModel.clientName = this.engagement.clientName;
+        this.engagement.clientUIModel.clientId = this.clientData.find(cd => cd.clientName === this.engagement.clientName).clientId;
         if (this.newEngagement) {
-            this.newEngagement = false;
             delete this.engagement.id;
             delete this.engagement.clientName;
             this.globalEngagementsService.updateGlobalEngagementData(this.engagement).subscribe(
@@ -183,12 +217,16 @@ export class GlobalEnagementsComponent implements OnInit {
                     this.engagements = engagements;
                     this.engagement = null;
                     this.displayDialog = false;
+                    this.newEngagement = false;
                     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Engagement is successfully added' });
+                    this.getEngagements();
                 },
                 (err) => {
                     this.engagement = null;
+                    this.newEngagement = false;
                     this.displayDialog = false;
-                    this.messageService.add({ severity: 'danger', summary: 'Failure', detail: 'Error in adding engagement. Please try again' });
+                    this.messageService.add({ severity: 'error', summary: 'Failure', detail: 'Error in adding engagement. Please try again' });
+                    this.getEngagements();
                 }
             );
         } else {
@@ -200,11 +238,13 @@ export class GlobalEnagementsComponent implements OnInit {
                     this.engagement = null;
                     this.displayDialog = false;
                     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Engagements are updated' });
+                    this.getEngagements();
                 },
                 (err) => {
                     this.engagement = null;
                     this.displayDialog = false;
-                    this.messageService.add({ severity: 'danger', summary: 'Failure', detail: 'Error in updating engagements. Please try again' });
+                    this.messageService.add({ severity: 'error', summary: 'Failure', detail: 'Error in updating engagements. Please try again' });
+                    this.getEngagements();
                 }
             );
         }
@@ -218,10 +258,12 @@ export class GlobalEnagementsComponent implements OnInit {
                 this.engagements = this.engagements.filter((val, i) => i !== this.currentIndex);
                 this.engagement = null;
                 this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Engagement has been deleted' });
+                this.getEngagements();
             },
             (err) => {
                 this.engagement = null;
                 this.messageService.add({ severity: 'danger', summary: 'Failure', detail: 'Error in deleting engagement. Please try again' });
+                this.getEngagements();
             }
         );
     }

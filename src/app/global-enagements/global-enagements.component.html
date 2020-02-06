@@ -1,7 +1,9 @@
 <p-table #dt [value]="engagements" [columns]="tableCols" dataKey="id" rowStyleClass="lookupRowStyleClass"
-  [paginator]="true" [rows]="12" [scrollable]="true" scrollHeight="calc(100vh - 190px)">
+  [paginator]="true" [rows]="10" [scrollable]="true" scrollHeight="calc(100vh - 190px)">
   <ng-template pTemplate="caption" let-rowData>
     <div class="d-flex justify-content-between">
+      <button pButton type="button" label="Refresh" icon="fa fa-refresh" class="ui-button-raised"
+        (click)="getEngagements()"></button>
       <div class="ui-inputgroup">
         <span class="ui-inputgroup-addon"><i class="fa fa-search"></i></span>
         <input type="text" pInputText size="50" placeholder="Filter by any field"
@@ -14,7 +16,8 @@
   <ng-template pTemplate="header">
     <tr class="text-center">
       <th style="width:4em"> </th>
-      <th *ngFor="let col of tableCols" [pSortableColumn]="col.field" [style.width]="col.style" [style.display]="col.display">
+      <th *ngFor="let col of tableCols" [pSortableColumn]="col.field" [style.width]="col.style"
+        [style.display]="col.display">
         {{col.header}} {{col.subField}}
         <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" *ngIf="col.sort"
           ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order">
@@ -33,7 +36,7 @@
           <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
         </a>
       </td>
-      <td *ngFor="let col of tableCols" [style.width]="col.style"  [style.display]="col.display">
+      <td *ngFor="let col of tableCols" [style.width]="col.style" [style.display]="col.display">
         {{ rowData[col.field] }}
       </td>
       <td style="text-align:center; width: 6em;">
@@ -45,19 +48,19 @@
 
   <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
     <tr>
-      <td [attr.colspan]="columns.length + 2 -15">
+      <td [attr.colspan]="columns.length + 2 - hiddenColsCount">
         <div class="ui-g ui-fluid" style="padding:20px">
           <div class="ui-g-12 ui-md-6 text-left">
             <div class="ui-g">
               <div class="ui-g-12">
-                <b>Engagement Details:</b> <br> {{rowData.engagementDetails}}
+                <b>Engagement Details:</b> <br> {{rowData.engagementDetails.length > 0 ? rowData.engagementDetails : 'N/A'}}
               </div>
               <div class="ui-g-12">
                 <b>Description:</b> <br>
-                <p [innerHTML]="rowData.brief"></p>
+                <p [innerHTML]="rowData.brief.length > 0 ? rowData.brief : 'N/A'"></p>
               </div>
               <div class="ui-g-12">
-                <b>Technology Stack:</b> <br> {{rowData.technologies}}
+                <b>Technology Stack:</b> <br> {{rowData.technologies.length > 0 ? rowData.technologies: 'N/A'}}
               </div>
             </div>
           </div>
@@ -192,7 +195,9 @@
         <label for="clientname">Client Name</label>
       </div>
       <div class="ui-g-8">
-        <input pInputText id="clientname" class="w-100" [(ngModel)]="engagement.clientName" autofocus />
+        <p-dropdown id="clientname" class="w-100" [options]="clientDropDown" [(ngModel)]="engagement.clientName"
+          [filter]="true"></p-dropdown>
+        <!-- <input pInputText id="clientname" class="w-100" [(ngModel)]="engagement.clientName" autofocus /> -->
       </div>
     </div>
     <div class="ui-g-6">
@@ -203,7 +208,7 @@
         <input pInputText id="pclientname" class="w-100" [(ngModel)]="engagement.clientPublicName" autofocus />
       </div>
     </div>
-    
+
     <div class="ui-g-6">
       <div class="ui-g-4">
         <label for="ename">Engagement Name</label>
@@ -226,7 +231,8 @@
         <label for="details">Engagement Details</label>
       </div>
       <div class="ui-g-10">
-        <textarea pInputTextarea id="details" style="font-size: small;" [(ngModel)]="engagement.engagementDetails"></textarea>
+        <textarea pInputTextarea id="details" style="font-size: small;"
+          [(ngModel)]="engagement.engagementDetails"></textarea>
       </div>
     </div>
 
@@ -237,18 +243,19 @@
       <div class="ui-g-10">
         <input pInputText id="bowner" class="w-100" [(ngModel)]="engagement.businessOwners" />
       </div>
-    </div> 
+    </div>
 
     <div class="ui-g-12">
       <div class="ui-g-2">
         <label for="technologies">Technologies</label>
       </div>
       <div class="ui-g-10">
-        <textarea pInputTextarea id="technologies" style="font-size: small;" [(ngModel)]="engagement.technologies"></textarea>
+        <textarea pInputTextarea id="technologies" style="font-size: small;"
+          [(ngModel)]="engagement.technologies"></textarea>
       </div>
     </div>
 
-    
+
     <div class="ui-g-12">
       <div class="ui-g-2">
         <label for="domain">Description</label>
@@ -391,7 +398,8 @@
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
       <button type="button" pButton icon="fa fa-times" (click)="onRowEditCancel(engagement)" label="Cancel"></button>
-      <button type="button" *ngIf="!newEngagement" pButton icon="fa fa-trash" (click)="deleteEngagement()" label="Delete"></button>
+      <button type="button" *ngIf="!newEngagement" pButton icon="fa fa-trash" (click)="deleteEngagement()"
+        label="Delete"></button>
       <button type="button" pButton icon="fa fa-check" (click)="save()" label="Save"></button>
     </div>
   </p-footer>

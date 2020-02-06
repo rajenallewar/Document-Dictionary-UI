@@ -114,7 +114,7 @@ export const AppSettings = {
     },
     'globalEngagements':{
       name: 'globalEngagements',
-      url: '/global-engagements/engagements'
+      url: '/globalengagements/engagements'
     }
 
   },
