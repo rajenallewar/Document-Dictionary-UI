@@ -111,6 +111,10 @@ export const AppSettings = {
 	'getAllTags':{
       name:'getAllTags',
       url:'/tag/allTags'
+    },
+    'globalEngagements':{
+      name: 'globalEngagements',
+      url: '/globalengagements/engagements'
     }
 
   },
