@@ -69,6 +69,19 @@
     border-right: 4px solid #f8e52d;
     margin-left: 0.3rem;
 }
+.gen-img{
+    background-image: url("/assets/images/gne.svg");
+    margin-left: 0.3rem;
+    background-size: contain;
+    padding: 0.8em;
+}
+.active-nav .gen-img{
+    background-image: url("/assets/images/gne2.svg");
+    border-right: 4px solid #f8e52d;
+    margin-left: 0.3rem;
+    padding: 0.8em;
+
+}
 .side-container{
     
 }
