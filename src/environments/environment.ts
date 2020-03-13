@@ -115,12 +115,17 @@ export const AppSettings = {
     'globalEngagements':{
       name: 'globalEngagements',
       url: '/globalengagements/engagements'
-    }
+    },
+    'getAllTagNames':{
+      name: 'getAllTagNames',
+      url: '/tag/allTagNames'
+    },
 
   },
-   BASE_URL: 'https://dms.synechron.net/docketManagement'
-  // BASE_URL: 'http://172.20.201.94:8080/docketManagement'
+    //BASE_URL: 'https://dms.synechron.net/docketManagement'
+  //BASE_URL: 'http://172.20.201.94:8080/docketManagement'
   // BASE_URL: 'http://13.58.252.233:8080/docketManagement'
+  BASE_URL: 'http://172.20.201.86:8080/docketManagement'
   // BASE_URL: ''
 };
 

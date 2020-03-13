@@ -28,6 +28,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   canLoad(route: Route): boolean {
     let url = `/${route.path}`;
     return this.checkLogin(url);
+   
   }
   checkLogin (url) {
     if (this.appSharedService.getUserLoggedIn()) {

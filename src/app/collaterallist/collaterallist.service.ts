@@ -21,4 +21,7 @@ export class CollateralListService {
     return this.http.get('getAllTags');
   }
 
+  getAllTagNames(){
+    return this.http.get('getAllTagNames');
+  }
 }

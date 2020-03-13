@@ -7,7 +7,7 @@ import { SpinnerService } from '../shared/spinner/spinner.service';
 import { ToastrService } from 'ngx-toastr';
 import * as _ from 'lodash';
 import { ViewCollateralService } from '../viewcollateral/viewcollateral.service';
-
+import { CollateralListService } from '../collaterallist/collaterallist.service';
 
 class TagsUIModel {
   tagId: number = null;
@@ -19,7 +19,7 @@ class TagsUIModel {
   selector: 'app-newcollateral',
   templateUrl: './newcollateral.component.html',
   styleUrls: ['./newcollateral.component.scss'],
-  providers: [NewCollateralService, ViewCollateralService]
+  providers: [NewCollateralService, ViewCollateralService,CollateralListService]
 })
 
 export class NewcollateralComponent implements OnInit, OnDestroy, AfterViewInit {
@@ -38,8 +38,9 @@ export class NewcollateralComponent implements OnInit, OnDestroy, AfterViewInit 
   proposalId: any;
   showTagError = false;
   newTag: string = '';
-
-
+  collateralTags = [];
+  allTagsList=[];
+  
   @ViewChild('documentNameRef') documentNameRef: any;
 
   constructor(private router: Router,
@@ -49,7 +50,8 @@ export class NewcollateralComponent implements OnInit, OnDestroy, AfterViewInit 
     private toastr: ToastrService,
     private collateralService: NewCollateralService,
     private appSharedService: AppSharedService,
-    private viewCollateralService: ViewCollateralService
+    private viewCollateralService: ViewCollateralService,
+    private collateralListService:CollateralListService
     ) { }
 
 
@@ -73,7 +75,8 @@ export class NewcollateralComponent implements OnInit, OnDestroy, AfterViewInit 
       docName: new FormControl("", Validators.required),
       spoc: new FormControl(""),
       fileUpload: new FormControl(""),
-      newTagInput: new FormControl(""),
+       newTagInput: new FormControl(""),
+      //search:[null]
     });
 
     this.collateralService.getAllCollateralTypes().subscribe((response: any)=>{
@@ -86,7 +89,11 @@ export class NewcollateralComponent implements OnInit, OnDestroy, AfterViewInit 
       fileItem.file = null;
       this.uploadedFiles.push(fileItem);
     }
-
+   
+      //this.collateralListService.getAllTags().subscribe((res:any)=> this.allTagsList=res);
+      this.collateralListService.getAllTagNames().subscribe((res:any)=> this.allTagsList=res);
+    
+  
 
   }
   ngAfterViewInit(){
@@ -161,7 +168,6 @@ export class NewcollateralComponent implements OnInit, OnDestroy, AfterViewInit 
     if (this.collateralForm.valid && this.tags.length > 0) {
       this.spinnerService.spinner(true);
       this.collateralService.saveCollateral(this.collateralService.buildSaveRequest(this.collateralObj, this.openType, this.uploadedFiles, this.proposalId)).subscribe(data => {
-        console.log(data);
         if (data.collateralId) {
           const requestData = {
             collateralId: data.collateralId,
@@ -183,8 +189,14 @@ export class NewcollateralComponent implements OnInit, OnDestroy, AfterViewInit 
             }
           }, ((err) => { }), (() => { this.spinnerService.spinner(false); }));
 
+        } 
+        if (data.errorType === 'DuplicateData') {
+          this.spinnerService.spinner(false);
+          setTimeout(() => {
+            this.toastr.error(data.errorMessage, '', this.appSharedService.toastrOption);
+          }, 100);
         }
-        this.spinnerService.spinner(false);
+        
 
       }, ((err) => { }), (() => { this.spinnerService.spinner(false); }));
     }
@@ -223,5 +235,25 @@ export class NewcollateralComponent implements OnInit, OnDestroy, AfterViewInit 
   ngOnDestroy(){
     this.appSharedService.clearRouteData();
   }
+  
+  //tages = ["United States", "Canada", "Afghanistan", "Albania", "Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and/or Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Bouvet Island", "Brazil", "British Indian Ocean Territory", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Cape Verde", "Cayman Islands", "Central African Republic", "Chad", "Chile", "China", "Christmas Island", "Cocos (Keeling) Islands", "Colombia", "Comoros", "Congo", "Cook Islands", "Costa Rica", "Croatia (Hrvatska)", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecudaor", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands (Malvinas)", "Faroe Islands", "Fiji", "Finland", "France", "France, Metropolitan", "French Guiana", "French Polynesia", "French Southern Territories", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", "Guam", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Heard and Mc Donald Islands", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran (Islamic Republic of)", "Iraq", "Ireland", "Israel", "Italy", "Ivory Coast", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, Democratic People's Republic of", "Korea, Republic of", "Kosovo", "Kuwait", "Kyrgyzstan", "Lao People's Democratic Republic", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libyan Arab Jamahiriya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Micronesia, Federated States of", "Moldova, Republic of", "Monaco", "Mongolia", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Niue", "Norfork Island", "Northern Mariana Islands", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Pitcairn", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russian Federation", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Georgia South Sandwich Islands", "South Sudan", "Spain", "Sri Lanka", "St. Helena", "St. Pierre and Miquelon", "Sudan", "Suriname", "Svalbarn and Jan Mayen Islands", "Swaziland", "Sweden", "Switzerland", "Syrian Arab Republic", "Taiwan", "Tajikistan", "Tanzania, United Republic of", "Thailand", "Togo", "Tokelau", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks and Caicos Islands", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States minor outlying islands", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City State", "Venezuela", "Vietnam", "Virigan Islands (British)", "Virgin Islands (U.S.)", "Wallis and Futuna Islands", "Western Sahara", "Yemen", "Yugoslavia", "Zaire", "Zambia", "Zimbabwe"];
+  
+ 
+  
+   showDropdown = false;
 
+  //code for autocomplete 
+  
+  toggleDropdown(){
+    this.showDropdown = !this.showDropdown;
+    console.log(this.allTagsList)
+  }
+  setValue(value:string){
+     this.collateralForm.patchValue({"newTagInput":value});
+     this.showDropdown=false;
+  }
+  getSearchValue(){
+    return this.collateralForm.value.newTagInput;
+  }
+ 
 }

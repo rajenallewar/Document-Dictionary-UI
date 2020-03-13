@@ -190,6 +190,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
   getCollateralList(req) {
     console.log("In getCollateralList");
     this.spinnerService.spinner(true);
+   
     this.collateralListService.getCollaterals(req).subscribe((response: any) => {
       if (response) {
         this.totalRecords = response.totalCount || 10;

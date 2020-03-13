@@ -85,9 +85,22 @@
                 <div class="form-group mt-1" (keydown.enter)="$event.preventDefault()">
                     <label>Add New Tag :</label>
                 
-                    <input [(ngModel)]="newTag" #newAnnotation formControlName="newTagInput" (keyup.enter)="addAnnotation(newAnnotation.value)"
+                    <!-- <input [(ngModel)]="newTag" #newAnnotation formControlName="newTagInput" (keyup.enter)="addAnnotation(newAnnotation.value)"
                         (blur)="addAnnotation(newAnnotation.value)" (change)="showTagError = false" class="form-control tx-box"
                         placeholder="Type your tag here…." [ngClass]="{ 'is-invalid': submitted && tags.length === 0 }">
+                    <span *ngIf="showTagError" class="pull-right tag-err">Tag already Exist in the list</span>
+                    <div *ngIf="submitted && tags.length === 0" class="invalid-feedback">
+                        <div *ngIf="submitted && tags.length === 0">Atleast one tag is required</div>
+                    </div> -->
+                    <input type="text" [(ngModel)]="newTag" #newAnnotation formControlName="newTagInput" class="form-control tx-box" id="newTagInput" (click)="toggleDropdown()" (keyup.enter)="addAnnotation(newAnnotation.value)"  (blur)="addAnnotation(newAnnotation.value)" (change)="showTagError = false" class="form-control tx-box"
+                    placeholder="Type your tag here…." [ngClass]="{ 'is-invalid': submitted && tags.length === 0 }"  >
+                    <div class="tages-container-dropdown" *ngIf="showDropdown" (cliclOutside)="toggleDropdown()">
+                        <div>
+                            <div class="tages" *ngFor="let tag of allTagsList| filterTags:getSearchValue()" (click)="setValue(tag)">
+                                {{tag}}
+                            </div>
+                        </div>
+                    </div>
                     <span *ngIf="showTagError" class="pull-right tag-err">Tag already Exist in the list</span>
                     <div *ngIf="submitted && tags.length === 0" class="invalid-feedback">
                         <div *ngIf="submitted && tags.length === 0">Atleast one tag is required</div>

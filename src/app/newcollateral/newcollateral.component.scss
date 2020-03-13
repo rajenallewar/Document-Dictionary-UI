@@ -163,3 +163,19 @@ label {
     font-family: 'Carnas-Light';
     max-width: --webkit-fill-available;
 }
+.tages-container-dropdown{
+    position: absolute;
+    z-index: 1;
+    width: 83%;
+    max-height: 100px;
+    background:whitesmoke;
+    overflow-y: auto;
+}
+.tages{
+    padding: 10px;
+    font-family: sans-serif;
+    color: #091837;
+}
+.tages:hover{
+    background: blueviolet;
+}

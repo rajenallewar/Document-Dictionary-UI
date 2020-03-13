@@ -52,7 +52,9 @@ import {ToastModule} from 'primeng/toast';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {EditorModule} from 'primeng/editor';
-
+import { FilterTagsPipe } from './shared/pipes/filterTags.pipe';
+import { cliclOutsideDirective } from './shared/directives/clickOutside.directive';
+import { from } from 'rxjs';
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,7 +75,9 @@ import {EditorModule} from 'primeng/editor';
     ViewcollateralComponent,
     SpinnerComponent,
     CustomPdfViewerComponent,
-    GlobalEnagementsComponent
+    GlobalEnagementsComponent,
+    FilterTagsPipe,
+    cliclOutsideDirective
 
   ],
   imports: [
