@@ -90,6 +90,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       event = this.setDates();
     } else {
       this.mtd = this. wtd = false;
+      this.resetDates();
     }
     this.appSharedService.setDashboardDateSubject(event);
     if (this.appSharedService.dateRange && this.appSharedService.dateRange[0] && this.appSharedService.dateRange[1]) {
@@ -99,6 +100,20 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  resetDates() {
+    let currentDate = new Date();
+
+    //Set end date as of yesterday
+    currentDate.setDate(currentDate.getDate() - 1);
+    this.appSharedService.endDate = this.datePipe.transform(currentDate, 'yyyy-MM-dd');
+
+    //Set start date as 1 month before
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    this.appSharedService.startDate = this.datePipe.transform(currentDate, 'yyyy-MM-dd');
+    this.appSharedService.dateRange = [new Date(this.appSharedService.startDate), new Date(this.appSharedService.endDate)];
+    console.log("this.dateRange ", this.appSharedService.dateRange);
+  }
+
   setDates() {
     let currentDate = new Date();
     if(this.mtd) {
@@ -106,6 +121,9 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       this.appSharedService.startDate = this.datePipe.transform(currentDate, 'yyyy-MM-dd');
     } else if (this.wtd) {
       currentDate.setDate(currentDate.getDate() - currentDate.getDay());
+      this.appSharedService.startDate = this.datePipe.transform(currentDate, 'yyyy-MM-dd');
+    } else {
+      currentDate.setDate(currentDate.getDate() - 30);
       this.appSharedService.startDate = this.datePipe.transform(currentDate, 'yyyy-MM-dd');
     }
     currentDate = new Date();

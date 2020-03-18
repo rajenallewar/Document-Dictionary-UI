@@ -52,6 +52,7 @@ import {ToastModule} from 'primeng/toast';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {EditorModule} from 'primeng/editor';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import {EditorModule} from 'primeng/editor';
   ],
   providers: [
     { provide: UrlSerializer, useClass: CustomUrlSerializer },
-    DatePipe
+    DatePipe,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

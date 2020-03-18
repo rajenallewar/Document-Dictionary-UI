@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class AppSharedService {
   private dashboardDateSubject: Subject<any> = new Subject<any>();
   dateRange:any;
 
-  constructor() { }
+  constructor( private cookieService: CookieService) { }
   startDate: string;
   endDate: string;
   toastrOption = {
@@ -25,10 +26,15 @@ export class AppSharedService {
   
   setUserLoggedIn (flag) {
     this.isUserLoggedIn = flag;
+    if (!this.isUserLoggedIn) {
+      this.cookieService.delete('currentUser', '/');
+      this.cookieService.delete('currentUser', '/dms');
+    }
   }
 
   getUserLoggedIn () {
-    return this.isUserLoggedIn;
+    const currentUser = this.cookieService.get('currentUser') ? JSON.parse(this.cookieService.get('currentUser')) : null;
+    return currentUser && currentUser.authenticated;
   }
 
   setRouteData(value:any) {

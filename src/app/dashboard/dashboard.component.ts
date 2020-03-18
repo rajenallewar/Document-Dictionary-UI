@@ -56,6 +56,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.resetDashboard();
       }
     });
+    console.log(localStorage.getItem('currentUser'));
     this.barChartData = {
       labels: [],
       datasets: []
@@ -188,6 +189,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.getCollateralsCount(this.appSharedService.startDate, this.appSharedService.endDate);
     this.totalAnnotatedCollaterals(this.appSharedService.startDate, this.appSharedService.endDate);
     this.getTrendingTags();
+    this.getTrendingBUs();
+    this.getTrendingAccounts();
   }
 
   getDefaultDates() {

@@ -9,13 +9,14 @@ import {
   CanLoad
 }                           from '@angular/router';
 import { AppSharedService } from './shared.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   constructor(private appSharedService:AppSharedService,
-  private router: Router) {}
+  private router: Router, private cookieService: CookieService) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     let url: string = state.url;
@@ -34,6 +35,8 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
       return true;
   } else {
       this.appSharedService.setUserLoggedIn(false);
+      this.cookieService.delete('currentUser', '/')
+      this.cookieService.delete('currentUser', '/dms')
       this.router.navigate(['/login']);
       return false;
   }
