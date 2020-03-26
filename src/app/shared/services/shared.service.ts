@@ -25,10 +25,14 @@ export class AppSharedService {
   
   setUserLoggedIn (flag) {
     this.isUserLoggedIn = flag;
+    if (!this.isUserLoggedIn) {
+      document.cookie = '';
+    }
   }
 
   getUserLoggedIn () {
-    return this.isUserLoggedIn;
+    const currentUser = document.cookie ? JSON.parse(document.cookie.split(';', 1)[0]) : null;
+    return (currentUser && currentUser.authenticated) || this.isUserLoggedIn;
   }
 
   setRouteData(value:any) {

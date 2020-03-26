@@ -12,7 +12,7 @@
             <div *ngFor="let proItem of proposalData?.statusCounts;index as i;" class="pro-count-box">
                 <hr [style.backgroundColor]="proItem?.backgroundColor" align="left">
                 <a [routerLink]="" (click)="onStatusClick(proItem?.label)"><div class="pro-count">{{proItem?.count}}</div> </a>
-                <div class="pro-name">{{proItem?.label}}</div>
+                <div class="pro-name">{{proItem?.label + ' '}} Proposals</div>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
         <div class="filter-item pd-0 mr-r-1">
             <span class="ft-label">Client</span>
             <p-dropdown class="proposal-dropdown" [options]="clientData" #client
-                [(ngModel)]="searchCriteria.clientName"></p-dropdown>
+                [(ngModel)]="searchCriteria.clientName" dataKey="searchCriteria.clientName" ></p-dropdown>
 
         </div>
         <div class="filter-item pd-0 mr-r-1">
@@ -60,11 +60,11 @@
         </div>
 
     </div>
-    <div class="scroll-container clearfix">
+    <div class="scroll-container clearfix" *ngIf="!!this.proposalData.statusCounts">
         <div class="card-container clearfix">
             <app-proposal-card *ngFor="let card of displayProposalList;index as i;" [cardIndex]="i" [card]="card"
                 (edit)="onEdit($event)" (add)="onAdd($event)" (delete)="onDelete($event)"
-                (viewCollaterals)="onViewCollaterals($event)">
+                (viewCollaterals)="onViewCollaterals($event)" [bgColor]="getColor(card.status)">
             </app-proposal-card>
         </div>
         <p-paginator *ngIf="totalRecords > displayRecordSize" #paginator [rows]="displayRecordSize"

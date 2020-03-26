@@ -20,7 +20,7 @@ export class ProposalCardComponent implements OnInit {
   get cardIndex(): boolean {
     return this._cardIndex;
   }
-  
+  @Input() bgColor = '#000';
   @Output() public edit = new EventEmitter<any>();
   @Output() public add = new EventEmitter<any>();
   @Output() public viewCollaterals = new EventEmitter<any>();
@@ -31,24 +31,24 @@ export class ProposalCardComponent implements OnInit {
 
   ngOnInit() {
   }
-  getColor(status){
-    let statusText: any = status.toLowerCase();
-    switch (statusText) {
-      case "in-progress":
-        return "#ffad66";
-      case "lost":
-        return "#fb6262";
-      case "new":
-        return "#69ffbd";
-      case "review":
-        return "#62affb";
-      case "won":
-        return "#f8e52d";
-      default:
-        break;
-    }
-    return "#000"
-  }
+  // getColor(status){
+  //   let statusText: any = status.toLowerCase();
+  //   switch (statusText) {
+  //     case "in-progress":
+  //       return "#ffad66";
+  //     case "lost":
+  //       return "#fb6262";
+  //     case "new":
+  //       return "#69ffbd";
+  //     case "review":
+  //       return "#62affb";
+  //     case "won":
+  //       return "#f8e52d";
+  //     default:
+  //       break;
+  //   }
+  //   return "#000"
+  // }
   onEdit(event) {
     this.edit.emit({ "index": this.cardIndex });
   }

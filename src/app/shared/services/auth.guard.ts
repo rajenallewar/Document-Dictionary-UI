@@ -35,6 +35,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
       return true;
   } else {
       this.appSharedService.setUserLoggedIn(false);
+      document.cookie = '';
       this.router.navigate(['/login']);
       return false;
   }
