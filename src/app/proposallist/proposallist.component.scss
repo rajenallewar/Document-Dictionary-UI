@@ -118,3 +118,13 @@ hr {
 .cal-container{
     position: relative;
 }
+
+.status-panel {
+    max-height: 70%;
+    overflow-y: scroll;
+}
+
+.bu-panel {
+    max-height: 30%;
+    overflow-y: scroll;
+}

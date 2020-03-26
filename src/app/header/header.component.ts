@@ -15,44 +15,49 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   showCalender = false;
   mtd = false;
   wtd = false;
-  constructor(private router:Router,
-    private acr:ActivatedRoute,
-    public appSharedService:AppSharedService,
-    public entitlement:Entitlement,
-    public datePipe: DatePipe) {}
+  constructor(private router: Router,
+    private acr: ActivatedRoute,
+    public appSharedService: AppSharedService,
+    public entitlement: Entitlement,
+    public datePipe: DatePipe) { }
 
   ngOnInit() {
     this.showCalender = false;
     this.mtd = false;
     this.wtd = false;
+    console.log(this.router.url);
+    this.setHeader();
   }
 
-  ngAfterViewInit(){
+  setHeader() {
+    switch (this.router.url) {
+      case '/dms/dashboard':
+        this.headerText = "Dashboard";
+        break;
+      case '/dms/proposals':
+        this.headerText = "Proposal Listings";
+        break;
+      case '/dms/collaterals':
+        this.headerText = "Collateral Listings";
+        break;
+      case '/dms/sme':
+        this.headerText = "SMEs/Architects Listings";
+        break;
+      case '/dms/qa':
+        this.headerText = "Q&A Forum";
+        break;
+      case '/dms/globalengagements':
+        this.headerText = "Global Engagements";
+        break;
+      default:
+        break;
+    }
+  }
+
+  ngAfterViewInit() {
     this.router.events.subscribe((event) => {
-      if(event instanceof NavigationEnd) {
-        console.log(this.router.url);
-        switch (this.router.url) {
-          case '/dms/dashboard':
-            this.headerText = "Dashboard";
-            break;
-          case '/dms/proposals':
-            this.headerText = "Proposal Listings";
-            break;
-          case '/dms/collaterals':
-            this.headerText = "Collateral Listings";
-            break;
-            case '/dms/sme':
-            this.headerText = "SMEs/Architects Listings";
-            break;
-          case '/dms/qa':
-          this.headerText = "Q&A Forum";
-          break;
-          case '/dms/globalengagements':
-          this.headerText = "Global Engagements";
-          break;
-          default:
-            break;
-        }
+      if (event instanceof NavigationEnd) {
+        this.setHeader();
       }
     });
 
@@ -61,24 +66,25 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     }, 100);
   }
 
+
   onNewCollateral() {
     this.appSharedService.setRouteData({
-      "openType":"newFromHeader"
+      "openType": "newFromHeader"
     });
     setTimeout(() => {
-      this.router.navigate([{outlets:{dialogs:'uploadcollateral'}}], {relativeTo:this.acr});
+      this.router.navigate([{ outlets: { dialogs: 'uploadcollateral' } }], { relativeTo: this.acr });
     }, 0);
   }
   onNewProposal() {
     this.appSharedService.setRouteData({
-      "openType":"newFromHeader"
+      "openType": "newFromHeader"
     });
     setTimeout(() => {
-      this.router.navigate([{outlets:{dialogs:'newproposal'}}], {relativeTo:this.acr});
+      this.router.navigate([{ outlets: { dialogs: 'newproposal' } }], { relativeTo: this.acr });
     }, 0);
- 
+
   }
-  onDateSelect(event, calendar){
+  onDateSelect(event, calendar) {
     console.log("Event", event);
     if (event.target && event.target.id === 'mtdate' && event.target.checked) {
       this.mtd = true;
@@ -88,13 +94,15 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       this.wtd = true;
       this.mtd = false;
       event = this.setDates();
-    } else {
-      this.mtd = this. wtd = false;
+    } else if (event.target) {
+      this.mtd = this.wtd = false;
       this.resetDates();
+    } else {
+      this.mtd = this.wtd = false;
     }
     this.appSharedService.setDashboardDateSubject(event);
     if (this.appSharedService.dateRange && this.appSharedService.dateRange[0] && this.appSharedService.dateRange[1]) {
-      if(calendar) {
+      if (calendar) {
         calendar.hideOverlay();
       }
     }
@@ -116,7 +124,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   setDates() {
     let currentDate = new Date();
-    if(this.mtd) {
+    if (this.mtd) {
       currentDate.setDate(currentDate.getDate() - currentDate.getDate() + 1);
       this.appSharedService.startDate = this.datePipe.transform(currentDate, 'yyyy-MM-dd');
     } else if (this.wtd) {
@@ -136,7 +144,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     return this.appSharedService.endDate;
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
 
   }
 

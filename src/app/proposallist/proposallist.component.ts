@@ -49,13 +49,13 @@ export class ProposallistComponent implements OnInit, OnDestroy {
   msgs: any;
 
   constructor(private proposalListService: ProposalListService,
-              private router: Router,
-              private acr: ActivatedRoute,
-              public datePipe: DatePipe,
-              private spinnerService: SpinnerService,
-              private appSharedService: AppSharedService,
-              private confirmationService: ConfirmationService,
-              private toastr: ToastrService
+    private router: Router,
+    private acr: ActivatedRoute,
+    public datePipe: DatePipe,
+    private spinnerService: SpinnerService,
+    private appSharedService: AppSharedService,
+    private confirmationService: ConfirmationService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -185,8 +185,8 @@ export class ProposallistComponent implements OnInit, OnDestroy {
     this.getClientData();
     this.getRegionData();
     this.getStatusData();
-    this.routeData.openType && this.routeData.openType === 'getProposalsFromAccount' ?  this.searchCriteria.clientName = this.routeData.clientName : this.searchCriteria.clientName = null;
-    this.routeData.openType && this.routeData.openType === 'getProposalsFromBu' ?  this.searchCriteria.region = this.routeData.region : this.searchCriteria.region = null;
+    this.routeData.openType && this.routeData.openType === 'getProposalsFromAccount' ? this.searchCriteria.clientName = this.routeData.clientName : this.searchCriteria.clientName = null;
+    this.routeData.openType && this.routeData.openType === 'getProposalsFromBu' ? this.searchCriteria.region = this.routeData.region : this.searchCriteria.region = null;
     this.searchCriteria.status = null;
 
     let obj: any = {
@@ -204,8 +204,8 @@ export class ProposallistComponent implements OnInit, OnDestroy {
     }
 
     this.getProposalList(obj);
-    this.getProposalCount();
 
+    
     this.appSharedService.getNewProposalCloseEvent().pipe(takeUntil(this.ngUnsubscribe$)).subscribe((flag) => {
       if (flag) {
         this.resetProposalListing();
@@ -276,7 +276,7 @@ export class ProposallistComponent implements OnInit, OnDestroy {
 
   }
 
-  onStatusClick(value : string) {    
+  onStatusClick(value: string) {
     this.searchCriteria.status = value.replace(" Proposals", "");
     this.onSearch(null);
   }
@@ -322,12 +322,12 @@ export class ProposallistComponent implements OnInit, OnDestroy {
     this.spinnerService.spinner(true);
     console.log('before: ', this.searchCriteria);
     this.proposalListService.getProposalList(obj).subscribe((response: any) => {
-    console.log('after: ', this.searchCriteria);
-    this.totalRecords = response.totalCountOfProposals || 10;
-    this.proposalList = response.listOfProposalUIModel;
-    console.log(this.proposalList);
-    this.displayProposalList = this.proposalList.slice(0, this.displayRecordSize);
-    // this.setProposalStatusCount();
+      console.log('after: ', this.searchCriteria);
+      this.totalRecords = response.totalCountOfProposals || 10;
+      this.proposalList = response.listOfProposalUIModel;
+      console.log(this.proposalList);
+      this.displayProposalList = this.proposalList.slice(0, this.displayRecordSize);
+      this.setProposalCount(response);
     }, ((err) => { }), (() => { this.spinnerService.spinner(false); }));
   }
 
@@ -379,80 +379,54 @@ export class ProposallistComponent implements OnInit, OnDestroy {
       }
     }
     this.getProposalList(obj);
-    this.getProposalCount();
   }
 
-  getProposalCount() {
+  
+  setProposalCount(response) {
     this.barChartData = {
       labels: [],
       datasets: [{ backgroundColor: [], data: [] }]
     }
-    this.spinnerService.spinner(true);
-    let req = {
-      "dateRangeUIModel": {
-        "startDate": null,
-        "endDate": null
+    console.log(response);
+    this.proposalData.totalAvailableProposals = 0;
+    if (response.totalProposalsPerStatus) {
+      this.proposalData.statusCounts = [];
+      for (const key in response.totalProposalsPerStatus) {
+        if (response.totalProposalsPerStatus.hasOwnProperty(key)) {
+          let item: any = {};
+          item.label = key;
+          let totalCount = +response.totalAvailableProposals;
+          let count = +response.totalProposalsPerStatus[key];
+          let perCount = 100 * count / totalCount;
+          item.data = [perCount];
+          item.count = +response.totalProposalsPerStatus[key];
+          this.proposalData.totalAvailableProposals = item.count;
+          item.backgroundColor = this.getRandomColor();
+          this.lineChartData.datasets.push(item);
+          this.proposalData.statusCounts.push(item);
+
+        }
+      }
+      this.lineChartData.datasets = this.lineChartData.datasets.slice();
+      this.setProposalStatusCount();
+    }
+
+
+    if (response.totalProposalsPerBU) {
+      for (const key in response.totalProposalsPerBU) {
+        if (response.totalProposalsPerBU.hasOwnProperty(key)) {
+          this.barChartData.labels.push(key);
+          this.barChartData.datasets[0].backgroundColor.push("#b6d2ff");
+          this.barChartData.datasets[0].data.push(+response.totalProposalsPerBU[key]);
+        }
       }
     }
-    this.proposalListService.countOfProposalStatus(req).subscribe((response: any) => {
-      console.log(response);
-      this.proposalData.totalAvailableProposals = response.totalAvailableProposals;
-      if (response.mapofStatus) {
-        this.proposalData.statusCounts = [];
-        for (const key in response.mapofStatus) {
-          if (response.mapofStatus.hasOwnProperty(key)) {
-            let item: any = {};
-            item.label = key;
-            let totalCount = +response.totalAvailableProposals;
-            let count = +response.mapofStatus[key];
-            let perCount = 100 * count / totalCount;
-            item.data = [perCount];
-            item.count = +response.mapofStatus[key];
-            item.backgroundColor = this.getRandomColor();
-            // switch (key) {
-            //   case "In-Progress":
-            //     item.backgroundColor = this.getRandomColor();
-            //     break;
-            //   case "Lost":
-            //     item.backgroundColor = "#fb6262";
-            //     break;
-            //   case "New":
-            //     item.backgroundColor = "#69ffbd";
-            //     break;
-            //   case "Review":
-            //     item.backgroundColor = "#62affb";
-            //     break;
-            //   case "Won":
-            //     item.backgroundColor = "#f8e52d";
-            //     break;
-            //   default:
-            //     break;
-            // }
-            this.lineChartData.datasets.push(item);
-            this.proposalData.statusCounts.push(item);
 
-          }
-        }
-        this.lineChartData.datasets = this.lineChartData.datasets.slice();
-      }
-
-
-      if (response.mapOfBu) {
-        for (const key in response.mapOfBu) {
-          if (response.mapOfBu.hasOwnProperty(key)) {
-            this.barChartData.labels.push(key);
-            this.barChartData.datasets[0].backgroundColor.push("#b6d2ff");
-            this.barChartData.datasets[0].data.push(+response.mapOfBu[key]);
-          }
-        }
-      }
-
-      console.log(this.barChartData);
-      this.displayLineChart = true;
-    }, ((err) => { }), (() => { this.spinnerService.spinner(false); }));
+    console.log(this.barChartData);
+    this.displayLineChart = true;
   }
 
-  
+
   public getColor(status: string): string {
     console.log(status);
     let clr = this.proposalData.statusCounts.find(sts => sts.label === status).backgroundColor;
@@ -471,7 +445,7 @@ export class ProposallistComponent implements OnInit, OnDestroy {
     this.proposalData.totalAvailableProposals = this.proposalList.length;
     this.proposalData.statusCounts.forEach(sts => {
       sts.count = this.proposalList.filter(prop => prop.status.toLowerCase() === sts.label.toLowerCase()).length;
-      const perCount = 100 * sts.count /  this.proposalData.totalAvailableProposals;
+      const perCount = 100 * sts.count / this.proposalData.totalAvailableProposals;
       sts.data = [perCount];
     });
   }

@@ -60,7 +60,7 @@
         </div>
 
     </div>
-    <div class="scroll-container clearfix">
+    <div class="scroll-container clearfix" *ngIf="!!this.proposalData.statusCounts">
         <div class="card-container clearfix">
             <app-proposal-card *ngFor="let card of displayProposalList;index as i;" [cardIndex]="i" [card]="card"
                 (edit)="onEdit($event)" (add)="onAdd($event)" (delete)="onDelete($event)"

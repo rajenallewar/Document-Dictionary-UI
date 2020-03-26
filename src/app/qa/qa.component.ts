@@ -30,7 +30,7 @@ export class QaComponent implements OnInit, OnDestroy {
   }
 
   getEmailList() {
-    this.qaservice.getEmailList().subscribe(res => { 
+    this.qaservice.searchEmails('').subscribe(res => { 
       this.emailList = res;
       console.log(this.emailList);
       this.selectedEmailChain = this.emailList[this.defaultSelIndex];

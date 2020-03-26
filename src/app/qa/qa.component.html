@@ -54,7 +54,7 @@
         </span>
       </section>
       <section class="pl-5 pr-5" style="font-size: small;">
-        <span [innerHTML]='email?.body'></span>
+        <span [innerHTML]='email?.body | safe:"html"'></span>
       </section>
     </div>
   </section>
