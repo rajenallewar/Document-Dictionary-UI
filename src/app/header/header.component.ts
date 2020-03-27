@@ -11,7 +11,7 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
-  headerText = "Dashboard";
+  headerText: string;
   showCalender = false;
   mtd = false;
   wtd = false;
