@@ -381,26 +381,38 @@ export class ProposallistComponent implements OnInit, OnDestroy {
     this.getProposalList(obj);
   }
 
+  getTotalCountofPrpposals(response) {
+    let count = 0;
+    if (response.totalProposalsPerStatus) {
+      for (const key in response.totalProposalsPerStatus) {
+        if (response.totalProposalsPerStatus.hasOwnProperty(key)) {
+          count += response.totalProposalsPerStatus[key];
+        }
+      }
+    }
+    return count;
+  }
   
   setProposalCount(response) {
     this.barChartData = {
       labels: [],
       datasets: [{ backgroundColor: [], data: [] }]
     }
+    const totalCount = this.getTotalCountofPrpposals(response);
+    this.totalRecords = totalCount;
     console.log(response);
-    this.proposalData.totalAvailableProposals = 0;
+    this.proposalData.totalAvailableProposals = totalCount;
     if (response.totalProposalsPerStatus) {
       this.proposalData.statusCounts = [];
       for (const key in response.totalProposalsPerStatus) {
         if (response.totalProposalsPerStatus.hasOwnProperty(key)) {
           let item: any = {};
           item.label = key;
-          let totalCount = +response.totalAvailableProposals;
           let count = +response.totalProposalsPerStatus[key];
           let perCount = 100 * count / totalCount;
           item.data = [perCount];
           item.count = +response.totalProposalsPerStatus[key];
-          this.proposalData.totalAvailableProposals = item.count;
+          // this.proposalData.totalAvailableProposals = item.count;
           item.backgroundColor = this.getRandomColor();
           this.lineChartData.datasets.push(item);
           this.proposalData.statusCounts.push(item);
@@ -408,7 +420,7 @@ export class ProposallistComponent implements OnInit, OnDestroy {
         }
       }
       this.lineChartData.datasets = this.lineChartData.datasets.slice();
-      this.setProposalStatusCount();
+      // this.setProposalStatusCount();
     }
 
 
@@ -441,14 +453,14 @@ export class ProposallistComponent implements OnInit, OnDestroy {
     return '#' + ('000000' + color).slice(-6);
   }
 
-  setProposalStatusCount() {
-    this.proposalData.totalAvailableProposals = this.proposalList.length;
-    this.proposalData.statusCounts.forEach(sts => {
-      sts.count = this.proposalList.filter(prop => prop.status.toLowerCase() === sts.label.toLowerCase()).length;
-      const perCount = 100 * sts.count / this.proposalData.totalAvailableProposals;
-      sts.data = [perCount];
-    });
-  }
+  // setProposalStatusCount() {
+  //   this.proposalData.totalAvailableProposals = this.proposalList.length;
+  //   this.proposalData.statusCounts.forEach(sts => {
+  //     sts.count = this.proposalList.filter(prop => prop.status.toLowerCase() === sts.label.toLowerCase()).length;
+  //     const perCount = 100 * sts.count / this.proposalData.totalAvailableProposals;
+  //     sts.data = [perCount];
+  //   });
+  // }
   onEdit(event) {
     console.log("onEdit :", event);
     this.appSharedService.setRouteData({

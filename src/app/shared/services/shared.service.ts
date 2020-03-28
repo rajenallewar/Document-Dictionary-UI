@@ -26,12 +26,15 @@ export class AppSharedService {
   setUserLoggedIn (flag) {
     this.isUserLoggedIn = flag;
     if (!this.isUserLoggedIn) {
-      document.cookie = '';
+      const expiredDate = new Date();
+      const expires = 'expires=' + expiredDate.toUTCString();
+      document.cookie = ';' + expires + ';path=/dms';
+
     }
   }
 
   getUserLoggedIn () {
-    const currentUser = document.cookie ? JSON.parse(document.cookie.split(';', 1)[0]) : null;
+    const currentUser = document.cookie && document.cookie.split(';', 1)[0] !== null ? JSON.parse(document.cookie.split(';', 1)[0]) : null;
     return (currentUser && currentUser.authenticated) || this.isUserLoggedIn;
   }
 
