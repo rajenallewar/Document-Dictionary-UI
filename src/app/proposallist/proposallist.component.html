@@ -4,9 +4,9 @@
         <div class="total-txt">Total Available</div>
         <div class="pro-txt">Proposal</div>
         <div class="line-bar-container" *ngIf="displayLineChart && lineChartData && lineChartOptions">
-            <p-chart type="horizontalBar" width="100%" height="20" [data]="lineChartData" [options]="lineChartOptions"
+            <!-- <p-chart type="horizontalBar" width="100%" height="20" [data]="lineChartData" [options]="lineChartOptions"
                 [responsive]="true">
-            </p-chart>
+            </p-chart> -->
         </div>
         <div>
             <div *ngFor="let proItem of proposalData?.statusCounts;index as i;" class="pro-count-box">
