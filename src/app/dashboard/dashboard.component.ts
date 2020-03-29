@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.resetDashboard();
       }
     });
-    console.log(localStorage.getItem('currentUser'));
+    // console.log(localStorage.getItem('currentUser'));
     this.barChartData = {
       labels: [],
       datasets: []

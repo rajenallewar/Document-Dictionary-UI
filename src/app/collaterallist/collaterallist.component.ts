@@ -96,7 +96,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
       }
     };
 
-    this.getCollateralsCount();
+    // this.getCollateralsCount();
     let req;
 
     if (this.routeData) {
@@ -134,8 +134,10 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
         "mapOfSearchKeyVsValue": null
       }
     }
-    this.getCollateralList(req);
-    this.getAllTagsForAutoComplete();
+    this.getAllTagsForAutoComplete(req);
+
+    // this.routeData && this.routeData.tagName ? this.addToAdvancedList() : this.getCollateralList(req);
+    // this.getCollateralList(req);
     this.appSharedService.getViewCollateralCloseEvent().pipe(takeUntil(this.ngUnsubscribe$)).subscribe((flag) => {
       if (flag) {
         this.resetCollateralListing();
@@ -148,15 +150,15 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
       }
     });
   }
-  getCollateralsCount() {
+  getCollateralsCount(req) {
     this.data = {
       labels: [],
       datasets: []
     };
     this.spinnerService.spinner(true);
-    let req = {
-      "dateRangeUIModel": null
-    }
+    // let req = {
+    //   "dateRangeUIModel": null
+    // }
     this.collateralListService.collateralTypeCount(req).subscribe((response: any) => {
       this.spinnerService.spinner(false);
       if (response) {
@@ -190,7 +192,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
   getCollateralList(req) {
     console.log("In getCollateralList");
     this.spinnerService.spinner(true);
-   
+    console.log('Request Object:', req);
     this.collateralListService.getCollaterals(req).subscribe((response: any) => {
       if (response) {
         this.totalRecords = response.totalCount || 10;
@@ -203,6 +205,13 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
           }
         });
         this.displayCollateralList = this.collateralList.slice(0, this.displayRecordSize);
+        const countReq = {
+          "dateRangeUIModel": null,
+          "proposalId": req && req.mapOfSearchKeyVsValue && req.mapOfSearchKeyVsValue.proposalId ? req.mapOfSearchKeyVsValue.proposalId : null,
+          "tagNames": req && req.mapOfSearchKeyVsValue && req.mapOfSearchKeyVsValue.tags ? req.mapOfSearchKeyVsValue.tags : null,
+          "collateralType": req && req.mapOfSearchKeyVsValue && req.mapOfSearchKeyVsValue.Type ? req.mapOfSearchKeyVsValue.Type : null,
+        };
+        this.getCollateralsCount(countReq);
       }
     }, ((err) => { }), (() => { this.spinnerService.spinner(false); }));
   }
@@ -217,7 +226,7 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
     }
     this.tagSearch = "";
     this.displayLineChart = false;
-    this.getCollateralsCount();
+    // this.getCollateralsCount();
     this.getCollateralList(req);
   }
 
@@ -243,16 +252,20 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
     this.getCollateralList(req);
   }
   onCollateralTypeClick(value : string) {
-    let req = {
-      "limit": 10,
-      "offset": 1,
-      "mapOfSearchKeyVsValue": null
+    if(this.showSearchBar) {
+      let req = {
+        "limit": 10,
+        "offset": 1,
+        "mapOfSearchKeyVsValue": null
+      }
+      if (value) {
+        let trimmedValue = value.trim();
+        req['mapOfSearchKeyVsValue'] = { "Type": trimmedValue };
+      }
+      this.advancedSearchList = [];
+      this.tagSearch = '';
+      this.getCollateralList(req);
     }
-    if (value) {
-      let trimmedValue = value.trim();
-      req['mapOfSearchKeyVsValue'] = { "Type": trimmedValue };
-    }
-    this.getCollateralList(req);
   }
   onSearchReset(){
     this.tagSearch = "";
@@ -298,8 +311,11 @@ export class CollaterallistComponent implements OnInit, OnDestroy {
     } 
   }
 
-  getAllTagsForAutoComplete(){
-    this.collateralListService.getAllTags().subscribe((res:any)=> this.allTagsList=res);
+  getAllTagsForAutoComplete(req) {
+    this.collateralListService.getAllTags().subscribe((res: any) => {
+      this.allTagsList = res;
+      this.routeData && this.routeData.tagName ? this.addToAdvancedList() : this.getCollateralList(req);
+    });
   }
 
   paginate(event) {

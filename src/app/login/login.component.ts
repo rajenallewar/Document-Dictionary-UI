@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
       this.loginService.login(obj).subscribe((res: any) => {
         console.log(res);
         if (res.authenticated === true && res.entitlements.length > 0) {
-          localStorage.setItem('currentUser', JSON.stringify(res));
+          // localStorage.setItem('currentUser', JSON.stringify(res));
           const expiredDate = new Date();
           // expiredDate.setTime(expiredDate.getTime() + (30 * 1000)); // for 30 secs
           expiredDate.setDate(expiredDate.getDate() + 1); // for 1 day
